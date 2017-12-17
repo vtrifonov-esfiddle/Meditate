@@ -1,0 +1,6 @@
+<layout id="MainLayout">
+    <label x="center" y="30" text="@Strings.promptAction" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label x="60" y="60" text="@Strings.actionResult" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="output" x="center" y="90" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+    <label id="HR" x="center" y="120" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+</layout>

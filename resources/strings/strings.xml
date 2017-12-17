@@ -1,0 +1,6 @@
+<strings>
+    <string id="AppName">Meditate</string>
+
+    <string id="promptAction">Perform Action</string>
+    <string id="actionResult">Result:</string>
+</strings>
