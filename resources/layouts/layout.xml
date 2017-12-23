@@ -1,6 +1,15 @@
-<layout id="MainLayout">
-    <label x="center" y="30" text="@Strings.promptAction" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-    <label x="60" y="60" text="@Strings.actionResult" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-    <label id="output" x="center" y="90" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-    <label id="HR" x="center" y="120" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-</layout>
+<layouts>
+	<layout id="MainLayout">
+		<drawable id="Meditate" />
+	    <label x="center" y="20" text="@Strings.AppName" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+   	    <label id="duration" x="center" y="60" text="" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	    <label id="output" x="center" y="90" text="" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	    <label id="HR" x="center" y="120" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	</layout>
+	<layout id="SummaryLayout">
+		<label x="center" y="10" text="@Strings.SummaryTitle" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+		<label x="center" y="60" id="duration" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+		<label x="center" y="110" id="maxHr" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+		<label x="center" y="140" id="avgHr" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	</layout>
+</layouts>

@@ -1,0 +1,7 @@
+<resources>
+    <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
+    <bitmap id="HeartRateIcon" filename="images/heartRate.png" />
+    <drawable-list id="Meditate">
+    	<bitmap id="MeditateIcon" x="0" y="0" filename="images/meditate.png" />
+    </drawable-list>
+</resources>

@@ -1,0 +1,4 @@
+<properties>
+
+    <property id="meditationDurationMins" type="number">1</property>
+</properties>

@@ -1,6 +1,16 @@
 <strings>
     <string id="AppName">Meditate</string>
 
-    <string id="promptAction">Perform Action</string>
-    <string id="actionResult">Result:</string>
+    <string id="ConfirmSaveHeader">Save meditation?</string>
+    
+    <string id="SummaryTitle">Summary</string>
+    
+    <string id="menuDuration1min">1 minutes</string>
+    <string id="menuDuration10min">10 minutes</string>
+    <string id="menuDuration15min">15 minutes</string>
+    <string id="menuDuration20min">20 minutes</string>
+    <string id="menuDuration30min">30 minutes</string>
+    <string id="menuDuration60min">1 hour</string>
+    
+    <string id="meditationDurationMinsDesc">Duration in minutes</string>
 </strings>

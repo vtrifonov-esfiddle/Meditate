@@ -1,0 +1,7 @@
+<settings>
+
+    <setting propertyKey="@Properties.meditationDurationMins" title="@Strings.meditationDurationMinsDesc">
+        <settingConfig type="numeric" />
+    </setting>
+
+</settings>
