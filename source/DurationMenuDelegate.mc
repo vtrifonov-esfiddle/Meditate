@@ -9,10 +9,7 @@ class DurationMenuDelegate extends Ui.MenuInputDelegate {
     }
 		
     function onMenuItem(item) {
-        if (item == :duration1min) {
-        	me.mMeditateModel.setDuration(1);
-        } 
-        else if (item == :duration10min) {
+        if (item == :duration10min) {
         	me.mMeditateModel.setDuration(10);
         }
         else if (item == :duration15min) {
@@ -24,8 +21,10 @@ class DurationMenuDelegate extends Ui.MenuInputDelegate {
         else if (item == :duration30min) {
    	        me.mMeditateModel.setDuration(30);
         }
-        else if (item == :duration60min) {
-   	        me.mMeditateModel.setDuration(60);
+        else if (item == :durationCustom) {
+        	var initialMinutes = me.mMeditateModel.getDurationMins() % 10;
+	        Ui.popView(Ui.SLIDE_IMMEDIATE);
+    		Ui.pushView(new DurationPicker(initialMinutes), new DurationPickerDelegate(me.mMeditateModel), Ui.SLIDE_IMMEDIATE);
         }
     }
 
