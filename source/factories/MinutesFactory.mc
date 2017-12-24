@@ -13,15 +13,15 @@ class MinutesFactory extends Ui.PickerFactory {
         return index;
     }
 
-    function initialize() {
+    function initialize(start, stop, font) {
         PickerFactory.initialize();
 
-        mStart = 0;
-        mStop = 59;
+        mStart = start;
+        mStop = stop;
         mIncrement = 1;
 
-        mFont = Gfx.FONT_SYSTEM_SMALL;
-    	mFormatString = "%02d";
+        mFont = font;
+    	mFormatString = "%d";
     }
 
     function getDrawable(index, selected) {

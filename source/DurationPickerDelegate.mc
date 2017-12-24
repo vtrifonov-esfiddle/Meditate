@@ -13,7 +13,7 @@ class DurationPickerDelegate extends Ui.PickerDelegate {
     }
 
     function onAccept(values) {
-    	var durationMins = values[0] * 60 + values[1];    	
+    	var durationMins = values[0] * 10 + values[1];    	
     	me.mMeditateModel.setDuration(durationMins);
         Ui.popView(Ui.SLIDE_IMMEDIATE);
     }
