@@ -22,7 +22,7 @@ class DurationMenuDelegate extends Ui.MenuInputDelegate {
    	        me.mMeditateModel.setDuration(30);
         }
         else if (item == :durationCustom) {
-        	var initialMinutes = me.mMeditateModel.getDurationMins() % 10;
+        	var initialMinutes = me.mMeditateModel.getDurationMins();
 	        Ui.popView(Ui.SLIDE_IMMEDIATE);
     		Ui.pushView(new DurationPicker(initialMinutes), new DurationPickerDelegate(me.mMeditateModel), Ui.SLIDE_IMMEDIATE);
         }
