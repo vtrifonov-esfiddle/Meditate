@@ -9,7 +9,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
         me.mMeditateModel = meditateModel;
         me.mMeditateActivity = new MediateActivity(me.mMeditateModel);
     }
-	
+		
     function onMenu() {
 		return me.showDurationMenu();
     }
