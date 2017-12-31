@@ -1,7 +1,6 @@
 <layouts>
 	<layout id="MainLayout">
 		<drawable id="Meditate" />
-	    <label x="center" y="20" text="@Strings.AppName" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
    	    <label id="duration" x="center" y="60" text="" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	    <label id="output" x="center" y="90" text="" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	    <label id="HR" x="center" y="120" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />

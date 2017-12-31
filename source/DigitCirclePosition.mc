@@ -2,7 +2,7 @@ using Toybox.Math;
 
 class DigitCirclePosition {
 	function initialize(regionWidth, regionHeigh, digitSize) {		
-		me.radius = (regionWidth - digitSize) / 2;
+		me.radius = (regionWidth - digitSize) / 2 - 10;
 		
 		me.centerX = (regionWidth - digitSize) / 2;
 		me.centerY = (regionHeigh - digitSize) / 2;

@@ -25,13 +25,57 @@ class DurationPickerView extends Ui.View {
     // loading resources into memory.
     function onShow() {
     	me.mModel.reset();
-    	me.mDigitsLayout.updateDurationText("Pick duration");
+    	me.mDigitsLayout.updateDurationText("Pick HH:MM");
     }
 	
-	
+	function updateDisableDigitsStatus() {
+		if (me.mModel.pickerPos == :durationPicker_initialHint || me.mModel.pickerPos == :durationPicker_finish) {  
+			me.mDigitsLayout.disableAllDigits();
+    	}   	    	
+    	    	
+		var digit;
+    	switch (me.mModel.pickerPos) {
+			case :durationPicker_start :
+				for (digit = 3; digit < 10; digit++) {
+	    			me.mDigitsLayout.disableDigitState(digit);
+	    		}
+	    		for (digit = 0; digit < 3; digit++) {
+	    			me.mDigitsLayout.enableDigitState(digit);
+	    		}
+				break;
+			case :durationPicker_hoursHigh :
+				if (me.mModel.hoursHigh > 1) {
+					for (digit = 0; digit < 5; digit++) {
+		    			me.mDigitsLayout.enableDigitState(digit);
+		    		}
+					for (digit = 5; digit < 10; digit++) {
+		    			me.mDigitsLayout.disableDigitState(digit);
+		    		}			    		
+	    		}
+	    		else {
+	    			me.mDigitsLayout.enableAllDigits();
+	    		}
+				break;
+			case :durationPicker_hoursLow :
+				for (digit = 0; digit < 6; digit++) {
+	    			me.mDigitsLayout.enableDigitState(digit);
+	    		}
+				for (digit = 6; digit < 10; digit++) {
+	    			me.mDigitsLayout.disableDigitState(digit);
+	    		}
+				break;
+			case :durationPicker_minutesHigh :
+			case :durationPicker_minutesLow :
+				me.mDigitsLayout.enableAllDigits();
+				break;		
+		}
+	}	
+		
     // Update the view
     function onUpdate(dc) {     
-    	if (me.mModel.pickerPos != :durationPicker_initialHint && me.mModel.pickerPos != :durationPicker_finish) {    	
+    	me.updateDisableDigitsStatus();
+    	    	
+    	if (me.mModel.pickerPos != :durationPicker_initialHint && me.mModel.pickerPos != :durationPicker_finish) {  
    			me.mDigitsLayout.updateDurationText(Lang.format("$1$$2$:$3$$4$", [me.mModel.hoursHigh, me.mModel.hoursLow, 
    				me.mModel.minutesHigh, me.mModel.minutesLow]));
     	}

@@ -2,7 +2,7 @@ using Toybox.Application as App;
 
 class MeditateModel {
 	function initialize() {
-		me.output = "";
+		me.output = "Pick duration";
 		me.heartRate = "";
 		me.isStarted = false;
 	}

@@ -1,4 +1,5 @@
 using Toybox.WatchUi as Ui;
+using Toybox.Lang;
 
 class DurationPickerDelegate extends Ui.BehaviorDelegate {
 	private var mModel;
@@ -14,7 +15,7 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 		if (me.mModel.pickerPos == :durationPicker_finish) {
 			me.pickFinalDuration();
 		}
-		else if (me.mModel.pickerPos == :durationPicker_initialHint) {
+		else if (me.mModel.pickerPos == :durationPicker_initialHint) {			
 			me.mModel.pickerPos = :durationPicker_start;
 			me.mModel.hoursHigh = "#";
 			Ui.requestUpdate();
@@ -28,11 +29,14 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 		Ui.popView(Ui.SLIDE_RIGHT);
 	}
 	
-	function onSelectable(event) {
+	function onSelectable(event) {	
 		me.onSelect();
 		
-        var instance = event.getInstance();
-		if (instance instanceof DigitButton && instance.getState() == :stateSelected) {			
+        var instance = event.getInstance();       
+        if (event.getPreviousState() == :stateDisabled) {
+        	instance.setState(:stateDisabled);
+        }
+		if (instance instanceof DigitButton && instance.getState() == :stateSelected) {						
 			switch (me.mModel.pickerPos) {
 				case :durationPicker_start :
 					me.mModel.pickerPos = :durationPicker_hoursHigh;					
@@ -54,7 +58,6 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 					me.mModel.minutesLow = instance.getDigitValue();
 					break;		
 			}
-			
 			Ui.requestUpdate();
 		}
 		
