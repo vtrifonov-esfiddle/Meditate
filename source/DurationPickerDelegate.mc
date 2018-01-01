@@ -17,13 +17,12 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 		}
 		else if (me.mModel.pickerPos == :durationPicker_initialHint) {			
 			me.mModel.pickerPos = :durationPicker_start;
-			me.mModel.hoursHigh = "#";
 			Ui.requestUpdate();
 		}
 	}
 	
 	function pickFinalDuration() {
-		var durationMins = me.mModel.hoursHigh * 600 + me.mModel.hoursLow * 60 + me.mModel.minutesHigh * 10 + me.mModel.minutesLow;
+		var durationMins = me.mModel.hoursLow * 60 + me.mModel.minutesHigh * 10 + me.mModel.minutesLow;
 		System.println(durationMins);
 		me.mMeditateModel.setDuration(durationMins);
 		Ui.popView(Ui.SLIDE_RIGHT);
@@ -38,25 +37,18 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
         }
 		if (instance instanceof DigitButton && instance.getState() == :stateSelected) {						
 			switch (me.mModel.pickerPos) {
-				case :durationPicker_start :
-					me.mModel.pickerPos = :durationPicker_hoursHigh;					
-					me.mModel.hoursHigh = instance.getDigitValue();
-					me.mModel.hoursLow = "#";
-					break;
-				case :durationPicker_hoursHigh :
-					me.mModel.pickerPos = :durationPicker_hoursLow;					
+				case :durationPicker_start :							
 					me.mModel.hoursLow = instance.getDigitValue();
-					me.mModel.minutesHigh = "#";
+					me.mModel.pickerPos = :durationPicker_hoursLow;		
 					break;
-				case :durationPicker_hoursLow :
-					me.mModel.pickerPos = :durationPicker_minutesHigh;					
+				case :durationPicker_hoursLow :								
 					me.mModel.minutesHigh = instance.getDigitValue();
-					me.mModel.minutesLow = "#";
+					me.mModel.pickerPos = :durationPicker_minutesHigh;	
 					break;
-				case :durationPicker_minutesHigh :
-					me.mModel.pickerPos = :durationPicker_minutesLow;					
+				case :durationPicker_minutesHigh :								
 					me.mModel.minutesLow = instance.getDigitValue();
-					break;		
+					me.mModel.pickerPos = :durationPicker_minutesLow;	
+					break;							
 			}
 			Ui.requestUpdate();
 		}
@@ -67,27 +59,20 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
     function onBack() {
     	System.println("onBack: " + me.mModel.pickerPos);
     	switch (me.mModel.pickerPos) {
-				case :durationPicker_start :			
+				case :durationPicker_start :	
+					me.mModel.hoursLow = "0";
 					Ui.popView(Ui.SLIDE_RIGHT);
 					break;
-				case :durationPicker_hoursHigh :
-					me.mModel.pickerPos = :durationPicker_start;	
-					me.mModel.hoursHigh = "#";
-					me.mModel.hoursLow = "0";
-					break;
 				case :durationPicker_hoursLow :
-					me.mModel.pickerPos = :durationPicker_hoursHigh;
-					me.mModel.hoursLow = "#";
+					me.mModel.pickerPos = :durationPicker_start;
 					me.mModel.minutesHigh = "0";
 					break;
 				case :durationPicker_minutesHigh :
 					me.mModel.pickerPos = :durationPicker_hoursLow;		
-					me.mModel.minutesHigh = "#";
 					me.mModel.minutesLow = "0";
 					break;		
 				case :durationPicker_minutesLow :
 					me.mModel.pickerPos = :durationPicker_minutesHigh;	
-					me.mModel.minutesLow = "#";
 					break;
 			}
 		Ui.requestUpdate();

@@ -13,11 +13,13 @@ class DurationPickerView extends Ui.View {
     }
     
     var mDigitsLayout;
+    var mDigitsOutput;
     
     // Load your resources here
     function onLayout(dc) {
     	me.mDigitsLayout = new DigitsLayout(dc);
         setLayout(me.mDigitsLayout.digitsLayout);
+        me.mDigitsOutput = me.mDigitsLayout.getDigitsOutput();
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -25,7 +27,7 @@ class DurationPickerView extends Ui.View {
     // loading resources into memory.
     function onShow() {
     	me.mModel.reset();
-    	me.mDigitsLayout.updateDurationText("Pick HH:MM");
+    	me.mDigitsOutput.setInitialHintLayout();
     }
 	
 	function updateDisableDigitsStatus() {
@@ -36,25 +38,7 @@ class DurationPickerView extends Ui.View {
 		var digit;
     	switch (me.mModel.pickerPos) {
 			case :durationPicker_start :
-				for (digit = 3; digit < 10; digit++) {
-	    			me.mDigitsLayout.disableDigitState(digit);
-	    		}
-	    		for (digit = 0; digit < 3; digit++) {
-	    			me.mDigitsLayout.enableDigitState(digit);
-	    		}
-				break;
-			case :durationPicker_hoursHigh :
-				if (me.mModel.hoursHigh > 1) {
-					for (digit = 0; digit < 5; digit++) {
-		    			me.mDigitsLayout.enableDigitState(digit);
-		    		}
-					for (digit = 5; digit < 10; digit++) {
-		    			me.mDigitsLayout.disableDigitState(digit);
-		    		}			    		
-	    		}
-	    		else {
-	    			me.mDigitsLayout.enableAllDigits();
-	    		}
+				me.mDigitsLayout.enableAllDigits();
 				break;
 			case :durationPicker_hoursLow :
 				for (digit = 0; digit < 6; digit++) {
@@ -74,18 +58,35 @@ class DurationPickerView extends Ui.View {
     // Update the view
     function onUpdate(dc) {     
     	me.updateDisableDigitsStatus();
-    	    	
-    	if (me.mModel.pickerPos != :durationPicker_initialHint && me.mModel.pickerPos != :durationPicker_finish) {  
-   			me.mDigitsLayout.updateDurationText(Lang.format("$1$$2$:$3$$4$", [me.mModel.hoursHigh, me.mModel.hoursLow, 
-   				me.mModel.minutesHigh, me.mModel.minutesLow]));
-    	}
-    	
+    	    	    	
+    	switch (me.mModel.pickerPos) {
+			case :durationPicker_initialHint:
+				me.mDigitsOutput.setInitialHintLayout();
+				break;
+			case :durationPicker_start :
+				me.mDigitsOutput.setHoursSelected();
+				break;
+			case :durationPicker_hoursLow :
+				me.mDigitsOutput.setHoursLow(me.mModel.hoursLow);				
+				me.mDigitsOutput.setMinutesHighSelected();
+				break;
+			case :durationPicker_minutesHigh :
+				me.mDigitsOutput.setMinutesHigh(me.mModel.minutesHigh);				
+				me.mDigitsOutput.setMinutesLowSelected();
+				break;
+			case :durationPicker_minutesLow :				
+				me.mDigitsOutput.setMinutesLow(me.mModel.minutesLow);				
+				me.mDigitsOutput.setFinish();
+				break;		
+		}  	
+				
     	View.onUpdate(dc);
-                
+    	     	
 		if (me.mModel.pickerPos == :durationPicker_minutesLow || me.mModel.pickerPos == :durationPicker_finish) {					
 			me.mModel.pickerPos = :durationPicker_finish;			
        		me.mDone.draw(dc);
-		}
+		}		
+		
     }
 
     // Called when this View is removed from the screen. Save the

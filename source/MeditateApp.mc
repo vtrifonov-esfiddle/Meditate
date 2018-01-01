@@ -18,7 +18,9 @@ class MeditateApp extends App.AppBase {
     // Return the initial view of your application here
     function getInitialView() {
     	var meditateModel = new MeditateModel();    	
-        return [ new MeditateView(meditateModel), new MeditateDelegate(meditateModel) ];
+        //return [ new MeditateView(meditateModel), new MeditateDelegate(meditateModel) ];
+        var durationPickerModel = new DurationPickerModel();
+    	return [ new DurationPickerView(durationPickerModel), new DurationPickerDelegate(durationPickerModel, meditateModel)];
     }
 
 }
