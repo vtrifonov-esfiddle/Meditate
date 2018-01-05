@@ -5,7 +5,7 @@
     
     <string id="SummaryTitle">Summary</string>
         
-    <string id="menuTitleSetting">Settings</string>
+    <string id="menuTitleSetting">Alerts Config</string>
     <string id="menuDuration10min">10 minutes</string>
     <string id="menuDuration15min">15 minutes</string>
     <string id="menuDuration20min">20 minutes</string>

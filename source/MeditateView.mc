@@ -31,7 +31,7 @@ class MeditateView extends Ui.View {
 	
 	
     // Update the view
-    function onUpdate(dc) {       
+    function onUpdate(dc) {    
         var output = View.findDrawableById("output");
         output.setText(me.mMeditateModel.output);
         

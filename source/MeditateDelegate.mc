@@ -18,6 +18,18 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     	return me.showDurationMenu();
     }
     
+    private function showConfigureAlertsMenu() {
+    	var configAlerts = new Ui.Menu();
+    	configAlerts.setTitle("Configure Alerts");
+    	configAlerts.addItem("Add Profile", :alerts_addProfile);
+    	configAlerts.addItem("Add Alert", :alerts_addAlert);
+    	configAlerts.addItem("Vibration Pattern", :alerts_vibrationPattern);
+    	configAlerts.addItem("Time", :alerts_time);
+    	
+    	var configAlertsMenuDelegate = new Ui.BehaviorDelegate();
+    	Ui.pushView(configAlerts, configAlertsMenuDelegate, Ui.SWIPE_DOWN);
+    }
+    
     private function showDurationMenu() {
     	var durationMenuDelegate = new DurationMenuDelegate(me.mMeditateModel);
         Ui.pushView(new Rez.Menus.DurationMenu(), durationMenuDelegate, Ui.CLICK_TYPE_TAP);

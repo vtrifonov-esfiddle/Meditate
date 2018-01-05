@@ -17,7 +17,7 @@ class MediateActivity {
                 {
                  :name=>"Meditation",                              
                  :sport=>ActivityRecording.SPORT_GENERIC,      
-                 :subSport=>ActivityRecording.SUB_SPORT_GENERIC 
+                 :subSport=>ActivityRecording.SUB_SPORT_CARDIO_TRAINING
                 }
            );  
         me.mIsStarted = false;     

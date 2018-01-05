@@ -1,14 +1,21 @@
 <resources>
     <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
-    <bitmap id="HeartRateIcon" filename="images/heartRate.png" />
+    <bitmap id="HeartRateIcon" filename="images/heartRate.png" />    
     
     <drawable-list id="done">
     	<bitmap id="doneIcon"  x="95" y="140" filename="images/done.png" />
     </drawable-list>
-    <drawable-list id="Meditate">
+    <drawable-list id="Meditate" background="Gfx.COLOR_WHITE">
     	<bitmap id="MeditateIcon" x="0" y="0" filename="images/meditate.png" />
     </drawable-list>
     <drawable-list id="WhiteBackground" background="Gfx.COLOR_WHITE" />
+    
+    <drawable-list id="up">
+   	    <bitmap id="upIcon" x="110" y="0" filename="images/up.png" />
+    </drawable-list>
+    <drawable-list id="down" background="Gfx.COLOR_TRANSPARENT">
+   	    <bitmap id="downIcon" x="110" y="220" filename="images/down.png" />
+    </drawable-list>
     
     <fonts>
    	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
