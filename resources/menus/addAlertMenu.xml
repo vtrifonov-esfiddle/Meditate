@@ -1,0 +1,6 @@
+<menu id="addAlertMenu" title="@Strings.addAlertMenuTitle">
+    <menu-item id="time" label="@Strings.addAlertTime" />
+    <menu-item id="vibration" label="@Strings.addAlertVibration"></menu-item>
+    <menu-item id="color" label="@Strings.addAlertColor"></menu-item>
+    <menu-item id="delete" label="@Strings.addAlertDelete"></menu-item>
+ </menu>

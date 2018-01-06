@@ -7,7 +7,7 @@
     </drawable-list>
     <drawable-list id="Meditate" background="Gfx.COLOR_WHITE">
     	<bitmap id="MeditateIcon" x="0" y="0" filename="images/meditate.png" />
-    </drawable-list>
+    </drawable-list>    
     <drawable-list id="WhiteBackground" background="Gfx.COLOR_WHITE" />
     
     <drawable-list id="up">

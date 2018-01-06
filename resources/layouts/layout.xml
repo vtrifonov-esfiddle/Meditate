@@ -12,4 +12,6 @@
 		<label x="center" y="110" id="maxHr" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 		<label x="center" y="140" id="avgHr" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	</layout>
+	<layout id="ColorPicker">		
+	</layout>	
 </layouts>

@@ -15,19 +15,14 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     }
     
     function onNextPage() {
-    	return me.showDurationMenu();
+    	return me.showAddAlertMenu();
     }
     
-    private function showConfigureAlertsMenu() {
-    	var configAlerts = new Ui.Menu();
-    	configAlerts.setTitle("Configure Alerts");
-    	configAlerts.addItem("Add Profile", :alerts_addProfile);
-    	configAlerts.addItem("Add Alert", :alerts_addAlert);
-    	configAlerts.addItem("Vibration Pattern", :alerts_vibrationPattern);
-    	configAlerts.addItem("Time", :alerts_time);
-    	
-    	var configAlertsMenuDelegate = new Ui.BehaviorDelegate();
-    	Ui.pushView(configAlerts, configAlertsMenuDelegate, Ui.SWIPE_DOWN);
+    private function showAddAlertMenu() {
+    	var addAlert = new Rez.Menus.addAlertMenu();   	
+
+    	var addAlertMenuDelegate = new AddAlertMenuDelegate();
+    	Ui.pushView(addAlert, addAlertMenuDelegate, Ui.SWIPE_DOWN);
     }
     
     private function showDurationMenu() {

@@ -15,4 +15,10 @@
     <string id="meditationDurationMinsDesc">Duration in minutes</string>
     
     <string id="durationPickerTitle">Pick mins</string>    
+    
+    <string id="addAlertMenuTitle">Add Alert</string>
+    <string id="addAlertTime">Pick Time</string>
+    <string id="addAlertVibration">Pick Vibration</string>
+    <string id="addAlertColor">Pick Color</string>
+    <string id="addAlertDelete">Delete</string>    
 </strings>
