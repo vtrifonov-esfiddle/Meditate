@@ -11,7 +11,13 @@ class AddAlertMenuDelegate extends Ui.MenuInputDelegate {
 	        Ui.popView(Ui.SLIDE_IMMEDIATE);
 	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW];
 	        
-	        Ui.pushView(new ColorPickerView(Gfx.COLOR_BLUE), new ColorPickerDelegate(colors, method(:onColorSelected)), Ui.SLIDE_RIGHT);
+	        Ui.pushView(new ScreenPickerView(Gfx.COLOR_BLUE), new ColorPickerDelegate(colors, method(:onColorSelected)), Ui.SLIDE_RIGHT);
+        }
+        else if (item == :selectAlert) {
+	        Ui.popView(Ui.SLIDE_IMMEDIATE);
+	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW];
+	        
+	        Ui.pushView(new AlertView(Gfx.COLOR_BLUE), new AlertViewDelegate(colors, method(:onColorSelected)), Ui.SLIDE_RIGHT);
         }
         else if (item == :time) {
         	var durationPickerModel = new DurationPickerModel();
