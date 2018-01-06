@@ -15,12 +15,12 @@ class AlertView extends ScreenPickerView {
 		ScreenPickerView.onUpdate(dc);
 			                
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT); 
-       	me.displayIconText(dc, "VI", "long");
-        me.displayIconText(dc, "TP", "One-off");
-        me.displayIconText(dc, "IN", "1m, 5m, 12m");
-        me.displayIconText(dc, "IN", "1m, 5h 30m");
-        me.displayIconText(dc, "IN", "1m, 5h 30m");
-        me.displayIconText(dc, "IN", "5h 30m");
+       	me.displayIconText(dc, "TM", "15m 40s");
+        me.displayIconText(dc, "VB", "Long");
+        me.displayIconText(dc, "TP", "one-off");
+        me.displayIconText(dc, "I1", "");
+        me.displayIconText(dc, "I2", "");
+        me.displayIconText(dc, "I3", "");
     }
     
     private function displayIconText(dc, icon, text) {   
