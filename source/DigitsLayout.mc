@@ -24,7 +24,7 @@ class DigitsLayout {
 			me.digitsLayout[layoutPos] = new DigitButton(pos["x"], pos["y"], digit, me.mFontDigits);			
 		}		
 		
-		me.digitsLayout[0] = new Rez.Drawables.WhiteBackground();
+		me.digitsLayout[0] = new Rez.Drawables.whiteBackground();
 		me.setDigitsOutputToLayout(me.digitsLayout, digitsOutputLayout);	
 	}
 	

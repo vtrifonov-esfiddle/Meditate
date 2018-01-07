@@ -2,8 +2,11 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
 class AddAlertMenuDelegate extends Ui.MenuInputDelegate {
-    function initialize() {
+	private var mMeditateModel;
+
+    function initialize(meditateModel) {
         MenuInputDelegate.initialize();
+        me.mMeditateModel = meditateModel;
     }
 		
     function onMenuItem(item) {
@@ -19,7 +22,7 @@ class AddAlertMenuDelegate extends Ui.MenuInputDelegate {
 	        
 	        Ui.pushView(new AlertView(Gfx.COLOR_BLUE), new AlertViewDelegate(colors, method(:onColorSelected)), Ui.SLIDE_RIGHT);
         }
-        else if (item == :time) {
+        else if (item == :duration) {
         	var durationPickerModel = new DurationPickerModel();
 	        Ui.popView(Ui.SLIDE_IMMEDIATE);
     		Ui.pushView(new DurationPickerView(durationPickerModel), new DurationPickerDelegate(durationPickerModel, me.mMeditateModel), Ui.SLIDE_RIGHT);
