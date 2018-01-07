@@ -10,7 +10,7 @@ class MeditateView extends Ui.View {
         View.initialize();
         me.mMeditateModel = meditateModel;
         me.mHeartRateIcon = new Ui.Bitmap({
-	         :rezId=>Rez.Drawables.HeartRateIcon,
+	         :rezId=>Rez.Drawables.heartRateIcon,
 	         :locX=>Ui.LAYOUT_HALIGN_CENTER ,
 	         :locY=>160
      	});
@@ -20,7 +20,7 @@ class MeditateView extends Ui.View {
 
     // Load your resources here
     function onLayout(dc) {
-        setLayout(Rez.Layouts.MainLayout(dc));
+        setLayout(Rez.Layouts.mainLayout(dc));
     }
 
     // Called when this View is brought to the foreground. Restore

@@ -1,20 +1,26 @@
 <resources>
-    <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
-    <bitmap id="HeartRateIcon" filename="images/heartRate.png" />    
-    
+    <bitmap id="launcherIcon" filename="images/launcher_icon.png" />
+    <bitmap id="heartRateIcon" filename="images/fontAwesome/heartRate.png" />    
+    <bitmap id="heartRateMinIcon" filename="images/fontAwesome/heartRateMin.png" />
+    <bitmap id="heartRateAvgIcon" filename="images/fontAwesome/heartRateAvg.png" />
+    <bitmap id="heartRateMaxIcon" filename="images/fontAwesome/heartRateMax.png" />
+    <bitmap id="vibrateIcon" filename="images/fontAwesome/clock-o-vibrate.png" />
+    <bitmap id="durationIcon" filename="images/fontAwesome/hourglass.png" />
+    <bitmap id="intermediateAlertsIcon" filename="images/fontAwesome/pie-chart.png" />
+        
     <drawable-list id="done">
     	<bitmap id="doneIcon"  x="95" y="140" filename="images/done.png" />
     </drawable-list>
-    <drawable-list id="Meditate" background="Gfx.COLOR_WHITE">
-    	<bitmap id="MeditateIcon" x="0" y="0" filename="images/meditate.png" />
+    <drawable-list id="meditate" background="Gfx.COLOR_WHITE">
+    	<bitmap id="meditateIcon" x="0" y="0" filename="images/meditate.png" />
     </drawable-list>    
-    <drawable-list id="WhiteBackground" background="Gfx.COLOR_WHITE" />
+    <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
     
     <drawable-list id="up">
-   	    <bitmap id="upIcon" x="110" y="0" filename="images/up.png" />
+   	    <bitmap id="upIcon" x="110" y="0" filename="images/fontAwesome/up.png" />
     </drawable-list>
     <drawable-list id="down" background="Gfx.COLOR_TRANSPARENT">
-   	    <bitmap id="downIcon" x="110" y="220" filename="images/down.png" />
+   	    <bitmap id="downIcon" x="110" y="220" filename="images/fontAwesome/down.png" />
     </drawable-list>
     
     <fonts>

@@ -9,7 +9,7 @@ class SummaryView extends Ui.View {
 	}
 	
 	function onLayout(dc) {
-		setLayout(Rez.Layouts.SummaryLayout(dc));
+		setLayout(Rez.Layouts.summaryLayout(dc));
 	}
 	
 	function onUpdate(dc) {       

@@ -1,17 +1,17 @@
 <layouts>
-	<layout id="MainLayout">	
-		<drawable id="Meditate" />
+	<layout id="mainLayout">	
+		<drawable id="meditate" />
    	    <label id="duration" x="center" y="60" text="" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	    <label id="output" x="center" y="90" text="" color="Gfx.COLOR_BLACK" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	    <label id="HR" x="center" y="120" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
    		<drawable id="down" />
 	</layout>
-	<layout id="SummaryLayout">
+	<layout id="summaryLayout">
 		<label x="center" y="10" text="@Strings.SummaryTitle" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 		<label x="center" y="60" id="duration" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 		<label x="center" y="110" id="maxHr" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 		<label x="center" y="140" id="avgHr" text="" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	</layout>
-	<layout id="ColorPicker">	
+	<layout id="colorPicker">	
 	</layout>	
 </layouts>
