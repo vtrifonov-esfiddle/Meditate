@@ -1,25 +1,15 @@
 using Toybox.WatchUi as Ui;
 
-class AlertViewDelegate extends ScreenPickerDelegate {
-
-	function initialize(colors, onColorSelected) {
-		ScreenPickerDelegate.initialize(colors, onColorSelected);		
+class AlertViewDelegate extends ColorPickerDelegate {
+	private var mAlertModel;
+	
+	function initialize(colors, onColorSelected, alertModel) {
+		ColorPickerDelegate.initialize(colors, onColorSelected);	
+		me.mAlertModel = alertModel;	
 	}
 	
 	function createScreenPickerView() {
-		return new AlertView(me.mColors[me.mSelectedColorIndex]);
-	}
-	
-	function onMenu() {
-		System.println("Alert View onMenu");
-		return true;
-	}
-	
-	function onSwipe(swipeEvent) {
-		if (swipeEvent.getDirection() == Ui.SWIPE_LEFT) {
-			System.println("Alert SWIPE_LEFT");
-			onMenu();
-			return true;
-		}
+		me.mAlertModel.color = me.mColors[me.mSelectedColorIndex];
+		return new AlertView(me.mAlertModel);
 	}
 }

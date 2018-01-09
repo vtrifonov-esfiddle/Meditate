@@ -1,18 +1,12 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
-class ScreenPickerView extends Ui.View {
-	private var mColor;
-	
-	function initialize(color) {
+class ScreenPickerView extends Ui.View {	
+	function initialize() {
 		View.initialize();
-		me.mColor = color;
 	}
 	
-	function onUpdate(dc) {				        
-        dc.setColor(Gfx.COLOR_TRANSPARENT, me.mColor);        
-        dc.clear();
-                
+	function onUpdate(dc) {		                
         var up = new Rez.Drawables.up();
         up.draw(dc);
         var down = new Rez.Drawables.down();
