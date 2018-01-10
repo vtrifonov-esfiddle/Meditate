@@ -11,13 +11,11 @@ class AddAlertMenuDelegate extends Ui.MenuInputDelegate {
 		
     function onMenuItem(item) {
         if (item == :color) {
-	        Ui.popView(Ui.SLIDE_IMMEDIATE);
 	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW];
 	        
-	        Ui.pushView(new ColorPickerView(Gfx.COLOR_BLUE), new ColorPickerDelegate(colors, method(:onColorSelected)), Ui.SLIDE_LEFT);
+	        Ui.switchToView(new ColorPickerView(Gfx.COLOR_BLUE), new ColorPickerDelegate(colors, method(:onColorSelected)), Ui.SLIDE_LEFT);
         }
         else if (item == :selectAlert) {
-	        Ui.popView(Ui.SLIDE_IMMEDIATE);
 	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW];
 	        
 	        var alertModel = new DetailsModel();
@@ -39,7 +37,25 @@ class AddAlertMenuDelegate extends Ui.MenuInputDelegate {
 	        alertModel.detailLines[5].icon = Rez.Drawables.heartRateMaxIcon;
 	        alertModel.detailLines[5].text = "85 bpm";
 	        
-	        Ui.pushView(new AlertView(alertModel), new AlertViewDelegate(colors, method(:onColorSelected), alertModel), Ui.SLIDE_LEFT);
+	        var alertModel2 = new DetailsModel();
+	        alertModel2.color = Gfx.COLOR_PINK;
+	        alertModel2.title = "Alert 2";
+	        
+	        alertModel2.detailLines[1].icon = Rez.Drawables.durationIcon;
+	        alertModel2.detailLines[1].text = "18m 00s";
+	        
+	        alertModel2.detailLines[2].icon = Rez.Drawables.vibrateIcon;
+	        alertModel2.detailLines[2].text = "medium constant";
+	        
+	        alertModel2.detailLines[3].icon = Rez.Drawables.intermediateAlertsIcon;
+	        alertModel2.detailLines[3].text = "chart";
+	        
+	        alertModel2.detailLines[4].icon = Rez.Drawables.heartRateMinIcon;
+	        alertModel2.detailLines[4].text = "57 bpm";
+	        
+	        alertModel2.detailLines[5].icon = Rez.Drawables.heartRateMaxIcon;
+	        alertModel2.detailLines[5].text = "66 bpm";
+	        Ui.switchToView(new AlertView(alertModel), new AlertViewDelegate(method(:onAlertSelected), [alertModel, alertModel2]), Ui.SLIDE_LEFT);
         }
         else if (item == :duration) {
         	var durationPickerModel = new DurationPickerModel();
@@ -49,6 +65,9 @@ class AddAlertMenuDelegate extends Ui.MenuInputDelegate {
     }
     
     function onColorSelected(color) {
+    }
+    
+    function onAlertSelected(alert) {
     }
 
 }

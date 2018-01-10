@@ -1,15 +1,26 @@
 using Toybox.WatchUi as Ui;
 
-class AlertViewDelegate extends ColorPickerDelegate {
-	private var mAlertModel;
+class AlertViewDelegate extends ScreenPickerDelegate {
+	private var mOnAlertSelected;
+	private var mAlertModels;
 	
-	function initialize(colors, onColorSelected, alertModel) {
-		ColorPickerDelegate.initialize(colors, onColorSelected);	
-		me.mAlertModel = alertModel;	
+	function initialize(onAlertSelected, alertModels) {
+		ScreenPickerDelegate.initialize(alertModels.size());	
+		me.mAlertModels = alertModels;
+		me.mOnAlertSelected = onAlertSelected;
+	}
+	
+	function onSelect() {
+		me.mOnAlertSelected.invoke(me.getSelectedAlert());
+		Ui.popView(Ui.SLIDE_RIGHT);
+		return true;
+	}	
+	
+	private function getSelectedAlert() {
+		return me.mAlertModels[me.mSelectedPageIndex];
 	}
 	
 	function createScreenPickerView() {
-		me.mAlertModel.color = me.mColors[me.mSelectedColorIndex];
-		return new AlertView(me.mAlertModel);
+		return new AlertView(me.getSelectedAlert());
 	}
 }

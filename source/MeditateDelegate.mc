@@ -22,7 +22,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     	var addAlert = new Rez.Menus.addAlertMenu();   	
 
     	var addAlertMenuDelegate = new AddAlertMenuDelegate(me.mMeditateModel);
-    	Ui.pushView(addAlert, addAlertMenuDelegate, Ui.SWIPE_DOWN);
+    	Ui.pushView(addAlert, addAlertMenuDelegate, Ui.SWIPE_UP);
     }
     
     private function showDurationMenu() {
