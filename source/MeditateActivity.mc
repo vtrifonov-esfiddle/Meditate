@@ -1,6 +1,5 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Timer;
-using Toybox.Attention;
 
 class MediateActivity {
 	private var mMeditateModel;
@@ -10,52 +9,64 @@ class MediateActivity {
 	
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
-		
-		Sensor.enableSensorEvents( method( :onSensor ) );
-    	
+		    	
     	me.mSession = ActivityRecording.createSession(       
                 {
-                 :name=>"Meditation",                              
+                 :name=>"Meditating",                              
                  :sport=>ActivityRecording.SPORT_GENERIC,      
-                 :subSport=>ActivityRecording.SUB_SPORT_CARDIO_TRAINING
+                 :subSport=>ActivityRecording.SUB_SPORT_GENERIC
                 }
            );  
         me.mIsStarted = false;     
-		me.mSummaryModel;		
+		me.mSummaryModel = null;		
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
 	}
+	
+	private var RefreshActivityInterval = 1000;
 		
 	function start() {
 		me.mIsStarted = true;		
 		me.mSession.start(); 
+		
+		var refreshActivityTimer = new Timer.Timer();		
+		refreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);
+			
 		var elapsedTimer = new Timer.Timer();
-		var durationInMilliseconds = me.mMeditateModel.getDurationMins() * 60 * 1000;
-		elapsedTimer.start(method(:durationElapsed), durationInMilliseconds, false);
+		var timeInMilliseconds = me.mMeditateModel.getAlertTime() * 1000;
+		elapsedTimer.start(method(:timeElapsed), timeInMilliseconds, false);
 	}
 	
-	private function durationElapsed() {
-		var viberationProfile = [
-			new Attention.VibeProfile(50, 1000),
-	        new Attention.VibeProfile(0, 1000),
-	        new Attention.VibeProfile(75, 1000),
-	        new Attention.VibeProfile(0, 1000), 
-	        new Attention.VibeProfile(100, 2000),
-	        new Attention.VibeProfile(0, 1000),
-	        new Attention.VibeProfile(100, 1000)
-		];
-		Attention.vibrate(viberationProfile);
+	private function refreshActivityStats() {	
+		if (me.mIsStarted == false) {
+			return;
+	    }	
+	    
+		var activityInfo = Activity.getActivityInfo();
+		if (activityInfo == null) {
+			return;
+		}
+		if (activityInfo.elapsedTime != null) {
+			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
+		} 
+		if (activityInfo.currentHeartRate != null) {
+	    	me.mMeditateModel.heartRate = activityInfo.currentHeartRate;
+	    }
+	    else {
+	    	me.mMeditateModel.setInvalidHeartRate();
+	    }
+	    Ui.requestUpdate();	    
+	}
+	
+	private function timeElapsed() {
+		Vibration.vibrate(me.mMeditateModel.getVibrationPattern());
 	}
 	
 	function stop() {
 		me.mIsStarted = false;			
-		me.mSession.stop();
-		me.mSummaryModel = new SummaryModel();
-	}
-	function onSensor(sensorInfo) {
-		if (me.mIsStarted) {
-		    me.mMeditateModel.heartRate = sensorInfo.heartRate;
-		    Ui.requestUpdate();
-	    }
+		me.mSession.stop();		
+		
+		var activityInfo = Activity.getActivityInfo();
+		me.mSummaryModel = new SummaryModel(activityInfo);
 	}
 		
 	function finish() {		

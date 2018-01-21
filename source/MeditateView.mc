@@ -1,5 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Lang;
+using Toybox.Graphics as Gfx;
 
 class MeditateView extends Ui.View {
 	private var mMeditateModel;
@@ -31,21 +32,27 @@ class MeditateView extends Ui.View {
 	
 	
     // Update the view
-    function onUpdate(dc) {    
+    function onUpdate(dc) {         
+        dc.setColor(me.mMeditateModel.getColor(), me.mMeditateModel.getColor());   
+        dc.clear();
+        
+    	var meditate = new Rez.Drawables.meditate();
+        meditate.draw(dc);
+		                        
         var output = View.findDrawableById("output");
-        output.setText(me.mMeditateModel.output);
+        output.setText(Lang.format("Alarm: $1$", [me.mMeditateModel.formatTime(me.mMeditateModel.getAlertTime())]));
+        output.draw(dc);
         
         var hr = View.findDrawableById("HR");
-        if (me.mMeditateModel.heartRate) {
-	       	hr.setText(me.mMeditateModel.heartRate.toString());		
-		}
+       	hr.setText(me.mMeditateModel.heartRate.toString());		
+		hr.draw(dc);
 		
-		var duration = View.findDrawableById("duration");
-		var durationMins = me.mMeditateModel.getDurationMins();
-		duration.setText(Lang.format("Duration: $1$ mins", [durationMins]));		
-				
-        View.onUpdate(dc);
-        if (!me.mIsHeartIconShowing && me.mMeditateModel.isStarted) {
+		var time = View.findDrawableById("time");
+		var elapsedTime = me.mMeditateModel.elapsedTime;
+		time.setText(Lang.format("Time: $1$", [me.mMeditateModel.formatTime(elapsedTime)]));		
+		time.draw(dc);		
+        
+        if (!me.mIsHeartIconShowing) {
 			me.mHeartRateIcon.draw(dc);
 		}
 		

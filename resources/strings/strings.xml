@@ -3,22 +3,28 @@
 
     <string id="ConfirmSaveHeader">Save meditation?</string>
     
+    <string id="confirmDeleteAlertHeader">Delete Alert?</string>
+    
     <string id="SummaryTitle">Summary</string>
-        
-    <string id="menuTitleSetting">Alerts Config</string>
-    <string id="menuDuration10min">10 minutes</string>
-    <string id="menuDuration15min">15 minutes</string>
-    <string id="menuDuration20min">20 minutes</string>
-    <string id="menuDuration30min">30 minutes</string>
-    <string id="menuDurationCustom">Custom time</string>
+                  
+    <string id="menuAlertSettings_Title">Alert Settings</string>
+    <string id="menuAlertSettings_addNew">Add New</string>
+    <string id="menuAlertSettings_edit">Edit</string>
+    <string id="menuAlertSettings_delete">Delete</string>
     
-    <string id="meditationDurationMinsDesc">Duration in minutes</string>
-    
-    <string id="durationPickerTitle">Pick mins</string>    
-    
-    <string id="addAlertMenuTitle">Add Alert</string>
-    <string id="addAlertDuration">Pick Duration</string>
-    <string id="addAlertVibration">Pick Vibration</string>
-    <string id="addAlertColor">Pick Color</string>
-    <string id="addAlertDelete">Delete</string>    
+    <string id="addEditAlertMenu_title">Alert</string>
+    <string id="addEditAlertMenu_time">Time</string>
+    <string id="addEditAlertMenu_color">Color</string>
+    <string id="addEditAlertMenu_vibrationPattern">Vibration pattern</string>
+
+	<string id="vibrationPatternMenu_title">Vibration pattern</string>
+	<string id="vibrationPatternMenu_longPulsating">Long pulsating</string>
+	<string id="vibrationPatternMenu_longContinuous">Long continuous</string>
+	<string id="vibrationPatternMenu_longAscending">Long ascending</string>
+	<string id="vibrationPatternMenu_mediumPulsating">Medium pulsating</string>
+	<string id="vibrationPatternMenu_mediumContinuous">Medium continuous</string>
+	<string id="vibrationPatternMenu_mediumAscending">Medium ascending</string>
+	<string id="vibrationPatternMenu_shortPulsating">Short pulsating</string>
+	<string id="vibrationPatternMenu_shortContinuous">Short continuous</string>
+	<string id="vibrationPatternMenu_shortAscending">Short ascending</string>
 </strings>

@@ -11,11 +11,10 @@
     <drawable-list id="done">
     	<bitmap id="doneIcon"  x="95" y="140" filename="images/done.png" />
     </drawable-list>
-    <drawable-list id="meditate" background="Gfx.COLOR_WHITE">
+    <drawable-list id="meditate">
     	<bitmap id="meditateIcon" x="0" y="0" filename="images/meditate.png" />
     </drawable-list>    
     <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
-    
     <drawable-list id="up">
    	    <bitmap id="upIcon" x="110" y="0" filename="images/fontAwesome/up.png" />
     </drawable-list>

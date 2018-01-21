@@ -1,5 +1,0 @@
-<menu id="addAlertMenu" title="@Strings.addAlertMenuTitle">
-    <menu-item id="duration" label="@Strings.addAlertDuration" />
-    <menu-item id="selectAlert" label="Select Alert"></menu-item>
-    <menu-item id="color" label="@Strings.addAlertColor"></menu-item>
- </menu>

@@ -3,12 +3,12 @@ using Toybox.Lang;
 
 class DurationPickerDelegate extends Ui.BehaviorDelegate {
 	private var mModel;
-	private var mMeditateModel;
+	private var mOnDurationPicked;
 	
-    function initialize(durationPickerModel, meditateModel) {
+    function initialize(durationPickerModel, onDurationPicked) {
         Ui.BehaviorDelegate.initialize();
         me.mModel = durationPickerModel;
-        me.mMeditateModel = meditateModel;
+        me.mOnDurationPicked = onDurationPicked;
     }
 	
 	function onSelect() {
@@ -23,9 +23,8 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 	
 	function pickFinalDuration() {
 		var durationMins = me.mModel.hoursLow * 60 + me.mModel.minutesHigh * 10 + me.mModel.minutesLow;
-		System.println(durationMins);
-		me.mMeditateModel.setDuration(durationMins);
 		Ui.popView(Ui.SLIDE_RIGHT);
+		me.mOnDurationPicked.invoke(durationMins);
 	}
 	
 	function onSelectable(event) {	

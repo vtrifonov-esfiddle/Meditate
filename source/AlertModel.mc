@@ -1,0 +1,45 @@
+using Toybox.Graphics as Gfx;
+using Toybox.Application as App;
+
+module VibrationPattern {
+	enum {
+		LongPulsating = 1,
+		LongContinuous = 2,
+		LongAscending = 3,		
+		ShortPulsating = 4,
+		ShortContinuous = 5,
+		ShortAscending = 6,
+		MediumPulsating = 7,
+		MediumContinuous = 8,
+		MediumAscending = 6
+	}
+}
+
+class AlertModel {
+	function initialize() {	
+	}
+	
+	function fromDictionary(loadedAlertDictionary) {	
+		me.time = loadedAlertDictionary["time"];
+		me.color = loadedAlertDictionary["color"];
+		me.vibrationPattern = loadedAlertDictionary["vibrationPattern"];
+	}
+	
+	function toDictionary() {
+		return {
+			"time" => me.time,
+			"color" => me.color,
+			"vibrationPattern" => me.vibrationPattern
+		};
+	}
+	
+	function reset() {
+		me.time = 600;
+		me.color = Gfx.COLOR_YELLOW;
+		me.vibrationPattern = VibrationPattern.LongContinuous;
+	}
+		
+	var time;
+	var color;
+	var vibrationPattern;
+}

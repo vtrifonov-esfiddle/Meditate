@@ -7,7 +7,7 @@ class DurationPickerView extends Ui.View {
 	private var mDone;
 	
     function initialize(model) {
-        View.initialize();        
+        View.initialize();     
         me.mModel = model;
         me.mDone = new Rez.Drawables.done();
     }

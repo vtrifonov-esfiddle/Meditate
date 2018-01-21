@@ -13,8 +13,8 @@ class SummaryView extends Ui.View {
 	}
 	
 	function onUpdate(dc) {       
-        var duration = View.findDrawableById("duration");
-        duration.setText(me.mSummaryModel.duration);
+        var elapsedTime = View.findDrawableById("elapsedTime");
+        elapsedTime.setText(me.mSummaryModel.elapsedTime);
         
         var maxHr = View.findDrawableById("maxHr");
         maxHr.setText("Max HR: " + me.mSummaryModel.maxHr);

@@ -1,0 +1,11 @@
+<menu id="vibrationPatternMenu" title="@Strings.vibrationPatternMenu_title">
+    <menu-item id="longContinuous" label="@Strings.vibrationPatternMenu_longContinuous" />
+    <menu-item id="longPulsating" label="@Strings.vibrationPatternMenu_longPulsating" />
+    <menu-item id="longAscending" label="@Strings.vibrationPatternMenu_longAscending" />   
+    <menu-item id="mediumContinuous" label="@Strings.vibrationPatternMenu_mediumContinuous" />
+    <menu-item id="mediumPulsating" label="@Strings.vibrationPatternMenu_mediumPulsating" />
+    <menu-item id="mediumAscending" label="@Strings.vibrationPatternMenu_mediumAscending" /> 
+    <menu-item id="shortContinuous" label="@Strings.vibrationPatternMenu_shortContinuous" />
+    <menu-item id="shortPulsating" label="@Strings.vibrationPatternMenu_shortPulsating" />
+    <menu-item id="shortAscending" label="@Strings.vibrationPatternMenu_shortAscending" />
+</menu>

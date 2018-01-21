@@ -1,7 +1,0 @@
-<menu id="DurationMenu" title="@Strings.menuTitleSetting">
-    <menu-item id="duration10min" label="@Strings.menuDuration10min" />
-    <menu-item id="duration15min" label="@Strings.menuDuration15min" />
-    <menu-item id="duration20min" label="@Strings.menuDuration20min" />
-    <menu-item id="duration30min" label="@Strings.menuDuration30min" />
-    <menu-item id="durationCustom" label="@Strings.menuDurationCustom" />
-</menu>
