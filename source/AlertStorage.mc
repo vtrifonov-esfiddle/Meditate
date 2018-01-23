@@ -45,6 +45,10 @@ class AlertStorage {
 		return me.mAlertsCount;
 	}
 	
+	function getSelectedAlertIndex() {
+		return me.mSelectedAlertIndex;
+	}
+	
 	function updateAlertStats() {
 		App.Storage.setValue("selectedAlertIndex", me.mSelectedAlertIndex);
 		App.Storage.setValue("alertsCount", me.mAlertsCount);
@@ -54,9 +58,10 @@ class AlertStorage {
 		var alert = new AlertModel();
 		alert.reset();
 		me.mAlertsCount++;
-		me.mSelectedAlertIndex = me.mAlertsCount -1;
+		me.mSelectedAlertIndex = me.mAlertsCount - 1;
 		me.saveSelectedAlert(alert);
 		me.updateAlertStats();
+		
 		return alert;
 	}
 	

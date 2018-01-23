@@ -5,7 +5,7 @@ class ColorPickerDelegate extends ScreenPickerDelegate {
 	private var mOnColorSelected;
 	
 	function initialize(colors, onColorSelected) {
-		ScreenPickerDelegate.initialize(colors.size());	
+		ScreenPickerDelegate.initialize(0, colors.size());	
 		
 		me.mColors = colors;
 		me.mOnColorSelected = onColorSelected;	

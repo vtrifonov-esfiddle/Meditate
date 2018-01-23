@@ -3,12 +3,10 @@ using Toybox.Graphics as Gfx;
 
 class AddEditAlertMenuDelegate extends Ui.MenuInputDelegate {
     private var mAlertStorage;
-    private var mMeditateModel;
     
-    function initialize(alertStorage, meditateModel) {
+    function initialize(alertStorage) {
         MenuInputDelegate.initialize();
         me.mAlertStorage = alertStorage;
-        me.mMeditateModel = meditateModel;
     }
 		
     function onMenuItem(item) {
@@ -30,19 +28,15 @@ class AddEditAlertMenuDelegate extends Ui.MenuInputDelegate {
     private function onVibrationPatternPicked(vibrationPattern) {
     	var alertModel = me.mAlertStorage.loadSelectedAlert();
     	alertModel.vibrationPattern = vibrationPattern;
-		me.updateAlert(alertModel);
+		me.mAlertStorage.saveSelectedAlert(alertModel); 
 		Vibration.vibrate(vibrationPattern);
     }
-    
-    private function updateAlert(alertModel) {
-    	me.mAlertStorage.saveSelectedAlert(alertModel); 
-    	me.mMeditateModel.setAlert(alertModel);
-    }
+
     
     function onDurationPicked(durationMins) {    
     	var alertModel = me.mAlertStorage.loadSelectedAlert();
     	alertModel.time = durationMins * 60;
-		me.updateAlert(alertModel);
+		me.mAlertStorage.saveSelectedAlert(alertModel); 
     }
     
     
@@ -50,6 +44,6 @@ class AddEditAlertMenuDelegate extends Ui.MenuInputDelegate {
     function onColorSelected(color) {
     	var alertModel = me.mAlertStorage.loadSelectedAlert();
     	alertModel.color = color;
-		me.updateAlert(alertModel);
+		me.mAlertStorage.saveSelectedAlert(alertModel); 
     }
 }

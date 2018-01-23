@@ -10,30 +10,19 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
         me.mMeditateModel = meditateModel;
         me.mMeditateActivity = new MediateActivity(me.mMeditateModel);
         me.mAlertStorage = alertStorage;
+        me.startActivity();
     }
 		
-    function onMenu() {
-		return me.showAlertSettingsMenu();
-    }
-    
-    private function showAlertSettingsMenu() {
-    	var alertSettingsMenuDelegate = new AlertSettingsMenuDelegate(me.mAlertStorage, me.mMeditateModel);
-        Ui.pushView(new Rez.Menus.alertSettingsMenu(), alertSettingsMenuDelegate, Ui.CLICK_TYPE_TAP);
-        return true;
-    }
+	private function startActivity() {
+		me.mMeditateModel.output = "Started";
+		me.mMeditateActivity.start();
+	}
 	
-	private function toggleActivity() {
-		if (!me.mMeditateActivity.isStarted()) {
-			me.mMeditateModel.output = "Started";
-			me.mMeditateActivity.start();		
-			Ui.requestUpdate();
-		}
-		else {
-			me.mMeditateModel.output = "Stopped";
-			Ui.requestUpdate();
-			me.mMeditateActivity.stop();
-			me.finishActivity();
-		}
+	private function stopActivity() {
+		me.mMeditateModel.output = "Stopped";
+		Ui.requestUpdate();
+		me.mMeditateActivity.stop();
+		me.finishActivity();
 	}
     
     private function finishActivity() {
@@ -44,7 +33,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
         
     function onKey(keyEvent) {
     	if (keyEvent.getKey() == Ui.KEY_ENTER) {
-	    	me.toggleActivity();
+	    	me.stopActivity();
 	    	return true;
 	  	}
 	  	return false;

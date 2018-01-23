@@ -40,7 +40,7 @@ class MeditateView extends Ui.View {
         meditate.draw(dc);
 		                        
         var output = View.findDrawableById("output");
-        output.setText(Lang.format("Alarm: $1$", [me.mMeditateModel.formatTime(me.mMeditateModel.getAlertTime())]));
+        output.setText(Lang.format("Alarm: $1$", [TimeFormatter.format(me.mMeditateModel.getAlertTime())]));
         output.draw(dc);
         
         var hr = View.findDrawableById("HR");
@@ -49,7 +49,7 @@ class MeditateView extends Ui.View {
 		
 		var time = View.findDrawableById("time");
 		var elapsedTime = me.mMeditateModel.elapsedTime;
-		time.setText(Lang.format("Time: $1$", [me.mMeditateModel.formatTime(elapsedTime)]));		
+		time.setText(Lang.format("Time: $1$", [TimeFormatter.format(elapsedTime)]));		
 		time.draw(dc);		
         
         if (!me.mIsHeartIconShowing) {
