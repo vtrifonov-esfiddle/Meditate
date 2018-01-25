@@ -16,7 +16,7 @@ class MeditateApp extends App.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() {    
+    function getInitialView() {     	  
     	var alertStorage = new AlertStorage();	
     	var alertPickerDelegate = new AlertPickerDelegate(alertStorage);
     	

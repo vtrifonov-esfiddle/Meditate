@@ -12,9 +12,9 @@ class ConfirmDeleteAlertDelegate extends Ui.ConfirmationDelegate {
 
     function onResponse(value) {
         if (value == Ui.CONFIRM_YES) {        	
-        	me.mAlertStorage.deleteSelectedAlert();
+        	me.mAlertStorage.deleteSelectedAlert();        	 	
         	me.mAlertPickerDelegate.setPagesCount(me.mAlertStorage.getAlertsCount());
-        	me.mAlertPickerDelegate.select(me.mAlertStorage.getSelectedAlertIndex());
+        	me.mAlertPickerDelegate.select(me.mAlertStorage.getSelectedAlertIndex());       
         }        
     }
 }

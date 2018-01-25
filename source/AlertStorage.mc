@@ -12,10 +12,27 @@ class AlertStorage {
 		if (me.mAlertsCount == null) {
 			me.mAlertsCount = 0;
 		}
+		me.loadAlertKeys();
 	}	
 	
 	private var mSelectedAlertIndex;
 	private var mAlertsCount;
+	private var mAlertKeys;
+	
+	private function loadAlertKeys() {
+		me.mAlertKeys = App.Storage.getValue("alertKeys");		
+		if (me.mAlertKeys == null) {
+			me.saveAlertKeys();
+		}
+	}
+	
+	private function saveAlertKeys() {
+		if (me.mAlertKeys == null || me.mAlertKeys.size() == 0) {
+			me.mAlertKeys = new [1];
+			me.mAlertKeys[0] = 0;
+		}
+		App.Storage.setValue("alertKeys", me.mAlertKeys);
+	}
 	
 	function selectAlert(index) {
 		me.mSelectedAlertIndex = index;
@@ -27,8 +44,7 @@ class AlertStorage {
 		
 		var alert = new AlertModel();
 		if (loadedAlertDictionary == null) {
-			alert.reset();
-			me.saveSelectedAlert(alert);
+			alert = me.addAlert();
 		}
 		else {
 			alert.fromDictionary(loadedAlertDictionary);
@@ -54,9 +70,24 @@ class AlertStorage {
 		App.Storage.setValue("alertsCount", me.mAlertsCount);
 	}
 	
+	private function addAlertKey() {
+		var lastAlertKey = me.mAlertKeys[me.mAlertKeys.size() - 1];
+		me.mAlertKeys.add(lastAlertKey + 1); 
+		me.saveAlertKeys();
+	}
+	
+	private function deleteAlertKey(removeIndex) {
+		var removeAlertKeyValue = me.mAlertKeys[removeIndex];
+		me.mAlertKeys.remove(removeAlertKeyValue);
+		me.saveAlertKeys();
+	}
+	
 	function addAlert() {
 		var alert = new AlertModel();
 		alert.reset();
+		if (me.mAlertKeys.size() <= me.mAlertsCount) {
+			me.addAlertKey();
+		}
 		me.mAlertsCount++;
 		me.mSelectedAlertIndex = me.mAlertsCount - 1;
 		me.saveSelectedAlert(alert);
@@ -67,6 +98,7 @@ class AlertStorage {
 	
 	function deleteSelectedAlert() {
 		App.Storage.deleteValue(me.getSelectedAlertKey());
+		me.deleteAlertKey(me.mSelectedAlertIndex);
 		if (me.mSelectedAlertIndex > 0) {
 			me.mSelectedAlertIndex--;
 		}
@@ -77,29 +109,6 @@ class AlertStorage {
 	}		
 	
 	private function getSelectedAlertKey() {
-		return "alert" + me.mSelectedAlertIndex.toString();
-	}
-	
-
-	function testSave() {
-		var alert1 = me.addAlert();
-		alert1.color = Gfx.COLOR_GREEN;
-		alert1.time = 300;
-		me.saveSelectedAlert(alert1);
-		
-		var alert2 =  me.addAlert();
-		alert2.color = Gfx.COLOR_BLUE;
-		alert2.time = 70;
-		
-		me.saveSelectedAlert(alert2);
-	}
-	
-	private function printAlert(alert) {	
-		System.println("alert: " + me.getSelectedAlertKey() + " " + alert.time + " " + alert.color + " " + alert.vibrationPattern);
-	}
-	
-	function testLoad() {
-		var alert = me.loadSelectedAlert();
-		me.printAlert(alert);
-	}
+		return "alert" + me.mAlertKeys[me.mSelectedAlertIndex].toString();
+	}	
 }

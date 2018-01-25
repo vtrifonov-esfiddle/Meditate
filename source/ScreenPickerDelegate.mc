@@ -22,9 +22,13 @@ class ScreenPickerDelegate extends Ui.BehaviorDelegate {
 		Ui.switchToView(me.createScreenPickerView(), me, Ui.SLIDE_IMMEDIATE);
 	}
 	
-	function onNextPage() {					
-		me.mSelectedPageIndex = (me.mSelectedPageIndex + 1) % me.mPagesCount;
-		
+	function onNextPage() {		
+		if (me.mPagesCount == 1) {
+			me.mSelectedPageIndex = 0;
+		}			
+		else {
+			me.mSelectedPageIndex = (me.mSelectedPageIndex + 1) % me.mPagesCount;
+		}
 		Ui.switchToView(me.createScreenPickerView(), me, Ui.SLIDE_UP);		
 		return true;
 	}

@@ -13,7 +13,7 @@ class AlertSettingsMenuDelegate extends Ui.MenuInputDelegate {
     function onMenuItem(item) {
         if (item == :addNew) {
         	var newAlert = me.mAlertStorage.addAlert();	
-        	var addEditAlertMenuMenuDelegate = new AddEditAlertMenuDelegate(me.mAlertStorage);
+        	var addEditAlertMenuMenuDelegate = new AddEditAlertMenuDelegate(me.mAlertStorage);        	
         	me.mAlertPickerDelegate.setPagesCount(me.mAlertStorage.getAlertsCount());
         	me.mAlertPickerDelegate.select(me.mAlertStorage.getSelectedAlertIndex());
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
