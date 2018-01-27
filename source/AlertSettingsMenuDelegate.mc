@@ -13,14 +13,14 @@ class AlertSettingsMenuDelegate extends Ui.MenuInputDelegate {
     function onMenuItem(item) {
         if (item == :addNew) {
         	var newAlert = me.mAlertStorage.addAlert();	
-        	var addEditAlertMenuMenuDelegate = new AddEditAlertMenuDelegate(me.mAlertStorage);        	
+        	var addEditAlertMenuMenuDelegate = new AddEditAlertMenuDelegate(method(:onChangeAlert));        	
         	me.mAlertPickerDelegate.setPagesCount(me.mAlertStorage.getAlertsCount());
         	me.mAlertPickerDelegate.select(me.mAlertStorage.getSelectedAlertIndex());
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(new Rez.Menus.addEditAlertMenu(), addEditAlertMenuMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :edit) {
-   	        var addEditAlertMenuMenuDelegate = new AddEditAlertMenuDelegate(me.mAlertStorage);
+   	        var addEditAlertMenuMenuDelegate = new AddEditAlertMenuDelegate(method(:onChangeAlert));
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(new Rez.Menus.addEditAlertMenu(), addEditAlertMenuMenuDelegate, Ui.SLIDE_LEFT);    
         }
@@ -30,5 +30,13 @@ class AlertSettingsMenuDelegate extends Ui.MenuInputDelegate {
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(confirmDeleteAlertDialog, new ConfirmDeleteAlertDelegate(me.mAlertStorage, me.mAlertPickerDelegate), Ui.SLIDE_LEFT);
         }
+    }
+    
+    private function onChangeAlert(changedAlertModel) {
+    	var existingAlert = me.mAlertStorage.loadSelectedAlert();
+		existingAlert.copyNonNullFieldsFromAlert(changedAlertModel);
+		me.mAlertStorage.saveSelectedAlert(existingAlert);
+		me.mAlertPickerDelegate.updateSelectedAlertDetails(existingAlert);
+		Ui.requestUpdate();
     }
 }

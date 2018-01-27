@@ -2,10 +2,12 @@ using Toybox.WatchUi as Ui;
 
 class AlertPickerDelegate extends ScreenPickerDelegate {
 	private var mAlertStorage;
+	private var mSelectedAlertDetails;
 	
 	function initialize(alertStorage) {
 		ScreenPickerDelegate.initialize(alertStorage.getSelectedAlertIndex(), alertStorage.getAlertsCount());	
 		me.mAlertStorage = alertStorage;
+		me.mSelectedAlertDetails = new DetailsModel();
 	}
 	
     function onMenu() {
@@ -35,29 +37,12 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
 	  	return false;
     }
 	
-	private function getSelectedAlertDetails() {
+	private function setSelectedAlertDetails() {
 		me.mAlertStorage.selectAlert(me.mSelectedPageIndex);
 		var alert = me.mAlertStorage.loadSelectedAlert();
-		
-		var details = new DetailsModel();
-        details.color = alert.color;
-        details.title = "Alert " + (me.mSelectedPageIndex + 1);
-        
-        details.detailLines[1].icon = Rez.Drawables.durationIcon;
-        details.detailLines[1].text = TimeFormatter.format(alert.time);
-        
-        details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
-        details.detailLines[2].text = getVibrationPatternText(alert.vibrationPattern);
-        
-        details.detailLines[3].icon = Rez.Drawables.intermediateAlertsIcon;
-        details.detailLines[3].text = "Inter bar chart";
-        
-        details.detailLines[4].icon = Rez.Drawables.heartRateIcon;
-        details.detailLines[4].text = "ready to start";
-		
-		return details;
+		me.updateSelectedAlertDetails(alert);
 	}
-	
+		
 	private static function getVibrationPatternText(vibrationPattern) {
 		switch (vibrationPattern) {
 			case VibrationPattern.LongPulsating:
@@ -81,7 +66,26 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
 		}
 	}
 	
+	function updateSelectedAlertDetails(alert) {
+		var details = me.mSelectedAlertDetails;
+        details.color = alert.color;
+        details.title = "Alert " + (me.mSelectedPageIndex + 1);
+        
+        details.detailLines[1].icon = Rez.Drawables.durationIcon;
+        details.detailLines[1].text = TimeFormatter.format(alert.time);
+        
+        details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
+        details.detailLines[2].text = getVibrationPatternText(alert.vibrationPattern);
+        
+        details.detailLines[3].icon = Rez.Drawables.intermediateAlertsIcon;
+        details.detailLines[3].text = "Inter bar chart";
+        
+        details.detailLines[4].icon = Rez.Drawables.heartRateIcon;
+        details.detailLines[4].text = "ready to start";
+	}
+	
 	function createScreenPickerView() {
-		return new AlertPickerView(me.getSelectedAlertDetails());
+		me.setSelectedAlertDetails();
+		return new AlertPickerView(me.mSelectedAlertDetails);
 	}
 }

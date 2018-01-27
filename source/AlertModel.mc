@@ -32,11 +32,23 @@ class AlertModel {
 			"vibrationPattern" => me.vibrationPattern
 		};
 	}
-	
+		
 	function reset() {
 		me.time = 600;
 		me.color = Gfx.COLOR_YELLOW;
 		me.vibrationPattern = VibrationPattern.LongContinuous;
+	}
+	
+	function copyNonNullFieldsFromAlert(otherAlert) {
+    	if (otherAlert.time != null) {
+    		me.time = otherAlert.time;
+    	}
+    	if (otherAlert.color != null) {
+    		me.color = otherAlert.color;
+    	}
+    	if (otherAlert.vibrationPattern != null) {
+    		me.vibrationPattern = otherAlert.vibrationPattern;
+    	}
 	}
 		
 	var time;
