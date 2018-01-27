@@ -13,11 +13,12 @@ class MeditateView extends Ui.View {
         me.mHeartRateIcon = new Ui.Bitmap({
 	         :rezId=>Rez.Drawables.heartRateIcon,
 	         :locX=>Ui.LAYOUT_HALIGN_CENTER ,
-	         :locY=>160
+	         :locY=>180
      	});
      	me.mIsHeartIconShowing = false;
     }
     
+
 
     // Load your resources here
     function onLayout(dc) {
@@ -30,6 +31,14 @@ class MeditateView extends Ui.View {
     function onShow() {
     }
 	
+	private function formatHr(hr) {
+		if (hr == null) {
+			return "--";
+		}
+		else {
+			return hr.toString();
+		}
+	}
 	
     // Update the view
     function onUpdate(dc) {         
@@ -44,8 +53,13 @@ class MeditateView extends Ui.View {
         output.draw(dc);
         
         var hr = View.findDrawableById("HR");
-       	hr.setText(me.mMeditateModel.heartRate.toString());		
+       	hr.setText(me.formatHr(me.mMeditateModel.currentHr));		
 		hr.draw(dc);
+		
+		var minHr = View.findDrawableById("MinHR");
+		minHr.setText(me.formatHr(me.mMeditateModel.minHr));
+		minHr.draw(dc);
+		
 		
 		var time = View.findDrawableById("time");
 		var elapsedTime = me.mMeditateModel.elapsedTime;
