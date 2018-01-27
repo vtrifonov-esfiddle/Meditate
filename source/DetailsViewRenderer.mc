@@ -27,7 +27,7 @@ class DetailsViewRenderer {
 			if (line.icon != null) {
 				me.displayIcon(dc, lineNumber, line.icon);
 			}
-       		me.displayText(dc, lineNumber, line.text);       	
+       		me.displayText(dc, lineNumber, line.text, line.textOffset);       	
        	}       
     }
     
@@ -51,8 +51,8 @@ class DetailsViewRenderer {
      	bitmap.draw(dc);
 	}
     
-    private function displayText(dc, lineNumber, text) {   
-        var textX = dc.getWidth() / 3.4;
+    private function displayText(dc, lineNumber, text, textOffset) {   
+        var textX = dc.getWidth() / 3.4 + textOffset;
         var posY = getLinePosY(lineNumber);		
         
         dc.drawText(textX, posY, Gfx.FONT_SYSTEM_SMALL, text, Gfx.TEXT_JUSTIFY_LEFT);

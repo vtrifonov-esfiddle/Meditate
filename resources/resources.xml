@@ -6,6 +6,7 @@
     <bitmap id="heartRateMaxIcon" filename="images/fontAwesome/heartRateMax.png" />
     <bitmap id="vibrateIcon" filename="images/fontAwesome/clock-o-vibrate.png" />
     <bitmap id="durationIcon" filename="images/fontAwesome/hourglass.png" />
+    <bitmap id="timeIcon" filename="images/fontAwesome/hourglass-end.png" />
     <bitmap id="intermediateAlertsIcon" filename="images/fontAwesome/pie-chart.png" />
         
     <drawable-list id="done">

@@ -2,11 +2,22 @@ using Toybox.System;
 
 class SummaryModel {
 	function initialize(activityInfo) {
-		me.elapsedTime = TimeFormatter.format(activityInfo.elapsedTime / 1000); 
-		me.maxHr = activityInfo.maxHeartRate;
-		me.avgHr = activityInfo.averageHeartRate;
+		me.elapsedTime = activityInfo.elapsedTime / 1000; 
+		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
+		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 	}
-
+	
+	private function initializeHeartRate(heartRate) {
+		if (heartRate == null) {
+			return me.InvalidHeartRate;
+		}
+		else {
+			return heartRate;
+		}
+	}
+	
+	private const InvalidHeartRate = "--";
+	
 	public var elapsedTime;
 	
 	public var maxHr;

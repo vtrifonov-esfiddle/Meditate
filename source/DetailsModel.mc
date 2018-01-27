@@ -2,10 +2,12 @@ class DetailsLine {
 	function initialize() {
 		me.icon = null;
 		me.text = "";
+		me.textOffset = 0;
 	}
 
 	var icon;
 	var text;
+	var textOffset;
 }
 
 class DetailsModel{
