@@ -11,7 +11,7 @@ module VibrationPattern {
 		ShortAscending = 6,
 		MediumPulsating = 7,
 		MediumContinuous = 8,
-		MediumAscending = 6
+		MediumAscending = 9
 	}
 }
 
