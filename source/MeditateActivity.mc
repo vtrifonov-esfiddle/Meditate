@@ -48,12 +48,8 @@ class MediateActivity {
 		if (activityInfo.elapsedTime != null) {
 			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
 		} 
-		if (activityInfo.currentHeartRate != null) {
-	    	me.mMeditateModel.heartRate = activityInfo.currentHeartRate;
-	    }
-	    else {
-	    	me.mMeditateModel.setInvalidHeartRate();
-	    }
+		me.mMeditateModel.heartRate = activityInfo.currentHeartRate;
+
 	    Ui.requestUpdate();	    
 	}
 	

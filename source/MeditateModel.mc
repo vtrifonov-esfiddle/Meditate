@@ -2,19 +2,13 @@ using Toybox.Application as App;
 
 class MeditateModel {
 	function initialize(alertModel) {
-		me.output = "Pick duration";
-		me.setInvalidHeartRate();
+		me.heartRate = null;
 		me.mAlert = alertModel;
 		me.elapsedTime = 0;
 	}
 	
 	private var mAlert;
-	
-	function setInvalidHeartRate() {
-		me.heartRate = "--";
-	}	
-		
-	public var output;
+			
 	public var heartRate;
 	public var elapsedTime;
 	

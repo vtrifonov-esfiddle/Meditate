@@ -25,7 +25,7 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
     	var meditateModel = new MeditateModel(selectedAlert);  
     	  
         var meditateView = new MeditateView(meditateModel);
-        var mediateDelegate = new MeditateDelegate(meditateModel, me.mAlertStorage);
+        var mediateDelegate = new MeditateDelegate(meditateModel);
 		Ui.pushView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
 	}
 	

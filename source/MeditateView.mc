@@ -4,25 +4,23 @@ using Toybox.Graphics as Gfx;
 
 class MeditateView extends Ui.View {
 	private var mMeditateModel;
-	private var mHeartRateIcon;
-	private var mIsHeartIconShowing;
+	private var mMainDuationRenderer;
 	
     function initialize(meditateModel) {
         View.initialize();
         me.mMeditateModel = meditateModel;
-        me.mHeartRateIcon = new Ui.Bitmap({
-	         :rezId=>Rez.Drawables.heartRateIcon,
-	         :locX=>Ui.LAYOUT_HALIGN_CENTER ,
-	         :locY=>160
-     	});
-     	me.mIsHeartIconShowing = false;
+        me.mMainDuationRenderer = null;
     }
     
 
     // Load your resources here
-    function onLayout(dc) {
+    function onLayout(dc) {    
+        var durationArcRadius = dc.getWidth() / 2;
+        var mainDurationArcWidth = dc.getWidth() / 5;
+        me.mMainDuationRenderer = new ElapsedDuationRenderer(me.mMeditateModel.getColor(), durationArcRadius, mainDurationArcWidth);
         setLayout(Rez.Layouts.mainLayout(dc));
     }
+     
 
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
@@ -32,32 +30,17 @@ class MeditateView extends Ui.View {
 	
 	
     // Update the view
-    function onUpdate(dc) {         
-        dc.setColor(me.mMeditateModel.getColor(), me.mMeditateModel.getColor());   
-        dc.clear();
-        
-    	var meditate = new Rez.Drawables.meditate();
-        meditate.draw(dc);
-		                        
-        var output = View.findDrawableById("output");
-        output.setText(Lang.format("Alarm: $1$", [TimeFormatter.format(me.mMeditateModel.getAlertTime())]));
-        output.draw(dc);
-        
-        var hr = View.findDrawableById("HR");
-       	hr.setText(me.mMeditateModel.heartRate.toString());		
-		hr.draw(dc);
-		
-		var time = View.findDrawableById("time");
-		var elapsedTime = me.mMeditateModel.elapsedTime;
-		time.setText(Lang.format("Time: $1$", [TimeFormatter.format(elapsedTime)]));		
-		time.draw(dc);		
-        
-        if (!me.mIsHeartIconShowing) {
-			me.mHeartRateIcon.draw(dc);
-		}
-		
-		me.mIsHeartIconShowing = !me.mIsHeartIconShowing;
+    function onUpdate(dc) {   
+		var elapsedTime = View.findDrawableById("elapsedTime");
+		elapsedTime.setColor(me.mMeditateModel.getColor());
+		elapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
+		      
+        View.onUpdate(dc);
+        		                        
+        var alarmTime = me.mMeditateModel.getAlertTime();
+		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);		
     }
+    
 
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
