@@ -26,6 +26,10 @@ class SummaryView extends Ui.View {
         details.detailLines[3].text = summaryModel.maxHr;
         details.detailLines[3].textOffset = 5;
         
+        details.detailLines[4].icon = Rez.Drawables.heartRateMinIcon;
+        details.detailLines[4].text = summaryModel.minHr;
+        details.detailLines[4].textOffset = 5;
+        
         me.mRenderer = new DetailsViewRenderer(details);
 	}	
 		

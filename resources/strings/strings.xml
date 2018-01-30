@@ -27,4 +27,7 @@
 	<string id="vibrationPatternMenu_shortPulsating">Short pulsating</string>
 	<string id="vibrationPatternMenu_shortContinuous">Short continuous</string>
 	<string id="vibrationPatternMenu_shortAscending">Short ascending</string>
+	
+	<string id="minHrField">Min HR</string>
+	<string id="minHrFieldUnits">bpm</string>
 </strings>

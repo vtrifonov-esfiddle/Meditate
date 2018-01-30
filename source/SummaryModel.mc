@@ -1,14 +1,15 @@
 using Toybox.System;
 
 class SummaryModel {
-	function initialize(activityInfo) {
+	function initialize(activityInfo, minHr) {
 		me.elapsedTime = activityInfo.elapsedTime / 1000; 
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
+		me.minHr = me.initializeHeartRate(minHr);
 	}
 	
 	private function initializeHeartRate(heartRate) {
-		if (heartRate == null) {
+		if (heartRate == null || heartRate == 0) {
 			return me.InvalidHeartRate;
 		}
 		else {
@@ -18,8 +19,9 @@ class SummaryModel {
 	
 	private const InvalidHeartRate = "--";
 	
-	public var elapsedTime;
+	var elapsedTime;
 	
-	public var maxHr;
-	public var avgHr;
+	var maxHr;
+	var avgHr;
+	var minHr;
 }

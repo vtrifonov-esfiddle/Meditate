@@ -2,14 +2,16 @@ using Toybox.Application as App;
 
 class MeditateModel {
 	function initialize(alertModel) {
-		me.heartRate = null;
 		me.mAlert = alertModel;
 		me.elapsedTime = 0;
+		me.minHr = null;
+		me.currentHr = null;
 	}
 	
 	private var mAlert;
-			
-	public var heartRate;
+
+	public var currentHr;
+	public var minHr;
 	public var elapsedTime;
 	
 	function getAlertTime() {

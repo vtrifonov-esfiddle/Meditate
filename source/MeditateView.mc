@@ -13,6 +13,7 @@ class MeditateView extends Ui.View {
     }
     
 
+
     // Load your resources here
     function onLayout(dc) {    
         var durationArcRadius = dc.getWidth() / 2;
@@ -28,6 +29,14 @@ class MeditateView extends Ui.View {
     function onShow() {
     }
 	
+	private function formatHr(hr) {
+		if (hr == null) {
+			return "--";
+		}
+		else {
+			return hr.toString();
+		}
+	}
 	
     // Update the view
     function onUpdate(dc) {   
@@ -38,7 +47,7 @@ class MeditateView extends Ui.View {
         View.onUpdate(dc);
         		                        
         var alarmTime = me.mMeditateModel.getAlertTime();
-		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);		
+		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);	
     }
     
 

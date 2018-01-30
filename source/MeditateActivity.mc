@@ -1,5 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Timer;
+using Toybox.FitContributor;
 
 class MediateActivity {
 	private var mMeditateModel;
@@ -19,8 +20,23 @@ class MediateActivity {
            );  
         me.mIsStarted = false;     
 		me.mSummaryModel = null;		
-		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
+		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
+		me.createMinHrDataField();
 	}
+	
+	private function createMinHrDataField() {
+		me.mMinHrField = me.mSession.createField(
+            "min_hr",
+            me.MinHrFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_LAP, :units=>"bpm"}
+        );
+
+        me.mMinHrField.setData(0.0);
+	}
+	
+	private const MinHrFieldId = 0;
+	private var mMinHrField;
 	
 	private var RefreshActivityInterval = 1000;
 		
@@ -48,21 +64,26 @@ class MediateActivity {
 		if (activityInfo.elapsedTime != null) {
 			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
 		} 
-		me.mMeditateModel.heartRate = activityInfo.currentHeartRate;
-
+		me.mMeditateModel.currentHr = activityInfo.currentHeartRate;
+		if (activityInfo.currentHeartRate != null) {
+	    	if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate) {
+	    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
+	    		me.mMinHrField.setData(activityInfo.currentHeartRate.toFloat());
+	    	}
+	    }
 	    Ui.requestUpdate();	    
 	}
-	
+	    
 	private function timeElapsed() {
 		Vibration.vibrate(me.mMeditateModel.getVibrationPattern());
 	}
 	
 	function stop() {
-		me.mIsStarted = false;			
+		me.mIsStarted = false;		
 		me.mSession.stop();		
-		
+
 		var activityInfo = Activity.getActivityInfo();
-		me.mSummaryModel = new SummaryModel(activityInfo);
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr);
 	}
 		
 	function finish() {		

@@ -27,4 +27,7 @@
     <fonts>
    	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
     </fonts>
+    <fitContributions>
+		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />
+	</fitContributions>
 </resources>
