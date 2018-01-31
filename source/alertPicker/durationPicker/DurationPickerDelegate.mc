@@ -56,7 +56,6 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
     }
     
     function onBack() {
-    	System.println("onBack: " + me.mModel.pickerPos);
     	switch (me.mModel.pickerPos) {
 				case :durationPicker_start :	
 					me.mModel.hoursLow = "0";

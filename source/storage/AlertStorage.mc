@@ -7,36 +7,26 @@ class AlertStorage {
 		if (me.mSelectedAlertIndex == null) {
 			me.mSelectedAlertIndex = 0;
 		}
+				
+		me.mAlertKeysStorage = new AlertKeysStorage();
 		
 		me.mAlertsCount = App.Storage.getValue("alertsCount");
 		if (me.mAlertsCount == null) {
-			me.mAlertsCount = 0;
+			me.loadSelectedAlert();
 		}
-		me.loadAlertKeys();
 	}	
 	
 	private var mSelectedAlertIndex;
 	private var mAlertsCount;
-	private var mAlertKeys;
-	
-	private function loadAlertKeys() {
-		me.mAlertKeys = App.Storage.getValue("alertKeys");		
-		if (me.mAlertKeys == null) {
-			me.saveAlertKeys();
-		}
-	}
-	
-	private function saveAlertKeys() {
-		if (me.mAlertKeys == null || me.mAlertKeys.size() == 0) {
-			me.mAlertKeys = new [1];
-			me.mAlertKeys[0] = 0;
-		}
-		App.Storage.setValue("alertKeys", me.mAlertKeys);
-	}
-	
+	private var mAlertKeysStorage;
+		
 	function selectAlert(index) {
 		me.mSelectedAlertIndex = index;
 		App.Storage.setValue("selectedAlertIndex", me.mSelectedAlertIndex);
+	}
+	
+	private function getSelectedAlertKey() {
+		return me.mAlertKeysStorage.getKey(me.mSelectedAlertIndex);
 	}
 	
 	function loadSelectedAlert() {
@@ -44,6 +34,7 @@ class AlertStorage {
 		
 		var alert = new AlertModel();
 		if (loadedAlertDictionary == null) {
+			me.mAlertsCount = 0;
 			alert = me.addAlert();
 		}
 		else {
@@ -65,31 +56,19 @@ class AlertStorage {
 		return me.mSelectedAlertIndex;
 	}
 	
-	function updateAlertStats() {
+	private function updateAlertStats() {
 		App.Storage.setValue("selectedAlertIndex", me.mSelectedAlertIndex);
 		App.Storage.setValue("alertsCount", me.mAlertsCount);
 	}
-	
-	private function addAlertKey() {
-		var lastAlertKey = me.mAlertKeys[me.mAlertKeys.size() - 1];
-		me.mAlertKeys.add(lastAlertKey + 1); 
-		me.saveAlertKeys();
-	}
-	
-	private function deleteAlertKey(removeIndex) {
-		var removeAlertKeyValue = me.mAlertKeys[removeIndex];
-		me.mAlertKeys.remove(removeAlertKeyValue);
-		me.saveAlertKeys();
-	}
-	
+			
 	function addAlert() {
 		var alert = new AlertModel();
 		alert.reset();
-		if (me.mAlertKeys.size() <= me.mAlertsCount) {
-			me.addAlertKey();
-		}
 		me.mAlertsCount++;
 		me.mSelectedAlertIndex = me.mAlertsCount - 1;
+		if (me.mSelectedAlertIndex > 0) {
+			me.mAlertKeysStorage.addAfterInitialKey();
+		}
 		me.saveSelectedAlert(alert);
 		me.updateAlertStats();
 		
@@ -98,17 +77,56 @@ class AlertStorage {
 	
 	function deleteSelectedAlert() {
 		App.Storage.deleteValue(me.getSelectedAlertKey());
-		me.deleteAlertKey(me.mSelectedAlertIndex);
+		me.mAlertKeysStorage.deleteKey(me.mSelectedAlertIndex);
 		if (me.mSelectedAlertIndex > 0) {
 			me.mSelectedAlertIndex--;
 		}
-		if (me.mAlertsCount > 0) {
+		if (me.mAlertsCount > 1) {
 			me.mAlertsCount--;
 		}
+		
 		me.updateAlertStats();
-	}		
-	
-	private function getSelectedAlertKey() {
-		return "alert" + me.mAlertKeys[me.mSelectedAlertIndex].toString();
 	}	
+	
+	class AlertKeysStorage {
+		function initialize() {
+			me.loadAlertKeys();
+		}
+		
+		private var mAlertKeys;
+		
+		private function loadAlertKeys() {
+			me.mAlertKeys = App.Storage.getValue("alertKeys");		
+			me.saveAlertKeys();
+		}
+		
+		private function ensureInitialAlertKeyExists() {
+			if (me.mAlertKeys == null || me.mAlertKeys.size() == 0) {
+				me.mAlertKeys = new [1];
+				me.mAlertKeys[0] = 0;
+			}
+		}
+		
+		private function saveAlertKeys() {
+			me.ensureInitialAlertKeyExists();
+			App.Storage.setValue("alertKeys", me.mAlertKeys);
+		}	
+			
+		function addAfterInitialKey() {
+			var lastAlertKey = me.mAlertKeys[me.mAlertKeys.size() - 1];
+			me.mAlertKeys.add(lastAlertKey + 1); 
+			me.saveAlertKeys();
+		}
+		
+		function deleteKey(removeIndex) {
+			var removeAlertKeyValue = me.mAlertKeys[removeIndex];
+			me.mAlertKeys.remove(removeAlertKeyValue);
+			me.saveAlertKeys();
+		}
+		
+		function getKey(alertIndex) {
+			return "alert" + me.mAlertKeys[alertIndex].toString();
+		}
+	}
 }
+

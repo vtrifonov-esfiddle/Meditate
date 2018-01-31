@@ -136,17 +136,14 @@ class DigitsOutput {
 	}
 	
 	function setHoursLow(digit) {
-		System.println("setHoursLow: " + digit);
 		me.mHoursLow.setText(digit.toString());
 	}
 	
 	function setMinutesHigh(digit) {
-			System.println("setMinutesHigh" + digit);
 		me.mMinutesHigh.setText(digit.toString());
 	}
 	
 	function setMinutesLow(digit) {
-			System.println("setMinutesLow" + digit);
 		me.mMinutesLow.setText(digit.toString());
 	}
 }
