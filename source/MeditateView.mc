@@ -43,7 +43,10 @@ class MeditateView extends Ui.View {
 		var elapsedTime = View.findDrawableById("elapsedTime");
 		elapsedTime.setColor(me.mMeditateModel.getColor());
 		elapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
-		      
+		
+		var hrStatusText = View.findDrawableById("hrStatusText");
+		hrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
+		
         View.onUpdate(dc);
         		                        
         var alarmTime = me.mMeditateModel.getAlertTime();

@@ -18,16 +18,16 @@ class SummaryView extends Ui.View {
         details.detailLines[1].text = TimeFormatter.format(summaryModel.elapsedTime);
         details.detailLines[1].textOffset = 5;
                 
-        details.detailLines[2].icon = Rez.Drawables.heartRateAvgIcon;
-        details.detailLines[2].text = summaryModel.avgHr;
+        details.detailLines[2].icon = Rez.Drawables.heartRateMinIcon;
+        details.detailLines[2].text = summaryModel.minHr;
         details.detailLines[2].textOffset = 5;
-        
-        details.detailLines[3].icon = Rez.Drawables.heartRateMaxIcon;
-        details.detailLines[3].text = summaryModel.maxHr;
+                
+        details.detailLines[3].icon = Rez.Drawables.heartRateAvgIcon;
+        details.detailLines[3].text = summaryModel.avgHr;
         details.detailLines[3].textOffset = 5;
         
-        details.detailLines[4].icon = Rez.Drawables.heartRateMinIcon;
-        details.detailLines[4].text = summaryModel.minHr;
+        details.detailLines[4].icon = Rez.Drawables.heartRateMaxIcon;
+        details.detailLines[4].text = summaryModel.maxHr;
         details.detailLines[4].textOffset = 5;
         
         me.mRenderer = new DetailsViewRenderer(details);

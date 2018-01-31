@@ -17,6 +17,9 @@
     </drawable-list>    
     <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
     <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
+    <drawable-list id="hrStatus">
+    	<bitmap id="heartRateIcon" x="60" y="150" filename="images/fontAwesome/heartRate.png" />
+    </drawable-list>
     <drawable-list id="up">
    	    <bitmap id="upIcon" x="110" y="0" filename="images/fontAwesome/up.png" />
     </drawable-list>
