@@ -26,6 +26,11 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
         Ui.pushView(confirmSaveDialog, new ConfirmSaveDelegate(me.mMeditateActivity), Ui.SLIDE_IMMEDIATE);
     }
+    
+    function onBack() {
+    	me.mMeditateActivity.stop();
+    	me.mMeditateActivity.discard();
+    }
         
     function onKey(keyEvent) {
     	if (keyEvent.getKey() == Ui.KEY_ENTER) {

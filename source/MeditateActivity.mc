@@ -39,17 +39,20 @@ class MediateActivity {
 	private var mMinHrField;
 	
 	private var RefreshActivityInterval = 1000;
+	
+	private var mRefreshActivityTimer;
+	private var mElapsedTimer;
 		
 	function start() {
 		me.mIsStarted = true;		
 		me.mSession.start(); 
 		
-		var refreshActivityTimer = new Timer.Timer();		
-		refreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);
+		me.mRefreshActivityTimer = new Timer.Timer();		
+		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);
 			
-		var elapsedTimer = new Timer.Timer();
+		me.mElapsedTimer = new Timer.Timer();
 		var timeInMilliseconds = me.mMeditateModel.getAlertTime() * 1000;
-		elapsedTimer.start(method(:timeElapsed), timeInMilliseconds, false);
+		me.mElapsedTimer.start(method(:timeElapsed), timeInMilliseconds, false);
 	}
 	
 	private function refreshActivityStats() {	
@@ -81,7 +84,9 @@ class MediateActivity {
 	function stop() {
 		me.mIsStarted = false;		
 		me.mSession.stop();		
-
+		me.mRefreshActivityTimer.stop();
+		me.mElapsedTimer.stop();
+		
 		var activityInfo = Activity.getActivityInfo();
 		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr);
 	}
