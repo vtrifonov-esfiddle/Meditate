@@ -13,7 +13,7 @@
     	<bitmap id="doneIcon"  x="95" y="140" filename="images/done.png" />
     </drawable-list>
     <drawable-list id="meditate">
-    	<bitmap id="meditateIcon" x="0" y="0" filename="images/meditate.png" />
+    	<bitmap id="meditateIcon" x="-5" y="5" filename="images/meditate.png" />
     </drawable-list>    
     <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
     <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
