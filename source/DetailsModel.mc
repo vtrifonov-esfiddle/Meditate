@@ -1,13 +1,31 @@
+class ProgressBarLine {
+	function initialize() {
+		me.progressDictionary = {};
+	}
+	
+	var progress;
+}
+
+class TextLine {
+	function initialize() {
+		me.text = "";
+	}
+
+	var text;
+}
+
 class DetailsLine {
 	function initialize() {
 		me.icon = null;
-		me.text = "";
 		me.textOffset = 0;
+		me.iconOffset = 0;
+		me.value = new TextLine();
 	}
 
 	var icon;
-	var text;
 	var textOffset;
+	var iconOffset;
+	var value;
 }
 
 class DetailsModel{
@@ -24,7 +42,22 @@ class DetailsModel{
 		};
 	}
 	
+	const LinesCount = 5;
+	
+	function setAllIconsOffset(offset) {
+		for (var i = 1; i <= LinesCount; i++) {
+			me.detailLines[i].iconOffset = offset;
+		}
+	}
+	
+	function setAllTextsOffset(offset) {
+		for (var i = 1; i <= LinesCount; i++) {
+			me.detailLines[i].textOffset = offset;
+		}
+	}
+	
 	var title;
 	var detailLines;
 	var color;
+	var backgroundColor;
 }

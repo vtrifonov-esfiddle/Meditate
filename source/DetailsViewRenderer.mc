@@ -14,20 +14,25 @@ class DetailsViewRenderer {
 	}
 	
 	function renderBackgroundColor(dc) {				        
-        dc.setColor(Gfx.COLOR_TRANSPARENT, me.mDetailsModel.color);        
+        dc.setColor(Gfx.COLOR_TRANSPARENT, me.mDetailsModel.backgroundColor);        
         dc.clear();        
     }
     
     function renderDetailsView(dc) {
-        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT); 
+        dc.setColor(me.mDetailsModel.color, Gfx.COLOR_TRANSPARENT); 
        	me.displayTitle(dc, me.mDetailsModel.title);
 		
 		for (var lineNumber = 1; lineNumber <= me.mDetailsModel.detailLines.size(); lineNumber++) {
 			var line = me.mDetailsModel.detailLines[lineNumber];
 			if (line.icon != null) {
-				me.displayIcon(dc, lineNumber, line.icon);
+				me.displayIcon(dc, lineNumber, line.icon, line.iconOffset);
 			}
-       		me.displayText(dc, lineNumber, line.text, line.textOffset);       	
+			if (line.value instanceof  TextLine) {
+       			me.displayText(dc, lineNumber, line.value.text, line.textOffset);  
+       		}
+   			else if	(line.value instanceof ProgressBarLine) {
+   			
+   			}
        	}       
     }
     
@@ -40,12 +45,13 @@ class DetailsViewRenderer {
     	return lineNumber * TextPosYOffset + InitialTextPosY;
     }
     	
-	private function displayIcon(dc, lineNumber, drawableId) {
+	private function displayIcon(dc, lineNumber, drawableId, iconOffset) {
+        var posX = IconX + iconOffset;
         var posY = getLinePosY(lineNumber);
         
 		var bitmap = new Ui.Bitmap({
 	         :rezId=>drawableId,
-	         :locX=>IconX,
+	         :locX=>posX,
 	         :locY=>posY
      	});
      	bitmap.draw(dc);
