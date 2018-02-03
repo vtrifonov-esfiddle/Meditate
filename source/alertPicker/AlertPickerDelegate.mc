@@ -72,6 +72,7 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
         details.title = "Alert " + (me.mSelectedPageIndex + 1);
+        details.titleColor = alert.color;
         details.setAllIconsOffset(-4);
         
         details.detailLines[1].icon = Rez.Drawables.durationIcon;
@@ -81,13 +82,22 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[2].value.text = getVibrationPatternText(alert.vibrationPattern);
         
         details.detailLines[3].icon = Rez.Drawables.mainAlertDurationIcon;
-        details.detailLines[3].value.text = "Main chart";
+        var mainDuration = new ProgressBarLine();
+        mainDuration.addSection(alert.color, 100);
+        details.detailLines[3].value = mainDuration;
         
         details.detailLines[4].icon = Rez.Drawables.intermediateRepeatAlertDurationIcon;
-        details.detailLines[4].value.text = "Repeat chart";
+        var repeatDuration1 = new ProgressBarLine();
+        repeatDuration1.addSection(Gfx.COLOR_BLUE, 20);
+        for (var i = 1; i <= 7; i++) {
+	        repeatDuration1.addSection(Gfx.COLOR_RED, 2);
+	        repeatDuration1.addSection(Gfx.COLOR_BLUE, 8);
+        }
+        repeatDuration1.addSection(Gfx.COLOR_GREEN, 10);
+        details.detailLines[4].value = repeatDuration1;
         
         details.detailLines[5].icon = Rez.Drawables.heartRateIcon;
-        details.detailLines[5].value.text = "ready to start";
+        details.detailLines[5].value.text = "ready";
 	}
 	
 	function createScreenPickerView() {
