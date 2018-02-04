@@ -1,5 +1,5 @@
-<menu id="addEditAlertMenu" title="@Strings.addEditAlertMenu_title">
-    <menu-item id="time" label="@Strings.addEditAlertMenu_time" />
-    <menu-item id="color" label="@Strings.addEditAlertMenu_color"></menu-item>
-    <menu-item id="vibrationPattern" label="@Strings.addEditAlertMenu_vibrationPattern"></menu-item>
+<menu id="addEditSessionMenu" title="@Strings.addEditSessionMenu_title">
+    <menu-item id="time" label="@Strings.addEditSessionMenu_time" />
+    <menu-item id="color" label="@Strings.addEditSessionMenu_color"></menu-item>
+    <menu-item id="vibePattern" label="@Strings.addEditSessionMenu_vibePattern"></menu-item>
  </menu>

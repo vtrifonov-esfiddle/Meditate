@@ -1,0 +1,11 @@
+<menu id="vibePatternMenu" title="@Strings.vibePatternMenu_title">
+    <menu-item id="longContinuous" label="@Strings.vibePatternMenu_longContinuous" />
+    <menu-item id="longPulsating" label="@Strings.vibePatternMenu_longPulsating" />
+    <menu-item id="longAscending" label="@Strings.vibePatternMenu_longAscending" />   
+    <menu-item id="mediumContinuous" label="@Strings.vibePatternMenu_mediumContinuous" />
+    <menu-item id="mediumPulsating" label="@Strings.vibePatternMenu_mediumPulsating" />
+    <menu-item id="mediumAscending" label="@Strings.vibePatternMenu_mediumAscending" /> 
+    <menu-item id="shortContinuous" label="@Strings.vibePatternMenu_shortContinuous" />
+    <menu-item id="shortPulsating" label="@Strings.vibePatternMenu_shortPulsating" />
+    <menu-item id="shortAscending" label="@Strings.vibePatternMenu_shortAscending" />
+</menu>

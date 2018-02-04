@@ -49,7 +49,7 @@ class MeditateView extends Ui.View {
 		
         View.onUpdate(dc);
         		                        
-        var alarmTime = me.mMeditateModel.getAlertTime();
+        var alarmTime = me.mMeditateModel.getSessionTime();
 		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);	
     }
     

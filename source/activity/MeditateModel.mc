@@ -1,32 +1,32 @@
 using Toybox.Application as App;
 
 class MeditateModel {
-	function initialize(alertModel) {
-		me.mAlert = alertModel;
+	function initialize(sessionModel) {
+		me.mSession = sessionModel;
 		me.elapsedTime = 0;
 		me.minHr = null;
 		me.currentHr = null;
 	}
 	
-	private var mAlert;
+	private var mSession;
 
 	public var currentHr;
 	public var minHr;
 	public var elapsedTime;
 	
-	function getAlertTime() {
-		return me.mAlert.time;
+	function getSessionTime() {
+		return me.mSession.time;
 	}
 		
 	function getColor() {
-		return me.mAlert.color;
+		return me.mSession.color;
 	}
 	
-	function getVibrationPattern() {
-		return me.mAlert.vibrationPattern;
+	function getVibePattern() {
+		return me.mSession.vibePattern;
 	}
 	
-	function setAlert(alertModel) {
-		me.mAlert = alertModel;
+	function setSession(sessionModel) {
+		me.mSession = sessionModel;
 	}
 }

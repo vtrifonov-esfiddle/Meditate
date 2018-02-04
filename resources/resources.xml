@@ -7,7 +7,7 @@
     <bitmap id="vibrateIcon" filename="images/fontAwesome/clock-white-vibrate.png" />
     <bitmap id="durationIcon" filename="images/fontAwesome/hourglass-white.png" />
     <bitmap id="timeIcon" filename="images/fontAwesome/hourglass-end.png" />
-    <bitmap id="alertDurationIcon" filename="images/fontAwesome/clock-white.png" />
+    <bitmap id="sessionDurationIcon" filename="images/fontAwesome/clock-white.png" />
         
     <drawable-list id="done">
     	<bitmap id="doneIcon"  x="95" y="140" filename="images/done.png" />

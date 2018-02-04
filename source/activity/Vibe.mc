@@ -1,41 +1,41 @@
 using Toybox.Attention;
 
-class Vibration {
+class Vibe {
 	static function vibrate(pattern) {
-		var vibrationProfile;
+		var vibeProfile;
 		switch (pattern) {
-			case VibrationPattern.LongContinuous:
-				vibrationProfile = getLongContinuous();
+			case VibePattern.LongContinuous:
+				vibeProfile = getLongContinuous();
 				break;
-			case VibrationPattern.LongPulsating:
-				vibrationProfile = getLongPulsating();
+			case VibePattern.LongPulsating:
+				vibeProfile = getLongPulsating();
 				break;
-			case VibrationPattern.LongAscending:
-				vibrationProfile = getLongAscending();
+			case VibePattern.LongAscending:
+				vibeProfile = getLongAscending();
 				break;
-			case VibrationPattern.MediumContinuous:
-				vibrationProfile = getMediumContinuous();
+			case VibePattern.MediumContinuous:
+				vibeProfile = getMediumContinuous();
 				break;
-			case VibrationPattern.MediumPulsating:
-				vibrationProfile = getMediumPulsating();
+			case VibePattern.MediumPulsating:
+				vibeProfile = getMediumPulsating();
 				break;
-			case VibrationPattern.MediumAscending:
-				vibrationProfile = getMediumAscending();
+			case VibePattern.MediumAscending:
+				vibeProfile = getMediumAscending();
 				break;
-			case VibrationPattern.ShortContinuous:
-				vibrationProfile = getShortContinuous();
+			case VibePattern.ShortContinuous:
+				vibeProfile = getShortContinuous();
 				break;
-			case VibrationPattern.ShortPulsating:
-				vibrationProfile = getShortPulsating();
+			case VibePattern.ShortPulsating:
+				vibeProfile = getShortPulsating();
 				break;
-			case VibrationPattern.ShortAscending:
-				vibrationProfile = getShortAscending();
+			case VibePattern.ShortAscending:
+				vibeProfile = getShortAscending();
 				break;
 			default:
-				vibrationProfile = getLongPulsating();
+				vibeProfile = getLongPulsating();
 				break;
 		}
-		Attention.vibrate(vibrationProfile);
+		Attention.vibrate(vibeProfile);
 	}
 	
 	static function getLongPulsating() {

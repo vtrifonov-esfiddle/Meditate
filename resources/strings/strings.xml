@@ -1,32 +1,32 @@
 <strings>
     <string id="AppName">Meditate</string>
 
-    <string id="ConfirmSaveHeader">Save meditation?</string>
+    <string id="ConfirmSaveHeader">Save session?</string>
     
-    <string id="confirmDeleteAlertHeader">Delete Alert?</string>
+    <string id="confirmDeleteSessionHeader">Delete Session?</string>
     
     <string id="SummaryTitle">Summary</string>
                   
-    <string id="menuAlertSettings_Title">Alert Settings</string>
-    <string id="menuAlertSettings_addNew">Add New</string>
-    <string id="menuAlertSettings_edit">Edit</string>
-    <string id="menuAlertSettings_delete">Delete</string>
+    <string id="menuSessionSettings_Title">Session Settings</string>
+    <string id="menuSessionSettings_addNew">Add New</string>
+    <string id="menuSessionSettings_edit">Edit</string>
+    <string id="menuSessionSettings_delete">Delete</string>
     
-    <string id="addEditAlertMenu_title">Alert</string>
-    <string id="addEditAlertMenu_time">Time</string>
-    <string id="addEditAlertMenu_color">Color</string>
-    <string id="addEditAlertMenu_vibrationPattern">Vibration pattern</string>
+    <string id="addEditSessionMenu_title">Session</string>
+    <string id="addEditSessionMenu_time">Time</string>
+    <string id="addEditSessionMenu_color">Color</string>
+    <string id="addEditSessionMenu_vibePattern">Vibe pattern</string>
 
-	<string id="vibrationPatternMenu_title">Vibration pattern</string>
-	<string id="vibrationPatternMenu_longPulsating">Long pulsating</string>
-	<string id="vibrationPatternMenu_longContinuous">Long continuous</string>
-	<string id="vibrationPatternMenu_longAscending">Long ascending</string>
-	<string id="vibrationPatternMenu_mediumPulsating">Medium pulsating</string>
-	<string id="vibrationPatternMenu_mediumContinuous">Medium continuous</string>
-	<string id="vibrationPatternMenu_mediumAscending">Medium ascending</string>
-	<string id="vibrationPatternMenu_shortPulsating">Short pulsating</string>
-	<string id="vibrationPatternMenu_shortContinuous">Short continuous</string>
-	<string id="vibrationPatternMenu_shortAscending">Short ascending</string>
+	<string id="vibePatternMenu_title">Vibe pattern</string>
+	<string id="vibePatternMenu_longPulsating">Long pulsating</string>
+	<string id="vibePatternMenu_longContinuous">Long continuous</string>
+	<string id="vibePatternMenu_longAscending">Long ascending</string>
+	<string id="vibePatternMenu_mediumPulsating">Medium pulsating</string>
+	<string id="vibePatternMenu_mediumContinuous">Medium continuous</string>
+	<string id="vibePatternMenu_mediumAscending">Medium ascending</string>
+	<string id="vibePatternMenu_shortPulsating">Short pulsating</string>
+	<string id="vibePatternMenu_shortContinuous">Short continuous</string>
+	<string id="vibePatternMenu_shortAscending">Short ascending</string>
 	
 	<string id="minHrField">Min HR</string>
 	<string id="minHrFieldUnits">bpm</string>

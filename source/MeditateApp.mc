@@ -17,10 +17,10 @@ class MeditateApp extends App.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {     	  
-    	var alertStorage = new AlertStorage();	
-    	var alertPickerDelegate = new AlertPickerDelegate(alertStorage);
+    	var sessionStorage = new SessionStorage();	
+    	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
     	
-        return [ alertPickerDelegate.createScreenPickerView(), alertPickerDelegate ];
+        return [ sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate ];
     }
 
 }

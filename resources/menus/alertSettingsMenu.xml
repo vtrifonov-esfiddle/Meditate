@@ -1,5 +1,5 @@
-<menu id="alertSettingsMenu" title="@Strings.menuAlertSettings_Title">
-    <menu-item id="addNew" label="@Strings.menuAlertSettings_addNew" />
-    <menu-item id="edit" label="@Strings.menuAlertSettings_edit" />
-    <menu-item id="delete" label="@Strings.menuAlertSettings_delete" />
+<menu id="sessionSettingsMenu" title="@Strings.menuSessionSettings_Title">
+    <menu-item id="addNew" label="@Strings.menuSessionSettings_addNew" />
+    <menu-item id="edit" label="@Strings.menuSessionSettings_edit" />
+    <menu-item id="delete" label="@Strings.menuSessionSettings_delete" />
 </menu>

@@ -51,7 +51,7 @@ class MediateActivity {
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);
 			
 		me.mElapsedTimer = new Timer.Timer();
-		var timeInMilliseconds = me.mMeditateModel.getAlertTime() * 1000;
+		var timeInMilliseconds = me.mMeditateModel.getSessionTime() * 1000;
 		me.mElapsedTimer.start(method(:timeElapsed), timeInMilliseconds, false);
 	}
 	
@@ -78,7 +78,7 @@ class MediateActivity {
 	}
 	    
 	private function timeElapsed() {
-		Vibration.vibrate(me.mMeditateModel.getVibrationPattern());
+		Vibe.vibrate(me.mMeditateModel.getVibePattern());
 	}
 	
 	function stop() {

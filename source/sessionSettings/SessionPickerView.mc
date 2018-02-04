@@ -1,7 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
-class AlertPickerView extends ScreenPickerView {	
+class SessionPickerView extends ScreenPickerView {	
 	private var mRenderer;
 	
 	function initialize(detailsModel) {	
