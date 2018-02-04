@@ -86,18 +86,8 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
         mainDuration.addSection(alert.color, 100);
         details.detailLines[3].value = mainDuration;
         
-        details.detailLines[4].icon = Rez.Drawables.alertDurationIcon;
-        var repeatDuration1 = new ProgressBarLine();
-        repeatDuration1.addSection(Gfx.COLOR_BLUE, 20);
-        for (var i = 1; i <= 7; i++) {
-	        repeatDuration1.addSection(Gfx.COLOR_RED, 2);
-	        repeatDuration1.addSection(Gfx.COLOR_BLUE, 8);
-        }
-        repeatDuration1.addSection(Gfx.COLOR_GREEN, 10);
-        details.detailLines[4].value = repeatDuration1;
-        
-        details.detailLines[5].icon = Rez.Drawables.heartRateIcon;
-        details.detailLines[5].value.text = "ready";
+        details.detailLines[5].valueOffset = -20;        
+        details.detailLines[5].value.text = "ready to start";
 	}
 	
 	function createScreenPickerView() {
