@@ -81,12 +81,12 @@ class AlertPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
         details.detailLines[2].value.text = getVibrationPatternText(alert.vibrationPattern);
         
-        details.detailLines[3].icon = Rez.Drawables.mainAlertDurationIcon;
+        details.detailLines[3].icon = Rez.Drawables.alertDurationIcon;
         var mainDuration = new ProgressBarLine();
         mainDuration.addSection(alert.color, 100);
         details.detailLines[3].value = mainDuration;
         
-        details.detailLines[4].icon = Rez.Drawables.intermediateRepeatAlertDurationIcon;
+        details.detailLines[4].icon = Rez.Drawables.alertDurationIcon;
         var repeatDuration1 = new ProgressBarLine();
         repeatDuration1.addSection(Gfx.COLOR_BLUE, 20);
         for (var i = 1; i <= 7; i++) {
