@@ -1,5 +1,4 @@
 using Toybox.Graphics as Gfx;
-using Toybox.Application as App;
 
 module VibePattern {
 	enum {
@@ -17,19 +16,25 @@ module VibePattern {
 
 class SessionModel {
 	function initialize() {	
+		me.intervalAlerts = new IntervalAlerts();
 	}
-	
+		
 	function fromDictionary(loadedSessionDictionary) {	
 		me.time = loadedSessionDictionary["time"];
 		me.color = loadedSessionDictionary["color"];
 		me.vibePattern = loadedSessionDictionary["vibePattern"];
+				
+		var serializedAlerts = loadedSessionDictionary["intervalAlerts"];
+		me.intervalAlerts.fromDictionary(serializedAlerts);
 	}
 	
 	function toDictionary() {
+		var serializedAlerts = me.intervalAlerts.toDictionary();
 		return {
 			"time" => me.time,
 			"color" => me.color,
-			"vibePattern" => me.vibePattern
+			"vibePattern" => me.vibePattern,
+			"intervalAlerts" => serializedAlerts
 		};
 	}
 		
@@ -37,6 +42,7 @@ class SessionModel {
 		me.time = 600;
 		me.color = Gfx.COLOR_YELLOW;
 		me.vibePattern = VibePattern.LongContinuous;
+		me.intervalAlerts.reset();
 	}
 	
 	function copyNonNullFieldsFromSession(otherSession) {
@@ -49,9 +55,13 @@ class SessionModel {
     	if (otherSession.vibePattern != null) {
     		me.vibePattern = otherSession.vibePattern;
     	}
+    	if (otherSession.intervalAlerts != null) {
+    		me.intervalAlerts = otherSession.intervalAlerts;
+    	}
 	}
 		
 	var time;
 	var color;
 	var vibePattern;
+	var intervalAlerts;
 }

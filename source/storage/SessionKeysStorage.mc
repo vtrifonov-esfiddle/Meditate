@@ -1,3 +1,5 @@
+using Toybox.Application as App;
+
 class SessionKeysStorage {
 	function initialize() {
 		me.loadSessionKeys();

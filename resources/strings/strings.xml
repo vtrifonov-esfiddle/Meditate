@@ -12,12 +12,18 @@
     <string id="menuSessionSettings_edit">Edit</string>
     <string id="menuSessionSettings_delete">Delete</string>
     
+    <string id="menuIntervalAlertSettings_Title">Interval Alerts</string>
+    <string id="menuIntervalAlertSettings_addNew">Add New</string>
+    <string id="menuIntervalAlertSettings_edit">Edit</string>
+    <string id="menuIntervalAlertSettings_deleteAll">Delete All</string>
+    
     <string id="addEditSessionMenu_title">Session</string>
     <string id="addEditSessionMenu_time">Time</string>
     <string id="addEditSessionMenu_color">Color</string>
-    <string id="addEditSessionMenu_vibePattern">Vibe pattern</string>
-
-	<string id="vibePatternMenu_title">Vibe pattern</string>
+    <string id="addEditSessionMenu_vibePattern">Vibe Pattern</string>
+	<string id="addEditSessionMenu_intervalAlerts">Interval Alerts</string>
+	
+	<string id="vibePatternMenu_title">Vibe Pattern</string>
 	<string id="vibePatternMenu_longPulsating">Long pulsating</string>
 	<string id="vibePatternMenu_longContinuous">Long continuous</string>
 	<string id="vibePatternMenu_longAscending">Long ascending</string>
