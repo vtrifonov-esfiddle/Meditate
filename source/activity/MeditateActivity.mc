@@ -96,6 +96,7 @@ class MediateActivity {
 	function discard() {		
 		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();
+		return me.mSummaryModel;
 	}
 	
 	function isStarted() {

@@ -9,14 +9,13 @@ class ConfirmSaveDelegate extends Ui.ConfirmationDelegate {
     }
 
     function onResponse(value) {
+    	var summaryModel;
         if (value == Ui.CONFIRM_YES) {        	
-        	var summaryModel = me.mMeditateActivity.finish();        	
-	        Ui.pushView(new SummaryView(summaryModel), new SummaryViewDelegate(), Ui.SLIDE_IMMEDIATE);
+        	summaryModel = me.mMeditateActivity.finish();  	        
         }
         else {
-        	me.mMeditateActivity.discard();
-        	var discardedView = new DiscardedView();
-        	Ui.pushView(discardedView, new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
+        	summaryModel = me.mMeditateActivity.discard();
         }
+        Ui.pushView(new SummaryView(summaryModel), new SummaryViewDelegate(), Ui.SLIDE_IMMEDIATE);
     }
 }
