@@ -25,9 +25,15 @@ class IntervalAlertsMenuDelegate extends Ui.MenuInputDelegate {
         
         }
         else if (item == :deleteAll) {
-        	me.mIntervalAlerts.reset();
-        	me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
+        	var confirmDeleteAllIntervalAlertsHeader = Ui.loadResource(Rez.Strings.confirmDeleteAllIntervalAlertsHeader);
+        	var confirmDeleteAllDialog = new Ui.Confirmation(confirmDeleteAllIntervalAlertsHeader);
+        	Ui.pushView(confirmDeleteAllDialog, new YesDelegate(method(:onConfirmedDeleteAllIntervalAlerts)), Ui.SLIDE_IMMEDIATE);
         }
+    }
+    
+    private function onConfirmedDeleteAllIntervalAlerts() {
+    	me.mIntervalAlerts.reset();
+    	me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
     }
     
     function onIntervalAlertChanged(intervalAlert) {

@@ -5,6 +5,8 @@
     
     <string id="confirmDeleteSessionHeader">Delete Session?</string>
     
+    <string id="confirmDeleteAllIntervalAlertsHeader">Delete all alerts?</string>
+    
     <string id="SummaryTitle">Summary</string>
                   
     <string id="menuSessionSettings_Title">Session Settings</string>
