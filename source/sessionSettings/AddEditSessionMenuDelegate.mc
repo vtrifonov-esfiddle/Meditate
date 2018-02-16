@@ -3,9 +3,11 @@ using Toybox.Graphics as Gfx;
 
 class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
     private var mOnChangeSession;
+    private var mIntervalAlerts;
     
-    function initialize(onChangeSession) {
+    function initialize(intervalAlerts, onChangeSession) {
         MenuInputDelegate.initialize();
+        me.mIntervalAlerts = intervalAlerts;
         me.mOnChangeSession = onChangeSession;
     }
 		
@@ -24,8 +26,7 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         	Ui.pushView(new Rez.Menus.vibePatternMenu(), vibePatternMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :intervalAlerts) {
-        	var sessionModel = new SessionModel();
-        	var intervalAlertsMenuDelegate = new IntervalAlertsMenuDelegate(sessionModel.intervalAlerts, method(:onIntervalAlertsChanged));
+        	var intervalAlertsMenuDelegate = new IntervalAlertsMenuDelegate(me.mIntervalAlerts, method(:onIntervalAlertsChanged));
         	Ui.pushView(new Rez.Menus.intervalAlertSettingsMenu(), intervalAlertsMenuDelegate, Ui.SLIDE_LEFT);
         }
     }

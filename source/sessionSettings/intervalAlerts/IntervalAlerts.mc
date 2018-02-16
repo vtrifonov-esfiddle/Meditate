@@ -18,6 +18,7 @@ class IntervalAlerts {
 		var newAlertIndex = me.mAlerts.size();
 		var newIntervalAlert = new Alert();
 		me.mAlerts.put(newAlertIndex, newIntervalAlert);
+		return newAlertIndex;
 	}
 	
 	function delete(index) {

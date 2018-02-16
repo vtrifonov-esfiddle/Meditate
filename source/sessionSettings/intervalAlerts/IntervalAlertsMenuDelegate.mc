@@ -13,12 +13,12 @@ class IntervalAlertsMenuDelegate extends Ui.MenuInputDelegate {
 	
  	function onMenuItem(item) {
         if (item == :addNew) {
-			me.mIntervalAlerts.addNew();
-			me.mSelectedIntervalAlertIndex = me.mIntervalAlerts.count() - 1;
-			var lastIntervalAlert = me.mIntervalAlerts.get(mSelectedIntervalAlertIndex);
+			me.mSelectedIntervalAlertIndex = me.mIntervalAlerts.addNew();
+			me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
+			var selectedIntervalAlert = me.mIntervalAlerts.get(mSelectedIntervalAlertIndex);
 			var intervalAlertMenu = new Rez.Menus.addEditIntervalAlertMenu();
 			intervalAlertMenu.setTitle(Ui.loadResource(Rez.Strings.addEditIntervalAlertMenu_title) + " " + me.mIntervalAlerts.count());
-			var intevalAlertMenuDelegate = new AddEditIntervalAlertMenuDelegate(lastIntervalAlert, method(:onIntervalAlertChanged));
+			var intevalAlertMenuDelegate = new AddEditIntervalAlertMenuDelegate(selectedIntervalAlert, method(:onIntervalAlertChanged));
 			Ui.pushView(intervalAlertMenu, intevalAlertMenuDelegate, Ui.SLIDE_LEFT);			
         }
         else if (item == :edit) {

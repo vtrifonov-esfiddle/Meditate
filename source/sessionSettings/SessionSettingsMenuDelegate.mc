@@ -13,14 +13,15 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
     function onMenuItem(item) {
         if (item == :addNew) {
         	var newSession = me.mSessionStorage.addSession();	
-        	var addEditSessionMenuMenuDelegate = new AddEditSessionMenuDelegate(method(:onChangeSession));        	
+        	var addEditSessionMenuMenuDelegate = new AddEditSessionMenuDelegate(newSession.intervalAlerts ,method(:onChangeSession));        	
         	me.mSessionPickerDelegate.setPagesCount(me.mSessionStorage.getSessionsCount());
         	me.mSessionPickerDelegate.select(me.mSessionStorage.getSelectedSessionIndex());
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(new Rez.Menus.addEditSessionMenu(), addEditSessionMenuMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :edit) {
-   	        var addEditSessionMenuMenuDelegate = new AddEditSessionMenuDelegate(method(:onChangeSession));
+        	var existingSession = me.mSessionStorage.loadSelectedSession();
+   	        var addEditSessionMenuMenuDelegate = new AddEditSessionMenuDelegate(existingSession.intervalAlerts, method(:onChangeSession));
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(new Rez.Menus.addEditSessionMenu(), addEditSessionMenuMenuDelegate, Ui.SLIDE_LEFT);    
         }
