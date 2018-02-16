@@ -28,5 +28,4 @@ class IntervalVibePatternMenuDelegate extends Ui.MenuInputDelegate {
         	me.mOnVibePatternPicked.invoke(VibePattern.Blip);
         }              
     }
-
 }

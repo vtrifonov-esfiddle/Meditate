@@ -1,11 +1,11 @@
 <strings>
     <string id="AppName">Meditate</string>
 
-    <string id="ConfirmSaveHeader">Save session?</string>
+    <string id="ConfirmSaveHeader">Save Session?</string>
     
     <string id="confirmDeleteSessionHeader">Delete Session?</string>
     
-    <string id="confirmDeleteAllIntervalAlertsHeader">Delete all alerts?</string>
+    <string id="confirmDeleteAllIntervalAlertsHeader">Delete All Alerts?</string>
     
     <string id="SummaryTitle">Summary</string>
                   
@@ -18,6 +18,8 @@
     <string id="menuIntervalAlertSettings_addNew">Add New</string>
     <string id="menuIntervalAlertSettings_edit">Edit</string>
     <string id="menuIntervalAlertSettings_deleteAll">Delete All</string>
+    
+    <string id="confirmDeleteIntervalAlertHeader">Delete Alert?</string>
     
     <string id="addEditIntervalAlertMenu_title">Alert</string>    
     <string id="addEditIntervalAlertMenu_type">Type</string>
@@ -53,6 +55,8 @@
 	<string id="intervalTypeMenu_title">Interval Alert Type</string>
 	<string id="intervalTypeMenu_oneOff">One-off</string>
 	<string id="intervalTypeMenu_repeat">Repeat</string>		
+	
+	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
 			
 	<string id="minHrField">Min HR</string>
 	<string id="minHrFieldUnits">bpm</string>

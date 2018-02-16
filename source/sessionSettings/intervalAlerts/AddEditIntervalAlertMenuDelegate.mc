@@ -4,11 +4,13 @@ using Toybox.Graphics as Gfx;
 class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 	private var mOnIntervalAlertChanged;
 	private var mIntervalAlert;
+	private var mOnIntervalAlertDeleted;
 
-	function initialize(intervalAlert, onIntervalAlertChanged) {
+	function initialize(intervalAlert, onIntervalAlertChanged, onIntervalAlertDeleted) {
 		MenuInputDelegate.initialize();
 		me.mOnIntervalAlertChanged = onIntervalAlertChanged;
 		me.mIntervalAlert = intervalAlert;
+		me.mOnIntervalAlertDeleted = onIntervalAlertDeleted;
 	}
 	
 	function onMenuItem(item) {
@@ -29,6 +31,15 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 	        
 	        Ui.pushView(new ColorPickerView(Gfx.COLOR_BLUE), new ColorPickerDelegate(colors, method(:onColorPicked)), Ui.SLIDE_LEFT);  
         }
+        else if (item == :delete) {
+        	var confirmDeleteIntervalAlertHeader = Ui.loadResource(Rez.Strings.confirmDeleteIntervalAlertHeader);
+        	var confirmDeleteDialog = new Ui.Confirmation(confirmDeleteIntervalAlertHeader);
+        	Ui.pushView(confirmDeleteAllDialog, new YesDelegate(method(:onConfirmedDelete)), Ui.SLIDE_IMMEDIATE);
+        }
+    }
+    
+    private function onConfirmedDelete() {
+    	me.mOnIntervalAlertDeleted.invoke(me.mIntervalAlert);
     }
     
     function onDurationPicked(durationInSeconds) {
