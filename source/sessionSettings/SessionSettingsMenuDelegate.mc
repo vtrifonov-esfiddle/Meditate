@@ -29,8 +29,14 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
 	    	var confirmHeader = Ui.loadResource(Rez.Strings.confirmDeleteSessionHeader);
     		var confirmDeleteSessionDialog = new Ui.Confirmation(confirmHeader);    		
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
-        	Ui.pushView(confirmDeleteSessionDialog, new ConfirmDeleteSessionDelegate(me.mSessionStorage, me.mSessionPickerDelegate), Ui.SLIDE_LEFT);
+        	Ui.pushView(confirmDeleteSessionDialog, new YesDelegate(method(:onConfirmedDeleteSession)), Ui.SLIDE_LEFT);
         }
+    }
+    
+    private function onConfirmedDeleteSession() {
+    	me.mSessionStorage.deleteSelectedSession();        	 	
+    	me.mSessionPickerDelegate.setPagesCount(me.mSessionStorage.getSessionsCount());
+    	me.mSessionPickerDelegate.select(me.mSessionStorage.getSelectedSessionIndex());      
     }
     
     private function onChangeSession(changedSessionModel) {
