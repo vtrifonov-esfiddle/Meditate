@@ -130,13 +130,13 @@ class Vibe {
 	
 	static function getShorterContinuous() {
 		return [
-	        new Attention.VibeProfile(100, 60)
+	        new Attention.VibeProfile(100, 100)
 		];
 	}
 	
 	static function getBlip() {
 		return [
-	        new Attention.VibeProfile(100, 30)
+	        new Attention.VibeProfile(100, 50)
 		];
 	}
 }
