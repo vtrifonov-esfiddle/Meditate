@@ -17,13 +17,13 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
         	me.mSessionPickerDelegate.setPagesCount(me.mSessionStorage.getSessionsCount());
         	me.mSessionPickerDelegate.select(me.mSessionStorage.getSelectedSessionIndex());
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
-        	Ui.pushView(new Rez.Menus.addEditSessionMenu(), addEditSessionMenuMenuDelegate, Ui.SLIDE_LEFT);        	
+        	Ui.pushView(me.createAddEditSessionMenu(me.mSessionStorage.getSelectedSessionIndex()), addEditSessionMenuMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :edit) {
         	var existingSession = me.mSessionStorage.loadSelectedSession();
    	        var addEditSessionMenuMenuDelegate = new AddEditSessionMenuDelegate(existingSession.intervalAlerts, method(:onChangeSession));
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
-        	Ui.pushView(new Rez.Menus.addEditSessionMenu(), addEditSessionMenuMenuDelegate, Ui.SLIDE_LEFT);    
+        	Ui.pushView(me.createAddEditSessionMenu(me.mSessionStorage.getSelectedSessionIndex()), addEditSessionMenuMenuDelegate, Ui.SLIDE_LEFT);    
         }
         else if (item == :delete) {
 	    	var confirmHeader = Ui.loadResource(Rez.Strings.confirmDeleteSessionHeader);
@@ -31,6 +31,13 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(confirmDeleteSessionDialog, new YesDelegate(method(:onConfirmedDeleteSession)), Ui.SLIDE_LEFT);
         }
+    }
+    
+    private function createAddEditSessionMenu(selectedSessionIndex) {
+    	var addEditSessionMenu = new Rez.Menus.addEditSessionMenu();
+    	var sessionNumber = selectedSessionIndex + 1;
+    	addEditSessionMenu.setTitle(Ui.loadResource(Rez.Strings.addEditSessionMenu_title) + " " + sessionNumber);
+    	return addEditSessionMenu;
     }
     
     private function onConfirmedDeleteSession() {
