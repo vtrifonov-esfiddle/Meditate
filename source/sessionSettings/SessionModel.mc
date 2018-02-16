@@ -10,7 +10,10 @@ module VibePattern {
 		ShortAscending = 6,
 		MediumPulsating = 7,
 		MediumContinuous = 8,
-		MediumAscending = 9
+		MediumAscending = 9,
+		ShorterAscending = 10,
+		ShorterContinuous = 11,
+		Blip = 12
 	}
 }
 

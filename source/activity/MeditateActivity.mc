@@ -41,19 +41,19 @@ class MediateActivity {
 	private var RefreshActivityInterval = 1000;
 	
 	private var mRefreshActivityTimer;
-	private var mElapsedTimer;
 		
 	function start() {
 		me.mIsStarted = true;		
 		me.mSession.start(); 
 		
 		me.mRefreshActivityTimer = new Timer.Timer();		
-		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);
-			
-		me.mElapsedTimer = new Timer.Timer();
-		var timeInMilliseconds = me.mMeditateModel.getSessionTime() * 1000;
-		me.mElapsedTimer.start(method(:timeElapsed), timeInMilliseconds, false);
+		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);		
+		me.mOneOffIntervalAlerts = me.mMeditateModel.getOneOffIntervalAlerts();
+		me.mRepeatIntervalAlerts = me.mMeditateModel.getRepeatIntervalAlerts();	
 	}
+	
+	private var mOneOffIntervalAlerts;
+	private var mRepeatIntervalAlerts;
 	
 	private function refreshActivityStats() {	
 		if (me.mIsStarted == false) {
@@ -74,13 +74,39 @@ class MediateActivity {
 	    		me.mMinHrField.setData(activityInfo.currentHeartRate.toFloat());
 	    	}
 	    }
+	    
+	    if (me.mMeditateModel.elapsedTime >= me.mMeditateModel.getSessionTime()) {	    	
+			Vibe.vibrate(me.mMeditateModel.getVibePattern());
+	    }
+	    
+		fireIfRequiredOneOffIntervalAlerts();
+	    fireIfRequiredRepeatIntervalAlerts();
+	    
 	    Ui.requestUpdate();	    
 	}
-	    
-	private function timeElapsed() {
-		Vibe.vibrate(me.mMeditateModel.getVibePattern());
+	
+	function fireIfRequiredOneOffIntervalAlerts() {
+	    var i = 0;
+	    while (me.mOneOffIntervalAlerts.size() > 0 && i < me.mOneOffIntervalAlerts.size()) {
+	    	var alertKey = me.mOneOffIntervalAlerts.keys()[i];
+	    	if (me.mMeditateModel.elapsedTime >= me.mOneOffIntervalAlerts[alertKey].time) {
+	    		Vibe.vibrate(me.mOneOffIntervalAlerts[alertKey].vibePattern);
+	    		me.mOneOffIntervalAlerts.remove(alertKey);
+	    	}	
+	    	else {
+	    		i++;  
+	    	}  		
+	    }
 	}
 	
+	function fireIfRequiredRepeatIntervalAlerts() {
+		for (var i = 0; i < me.mRepeatIntervalAlerts.size(); i++) {
+			if (me.mMeditateModel.elapsedTime % me.mRepeatIntervalAlerts[i].time == 0) {
+	    		Vibe.vibrate(me.mRepeatIntervalAlerts[i].vibePattern);	    		
+	    	}	
+		}
+	}
+	   	
 	function stop() {
 		me.mIsStarted = false;		
 		me.mSession.stop();		

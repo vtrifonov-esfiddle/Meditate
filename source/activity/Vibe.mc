@@ -31,6 +31,15 @@ class Vibe {
 			case VibePattern.ShortAscending:
 				vibeProfile = getShortAscending();
 				break;
+			case VibePattern.ShorterAscending:
+				vibeProfile = getShorterAscending();
+				break;
+			case VibePattern.ShorterContinuous:
+				vibeProfile = getShorterContinuous();
+				break;
+			case VibePattern.Blip:
+				vibeProfile = getBlip();
+				break;
 			default:
 				vibeProfile = getLongPulsating();
 				break;
@@ -108,6 +117,26 @@ class Vibe {
 	static function getShortContinuous() {
 		return [
 			new Attention.VibeProfile(100, 500)
+		];
+	}
+	
+	static function getShorterAscending() {
+		return [
+	        new Attention.VibeProfile(33, 111),
+	        new Attention.VibeProfile(66, 111),
+	        new Attention.VibeProfile(100, 111)
+		];
+	}
+	
+	static function getShorterContinuous() {
+		return [
+	        new Attention.VibeProfile(100, 60)
+		];
+	}
+	
+	static function getBlip() {
+		return [
+	        new Attention.VibeProfile(100, 30)
 		];
 	}
 }

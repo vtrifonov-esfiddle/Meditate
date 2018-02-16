@@ -1,0 +1,4 @@
+<menu id="intervalTypeMenu" title="@Strings.intervalTypeMenu_title">
+    <menu-item id="oneOff" label="@Strings.intervalTypeMenu_oneOff" />
+    <menu-item id="repeat" label="@Strings.intervalTypeMenu_repeat" />
+ </menu>

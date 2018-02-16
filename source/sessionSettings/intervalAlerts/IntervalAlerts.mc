@@ -1,5 +1,12 @@
 using Toybox.Graphics as Gfx;
 
+module IntervalAlertType {
+	enum {
+		OneOff = 1,
+		Repeat = 2
+	}
+}
+
 class IntervalAlerts {
 	private var mAlerts;
 	
@@ -7,9 +14,10 @@ class IntervalAlerts {
 		me.reset();
 	}
 			
-	function add(intervalAlert) {
+	function addNew() {
 		var newAlertIndex = me.mAlerts.size();
-		me.mAlerts.put(newAlertIndex, intervalAlert);
+		var newIntervalAlert = new Alert();
+		me.mAlerts.put(newAlertIndex, newIntervalAlert);
 	}
 	
 	function delete(index) {
@@ -39,6 +47,10 @@ class IntervalAlerts {
 		return me.mAlerts[index];
 	}
 	
+	function set(index, alert) {
+		me.mAlerts[index] = alert;
+	}
+	
 	function count() {
 		return me.mAlerts.size();
 	}
@@ -50,6 +62,7 @@ class Alert {
 	}
 	static function fromDictionary(loadedSessionDictionary) {	
 		var alert = new Alert();
+		alert.type = loadedSessionDictionary["type"];
 		alert.time = loadedSessionDictionary["time"];
 		alert.color = loadedSessionDictionary["color"];
 		alert.vibePattern = loadedSessionDictionary["vibePattern"];
@@ -58,6 +71,7 @@ class Alert {
 	
 	function toDictionary() {
 		return {
+			"type" => me.type,
 			"time" => me.time,
 			"color" => me.color,
 			"vibePattern" => me.vibePattern
@@ -65,12 +79,14 @@ class Alert {
 	}
 	
 	function reset() {
-		me.time = 10;
+		me.type = IntervalAlertType.Repeat;
+		me.time = 60;
 		me.color = Gfx.COLOR_PINK;
 		me.vibePattern = VibePattern.ShortPulsating;
 	}		
-
-	var time;
+		
+	var type;
+	var time;//in seconds
 	var color;
 	var vibePattern;
 }

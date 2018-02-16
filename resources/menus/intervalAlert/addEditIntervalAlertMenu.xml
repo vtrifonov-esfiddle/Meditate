@@ -1,0 +1,6 @@
+<menu id="addEditIntervalAlertMenu" title="@Strings.addEditIntervalAlertMenu_title">
+    <menu-item id="type" label="@Strings.addEditIntervalAlertMenu_type" />
+    <menu-item id="time" label="@Strings.addEditIntervalAlertMenu_time" />
+    <menu-item id="color" label="@Strings.addEditIntervalAlertMenu_color"></menu-item>
+    <menu-item id="vibePattern" label="@Strings.addEditIntervalAlertMenu_vibePattern"></menu-item>
+ </menu>

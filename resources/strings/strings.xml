@@ -17,6 +17,12 @@
     <string id="menuIntervalAlertSettings_edit">Edit</string>
     <string id="menuIntervalAlertSettings_deleteAll">Delete All</string>
     
+    <string id="addEditIntervalAlertMenu_title">Alert</string>    
+    <string id="addEditIntervalAlertMenu_type">Type</string>
+    <string id="addEditIntervalAlertMenu_time">Time</string>
+    <string id="addEditIntervalAlertMenu_color">Color</string>
+    <string id="addEditIntervalAlertMenu_vibePattern">Vibe</string>
+    
     <string id="addEditSessionMenu_title">Session</string>
     <string id="addEditSessionMenu_time">Time</string>
     <string id="addEditSessionMenu_color">Color</string>
@@ -34,6 +40,18 @@
 	<string id="vibePatternMenu_shortContinuous">Short continuous</string>
 	<string id="vibePatternMenu_shortAscending">Short ascending</string>
 	
+	<string id="intervalVibePatternMenu_title">Vibe Pattern</string>
+	<string id="intervalVibePatternMenu_shortContinuous">Short continuous</string>
+	<string id="intervalVibePatternMenu_shortPulsating">Short pulsating</string>
+	<string id="intervalVibePatternMenu_shortAscending">Short ascending</string>
+	<string id="intervalVibePatternMenu_shorterContinuous">Shorter continuous</string>
+	<string id="intervalVibePatternMenu_shorterAscending">Shorter ascending</string>
+	<string id="intervalVibePatternMenu_blip">Blip</string>
+		
+	<string id="intervalTypeMenu_title">Interval Alert Type</string>
+	<string id="intervalTypeMenu_oneOff">One-off</string>
+	<string id="intervalTypeMenu_repeat">Repeat</string>		
+			
 	<string id="minHrField">Min HR</string>
 	<string id="minHrFieldUnits">bpm</string>
 </strings>

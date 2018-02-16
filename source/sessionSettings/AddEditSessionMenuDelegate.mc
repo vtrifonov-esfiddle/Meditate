@@ -24,7 +24,8 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         	Ui.pushView(new Rez.Menus.vibePatternMenu(), vibePatternMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :intervalAlerts) {
-        	var intervalAlertsMenuDelegate = new IntervalAlertsMenuDelegate(method(:onIntervalAlertsChanged));
+        	var sessionModel = new SessionModel();
+        	var intervalAlertsMenuDelegate = new IntervalAlertsMenuDelegate(sessionModel.intervalAlerts, method(:onIntervalAlertsChanged));
         	Ui.pushView(new Rez.Menus.intervalAlertSettingsMenu(), intervalAlertsMenuDelegate, Ui.SLIDE_LEFT);
         }
     }

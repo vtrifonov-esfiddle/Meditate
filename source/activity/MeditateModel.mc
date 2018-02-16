@@ -17,6 +17,25 @@ class MeditateModel {
 	function getSessionTime() {
 		return me.mSession.time;
 	}
+	
+	function getOneOffIntervalAlerts() {
+		return me.getIntervalAlerts(IntervalAlertType.OneOff);
+	}	
+	
+	private function getIntervalAlerts(alertType) {
+		var result = {};
+		for (var i = 0; i < me.mSession.intervalAlerts.count(); i++) {
+			var alert = me.mSession.intervalAlerts.get(i);
+			if (alert.type == alertType) {
+				result.put(result.size(), alert);
+			}
+		}
+		return result;
+	}
+	
+	function getRepeatIntervalAlerts() {		
+		return me.getIntervalAlerts(IntervalAlertType.Repeat);
+	}
 		
 	function getColor() {
 		return me.mSession.color;
