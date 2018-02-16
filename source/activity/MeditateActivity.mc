@@ -111,7 +111,6 @@ class MediateActivity {
 		me.mIsStarted = false;		
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
-		me.mElapsedTimer.stop();
 		
 		var activityInfo = Activity.getActivityInfo();
 		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr);

@@ -44,6 +44,7 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
     function onVibePatternChanged(vibePattern) {
     	me.mIntervalAlert.vibePattern = vibePattern;
     	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlert);
+    	Vibe.vibrate(vibePattern);
     }
     
     function onTypeChanged(type) {
