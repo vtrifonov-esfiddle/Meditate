@@ -4,12 +4,14 @@ using Toybox.Graphics as Gfx;
 class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 	private var mOnIntervalAlertChanged;
 	private var mIntervalAlert;
+	private var mIntervalAlertIndex;
 	private var mOnIntervalAlertDeleted;
 
-	function initialize(intervalAlert, onIntervalAlertChanged, onIntervalAlertDeleted) {
+	function initialize(intervalAlert, intervalAlertIndex, onIntervalAlertChanged, onIntervalAlertDeleted) {
 		MenuInputDelegate.initialize();
 		me.mOnIntervalAlertChanged = onIntervalAlertChanged;
 		me.mIntervalAlert = intervalAlert;
+		me.mIntervalAlertIndex = intervalAlertIndex;
 		me.mOnIntervalAlertDeleted = onIntervalAlertDeleted;
 	}
 	
@@ -34,33 +36,38 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
         else if (item == :delete) {
         	var confirmDeleteIntervalAlertHeader = Ui.loadResource(Rez.Strings.confirmDeleteIntervalAlertHeader);
         	var confirmDeleteDialog = new Ui.Confirmation(confirmDeleteIntervalAlertHeader);
-        	Ui.pushView(confirmDeleteAllDialog, new YesDelegate(method(:onConfirmedDelete)), Ui.SLIDE_IMMEDIATE);
+        	Ui.pushView(confirmDeleteDialog, new YesDelegate(method(:onConfirmedDelete)), Ui.SLIDE_IMMEDIATE);
         }
     }
     
     private function onConfirmedDelete() {
-    	me.mOnIntervalAlertDeleted.invoke(me.mIntervalAlert);
+    	Ui.popView(Ui.SLIDE_IMMEDIATE);
+    	me.mOnIntervalAlertDeleted.invoke(me.mIntervalAlertIndex);
     }
     
-    function onDurationPicked(durationInSeconds) {
+    private function notifyIntervalAlertChanged() {    
+    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
+    }
+    
+    private function onDurationPicked(durationInSeconds) {
     	me.mIntervalAlert.time = durationInSeconds;
-    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlert);
+    	me.notifyIntervalAlertChanged();
     }
     
-    function onColorPicked(color) {
+    private function onColorPicked(color) {
     	me.mIntervalAlert.color = color;
-    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlert);
+    	me.notifyIntervalAlertChanged();
     }
     
-    function onVibePatternChanged(vibePattern) {
+    private function onVibePatternChanged(vibePattern) {
     	me.mIntervalAlert.vibePattern = vibePattern;
-    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlert);
+    	me.notifyIntervalAlertChanged();
     	Vibe.vibrate(vibePattern);
     }
     
-    function onTypeChanged(type) {
+    private function onTypeChanged(type) {
     	me.mIntervalAlert.type = type;
-    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlert);
+    	me.notifyIntervalAlertChanged();
     }
 	
 }

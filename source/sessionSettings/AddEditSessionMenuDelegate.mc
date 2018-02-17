@@ -27,7 +27,14 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         }
         else if (item == :intervalAlerts) {
         	var intervalAlertsMenuDelegate = new IntervalAlertsMenuDelegate(me.mIntervalAlerts, method(:onIntervalAlertsChanged));
-        	Ui.pushView(new Rez.Menus.intervalAlertSettingsMenu(), intervalAlertsMenuDelegate, Ui.SLIDE_LEFT);
+        	var intervalAlertSettingsMenu = new Rez.Menus.intervalAlertSettingsMenu();
+        	if (me.mIntervalAlerts.count() > 0) {
+	        	var editName = Ui.loadResource(Rez.Strings.menuIntervalAlertSettings_edit);
+	        	intervalAlertSettingsMenu.addItem(editName, :edit);
+	        	var deleteAllName = Ui.loadResource(Rez.Strings.menuIntervalAlertSettings_deleteAll);
+	        	intervalAlertSettingsMenu.addItem(deleteAllName, :deleteAll);
+        	}
+        	Ui.pushView(intervalAlertSettingsMenu, intervalAlertsMenuDelegate, Ui.SLIDE_LEFT);
         }
     }
     

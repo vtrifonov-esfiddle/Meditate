@@ -26,6 +26,7 @@
     <string id="addEditIntervalAlertMenu_time">Time</string>
     <string id="addEditIntervalAlertMenu_color">Color</string>
     <string id="addEditIntervalAlertMenu_vibePattern">Vibe</string>
+    <string id="addEditIntervalAlertMenu_delete">Delete</string>
     
     <string id="addEditSessionMenu_title">Session</string>
     <string id="addEditSessionMenu_time">Time</string>

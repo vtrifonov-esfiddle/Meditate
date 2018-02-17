@@ -15,24 +15,24 @@ class IntervalAlerts {
 	}
 			
 	function addNew() {
-		var newAlertIndex = me.mAlerts.size();
-		var newIntervalAlert = new Alert();
-		me.mAlerts.put(newAlertIndex, newIntervalAlert);
+		me.mAlerts.add(new Alert());
+		var newAlertIndex = me.mAlerts.size() - 1;
 		return newAlertIndex;
 	}
 	
 	function delete(index) {
-		me.mAlerts.remove(index);
+		var alert = me.mAlerts[index];
+		me.mAlerts.remove(alert);
 	}
 	
 	function reset() {
-		me.mAlerts = {};
+		me.mAlerts = [];
 	}
 	
 	function fromDictionary(serializedAlerts) {		
-		me.mAlerts = {};
+		me.mAlerts = new [serializedAlerts.size()];
 		for (var i = 0; i < serializedAlerts.size(); i++) {
-			me.mAlerts.put(i, Alert.fromDictionary(serializedAlerts[i]));
+			me.mAlerts[i] = Alert.fromDictionary(serializedAlerts[i]);
 		}
 	}
 	
