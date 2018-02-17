@@ -49,7 +49,7 @@ class DetailsViewRenderer {
 		dc.setColor(backgroundColor, Gfx.COLOR_TRANSPARENT);
 		dc.fillRectangle(valuePosXOffset, posY, ProgressBarWidth, ProgressBarHeight);   
 		
-		var highlightWidth = 0.015 * ProgressBarWidth;		
+		var highlightWidth = 0.03 * ProgressBarWidth;		
     	for (var i = 0; i < highlights.size(); i++) {
     		var sectionKey = highlightKeys[i];
     		var highlight = highlights[sectionKey];
