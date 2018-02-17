@@ -32,8 +32,8 @@ class DetailsViewRenderer {
 			if (line.value instanceof TextLine) {
        			me.displayText(dc, lineNumber, line.value.text, line.valueOffset);  
        		}
-   			else if	(line.value instanceof ProgressBarLine) {
-   				me.drawProgressBar(dc, lineNumber, line.value.getSections(), line.valueOffset);
+   			else if	(line.value instanceof PercentageHighlightLine) {
+   				me.drawPercentageHighlightLine(dc, lineNumber, line.value.getHighlights(), line.value.backgroundColor, line.valueOffset);
    			}
        	}       
     }
@@ -41,20 +41,21 @@ class DetailsViewRenderer {
     private const ProgressBarWidth = 150;
     private const ProgressBarHeight = 16;
     
-    private function drawProgressBar(dc, lineNumber, progressBarSections, valueOffset) {
-    	var sectionsKeys = progressBarSections.keys();
-    	var startValuePosX = dc.getWidth() / 3.4 + valueOffset;
-    	var valuePosX = startValuePosX;
+    private function drawPercentageHighlightLine(dc, lineNumber, highlights, backgroundColor, valueOffset) {
+    	var highlightKeys = highlights.keys();
+    	var valuePosXOffset = dc.getWidth() / 3.4 + valueOffset;
     	var posY = me.getLinePosY(lineNumber) + 10;
-    	
-    	for (var i = 0; i < progressBarSections.size(); i++) {
-    		var sectionKey = sectionsKeys[i];
-    		var section = progressBarSections[sectionKey];
-    		var width = (section.progressPercentage.toDouble() / 100) * ProgressBarWidth;
-    		dc.setColor(section.color, Gfx.COLOR_TRANSPARENT);
-    		dc.fillRectangle(valuePosX, posY, width, ProgressBarHeight);
-    		
-    		valuePosX += width;    	
+		
+		dc.setColor(backgroundColor, Gfx.COLOR_TRANSPARENT);
+		dc.fillRectangle(valuePosXOffset, posY, ProgressBarWidth, ProgressBarHeight);   
+		
+		var highlightWidth = 0.015 * ProgressBarWidth;		
+    	for (var i = 0; i < highlights.size(); i++) {
+    		var sectionKey = highlightKeys[i];
+    		var highlight = highlights[sectionKey];
+    		var valuePosX = valuePosXOffset + highlight.progressPercentage * ProgressBarWidth;
+    		dc.setColor(highlight.color, Gfx.COLOR_TRANSPARENT);
+    		dc.fillRectangle(valuePosX, posY, highlightWidth, ProgressBarHeight);    		
     	}
     }
     

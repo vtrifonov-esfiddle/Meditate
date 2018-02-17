@@ -1,23 +1,27 @@
-class ProgressBarLine {
+using Toybox.Graphics as Gfx;
+
+class PercentageHighlightLine {
 	function initialize() {
-		me.progressSections = {};
-		me.sectionsLatestAddedIndex = -1;
+		me.highlights = {};
+		me.latestAddedIndex = -1;
+		me.backgroundColor = Gfx.COLOR_WHITE;
 	}
 	
-	private var progressSections;
-	private var sectionsLatestAddedIndex;
+	private var highlights;
+	private var latestAddedIndex;
+	var backgroundColor;	
 	
-	function addSection(color, progressPercentage) {
-		sectionsLatestAddedIndex++;
-		me.progressSections[sectionsLatestAddedIndex] = new ProgressBarSection(color, progressPercentage);
+	function addHighlight(color, progressPercentage) {
+		me.latestAddedIndex++;
+		me.highlights[latestAddedIndex] = new LineHighlight(color, progressPercentage);
 	}
 	
-	function getSections() {
-		return me.progressSections;
+	function getHighlights() {
+		return me.highlights;
 	}
 }
 
-class ProgressBarSection {
+class LineHighlight {
 	function initialize(color, progressPercentage) {
 		me.color = color;
 		me.progressPercentage = progressPercentage;

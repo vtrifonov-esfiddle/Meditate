@@ -86,6 +86,21 @@ class Alert {
 		me.vibePattern = VibePattern.ShortPulsating;
 	}		
 		
+	function getAlertPercentageTimes(sessionTime) {
+		var percentageTime = me.time.toDouble() / sessionTime.toDouble();
+		if (me.type == IntervalAlertType.OneOff) {
+			return [percentageTime];
+		}
+		else {			
+			var executionsCount = sessionTime / me.time;
+			var result = new [executionsCount];
+			for (var i = 0; i < executionsCount; i++) {
+				result[i] = percentageTime * (i + 1);
+			}
+			return result;
+		}		 
+	}	
+		
 	var type;
 	var time;//in seconds
 	var color;

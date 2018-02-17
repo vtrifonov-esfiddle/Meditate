@@ -16,7 +16,7 @@ class MeditateApp extends App.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() {     	  
+    function getInitialView() {         	  
     	var sessionStorage = new SessionStorage();	    	    	
     	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
     	

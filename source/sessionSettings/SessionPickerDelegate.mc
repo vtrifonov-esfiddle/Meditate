@@ -82,12 +82,23 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
         details.detailLines[3].icon = Rez.Drawables.sessionDurationIcon;
-        var mainDuration = new ProgressBarLine();
-        mainDuration.addSection(session.color, 100);
-        details.detailLines[3].value = mainDuration;
+        details.detailLines[3].value = getAlertsLine(session);
         
         details.detailLines[5].valueOffset = -20;        
         details.detailLines[5].value.text = "ready to start";
+	}
+	
+	private function getAlertsLine(session) {
+        var alertsLine = new PercentageHighlightLine();
+        alertsLine.backgroundColor = session.color;
+        for (var i = 0; i < session.intervalAlerts.count(); i++) {
+        	var alert = session.intervalAlerts.get(i);
+        	var percentageTimes = alert.getAlertPercentageTimes(session.time);
+        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {        		
+        		alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);
+        	}
+        }
+        return alertsLine;
 	}
 	
 	function createScreenPickerView() {
