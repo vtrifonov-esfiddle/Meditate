@@ -5,11 +5,13 @@ using Toybox.Graphics as Gfx;
 class MeditateView extends Ui.View {
 	private var mMeditateModel;
 	private var mMainDuationRenderer;
+	private var mIntervalAlertsRenderer;
 	
     function initialize(meditateModel) {
         View.initialize();
         me.mMeditateModel = meditateModel;
         me.mMainDuationRenderer = null;
+        me.mIntervalAlertsRenderer = null;
     }
     
 
@@ -17,8 +19,13 @@ class MeditateView extends Ui.View {
     // Load your resources here
     function onLayout(dc) {    
         var durationArcRadius = dc.getWidth() / 2;
-        var mainDurationArcWidth = dc.getWidth() / 5;
+        var mainDurationArcWidth = dc.getWidth() / 4;
         me.mMainDuationRenderer = new ElapsedDuationRenderer(me.mMeditateModel.getColor(), durationArcRadius, mainDurationArcWidth);
+        
+        var intervalAlertsArcRadius = dc.getWidth() / 2;
+        var intervalAlertsArcWidth = dc.getWidth() / 16;
+        me.mIntervalAlertsRenderer = new IntervalAlertsRenderer(me.mMeditateModel.getSessionTime(), me.mMeditateModel.getOneOffIntervalAlerts(), 
+        	me.mMeditateModel.getRepeatIntervalAlerts(), intervalAlertsArcRadius, intervalAlertsArcWidth);
         setLayout(Rez.Layouts.mainLayout(dc));
     }
      
@@ -50,7 +57,9 @@ class MeditateView extends Ui.View {
         View.onUpdate(dc);
         		                        
         var alarmTime = me.mMeditateModel.getSessionTime();
-		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);	
+		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
+		me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
+		me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);	
     }
     
 
