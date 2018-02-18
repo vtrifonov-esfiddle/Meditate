@@ -80,7 +80,7 @@ class Alert {
 	}
 	
 	function reset() {
-		me.type = IntervalAlertType.Repeat;
+		me.type = IntervalAlertType.OneOff;
 		me.time = 60;
 		me.color = Gfx.COLOR_PINK;
 		me.vibePattern = VibePattern.ShortPulsating;
