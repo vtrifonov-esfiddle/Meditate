@@ -82,27 +82,56 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
         details.detailLines[3].icon = Rez.Drawables.sessionDurationIcon;
-        details.detailLines[3].value = getAlertsLine(session);
+        var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
+        details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine();
         
         details.detailLines[5].valueOffset = -20;        
         details.detailLines[5].value.text = "ready to start";
-	}
-	
-	private function getAlertsLine(session) {
-        var alertsLine = new PercentageHighlightLine();
-        alertsLine.backgroundColor = session.color;
-        for (var i = 0; i < session.intervalAlerts.count(); i++) {
-        	var alert = session.intervalAlerts.get(i);
-        	var percentageTimes = alert.getAlertPercentageTimes(session.time);
-        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {        		
-        		alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);
-        	}
-        }
-        return alertsLine;
-	}
+	}	
 	
 	function createScreenPickerView() {
 		me.setSelectedSessionDetails();
 		return new SessionPickerView(me.mSelectedSessionDetails);
+	}
+	
+	private class AlertsToHighlightsLine {
+		function initialize(session) {
+			me.mSession = session;
+		}
+		
+		private var mSession;
+		
+		function getAlertsLine() {
+	        var alertsLine = new PercentageHighlightLine();
+	        alertsLine.backgroundColor = me.mSession.color;
+	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);
+	        me.AddHighlights(alertsLine, IntervalAlertType.OneOff);
+	        
+	        return alertsLine;
+		}
+		
+		private const MinPercentageOffset = 0.05;
+		
+		private function AddHighlights(alertsLine, alertsType) {
+			var intervalAlerts = me.mSession.intervalAlerts;
+			
+			for (var i = 0; i < intervalAlerts.count(); i++) {
+	        	var alert = intervalAlerts.get(i);
+	        	if (alert.type == alertsType) {
+		        	var percentageTimes = alert.getAlertPercentageTimes(me.mSession.time);
+		        	var lastPercentageTime = -1;
+		        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {     	
+		        		if (isHighglightFiltered(percentageTimes[percentageIndex], lastPercentageTime) == false) {	
+		        			alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);	        			
+		        			lastPercentageTime = percentageTimes[percentageIndex];
+		        		}
+		        	}
+	        	}
+	        }
+		}
+		
+		private function isHighglightFiltered(currentPercentageTime, lastPercentageTime) {
+			return (currentPercentageTime - lastPercentageTime) < MinPercentageOffset;
+		}
 	}
 }
