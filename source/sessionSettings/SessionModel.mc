@@ -19,7 +19,6 @@ module VibePattern {
 
 class SessionModel {
 	function initialize() {	
-		me.intervalAlerts = new IntervalAlerts();
 	}
 		
 	function fromDictionary(loadedSessionDictionary) {	
@@ -27,11 +26,12 @@ class SessionModel {
 		me.color = loadedSessionDictionary["color"];
 		me.vibePattern = loadedSessionDictionary["vibePattern"];
 				
-		var serializedAlerts = loadedSessionDictionary["intervalAlerts"];
+		var serializedAlerts = loadedSessionDictionary["intervalAlerts"];		
+		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.fromDictionary(serializedAlerts);
 	}
 	
-	function toDictionary() {
+	function toDictionary() {	
 		var serializedAlerts = me.intervalAlerts.toDictionary();
 		return {
 			"time" => me.time,
@@ -44,7 +44,8 @@ class SessionModel {
 	function reset() {
 		me.time = 600;
 		me.color = Gfx.COLOR_YELLOW;
-		me.vibePattern = VibePattern.LongContinuous;
+		me.vibePattern = VibePattern.LongContinuous;		
+		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.reset();
 	}
 	
