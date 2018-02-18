@@ -9,6 +9,7 @@ class YesNoDelegate extends YesDelegate {
     }
 
     function onResponse(value) {
+    	YesDelegate.onResponse(value);
         if (value == Ui.CONFIRM_NO) {  
         	me.mOnNo.invoke();      	    
         }        
