@@ -41,7 +41,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     private var summaryView;
     private function showSummaryView() {    
     	me.summaryView = new SummaryView();
-        Ui.pushView(me.summaryView, new SummaryViewDelegate(), Ui.SLIDE_IMMEDIATE);
+        Ui.switchToView(me.summaryView, new SummaryViewDelegate(), Ui.SLIDE_IMMEDIATE);
     }
     
     function onBack() {

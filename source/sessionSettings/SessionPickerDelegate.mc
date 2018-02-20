@@ -27,7 +27,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     	  
         var meditateView = new MeditateView(meditateModel);
         var mediateDelegate = new MeditateDelegate(meditateModel);
-		Ui.pushView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
+		Ui.switchToView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
 	}
 	
     function onKey(keyEvent) {
