@@ -4,16 +4,15 @@ using Toybox.Graphics as Gfx;
 class SummaryView extends Ui.View {
 	private var mRenderer;
 	
-	function initialize(summaryModel) {
+	function initialize() {
 		View.initialize();
-		me.createDetailsRenderer(summaryModel);
 	}
 	
 	private function formatHr(hr) {
 		return hr + " bpm";
 	}
 	
-	private function createDetailsRenderer(summaryModel) {
+	function createDetailsRenderer(summaryModel) {
 		var details = new DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
@@ -36,8 +35,10 @@ class SummaryView extends Ui.View {
         me.mRenderer = new DetailsViewRenderer(details);
 	}	
 		
-	function onUpdate(dc) {       
-		me.mRenderer.renderBackgroundColor(dc);			
-		me.mRenderer.renderDetailsView(dc);	  
+	function onUpdate(dc) {     
+		if (me.mRenderer != null) {  
+			me.mRenderer.renderBackgroundColor(dc);			
+			me.mRenderer.renderDetailsView(dc);
+		}	  
     }
 }
