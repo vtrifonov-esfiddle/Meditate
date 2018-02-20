@@ -48,7 +48,9 @@ class DigitsLayout {
 	}
 		
 	function enableDigitState(digit) {
-		me.getDigitButton(digit).setState(:stateDefault);
+		if (me.getDigitButton(digit).getState() == :stateDisabled) {
+			me.getDigitButton(digit).setState(:stateDefault);
+		}
 	}
 	
 	function disableDigitState(digit) {

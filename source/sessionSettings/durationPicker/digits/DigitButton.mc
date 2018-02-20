@@ -11,8 +11,7 @@ class DigitButton extends Ui.Button {
         me.mSize = 40;
 			
         var options = {
-            :stateDefault=> Gfx.COLOR_TRANSPARENT,
-            :stateSelected=> Gfx.COLOR_GREEN,
+            :stateDefault => Gfx.COLOR_TRANSPARENT,
             :locX=>x,
             :locY=>y,
             :width=>me.mSize,
@@ -34,6 +33,9 @@ class DigitButton extends Ui.Button {
 		Ui.Button.draw(dc);
 		if (me.getState() == :stateDisabled) {
 			dc.setColor(Gfx.COLOR_LT_GRAY, Gfx.COLOR_TRANSPARENT);	
+		}
+		else if (me.getState() == :stateSelected || me.getState() == :stateHighlighted) {
+			dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);	
 		}
 		else {
 			dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);	
