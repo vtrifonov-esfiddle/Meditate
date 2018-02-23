@@ -94,7 +94,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		return new SessionPickerView(me.mSelectedSessionDetails);
 	}
 	
-	private class AlertsToHighlightsLine {
+	class AlertsToHighlightsLine {
 		function initialize(session) {
 			me.mSession = session;
 		}
