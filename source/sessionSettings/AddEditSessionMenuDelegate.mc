@@ -10,11 +10,22 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         me.mIntervalAlerts = intervalAlerts;
         me.mOnChangeSession = onChangeSession;
     }
-		
+	
+	private function createHmmTimeOutputBuilder() {
+		var digitsOutput = new DigitsOutputBuilder(Gfx.FONT_TINY);
+		digitsOutput.addInitialHint("Pick H:MM time");
+		digitsOutput.addDigit();
+		digitsOutput.addSeparator(":");
+		digitsOutput.addDigit();
+		digitsOutput.addDigit();
+		return digitsOutput;
+	}	
+			
     function onMenuItem(item) {
         if (item == :time) {
         	var durationPickerModel = new DurationPickerModel();
-    		Ui.pushView(new DurationPickerView(durationPickerModel), new DurationPickerDelegate(durationPickerModel, method(:onDurationPicked)), Ui.SLIDE_LEFT);   	
+        	var hMmTimeOutputBuilder = createHmmTimeOutputBuilder();
+    		Ui.pushView(new DurationPickerView(durationPickerModel, hMmTimeOutputBuilder), new DurationPickerDelegate(durationPickerModel, method(:onHmmDigitsPicked)), Ui.SLIDE_LEFT);   	
         }
         else if (item == :color) {
 	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_RED, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW, Gfx.COLOR_GREEN, Gfx.COLOR_LT_GRAY, Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE];
@@ -51,8 +62,9 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
 		Vibe.vibrate(vibePattern);
     }
 	    
-    function onDurationPicked(durationMins) {    
+    function onHmmDigitsPicked(digits) {    
 		var sessionModel = new SessionModel();
+		var durationMins = digits[0] * 60 + digits[1] * 10 + digits[2];
     	sessionModel.time = durationMins * 60;
     	me.mOnChangeSession.invoke(sessionModel);	
     }

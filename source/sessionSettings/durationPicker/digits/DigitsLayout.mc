@@ -6,15 +6,15 @@ class DigitsLayout {
 	
 	const DigitsInputCount = 10;
 		
-	function initialize(viewDc) {
-        me.mDigitsOutput = new DigitsOutput(viewDc, Gfx.FONT_TINY, ":");        
+	function initialize(dcWidth, dcHeight, digitsOutput) {
+        me.mDigitsOutput = digitsOutput;        
         var digitsOutputLayout = me.mDigitsOutput.getLayout();
 		
 		me.digitsLayout = new[DigitsInputCount + digitsOutputLayout.size() + 1];				
 		me.mFontDigits = Ui.loadResource(Rez.Fonts.fontDigits);
 								
 		var digitSize = 40;
-		var digitCirclePos = new DigitCirclePosition(viewDc.getWidth(), viewDc.getHeight(), digitSize);
+		var digitCirclePos = new DigitCirclePosition(dcWidth, dcHeight, digitSize);
 		
 		for (var digit = 0; digit < 10; digit++) {
 			var posCoefficient = 0.1 * digit;

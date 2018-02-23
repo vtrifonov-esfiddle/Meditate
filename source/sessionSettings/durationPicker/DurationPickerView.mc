@@ -5,11 +5,13 @@ using Toybox.Lang;
 class DurationPickerView extends Ui.View {
 	private var mModel;
 	private var mDone;
+	private var mDigitsOutputBuilder;
 	
-    function initialize(model) {
+    function initialize(model, digitsOutputBuilder) {
         View.initialize();     
         me.mModel = model;
         me.mDone = new Rez.Drawables.done();
+        me.mDigitsOutputBuilder = digitsOutputBuilder;
     }
     
     var mDigitsLayout;
@@ -17,7 +19,8 @@ class DurationPickerView extends Ui.View {
     
     // Load your resources here
     function onLayout(dc) {
-    	me.mDigitsLayout = new DigitsLayout(dc);
+    	var digitsOutput = me.mDigitsOutputBuilder.build(dc);
+    	me.mDigitsLayout = new DigitsLayout(dc.getWidth(), dc.getHeight(), digitsOutput);
         setLayout(me.mDigitsLayout.digitsLayout);
         me.mDigitsOutput = me.mDigitsLayout.getDigitsOutput();
     }
@@ -59,7 +62,7 @@ class DurationPickerView extends Ui.View {
     // Update the view
     function onUpdate(dc) {     
     	me.updateDisableDigitsStatus();
-    	    	    	
+   	    	
     	switch (me.mModel.pickerPos) {
 			case :durationPicker_initialHint:
 				me.mDigitsOutput.setInitialHintLayout();

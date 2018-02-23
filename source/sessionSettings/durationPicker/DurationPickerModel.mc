@@ -53,6 +53,10 @@ class DurationPickerModel {
 		}
 	}
 	
+	function startPickingDigits() {
+		me.mPickerPos = 0;
+	}
+	
 	function isInitialHintPos() {
 		return me.mPickerPos == InitialHint;
 	}

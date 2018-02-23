@@ -3,28 +3,27 @@ using Toybox.Lang;
 
 class DurationPickerDelegate extends Ui.BehaviorDelegate {
 	private var mModel;
-	private var mOnDurationPicked;
+	private var mOnDigitsPicked;
 	
-    function initialize(durationPickerModel, onDurationPicked) {
+    function initialize(durationPickerModel, onDigitsPicked) {
         Ui.BehaviorDelegate.initialize();
         me.mModel = durationPickerModel;
-        me.mOnDurationPicked = onDurationPicked;
+        me.mOnDigitsPicked = onDigitsPicked;
     }
 	
 	function onSelect() {
-		if (me.mModel.pickerPos == :durationPicker_finish) {
-			me.pickFinalDuration();
+		if (me.mModel.isFinishPos()) {
+			me.finishPickingDigits();
 		}
-		else if (me.mModel.pickerPos == :durationPicker_initialHint) {			
-			me.mModel.pickerPos = :durationPicker_start;
+		else if (me.mModel.isInitialHintPos()) {			
+			me.mModel.startPickingDigits();
 			Ui.requestUpdate();
 		}
 	}
 	
-	function pickFinalDuration() {
-		var durationMins = me.mModel.hoursLow * 60 + me.mModel.minutesHigh * 10 + me.mModel.minutesLow;
+	function finishPickingDigits() {
 		Ui.popView(Ui.SLIDE_RIGHT);
-		me.mOnDurationPicked.invoke(durationMins);
+		me.mOnDigitsPicked.invoke(me.mModel.getDigits());
 	}
 	
 	function onSelectable(event) {	
@@ -34,21 +33,8 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
         if (event.getPreviousState() == :stateDisabled) {
         	instance.setState(:stateDisabled);
         }
-		if (instance instanceof DigitButton && instance.getState() == :stateSelected) {						
-			switch (me.mModel.pickerPos) {
-				case :durationPicker_start :							
-					me.mModel.hoursLow = instance.getDigitValue();
-					me.mModel.pickerPos = :durationPicker_hoursLow;		
-					break;
-				case :durationPicker_hoursLow :								
-					me.mModel.minutesHigh = instance.getDigitValue();
-					me.mModel.pickerPos = :durationPicker_minutesHigh;	
-					break;
-				case :durationPicker_minutesHigh :								
-					me.mModel.minutesLow = instance.getDigitValue();
-					me.mModel.pickerPos = :durationPicker_minutesLow;	
-					break;							
-			}
+		if (instance instanceof DigitButton && instance.getState() == :stateSelected) {		
+			me.mModel.pickDigit(instance.getDigitValue());				
 			Ui.requestUpdate();
 		}
 		
@@ -56,23 +42,10 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
     }
     
     function onBack() {
-    	switch (me.mModel.pickerPos) {
-				case :durationPicker_start :	
-					me.mModel.hoursLow = "0";
-					Ui.popView(Ui.SLIDE_RIGHT);
-					break;
-				case :durationPicker_hoursLow :
-					me.mModel.pickerPos = :durationPicker_start;
-					me.mModel.minutesHigh = "0";
-					break;
-				case :durationPicker_minutesHigh :
-					me.mModel.pickerPos = :durationPicker_hoursLow;		
-					me.mModel.minutesLow = "0";
-					break;		
-				case :durationPicker_minutesLow :
-					me.mModel.pickerPos = :durationPicker_minutesHigh;	
-					break;
-			}
+    	if (me.mModel.isInitialHintPos()) {
+    		return false;
+    	}
+    	me.mModel.undo();
 		Ui.requestUpdate();
     	return true;
     }

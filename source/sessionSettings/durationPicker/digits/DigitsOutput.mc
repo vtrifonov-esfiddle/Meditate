@@ -2,187 +2,62 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.Lang;
 
-class DigitsOutput {
-	function initialize(initialHint, digits) {
-		me.mHoursLow = me.createCharOutput();
-		me.addOffset(me.mHoursLow);
-		me.mSeparator = me.createSeparatorOutput(separator);
-		me.addOffset(me.mSeparator);
-		me.mMinutesHigh = me.createCharOutput();
-		me.addOffset(me.mMinutesHigh);
-		me.mMinutesLow = me.createCharOutput();
+module DigitOutputType {
+	enum {
+		Digit = 1,
+		Separator = 2
 	}
-		
-	private var mHoursLow;
-	private var mMinutesHigh;
-	private var mMinutesLow;
-	
+}
+
+class DigitsOutput {
+	function initialize(initialHint, digits, separators, layout) {
+		me.mInitialHint = initialHint;
+		me.mDigits = digits;
+		me.mSeparators = separators;
+		me.mLayout = layout;
+	}
+			
 	private var mInitialHint;
 	private var mDigits;
+	private var mSeparators;
+	private var mLayout;
 	
 	function getLayout() {
-		var result = new [mDigits.size() + 1];
-		result[0] = me.mInitialHint;
-		for (var i = 0; i < mDigits.size(); i++) {
-			result[i+1] = mDigits[i];
-		}
-		return result;
+		return mLayout;
 	}	
 	
 	function setInitialHintLayout() {
 		me.mInitialHint.setColor(Gfx.COLOR_BLACK);
 		me.mInitialHint.setBackgroundColor(Gfx.COLOR_LT_GRAY);
 		
-		me.mHoursLow.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mHoursLow.setColor(Gfx.COLOR_TRANSPARENT);
-		
-		me.mMinutesHigh.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mMinutesHigh.setColor(Gfx.COLOR_TRANSPARENT);
-		
-		me.mMinutesLow.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mMinutesLow.setColor(Gfx.COLOR_TRANSPARENT);
-		
-		me.mSeparator.setColor(Gfx.COLOR_TRANSPARENT);
+		for (var i = 0; i < me.mDigits.size(); i++) {
+			me.mDigits[i].setBackgroundColor(Gfx.COLOR_TRANSPARENT);
+			me.mDigits[i].setColor(Gfx.COLOR_TRANSPARENT);
+		}
+		for (var i = 0; i < me.mSeparators.size(); i++) {
+			me.mSeparators[i].setBackgroundColor(Gfx.COLOR_TRANSPARENT);
+			me.mSeparators[i].setColor(Gfx.COLOR_TRANSPARENT);
+		}
 	}
 	
-	function setHoursSelected() {
+	function setSelectedDigit(selectedIndex, digit) {
 		me.mInitialHint.setColor(Gfx.COLOR_TRANSPARENT);
 		me.mInitialHint.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
 		
-		me.mHoursLow.setBackgroundColor(Gfx.COLOR_DK_GRAY);
-		me.mHoursLow.setColor(Gfx.COLOR_DK_GRAY);
-		
-		me.mMinutesHigh.setBackgroundColor(Gfx.COLOR_LT_GRAY);
-		me.mMinutesHigh.setColor(Gfx.COLOR_LT_GRAY);
-		
-		me.mMinutesLow.setBackgroundColor(Gfx.COLOR_LT_GRAY);
-		me.mMinutesLow.setColor(Gfx.COLOR_LT_GRAY);		
-		
-		me.mSeparator.setColor(Gfx.COLOR_BLACK);	
-	}
-		
-	function setMinutesHighSelected() {	
-		me.mHoursLow.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mHoursLow.setColor(Gfx.COLOR_BLACK);
-		
-		me.mMinutesHigh.setBackgroundColor(Gfx.COLOR_DK_GRAY);
-		me.mMinutesHigh.setColor(Gfx.COLOR_DK_GRAY);
-		
-		me.mMinutesHigh.setBackgroundColor(Gfx.COLOR_LT_GRAY);
-		me.mMinutesHigh.setColor(Gfx.COLOR_LT_GRAY);
-	}
-	
-	function setMinutesLowSelected() {
-		me.mHoursLow.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mHoursLow.setColor(Gfx.COLOR_BLACK);
-		
-		me.mMinutesHigh.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mMinutesHigh.setColor(Gfx.COLOR_BLACK);
-		
-		me.mMinutesLow.setBackgroundColor(Gfx.COLOR_DK_GRAY);
-		me.mMinutesLow.setColor(Gfx.COLOR_DK_GRAY);
-	}
-	
-	function setFinish() {
-		me.mHoursLow.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mHoursLow.setColor(Gfx.COLOR_BLACK);
-		
-		me.mMinutesHigh.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mMinutesHigh.setColor(Gfx.COLOR_BLACK);
-		
-		me.mMinutesLow.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
-		me.mMinutesLow.setColor(Gfx.COLOR_BLACK);
-	}
-	
-	function setHoursLow(digit) {
-		me.mHoursLow.setText(digit.toString());
-	}
-	
-	function setMinutesHigh(digit) {
-		me.mMinutesHigh.setText(digit.toString());
-	}
-	
-	function setMinutesLow(digit) {
-		me.mMinutesLow.setText(digit.toString());
-	}
-	
-	function getOutputBuilder() {
-		return new DigitsOutputBuilder(me);
-	}
-	
-	class DigitsOutputBuilder {
-		function initialize(font) {
-			me.mFont = font;
-			me.mDigits = {};
-			me.mOutput = {};
+		for (var i = 0; i < selectedIndex; i++) {
+			me.mDigits[i].setBackgroundColor(Gfx.COLOR_TRANSPARENT);
+			me.mDigits[i].setColor(Gfx.COLOR_BLACK);
 		}
+		me.mDigits[selectedIndex].setBackgroundColor(Gfx.COLOR_DK_GRAY);
+		me.mDigits[selectedIndex].setColor(Gfx.COLOR_DK_GRAY);
+		me.mDigits[selectedIndex].setText(digit.toString());
 		
-		private var mFont;
-				
-		private var mDigits;
-		private var mOutput;		
-		private var mInitialHint;
-						
-		function addDigit() {
-			var digitIndex = me.mDigits.size();		
-			me.mDigits[digitIndex] = me.createDigit();
-						
-			var outputIndex = me.mOutput.size();	
-			me.mOutput[outputIndex] = me.mDigits[digitIndex];
+		for (var i = selectedIndex + 1; i < me.mDigits.size(); i++) {
+			me.mDigits[i].setBackgroundColor(Gfx.COLOR_LT_GRAY);
+			me.mDigits[i].setColor(Gfx.COLOR_LT_GRAY);
 		}
-				
-		private const DefaultDigit = "0";
-		
-		private function createDigit() {        
-			var result = new Ui.Text({
-	            :text=>DefaultDigit,
-	            :color=>Gfx.COLOR_LT_GRAY,
-	            :backgroundColor=>Gfx.COLOR_LT_GRAY,
-	            :font=> me.mFont,
-	            :locX => me.mX,
-	            :locY=>Ui.LAYOUT_VALIGN_CENTER
-	        });	
-	        return result;
-		}
-		
-		function addSeparator(separator) {
-			var result = new Ui.Text({
-	            :text=>separator,
-	            :color=>Gfx.COLOR_BLACK,
-	            :backgroundColor=>Gfx.COLOR_TRANSPARENT,
-	            :font=> me.mFont,
-	            :locX => me.mX,
-	            :locY=>Ui.LAYOUT_VALIGN_CENTER
-	        });	
-	        
-			var outputIndex = me.mOutput.size();	
-			me.mOutput[outputIndex] = result;
-		}
-		
-		private function getOffset(previousTextX, getTextWidthInPixels) {
-			var textWidth = getTextWidthInPixels.Invoke(DefaultDigit, me.mFont);
-			return previousTextX + textWidth + 3;
-		}
-		
-		function addInitialHint(text) {
-			me.mInitialHint = new Ui.Text({
-	            :text=>text,
-	            :color=>Gfx.COLOR_BLACK,
-	            :backgroundColor=>Gfx.COLOR_LT_GRAY,
-	            :font=>Gfx.FONT_TINY,
-	            :locX =>Ui.LAYOUT_HALIGN_CENTER,
-	            :locY=>Ui.LAYOUT_VALIGN_CENTER
-        	});
-		}  
-		
-		function build(getTextWidthInPixels) {
-			var outputValues = me.mOutput.values();
-			var x = 90;
-			for (var i = 0; i < outputValues.size(); i++) {
-				
-				x = me.getOffset(x, getTextWidthInPixels);
-			}
-			return new DigitsLayout(me.mInitialHint, me.mDigits);
-		}
-	}
+		for (var i = 0; i < me.mSeparators.size(); i++) {
+			me.mSeparators[i].setColor(Gfx.COLOR_BLACK);
+		}	
+	}	
 }
