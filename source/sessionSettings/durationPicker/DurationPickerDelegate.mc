@@ -15,7 +15,7 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 		if (me.mModel.isFinishPos()) {
 			me.finishPickingDigits();
 		}
-		else if (me.mModel.isInitialHintPos()) {			
+		else if (me.mModel.isInitialHintPos()) {	
 			me.mModel.startPickingDigits();
 			Ui.requestUpdate();
 		}
@@ -49,8 +49,4 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 		Ui.requestUpdate();
     	return true;
     }
-    
-    function onSwipe(evt) {
-    	return true;
-	}
 }

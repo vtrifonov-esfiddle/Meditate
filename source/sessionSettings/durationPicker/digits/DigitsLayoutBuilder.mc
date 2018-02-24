@@ -1,21 +1,28 @@
-class DigitsOutputBuilder {
+using Toybox.WatchUi as Ui;
+using Toybox.Graphics as Gfx;
+
+class DigitsLayoutBuilder {
 	function initialize(font) {
 		me.mFont = font;
 		me.mOutput = {};
+		me.mDigitsEnabledSpec = {};
 		me.mInitialHint = null;
 	}
 	
-	private var mFont;
-			
+	private var mFont;			
 	private var mOutput;		
 	private var mInitialHint;
+	private var mDigitsEnabledSpec;
 					
-	function addDigit() {				
+	function addDigit(enabledDigitsSpec) {				
 		var outputIndex = me.mOutput.size();	
 		me.mOutput[outputIndex] = me.createDigit();
+		var digitsEnabledSpecIndex = me.mDigitsEnabledSpec.size();
+		me.mDigitsEnabledSpec[digitsEnabledSpecIndex] = enabledDigitsSpec;
 	}
 			
 	private const DefaultDigit = "0";
+	private const UninitializesX = 0;
 	
 	private function createDigit() {        
 		var result = {
@@ -23,7 +30,7 @@ class DigitsOutputBuilder {
             :color=>Gfx.COLOR_LT_GRAY,
             :backgroundColor=>Gfx.COLOR_LT_GRAY,
             :font=> me.mFont,
-            :locX => me.mX,
+            :locX => UninitializesX,
             :locY=>Ui.LAYOUT_VALIGN_CENTER,
             :type=> DigitOutputType.Digit
         };	
@@ -36,7 +43,7 @@ class DigitsOutputBuilder {
             :color=>Gfx.COLOR_BLACK,
             :backgroundColor=>Gfx.COLOR_TRANSPARENT,
             :font=> me.mFont,
-            :locX => me.mX,
+            :locX => UninitializesX,
             :locY=>Ui.LAYOUT_VALIGN_CENTER,
             :type=> DigitOutputType.Separator
         };	
@@ -45,8 +52,13 @@ class DigitsOutputBuilder {
 		me.mOutput[outputIndex] = result;
 	}
 	
-	private function getOffset(previousTextX, viewDc) {
+	private function getDigitOffset(previousTextX, viewDc) {
 		var textWidth = viewDc.getTextWidthInPixels(DefaultDigit, me.mFont);
+		return previousTextX + textWidth + 3;
+	}
+	
+	private function getSeparatorOffset(previousTextX, separatorText, viewDc) {
+		var textWidth = viewDc.getTextWidthInPixels(separatorText, me.mFont);
 		return previousTextX + textWidth + 3;
 	}
 	
@@ -55,20 +67,26 @@ class DigitsOutputBuilder {
             :text=>text,
             :color=>Gfx.COLOR_BLACK,
             :backgroundColor=>Gfx.COLOR_LT_GRAY,
-            :font=>Gfx.FONT_TINY,
+            :font=>me.mFont,
             :locX =>Ui.LAYOUT_HALIGN_CENTER,
             :locY=>Ui.LAYOUT_VALIGN_CENTER
     	});
 	}  
 	
+	function setOutputXOffset(x) {
+		me.mOutputXOffset = x;
+	}
+	
+	private var mOutputXOffset;
+	
 	function build(viewDc) {
 		var outputSpecs = me.mOutput.values();
-		var layout = new [outputValues.size() + 1];
+		var layout = new [outputSpecs.size() + 1];
 		layout[0] = me.mInitialHint;
 			
 		var digits = {};
 		var separators = {};
-		var x = 90;
+		var x = me.mOutputXOffset;
 		for (var i = 0; i < outputSpecs.size(); i++) {
 			outputSpecs[i][:locX] = x;
 			var outputSpecType = outputSpecs[i][:type];
@@ -76,15 +94,22 @@ class DigitsOutputBuilder {
 			layout[i+1] = new Ui.Text(outputSpecs[i]);
 			me.filterOutputType(digits, DigitOutputType.Digit, outputSpecType, layout[i+1]);
 			me.filterOutputType(separators, DigitOutputType.Separator, outputSpecType, layout[i+1]);
-			x = me.getOffset(x, viewDc);
+			if (outputSpecType == DigitOutputType.Separator) {
+				x = me.getSeparatorOffset(x, outputSpecs[i][:text],  viewDc);
+			}
+			else {
+				x = me.getDigitOffset(x, viewDc);
+			}
 		}
-		return new DigitsLayout(me.mInitialHint, digits.values(), separators.values(), layout);
+		var digitsOutput = new DigitsOutput(me.mInitialHint, digits.values(), separators.values(), layout);
+		var digitsLayout = new DigitsLayout(viewDc.getWidth(), viewDc.getHeight(), digitsOutput, me.mDigitsEnabledSpec);
+		return digitsLayout;
 	}
 	
 	private function filterOutputType(filteringCollection, filteringType, outputSpecType, output) {
 		if (outputSpecType == filteringType) {					
 			var digitIndex = filteringCollection.size();	
-			filteringCollection = output;
+			filteringCollection[digitIndex] = output;
 		}
 	}
 }

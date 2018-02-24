@@ -11,21 +11,21 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         me.mOnChangeSession = onChangeSession;
     }
 	
-	private function createHmmTimeOutputBuilder() {
-		var digitsOutput = new DigitsOutputBuilder(Gfx.FONT_TINY);
-		digitsOutput.addInitialHint("Pick H:MM time");
-		digitsOutput.addDigit();
-		digitsOutput.addSeparator(":");
-		digitsOutput.addDigit();
-		digitsOutput.addDigit();
-		return digitsOutput;
+	private function createHmmTimeLayoutBuilder() {
+		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_TINY);
+		digitsLayout.addInitialHint("Pick H:MM time");
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
+		digitsLayout.addSeparator(":");
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
+		return digitsLayout;
 	}	
 			
     function onMenuItem(item) {
         if (item == :time) {
-        	var durationPickerModel = new DurationPickerModel();
-        	var hMmTimeOutputBuilder = createHmmTimeOutputBuilder();
-    		Ui.pushView(new DurationPickerView(durationPickerModel, hMmTimeOutputBuilder), new DurationPickerDelegate(durationPickerModel, method(:onHmmDigitsPicked)), Ui.SLIDE_LEFT);   	
+        	var durationPickerModel = new DurationPickerModel(3);
+        	var hMmTimeLayoutBuilder = createHmmTimeLayoutBuilder();
+    		Ui.pushView(new DurationPickerView(durationPickerModel, hMmTimeLayoutBuilder), new DurationPickerDelegate(durationPickerModel, method(:onHmmDigitsPicked)), Ui.SLIDE_LEFT);   	
         }
         else if (item == :color) {
 	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_RED, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW, Gfx.COLOR_GREEN, Gfx.COLOR_LT_GRAY, Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE];

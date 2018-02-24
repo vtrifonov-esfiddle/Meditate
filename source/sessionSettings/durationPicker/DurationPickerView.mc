@@ -5,22 +5,21 @@ using Toybox.Lang;
 class DurationPickerView extends Ui.View {
 	private var mModel;
 	private var mDone;
-	private var mDigitsOutputBuilder;
+	private var mDigitsLayoutBuilder;
 	
-    function initialize(model, digitsOutputBuilder) {
+    function initialize(model, digitsLayoutBuilder) {
         View.initialize();     
         me.mModel = model;
         me.mDone = new Rez.Drawables.done();
-        me.mDigitsOutputBuilder = digitsOutputBuilder;
+        me.mDigitsLayoutBuilder = digitsLayoutBuilder;
     }
-    
+        
     var mDigitsLayout;
     var mDigitsOutput;
     
     // Load your resources here
     function onLayout(dc) {
-    	var digitsOutput = me.mDigitsOutputBuilder.build(dc);
-    	me.mDigitsLayout = new DigitsLayout(dc.getWidth(), dc.getHeight(), digitsOutput);
+    	me.mDigitsLayout = me.mDigitsLayoutBuilder.build(dc);
         setLayout(me.mDigitsLayout.digitsLayout);
         me.mDigitsOutput = me.mDigitsLayout.getDigitsOutput();
     }
@@ -34,63 +33,25 @@ class DurationPickerView extends Ui.View {
     	me.mDigitsOutput.setInitialHintLayout();
     }
 	
-	function updateDisableDigitsStatus() {
-		if (me.mModel.pickerPos == :durationPicker_initialHint || me.mModel.pickerPos == :durationPicker_finish) {  
-			me.mDigitsLayout.disableAllDigits();
-    	}   	    	
-    	    	
-		var digit;
-    	switch (me.mModel.pickerPos) {
-			case :durationPicker_start :
-				me.mDigitsLayout.enableAllDigits();
-				break;
-			case :durationPicker_hoursLow :
-				for (digit = 0; digit < 6; digit++) {
-	    			me.mDigitsLayout.enableDigitState(digit);
-	    		}
-				for (digit = 6; digit < 10; digit++) {
-	    			me.mDigitsLayout.disableDigitState(digit);
-	    		}
-				break;
-			case :durationPicker_minutesHigh :
-			case :durationPicker_minutesLow :
-				me.mDigitsLayout.enableAllDigits();
-				break;		
-		}
+	function updateEnabledDigitsStatus() {
+		me.mDigitsLayout.setEnabledDigits(me.mModel.getPickerPos()+1);
 	}	
 		
     // Update the view
     function onUpdate(dc) {     
-    	me.updateDisableDigitsStatus();
-   	    	
-    	switch (me.mModel.pickerPos) {
-			case :durationPicker_initialHint:
-				me.mDigitsOutput.setInitialHintLayout();
-				break;
-			case :durationPicker_start :
-				me.mDigitsOutput.setHoursSelected();
-				break;
-			case :durationPicker_hoursLow :
-				me.mDigitsOutput.setHoursLow(me.mModel.hoursLow);				
-				me.mDigitsOutput.setMinutesHighSelected();
-				break;
-			case :durationPicker_minutesHigh :
-				me.mDigitsOutput.setMinutesHigh(me.mModel.minutesHigh);				
-				me.mDigitsOutput.setMinutesLowSelected();
-				break;
-			case :durationPicker_minutesLow :				
-				me.mDigitsOutput.setMinutesLow(me.mModel.minutesLow);				
-				me.mDigitsOutput.setFinish();
-				break;		
-		}  	
+    	me.updateEnabledDigitsStatus();
+    	if (me.mModel.isInitialHintPos()) {    		
+    		me.mDigitsOutput.setInitialHintLayout();
+    	}
+    	else {
+   	    	me.mDigitsOutput.setSelectedDigit(me.mModel.getPickerPos(), me.mModel.getDigits());	
+   	    }
 				
     	View.onUpdate(dc);
     	     	
-		if (me.mModel.pickerPos == :durationPicker_minutesLow || me.mModel.pickerPos == :durationPicker_finish) {					
-			me.mModel.pickerPos = :durationPicker_finish;			
+		if (me.mModel.isFinishPos()) {							
        		me.mDone.draw(dc);
-		}		
-		
+		}				
     }
 
     // Called when this View is removed from the screen. Save the

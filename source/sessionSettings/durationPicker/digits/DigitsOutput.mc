@@ -40,19 +40,22 @@ class DigitsOutput {
 		}
 	}
 	
-	function setSelectedDigit(selectedIndex, digit) {
+	function setSelectedDigit(selectedIndex, digits) {
 		me.mInitialHint.setColor(Gfx.COLOR_TRANSPARENT);
 		me.mInitialHint.setBackgroundColor(Gfx.COLOR_TRANSPARENT);
 		
-		for (var i = 0; i < selectedIndex; i++) {
+		for (var i = 0; i <= selectedIndex; i++) {
 			me.mDigits[i].setBackgroundColor(Gfx.COLOR_TRANSPARENT);
 			me.mDigits[i].setColor(Gfx.COLOR_BLACK);
+			me.mDigits[i].setText(digits[i].toString());
+		}		
+		var nextIndex = selectedIndex + 1;
+		if (nextIndex < me.mDigits.size()) {
+			me.mDigits[nextIndex].setBackgroundColor(Gfx.COLOR_DK_GRAY);
+			me.mDigits[nextIndex].setColor(Gfx.COLOR_DK_GRAY);
 		}
-		me.mDigits[selectedIndex].setBackgroundColor(Gfx.COLOR_DK_GRAY);
-		me.mDigits[selectedIndex].setColor(Gfx.COLOR_DK_GRAY);
-		me.mDigits[selectedIndex].setText(digit.toString());
 		
-		for (var i = selectedIndex + 1; i < me.mDigits.size(); i++) {
+		for (var i = nextIndex + 1; i < me.mDigits.size(); i++) {
 			me.mDigits[i].setBackgroundColor(Gfx.COLOR_LT_GRAY);
 			me.mDigits[i].setColor(Gfx.COLOR_LT_GRAY);
 		}
