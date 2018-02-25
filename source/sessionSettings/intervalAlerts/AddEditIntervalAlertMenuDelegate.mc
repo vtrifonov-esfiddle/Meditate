@@ -87,7 +87,8 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
     		durationPickerDelgate = new DurationPickerDelegate(durationPickerModel, method(:onRepeatDurationPicked));
     	}
     	var view = new DurationPickerView(durationPickerModel, timeLayoutBuilder);
-		Ui.switchToView(view, durationPickerDelgate, Ui.SLIDE_LEFT);   	
+    	Ui.popView(Ui.SLIDE_IMMEDIATE);
+		Ui.pushView(view, durationPickerDelgate, Ui.SLIDE_IMMEDIATE);   	
     }
         
     private function createTimeLayoutMmSsBuilder() {
