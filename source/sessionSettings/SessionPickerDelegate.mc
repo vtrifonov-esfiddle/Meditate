@@ -85,8 +85,8 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine();
         
-        details.detailLines[5].valueOffset = -20;        
-        details.detailLines[5].value.text = "ready to start";
+        details.detailLines[4].valueOffset = -10;        
+        details.detailLines[4].value.text = "ready to start";
 	}	
 	
 	function createScreenPickerView() {
