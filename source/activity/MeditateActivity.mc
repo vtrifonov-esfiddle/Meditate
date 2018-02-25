@@ -30,11 +30,11 @@ class MediateActivity {
 		me.mMinHrField = me.mSession.createField(
             "min_hr",
             me.MinHrFieldId,
-            FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_LAP, :units=>"bpm"}
+            FitContributor.DATA_TYPE_UINT16,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"bpm"}
         );
 
-        me.mMinHrField.setData(0.0);
+        me.mMinHrField.setData(0);
 	}
 	
 	private const MinHrFieldId = 0;
@@ -69,7 +69,6 @@ class MediateActivity {
 		if (activityInfo.currentHeartRate != null) {
 	    	if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate) {
 	    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
-	    		me.mMinHrField.setData(activityInfo.currentHeartRate.toFloat());
 	    	}
 	    }
 	    
@@ -83,7 +82,10 @@ class MediateActivity {
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		
-		var activityInfo = Activity.getActivityInfo();
+		var activityInfo = Activity.getActivityInfo();		
+		if (me.mMeditateModel.minHr != null) {
+			me.mMinHrField.setData(me.mMeditateModel.minHr);
+		}
 		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr);
 	}
 		
