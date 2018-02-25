@@ -47,6 +47,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     function onBack() {
     	me.mMeditateActivity.stop();
     	me.mMeditateActivity.discard();
+    	return false;
     }
         
     function onKey(keyEvent) {
