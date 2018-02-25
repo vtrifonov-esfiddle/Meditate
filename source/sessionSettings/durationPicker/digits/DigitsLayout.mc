@@ -72,6 +72,9 @@ class EnabledDigitsLayout {
 		if (me.getDigitButton(digit).getState() == :stateDisabled) {
 			me.getDigitButton(digit).setState(:stateDefault);
 		}
+		else if (me.getDigitButton(digit).getState() == :stateHighlightedSelected || me.getDigitButton(digit).getState() == :stateSelected) {
+			me.getDigitButton(digit).setState(:stateHighlighted);
+		}
 	}
 	
 	private function disableDigitState(digit) {

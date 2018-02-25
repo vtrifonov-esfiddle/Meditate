@@ -34,7 +34,7 @@ class DigitButton extends Ui.Button {
 		if (me.getState() == :stateDisabled) {
 			dc.setColor(Gfx.COLOR_LT_GRAY, Gfx.COLOR_TRANSPARENT);	
 		}
-		else if (me.getState() == :stateSelected || me.getState() == :stateHighlighted) {
+		else if (me.getState() == :stateSelected || me.getState() == :stateHighlighted || me.getState() == :stateHighlightedSelected) {
 			dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);	
 		}
 		else {
