@@ -30,7 +30,7 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
     		Ui.pushView(new DurationPickerView(durationPickerModel, hMmTimeLayoutBuilder), new DurationPickerDelegate(durationPickerModel, method(:onHmmDigitsPicked)), Ui.SLIDE_LEFT);   	
         }
         else if (item == :color) {
-	        var colors = [Gfx.COLOR_DK_BLUE, Gfx.COLOR_DK_RED, Gfx.COLOR_DK_GREEN, Gfx.COLOR_DK_GRAY, Gfx.COLOR_BLUE, Gfx.COLOR_RED, Gfx.COLOR_YELLOW, Gfx.COLOR_ORANGE, Gfx.COLOR_GREEN, Gfx.COLOR_LT_GRAY, Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE];
+	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_DK_BLUE, Gfx.COLOR_DK_RED, Gfx.COLOR_DK_GREEN, Gfx.COLOR_DK_GRAY, Gfx.COLOR_RED, Gfx.COLOR_YELLOW, Gfx.COLOR_ORANGE, Gfx.COLOR_GREEN, Gfx.COLOR_LT_GRAY, Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE];
 	        
 	        Ui.pushView(new ColorPickerView(colors[0]), new ColorPickerDelegate(colors, method(:onColorSelected)), Ui.SLIDE_LEFT);  
         }
