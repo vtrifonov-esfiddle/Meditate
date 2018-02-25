@@ -43,7 +43,7 @@ class SessionModel {
 		
 	function reset() {
 		me.time = 600;
-		me.color = Gfx.COLOR_YELLOW;
+		me.color = Gfx.COLOR_DK_GREEN;
 		me.vibePattern = VibePattern.LongContinuous;		
 		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.reset();

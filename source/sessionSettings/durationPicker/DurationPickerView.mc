@@ -34,7 +34,8 @@ class DurationPickerView extends Ui.View {
     }
 	
 	function updateEnabledDigitsStatus() {
-		me.mDigitsLayout.setEnabledDigits(me.mModel.getPickerPos()+1);
+		var nextPickerPos = me.mModel.getPickerPos()+1;
+		me.mDigitsLayout.setEnabledDigits(nextPickerPos);
 	}	
 		
     // Update the view

@@ -82,8 +82,8 @@ class Alert {
 	function reset() {
 		me.type = IntervalAlertType.OneOff;
 		me.time = 60;
-		me.color = Gfx.COLOR_PINK;
-		me.vibePattern = VibePattern.ShortPulsating;
+		me.color = Gfx.COLOR_RED;
+		me.vibePattern = VibePattern.ShorterContinuous;
 	}		
 		
 	function getAlertPercentageTimes(sessionTime) {
