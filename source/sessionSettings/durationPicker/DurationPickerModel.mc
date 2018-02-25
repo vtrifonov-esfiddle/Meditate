@@ -21,8 +21,10 @@ class DurationPickerModel {
 	}
 		
 	function undo() {
-		me.mDigits[me.mPickerPos] = 0;
-		me.mPickerPos--;
+		if (me.mPickerPos >= 0) {
+			me.mDigits[me.mPickerPos] = 0;
+		}
+		me.mPickerPos--;		
 	}
 	
 	function startPickingDigits() {
