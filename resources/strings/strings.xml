@@ -22,7 +22,6 @@
     <string id="confirmDeleteIntervalAlertHeader">Delete Alert?</string>
     
     <string id="addEditIntervalAlertMenu_title">Alert</string>    
-    <string id="addEditIntervalAlertMenu_type">Type</string>
     <string id="addEditIntervalAlertMenu_time">Time</string>
     <string id="addEditIntervalAlertMenu_color">Color</string>
     <string id="addEditIntervalAlertMenu_vibePattern">Vibe</string>
@@ -54,8 +53,8 @@
 	<string id="intervalVibePatternMenu_blip">Blip</string>
 		
 	<string id="intervalTypeMenu_title">Interval Alert Type</string>
-	<string id="intervalTypeMenu_oneOff">One-off</string>
-	<string id="intervalTypeMenu_repeat">Repeat</string>		
+	<string id="intervalTypeMenu_oneOff">One-off H:MM</string>
+	<string id="intervalTypeMenu_repeat">Every MM:SS</string>		
 	
 	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
 			

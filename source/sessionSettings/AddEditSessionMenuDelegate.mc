@@ -13,11 +13,13 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
 	
 	private function createHmmTimeLayoutBuilder() {
 		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_TINY);
-		digitsLayout.addInitialHint("Pick H:MM time");
+		digitsLayout.setOutputXOffset(85);
+		digitsLayout.addInitialHint("Pick H:MM");
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
-		digitsLayout.addSeparator(":");
+		digitsLayout.addSeparator("h");
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
-		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
+		digitsLayout.addSeparator("m");
 		return digitsLayout;
 	}	
 			

@@ -16,17 +16,13 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 	}
 	
 	function onMenuItem(item) {
-        if (item == :type) {
-			var intervalTypeMenuDelegate = new IntervalTypeMenuDelegate(method(:onTypeChanged));
-			Ui.pushView(new Rez.Menus.intervalTypeMenu(),  intervalTypeMenuDelegate, Ui.SLIDE_LEFT);			
-        }
-        else if (item == :vibePattern) {
+        if (item == :vibePattern) {
 			var intervalVibePatternMenuDelegate = new IntervalVibePatternMenuDelegate(method(:onVibePatternChanged));
 			Ui.pushView(new Rez.Menus.intervalVibePatternMenu(),  intervalVibePatternMenuDelegate, Ui.SLIDE_LEFT);			
         }
         else if (item == :time) {
-        	var durationPickerModel = new DurationPickerModel();
-    		Ui.pushView(new DurationPickerView(durationPickerModel), new DurationPickerDelegate(durationPickerModel, method(:onDurationPicked)), Ui.SLIDE_LEFT);   	
+        	var intervalTypeMenuDelegate = new IntervalTypeMenuDelegate(method(:onTypeChanged));
+			Ui.pushView(new Rez.Menus.intervalTypeMenu(),  intervalTypeMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :color) {
 	        var colors = [Gfx.COLOR_BLUE, Gfx.COLOR_RED, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW, Gfx.COLOR_GREEN, Gfx.COLOR_LT_GRAY, Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE];
@@ -49,7 +45,15 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
     	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
     }
     
-    private function onDurationPicked(durationInSeconds) {
+    private function onOneOffDurationPicked(digits) {
+    	var durationInMins = digits[0] * 60 + digits[1] * 10 + digits[2];
+    	var durationInSeconds = durationInMins * 60;
+    	me.mIntervalAlert.time = durationInSeconds;
+    	me.notifyIntervalAlertChanged();
+    }
+    
+    private function onRepeatDurationPicked(digits) {
+    	var durationInSeconds = digits[0] * 600 + digits[1] * 60 + digits[2] * 10 + digits[3];
     	me.mIntervalAlert.time = durationInSeconds;
     	me.notifyIntervalAlertChanged();
     }
@@ -68,6 +72,47 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
     private function onTypeChanged(type) {
     	me.mIntervalAlert.type = type;
     	me.notifyIntervalAlertChanged();
+    	
+    	var durationPickerModel;
+    	var durationPickerDelgate;
+    	var timeLayoutBuilder;
+    	if (type == IntervalAlertType.OneOff) {
+	    	durationPickerModel = new DurationPickerModel(3);
+    		timeLayoutBuilder = me.createTimeLayoutHmmBuilder();    	
+    		durationPickerDelgate = new DurationPickerDelegate(durationPickerModel, method(:onOneOffDurationPicked));
+    	}
+    	else {
+	    	durationPickerModel = new DurationPickerModel(4);
+    		timeLayoutBuilder = me.createTimeLayoutMmSsBuilder();    	
+    		durationPickerDelgate = new DurationPickerDelegate(durationPickerModel, method(:onRepeatDurationPicked));
+    	}
+    	var view = new DurationPickerView(durationPickerModel, timeLayoutBuilder);
+		Ui.switchToView(view, durationPickerDelgate, Ui.SLIDE_LEFT);   	
+    }
+        
+    private function createTimeLayoutMmSsBuilder() {
+		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_SYSTEM_TINY);
+		digitsLayout.setOutputXOffset(75);
+		digitsLayout.addInitialHint("Pick MM:SS");
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
+		digitsLayout.addSeparator("m");
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
+		digitsLayout.addSeparator("s");
+		return digitsLayout;
+    }
+    
+    private function createTimeLayoutHmmBuilder() {
+		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_SYSTEM_TINY);
+		digitsLayout.setOutputXOffset(85);
+		digitsLayout.addInitialHint("Pick H:MM");
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
+		digitsLayout.addSeparator("h");
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
+		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
+		digitsLayout.addSeparator("m");
+		return digitsLayout;
     }
 	
 }
