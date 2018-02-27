@@ -43,11 +43,13 @@ class DetailsLine {
 		me.icon = null;
 		me.valueOffset = 0;
 		me.iconOffset = 0;
+		me.yLineOffset = 0;
 		me.value = new TextLine();
 	}
 
 	var icon;
 	var valueOffset;
+	var yLineOffset;
 	var iconOffset;
 	var value;
 }

@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.Lang;
+using Toybox.Application as App;
 
 class DetailsViewRenderer {
 	private const InitialTextPosY = 30;
@@ -12,6 +13,7 @@ class DetailsViewRenderer {
 	
 	function initialize(detailsModel) {
 		me.mDetailsModel = detailsModel;
+		me.progressBarWidth = App.getApp().getProperty("progressBarWidth");
 	}
 	
 	function renderBackgroundColor(dc) {				        
@@ -27,10 +29,10 @@ class DetailsViewRenderer {
         	dc.setColor(me.mDetailsModel.color, Gfx.COLOR_TRANSPARENT); 
 			var line = me.mDetailsModel.detailLines[lineNumber];
 			if (line.icon != null) {
-				me.displayIcon(dc, lineNumber, line.icon, line.iconOffset);
+				me.displayIcon(dc, lineNumber, line.icon, line.iconOffset, line.yLineOffset);
 			}
 			if (line.value instanceof TextLine) {
-       			me.displayText(dc, lineNumber, line.value.text, line.valueOffset);  
+       			me.displayText(dc, lineNumber, line.value.text, line.valueOffset, line.yLineOffset);  
        		}
    			else if	(line.value instanceof PercentageHighlightLine) {
    				me.drawPercentageHighlightLine(dc, lineNumber, line.value.getHighlights(), line.value.backgroundColor, line.valueOffset);
@@ -38,7 +40,7 @@ class DetailsViewRenderer {
        	}       
     }
     
-    private const ProgressBarWidth = 150;
+    private var progressBarWidth;
     private const ProgressBarHeight = 16;
     
     private function drawPercentageHighlightLine(dc, lineNumber, highlights, backgroundColor, valueOffset) {
@@ -47,13 +49,13 @@ class DetailsViewRenderer {
     	var posY = me.getLinePosY(lineNumber) + 10;
 		
 		dc.setColor(backgroundColor, Gfx.COLOR_TRANSPARENT);
-		dc.fillRectangle(valuePosXOffset, posY, ProgressBarWidth, ProgressBarHeight);   
+		dc.fillRectangle(valuePosXOffset, posY, progressBarWidth, ProgressBarHeight);   
 		
-		var highlightWidth = 0.03 * ProgressBarWidth;		
+		var highlightWidth = 0.03 * progressBarWidth;		
     	for (var i = 0; i < highlights.size(); i++) {
     		var sectionKey = highlightKeys[i];
     		var highlight = highlights[sectionKey];
-    		var valuePosX = valuePosXOffset + highlight.progressPercentage * ProgressBarWidth;
+    		var valuePosX = valuePosXOffset + highlight.progressPercentage * progressBarWidth;
     		dc.setColor(highlight.color, Gfx.COLOR_TRANSPARENT);
     		dc.fillRectangle(valuePosX, posY, highlightWidth, ProgressBarHeight);    		
     	}
@@ -67,10 +69,10 @@ class DetailsViewRenderer {
     private function getLinePosY(lineNumber) {
     	return lineNumber * TextPosYOffset + InitialTextPosY;
     }
-    	
-	private function displayIcon(dc, lineNumber, drawableId, iconOffset) {
+        	
+	private function displayIcon(dc, lineNumber, drawableId, iconOffset, yLineOffset) {
         var posX = IconX + iconOffset;
-        var posY = getLinePosY(lineNumber);
+        var posY = getLinePosY(lineNumber) + yLineOffset;
         
 		var bitmap = new Ui.Bitmap({
 	         :rezId=>drawableId,
@@ -80,9 +82,9 @@ class DetailsViewRenderer {
      	bitmap.draw(dc);
 	}
     
-    private function displayText(dc, lineNumber, text, valueOffset) {   
+    private function displayText(dc, lineNumber, text, valueOffset, yLineOffset) {   
         var textX = dc.getWidth() / 3.4 + valueOffset;
-        var posY = getLinePosY(lineNumber);		
+        var posY = getLinePosY(lineNumber) + yLineOffset;		
         
         dc.drawText(textX, posY, Gfx.FONT_SYSTEM_SMALL, text, Gfx.TEXT_JUSTIFY_LEFT);
     }    

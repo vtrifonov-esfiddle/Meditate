@@ -1,0 +1,6 @@
+<properties>
+	<property id="progressBarWidth" type="number">150</property>
+	<property id="readyToStartOffset" type="number">-20</property>
+	<property id="sessionDetailsIconsOffset" type="number">-4</property>
+	<property id="readyToStartOffsetYOffset" type="number">20</property>
+</properties>
