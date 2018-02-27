@@ -9,7 +9,6 @@
             <iq:product id="fr645"/>
             <iq:product id="fr645m"/>
             <iq:product id="fr935"/>
-            <iq:product id="vivoactive3"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Fit"/>
