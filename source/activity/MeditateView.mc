@@ -45,6 +45,15 @@ class MeditateView extends Ui.View {
 		}
 	}
 	
+	private function formatHrv(hr) {
+		if (hr == null) {
+			return "--";
+		}
+		else {
+			return hr.format("%3.2f");
+		}
+	}
+	
     // Update the view
     function onUpdate(dc) {   
 		var elapsedTime = View.findDrawableById("elapsedTime");
@@ -53,6 +62,9 @@ class MeditateView extends Ui.View {
 		
 		var hrStatusText = View.findDrawableById("hrStatusText");
 		hrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
+		
+		var hrvStatusText = View.findDrawableById("hrvStatusText");
+		hrvStatusText.setText(me.formatHrv(me.mMeditateModel.hrv));
 		
         View.onUpdate(dc);
         		                        

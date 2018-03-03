@@ -4,6 +4,7 @@
     <bitmap id="heartRateMinIcon" filename="images/fontAwesome/heartRateMin.png" />
     <bitmap id="heartRateAvgIcon" filename="images/fontAwesome/heartRateAvg.png" />
     <bitmap id="heartRateMaxIcon" filename="images/fontAwesome/heartRateMax.png" />
+    <bitmap id="heartRateVariabilityIcon" filename="images/fontAwesome/heartRateVariability.png" />
     <bitmap id="vibrateIcon" filename="images/fontAwesome/clock-white-vibrate.png" />
     <bitmap id="durationIcon" filename="images/fontAwesome/hourglass-white.png" />
     <bitmap id="timeIcon" filename="images/fontAwesome/hourglass-end.png" />
@@ -19,7 +20,8 @@
     <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
     <drawable-list id="hrStatus">
     	<bitmap id="heartRateIcon" x="60" y="150" filename="images/fontAwesome/heartRate.png" />
-    </drawable-list>
+    	<bitmap id="heartRateVariabilityIcon" x="60" y="180" filename="images/fontAwesome/heartRateVariability.png" />
+    </drawable-list>    
     <drawable-list id="up">
    	    <bitmap id="upIcon" x="110" y="0" filename="images/fontAwesome/up-white.png" />
     </drawable-list>
@@ -32,5 +34,6 @@
     </fonts>
     <fitContributions>
 		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />
+		<fitField id="1" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="1" precision="2" dataLabel="@Strings.hrvRmssdFieldLabel" unitLabel="@Strings.hrvRmssdFieldUnits" chartTitle="@Strings.hrvRmssdFieldChartTitle" fillColor="E155D7" />
 	</fitContributions>
 </resources>

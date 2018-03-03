@@ -8,6 +8,7 @@ class MediateActivity {
 	private var mIsStarted;	
 	private var mSummaryModel;
 	private var mVibeAlertsExecutor;	
+	private var mHrvMonitor;
 		
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
@@ -24,8 +25,9 @@ class MediateActivity {
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
 		me.createMinHrDataField();
 		me.mVibeAlertsExecutor = null;
+		me.mHrvMonitor = new HrvMonitor(me.mSession);
 	}
-	
+			
 	private function createMinHrDataField() {
 		me.mMinHrField = me.mSession.createField(
             "min_hr",
@@ -50,7 +52,7 @@ class MediateActivity {
 		
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
-		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);		
+		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);	
 	}
 		
 	private function refreshActivityStats() {	
@@ -72,6 +74,8 @@ class MediateActivity {
 	    	}
 	    }
 	    
+	    me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);
+	    me.mMeditateModel.hrv = me.mHrvMonitor.calculateHrvUsingRmssd();
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
@@ -86,7 +90,8 @@ class MediateActivity {
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr);
+		var hrv = me.mHrvMonitor.calculateHrvUsingRmssd();
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv);
 	}
 		
 	function finish() {		

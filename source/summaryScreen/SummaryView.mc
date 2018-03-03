@@ -1,5 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
+using Toybox.Application as App;
+using Toybox.Lang;
 
 class SummaryView extends Ui.View {
 	private var mRenderer;
@@ -31,6 +33,16 @@ class SummaryView extends Ui.View {
         
         details.detailLines[4].icon = Rez.Drawables.heartRateMaxIcon;
         details.detailLines[4].value.text = me.formatHr(summaryModel.maxHr);
+        
+        if (summaryModel.hrv != null) {
+	        details.detailLines[5].icon = Rez.Drawables.heartRateVariabilityIcon;        
+	        details.detailLines[5].value.text = Lang.format("$1$ ms", [summaryModel.hrv.format("%3.2f")]);
+        }
+        var summaryLineXOffset = App.getApp().getProperty("summaryLineXOffset");
+        for (var i = 1; i <= 5; i++) {
+            details.detailLines[i].iconOffset = summaryLineXOffset;
+        	details.detailLines[i].valueOffset = summaryLineXOffset;
+        }
         
         me.mRenderer = new DetailsViewRenderer(details);
 	}	

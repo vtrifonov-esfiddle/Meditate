@@ -60,4 +60,8 @@
 			
 	<string id="minHrField">Min HR</string>
 	<string id="minHrFieldUnits">bpm</string>
+		
+	<string id="hrvRmssdFieldLabel">HRV (ms)</string>
+	<string id="hrvRmssdFieldUnits">ms</string>
+	<string id="hrvRmssdFieldChartTitle">HRV calculated with RMSSD</string>
 </strings>
