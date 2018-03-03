@@ -5,7 +5,6 @@
    	    <label id="elapsedTime" x="center" y="center" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
    	    <drawable id="hrStatus" />
    	    <label id="hrStatusText" x="center" y="150" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-   	    <label id="hrvStatusText" x="150" y="180" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	</layout>
 	<layout id="colorPicker">	
 	</layout>	

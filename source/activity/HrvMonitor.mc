@@ -4,16 +4,19 @@ using Toybox.Math;
 class HrvMonitor {
 	function initialize(activitySession) {
 		me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
+		me.mHrvRrIntervalsDataField = HrvMonitor.createHrvRrIntervalsDataField(activitySession);
 		me.previousRrInterval = null;
 		me.squareOfSuccessiveRrDifferences = 0.0;
 		me.successiveDifferencesCount = 0;
 	}
 	
 	private var mHrvRmssdDataField;
+	private var mHrvRrIntervalsDataField;
 	private var previousRrInterval;
 	private var squareOfSuccessiveRrDifferences;	
 	private var successiveDifferencesCount;
 	private static const HrvRmssdFieldId = 1;
+	private static const HrvRrIntervalsFieldId = 2;
 	
 	private static function createHrvRmssdDataField(activitySession) {
 		var hrvRmssdDataField = activitySession.createField(
@@ -24,10 +27,21 @@ class HrvMonitor {
         );
         return hrvRmssdDataField;
 	}
+	
+	private static function createHrvRrIntervalsDataField(activitySession) {
+		var rrfield = activitySession.createField(
+            "hrv_rr",
+            HrvMonitor.HrvRrIntervalsFieldId,
+            FitContributor.DATA_TYPE_UINT16,
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
+        );
+        return rrfield;
+	}
 		
 	function addHrSample(hr) {
 		if (hr != null) {
 			var hrvRr = 60000.toFloat() / hr.toFloat();		
+			me.mHrvRrIntervalsDataField.setData(hrvRr.toNumber());
 			me.addRrInterval(hrvRr);
 			
 			var currentHrv = me.calculateHrvUsingRmssd();

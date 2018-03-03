@@ -6,7 +6,7 @@ class SummaryModel {
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
-		me.hrv = me.initializeHeartRate(hrv);
+		me.hrv = me.initializeHeartRateVariability(hrv);
 	}
 	
 	private function initializeHeartRate(heartRate) {
@@ -15,6 +15,15 @@ class SummaryModel {
 		}
 		else {
 			return heartRate;
+		}
+	}
+	
+	private function initializeHeartRateVariability(hrv) {
+		if (hrv == null) {
+			return me.InvalidHeartRate;
+		}
+		else {
+			return hrv.format("%3.2f");
 		}
 	}
 	

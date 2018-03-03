@@ -33,11 +33,10 @@ class SummaryView extends Ui.View {
         
         details.detailLines[4].icon = Rez.Drawables.heartRateMaxIcon;
         details.detailLines[4].value.text = me.formatHr(summaryModel.maxHr);
-        
-        if (summaryModel.hrv != null) {
-	        details.detailLines[5].icon = Rez.Drawables.heartRateVariabilityIcon;        
-	        details.detailLines[5].value.text = Lang.format("$1$ ms", [summaryModel.hrv.format("%3.2f")]);
-        }
+                
+        details.detailLines[5].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[5].value.text = Lang.format("$1$ ms", [summaryModel.hrv]);
+                
         var summaryLineXOffset = App.getApp().getProperty("summaryLineXOffset");
         for (var i = 1; i <= 5; i++) {
             details.detailLines[i].iconOffset = summaryLineXOffset;

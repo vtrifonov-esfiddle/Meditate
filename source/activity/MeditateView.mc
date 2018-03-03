@@ -62,10 +62,7 @@ class MeditateView extends Ui.View {
 		
 		var hrStatusText = View.findDrawableById("hrStatusText");
 		hrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
-		
-		var hrvStatusText = View.findDrawableById("hrvStatusText");
-		hrvStatusText.setText(me.formatHrv(me.mMeditateModel.hrv));
-		
+				
         View.onUpdate(dc);
         		                        
         var alarmTime = me.mMeditateModel.getSessionTime();

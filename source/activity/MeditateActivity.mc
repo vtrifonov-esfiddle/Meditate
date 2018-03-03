@@ -75,7 +75,6 @@ class MediateActivity {
 	    }
 	    
 	    me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);
-	    me.mMeditateModel.hrv = me.mHrvMonitor.calculateHrvUsingRmssd();
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
