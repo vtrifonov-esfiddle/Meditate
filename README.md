@@ -22,12 +22,12 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate and
 ## Screenshots
 ![meditate.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/meditate.png)
 
-![sessionPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionPicker.png)
+![sessionPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionPicker.PNG)
 
-![sessionInProgress.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionInProgress.png)
+![sessionInProgress.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionInProgress.PNG)
 
-![sessionSummary.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionSummary.png)
+![sessionSummary.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionSummary.PNG)
 
-![timePicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/timePicker.png)
+![timePicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/timePicker.PNG)
 
-![colorPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/colorPicker.png)
+![colorPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/colorPicker.PNG)
