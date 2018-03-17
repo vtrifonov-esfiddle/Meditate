@@ -9,7 +9,7 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate and
 - each session supports interval vibration alerts
 - interval alerts can trigger from a few seconds up to few hours
 - summary stats at the end of the session
-- Heart Rate Variability (HRV) - experimental
+- Heart Rate Variability ([HRV](https://en.wikipedia.org/wiki/Heart_rate_variability)) - experimental
   - available at [hrv](https://github.com/vtrifonov-esfiddle/Meditate/tree/hrv) brach
   - this approximates current HR to R-R intervals to calculate RMSSD (root mean square of successive differences)
   - the Vivoactive 3 HR sensor is too unreliable to produce usable R-R intervals data (it flattens the readings)
@@ -21,8 +21,13 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate and
 
 ## Screenshots
 ![meditate.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/meditate.png)
+
 ![sessionPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionPicker.png)
+
 ![sessionInProgress.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionInProgress.png)
+
 ![sessionSummary.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionSummary.png)
+
 ![timePicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/timePicker.png)
+
 ![colorPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/colorPicker.png)
