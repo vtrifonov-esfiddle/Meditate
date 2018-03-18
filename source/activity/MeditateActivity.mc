@@ -92,7 +92,8 @@ class MediateActivity {
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
-		var hrv = me.mHrvMonitor.calculateHrvUsingSdnn();
+		var hrv = me.mHrvMonitor.calculateHrvUsingSdnn();		
+		me.mHrvMonitor.calculateHrvUsingRmssd();
 		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv);
 	}
 		

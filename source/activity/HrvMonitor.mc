@@ -29,7 +29,7 @@ class HrvMonitor {
             "hrv_rmssd",
             HrvMonitor.HrvRmssdFieldId,
             FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
         );
         return hrvRmssdDataField;
 	}
@@ -39,7 +39,7 @@ class HrvMonitor {
             "hrv_sdnn",
             HrvMonitor.HrvSdnnFieldId,
             FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
         );
         return hrvSdnnDataField;
 	}
@@ -59,8 +59,6 @@ class HrvMonitor {
 			var beatToBeatInterval = 60000.toFloat() / hr.toFloat();		
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
 			me.addBeatToBeatInterval(beatToBeatInterval);
-			
-			var currentHrvRmssd = me.calculateHrvUsingRmssd();
 		}
 	}
 	
@@ -100,7 +98,6 @@ class HrvMonitor {
 		
 		var sdnn = Math.sqrt(sumSquaredDeviations / me.mBeatToBeatIntervalsCount.toFloat());
 		me.mHrvSdnnDataField.setData(sdnn);
-		System.println(sdnn);
 		return sdnn;
 	}
 	
