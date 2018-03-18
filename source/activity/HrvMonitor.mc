@@ -1,22 +1,28 @@
 using Toybox.FitContributor;
 using Toybox.Math;
+using Toybox.Application as App;
 
 class HrvMonitor {
 	function initialize(activitySession) {
 		me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
-		me.mHrvRrIntervalsDataField = HrvMonitor.createHrvRrIntervalsDataField(activitySession);
-		me.previousRrInterval = null;
-		me.squareOfSuccessiveRrDifferences = 0.0;
-		me.successiveDifferencesCount = 0;
+		me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);
+		me.mHrvSdnnDataField = HrvMonitor.createHrvSdnnDataField(activitySession);
+		me.mPreviousBeatToBeatInterval = null;
+		me.mSquareOfSuccessiveBtbDifferences = 0.0;
+		me.mBeatToBeatIntervalsCount = 0;
 	}
-	
+		
 	private var mHrvRmssdDataField;
-	private var mHrvRrIntervalsDataField;
-	private var previousRrInterval;
-	private var squareOfSuccessiveRrDifferences;	
-	private var successiveDifferencesCount;
+	private var mHrvBeatToBeatIntervalsDataField;
+	private var mHrvSdnnDataField;
+	
+	private var mPreviousBeatToBeatInterval;
+	private var mSquareOfSuccessiveBtbDifferences;	
+	private var mBeatToBeatIntervalsCount;
+		
 	private static const HrvRmssdFieldId = 1;
-	private static const HrvRrIntervalsFieldId = 2;
+	private static const HrvBeatToBeatIntervalsFieldId = 2;
+	private static const HrvSdnnFieldId = 3;
 	
 	private static function createHrvRmssdDataField(activitySession) {
 		var hrvRmssdDataField = activitySession.createField(
@@ -28,43 +34,83 @@ class HrvMonitor {
         return hrvRmssdDataField;
 	}
 	
-	private static function createHrvRrIntervalsDataField(activitySession) {
-		var rrfield = activitySession.createField(
-            "hrv_rr",
-            HrvMonitor.HrvRrIntervalsFieldId,
+	private static function createHrvSdnnDataField(activitySession) {
+		var hrvSdnnDataField = activitySession.createField(
+            "hrv_sdnn",
+            HrvMonitor.HrvSdnnFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
+        );
+        return hrvSdnnDataField;
+	}
+	
+	private static function createHrvBeatToBeatIntervalsDataField(activitySession) {
+		var beatToBeatfield = activitySession.createField(
+            "hrv_btb",
+            HrvMonitor.HrvBeatToBeatIntervalsFieldId,
             FitContributor.DATA_TYPE_UINT16,
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
-        return rrfield;
+        return beatToBeatfield;
 	}
 		
 	function addHrSample(hr) {
 		if (hr != null) {
-			var hrvRr = 60000.toFloat() / hr.toFloat();		
-			me.mHrvRrIntervalsDataField.setData(hrvRr.toNumber());
-			me.addRrInterval(hrvRr);
+			var beatToBeatInterval = 60000.toFloat() / hr.toFloat();		
+			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
+			me.addBeatToBeatInterval(beatToBeatInterval);
 			
-			var currentHrv = me.calculateHrvUsingRmssd();
-			if (currentHrv != null) {
-				me.mHrvRmssdDataField.setData(currentHrv);
-			}
+			var currentHrvRmssd = me.calculateHrvUsingRmssd();
 		}
 	}
-		
-	private function addRrInterval(hrvRr) {
-		if (me.previousRrInterval != null) {
-			me.successiveDifferencesCount++;		
-			me.squareOfSuccessiveRrDifferences += Math.pow(hrvRr - me.previousRrInterval, 2);
-		}		
-		me.previousRrInterval = hrvRr;
+	
+	private function storeBeatToBeatInterval(index, beatToBeatInterval) {	
+		return App.getApp().Storage.setValue("btb" + index, beatToBeatInterval);
 	}
 	
-	public function calculateHrvUsingRmssd() {
-		if (me.successiveDifferencesCount < 1) {
+	private function getBeatToBeatInterval(index) {
+		return App.getApp().Storage.getValue("btb" + index);
+	}
+		
+	private function addBeatToBeatInterval(beatToBeatInterval) {
+		if (me.mPreviousBeatToBeatInterval != null) {
+			me.mBeatToBeatIntervalsCount++;		
+			
+			me.storeBeatToBeatInterval(me.mBeatToBeatIntervalsCount - 1, beatToBeatInterval);
+			me.mSquareOfSuccessiveBtbDifferences += Math.pow(beatToBeatInterval - me.mPreviousBeatToBeatInterval, 2);
+		}		
+		me.mPreviousBeatToBeatInterval = beatToBeatInterval;
+	}
+	
+	public function calculateHrvUsingSdnn() {
+		if (me.mBeatToBeatIntervalsCount < 1) {
 			return null;
 		}
 		
-		var rootMeanSquareOfSuccessiveRrDifferences = Math.sqrt(me.squareOfSuccessiveRrDifferences / me.successiveDifferencesCount);
-		return rootMeanSquareOfSuccessiveRrDifferences;
+		var sumBeatToBeat = 0;
+		for (var i = 0; i < me.mBeatToBeatIntervalsCount; i ++) {
+			sumBeatToBeat += me.getBeatToBeatInterval(i);
+		}
+		var meanBeatToBeat = sumBeatToBeat / me.mBeatToBeatIntervalsCount.toFloat();
+		
+		var sumSquaredDeviations = 0;
+		for (var i = 0; i < me.mBeatToBeatIntervalsCount; i ++) {			
+			sumSquaredDeviations += Math.pow(me.getBeatToBeatInterval(i) - meanBeatToBeat, 2);
+		}
+		
+		var sdnn = Math.sqrt(sumSquaredDeviations / me.mBeatToBeatIntervalsCount.toFloat());
+		me.mHrvSdnnDataField.setData(sdnn);
+		System.println(sdnn);
+		return sdnn;
+	}
+	
+	public function calculateHrvUsingRmssd() {
+		if (me.mBeatToBeatIntervalsCount < 1) {
+			return null;
+		}
+		
+		var rootMeanSquareOfSuccessiveBtbDifferences = Math.sqrt(me.mSquareOfSuccessiveBtbDifferences / me.mBeatToBeatIntervalsCount);
+		me.mHrvRmssdDataField.setData(rootMeanSquareOfSuccessiveBtbDifferences);
+		return rootMeanSquareOfSuccessiveBtbDifferences;
 	}
 }

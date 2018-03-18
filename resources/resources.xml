@@ -34,6 +34,7 @@
     <fitContributions>
 		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />
 		<fitField id="1" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="1" precision="2" dataLabel="@Strings.hrvRmssdFieldLabel" unitLabel="@Strings.hrvRmssdFieldUnits" chartTitle="@Strings.hrvRmssdFieldChartTitle" fillColor="E155D7" />
-		<fitField id="2" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="2" precision="0" dataLabel="@Strings.hrvRrIntervalsFieldLabel" unitLabel="@Strings.hrvRrIntervalsFieldUnits" chartTitle="@Strings.hrvRrIntervalsFieldChartTitle" fillColor="FFA500"  />
+		<fitField id="2" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="3" precision="0" dataLabel="@Strings.hrvRrIntervalsFieldLabel" unitLabel="@Strings.hrvRrIntervalsFieldUnits" chartTitle="@Strings.hrvRrIntervalsFieldChartTitle" fillColor="FFA500"  />
+		<fitField id="3" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="2" precision="2" dataLabel="@Strings.hrvSdnnFieldLabel" unitLabel="@Strings.hrvSdnnFieldUnits" chartTitle="@Strings.hrvSdnnFieldChartTitle" fillColor="1906F1" />
 	</fitContributions>
 </resources>

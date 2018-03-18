@@ -65,7 +65,11 @@
 	<string id="hrvRmssdFieldUnits">ms</string>
 	<string id="hrvRmssdFieldChartTitle">HRV calculated with RMSSD</string>
 	
-	<string id="hrvRrIntervalsFieldLabel">HRV R-R interval(ms)</string>
+	<string id="hrvSdnnFieldLabel">HRV (ms)</string>
+	<string id="hrvSdnnFieldUnits">ms</string>
+	<string id="hrvSdnnFieldChartTitle">HRV calculated with SDNN</string>
+	
+	<string id="hrvRrIntervalsFieldLabel">HRV beat-to-beat interval(ms)</string>
 	<string id="hrvRrIntervalsFieldUnits">ms</string>
-	<string id="hrvRrIntervalsFieldChartTitle">HRV R-R intervals</string>
+	<string id="hrvRrIntervalsFieldChartTitle">HRV beat-to-beat intervals</string>
 </strings>
