@@ -44,8 +44,4 @@ class MeditateModel {
 	function getVibePattern() {
 		return me.mSession.vibePattern;
 	}
-	
-	function setSession(sessionModel) {
-		me.mSession = sessionModel;
-	}
 }

@@ -64,8 +64,14 @@
 	<string id="hrvRmssdFieldLabel">HRV RMSSD</string>
 	<string id="hrvRmssdFieldUnits">ms</string>
 	
-	<string id="hrvSdnnFieldLabel">HRV SDNN</string>
-	<string id="hrvSdnnFieldUnits">ms</string>
+	<string id="hrvSdrrFieldLabel">HRV SDNN</string>
+	<string id="hrvSdrrFieldUnits">ms</string>
+	
+	<string id="hrvSdrrFirst5MinFieldLabel">HRV SDNN First 5 min</string>
+	<string id="hrvSdrrFirst5MinFieldUnits">ms</string>
+	
+	<string id="hrvSdrrLast5MinFieldLabel">HRV SDNN last 5 min</string>
+	<string id="hrvSdrrLast5MinFieldUnits">ms</string>
 	
 	<string id="hrvRrIntervalsFieldLabel">HRV beat-to-beat interval(ms)</string>
 	<string id="hrvRrIntervalsFieldUnits">ms</string>

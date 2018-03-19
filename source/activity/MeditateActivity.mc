@@ -75,9 +75,6 @@ class MediateActivity {
 	    }
 	    
 	    me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);
-	    if (me.mMeditateModel.elapsedTime % 30 == 0) {
-	    	me.mHrvMonitor.calculateHrvUsingSdnn();
-	    }
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
@@ -92,9 +89,12 @@ class MediateActivity {
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
-		var hrv = me.mHrvMonitor.calculateHrvUsingSdnn();		
+		var hrv = me.mHrvMonitor.calculateHrvUsingSdrr();
+		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
+		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
+				
 		me.mHrvMonitor.calculateHrvUsingRmssd();
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv);
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv, hrvFirst5Min, hrvLast5Min);
 	}
 		
 	function finish() {		
