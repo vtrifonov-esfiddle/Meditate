@@ -5,7 +5,6 @@ using Toybox.FitContributor;
 class MediateActivity {
 	private var mMeditateModel;
 	private var mSession;
-	private var mIsStarted;	
 	private var mSummaryModel;
 	private var mVibeAlertsExecutor;	
 	private var mHrvMonitor;
@@ -19,8 +18,7 @@ class MediateActivity {
                  :sport=>ActivityRecording.SPORT_GENERIC,      
                  :subSport=>ActivityRecording.SUB_SPORT_GENERIC
                 }
-           );  
-        me.mIsStarted = false;     
+           );      
 		me.mSummaryModel = null;		
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
 		me.createMinHrDataField();
@@ -46,17 +44,17 @@ class MediateActivity {
 	
 	private var mRefreshActivityTimer;
 		
-	function start() {
-		me.mIsStarted = true;		
+	function start() {	
 		me.mSession.start(); 
 		
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);	
+		me.mMeditateModel.isSessionFinished = false;
 	}
 		
 	private function refreshActivityStats() {	
-		if (me.mIsStarted == false) {
+		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
 	    
@@ -74,26 +72,33 @@ class MediateActivity {
 	    	}
 	    }
 	    
-	    me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);
+    	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	    
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
 	}
 	   	
-	function stop() {
-		me.mIsStarted = false;		
+	function stop() {	
+		if (me.mSession.isRecording() == false) {
+			return;
+	    }	
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
+		me.mRefreshActivityTimer = null;
+		me.mVibeAlertsExecutor = null;
+		me.mMeditateModel.isSessionFinished = true;
+		Ui.requestUpdate();
 		
 		var activityInfo = Activity.getActivityInfo();		
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
-		var hrv = me.mHrvMonitor.calculateHrvUsingSdrr();
-		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
-		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
 				
+		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();		
+		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
 		me.mHrvMonitor.calculateHrvUsingRmssd();
+		var hrv = me.mHrvMonitor.calculateHrvUsingSdrr();
+				
 		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv, hrvFirst5Min, hrvLast5Min);
 	}
 		
@@ -107,10 +112,6 @@ class MediateActivity {
 		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();
 		return me.mSummaryModel;
-	}
-	
-	function isStarted() {
-		return me.mIsStarted;
 	}
 }
 

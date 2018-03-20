@@ -13,8 +13,15 @@ class HrvMonitor {
 		me.mPreviousBeatToBeatInterval = null;
 		me.mSquareOfSuccessiveBtbDifferences = 0.0;
 		me.mBeatToBeatIntervalsCount = 0;
-	}
 		
+		me.mIntervalsBufferFirst5Min = new [BufferFirst5MinLength];	
+		me.mIntervalsBuffer = new [BufferLength];
+	}
+	
+	private const BufferFirst5MinLength = 300;
+	private const BufferLength = 60 * 60 - BufferFirst5MinLength;
+	private var mIntervalsBufferFirst5Min;
+	private var mIntervalsBuffer;
 	private var mHrvRmssdDataField;
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrDataField;
@@ -92,12 +99,22 @@ class HrvMonitor {
 		}
 	}
 	
-	private function storeBeatToBeatInterval(index, beatToBeatInterval) {	
-		return App.getApp().Storage.setValue("btb" + index, beatToBeatInterval);
+	private function storeBeatToBeatInterval(index, beatToBeatInterval) {
+		if (index < BufferFirst5MinLength) {
+			me.mIntervalsBufferFirst5Min[index] = beatToBeatInterval;
+		}
+		else {
+			me.mIntervalsBuffer[index - BufferFirst5MinLength] = beatToBeatInterval;
+		}	
 	}
 	
 	private function getBeatToBeatInterval(index) {
-		return App.getApp().Storage.getValue("btb" + index);
+		if (index < BufferFirst5MinLength) {
+			return me.mIntervalsBufferFirst5Min[index];
+		}
+		else {
+			return me.mIntervalsBuffer[index - BufferFirst5MinLength];
+		}
 	}
 		
 	private function addBeatToBeatInterval(beatToBeatInterval) {
@@ -112,7 +129,9 @@ class HrvMonitor {
 	
 	public function calculateHrvUsingSdrr() {
 		var sdrr = me.calculateHrvUsingSdrrSubset(0, me.mBeatToBeatIntervalsCount);
-		me.mHrvSdrrDataField.setData(sdrr);
+		if (sdrr != null) {
+			me.mHrvSdrrDataField.setData(sdrr);
+		}
 		return sdrr;
 	}
 	
@@ -125,7 +144,9 @@ class HrvMonitor {
 			count = me.mBeatToBeatIntervalsCount;
 		}
 		var sdrr = me.calculateHrvUsingSdrrSubset(0, count);
-		me.mHrvSdrrFirst5MinDataField.setData(sdrr);
+		if (sdrr != null) {
+			me.mHrvSdrrFirst5MinDataField.setData(sdrr);
+		}
 		return sdrr;
 	}
 	
@@ -135,7 +156,9 @@ class HrvMonitor {
 			startIndex = 0;
 		}
 		var sdrr = me.calculateHrvUsingSdrrSubset(startIndex, me.mBeatToBeatIntervalsCount);
-		me.mHrvSdrrLast5MinDataField.setData(sdrr);
+		if (sdrr != null) {
+			me.mHrvSdrrLast5MinDataField.setData(sdrr);
+		}
 		return sdrr;
 	}
 	
@@ -155,8 +178,7 @@ class HrvMonitor {
 			sumSquaredDeviations += Math.pow(me.getBeatToBeatInterval(i) - meanBeatToBeat, 2);
 		}
 		
-		var sdrr = Math.sqrt(sumSquaredDeviations / me.mBeatToBeatIntervalsCount.toFloat());
-		return sdrr;
+		return Math.sqrt(sumSquaredDeviations / me.mBeatToBeatIntervalsCount.toFloat());
 	}
 	
 	

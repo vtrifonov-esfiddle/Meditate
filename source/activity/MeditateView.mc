@@ -55,20 +55,31 @@ class MeditateView extends Ui.View {
 	}
 	
     // Update the view
-    function onUpdate(dc) {   
-		var elapsedTime = View.findDrawableById("elapsedTime");
-		elapsedTime.setColor(me.mMeditateModel.getColor());
-		elapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
-		
-		var hrStatusText = View.findDrawableById("hrStatusText");
-		hrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
-				
-        View.onUpdate(dc);
-        		                        
-        var alarmTime = me.mMeditateModel.getSessionTime();
-		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
-		me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
-		me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);	
+    function onUpdate(dc) {  
+    	if (me.mMeditateModel.isSessionFinished) {
+    		var calculatingResultsText = Ui.loadResource(Rez.Strings.activityCalculatingResultsText);
+    		dc.setColor(Gfx.COLOR_TRANSPARENT, Gfx.COLOR_BLACK);
+        	dc.clear();  
+    		dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+    		dc.drawText(dc.getWidth() / 2, dc.getHeight() / 2 - 20, Gfx.FONT_SYSTEM_MEDIUM, calculatingResultsText, Gfx.TEXT_JUSTIFY_CENTER);
+    	}
+    	else { 
+			var elapsedTime = View.findDrawableById("elapsedTime");
+			elapsedTime.setColor(me.mMeditateModel.getColor());
+			elapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
+			
+			var hrStatusText = View.findDrawableById("hrStatusText");
+			hrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
+					
+	        View.onUpdate(dc);
+	        		                        
+	        var alarmTime = me.mMeditateModel.getSessionTime();
+			me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
+			if (me.mIntervalAlertsRenderer != null) {
+				me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
+				me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);
+			}	
+		}
     }
     
 

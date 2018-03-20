@@ -6,13 +6,15 @@ class MeditateModel {
 		me.elapsedTime = 0;
 		me.minHr = null;
 		me.currentHr = null;
+		me.isSessionFinished = false;
 	}
 	
 	private var mSession;
 
-	public var currentHr;
-	public var minHr;
-	public var elapsedTime;
+	var currentHr;
+	var minHr;
+	var elapsedTime;
+	var isSessionFinished;
 		
 	function getSessionTime() {
 		return me.mSession.time;

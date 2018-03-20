@@ -76,4 +76,6 @@
 	<string id="hrvRrIntervalsFieldLabel">HRV beat-to-beat interval(ms)</string>
 	<string id="hrvRrIntervalsFieldUnits">ms</string>
 	<string id="hrvRrIntervalsFieldChartTitle">HRV beat-to-beat intervals</string>
+	
+	<string id="activityCalculatingResultsText">Finishing...</string>
 </strings>
