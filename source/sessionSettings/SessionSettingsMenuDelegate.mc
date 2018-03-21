@@ -51,6 +51,5 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		existingSession.copyNonNullFieldsFromSession(changedSessionModel);
 		me.mSessionStorage.saveSelectedSession(existingSession);
 		me.mSessionPickerDelegate.updateSelectedSessionDetails(existingSession);
-		Ui.requestUpdate();
     }
 }

@@ -81,7 +81,7 @@ class Alert {
 	
 	function reset() {
 		me.type = IntervalAlertType.OneOff;
-		me.time = 60;
+		me.time = 60 * 5;
 		me.color = Gfx.COLOR_RED;
 		me.vibePattern = VibePattern.ShorterContinuous;
 	}		
