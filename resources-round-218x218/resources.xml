@@ -11,6 +11,12 @@
     <drawable-list id="down" background="Gfx.COLOR_TRANSPARENT">
    	    <bitmap id="downIcon" x="100" y="200" filename="../resources/images/fontAwesome/down-white.png" />
     </drawable-list>
+    <drawable-list id="upBlack">
+  	    <bitmap id="upBlackIcon" x="100" y="-2" filename="../resources/images/fontAwesome/up.png" />
+    </drawable-list>
+    <drawable-list id="downBlack" background="Gfx.COLOR_TRANSPARENT">
+   	    <bitmap id="downBlackIcon" x="100" y="200" filename="../resources/images/fontAwesome/down.png" />
+    </drawable-list>
     <drawable-list id="hrStatus">
     	<bitmap id="heartRateIcon" x="50" y="130" filename="../resources/images/fontAwesome/heartRate.png" />
     </drawable-list>

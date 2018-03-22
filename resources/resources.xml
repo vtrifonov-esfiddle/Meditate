@@ -27,16 +27,20 @@
     <drawable-list id="down" background="Gfx.COLOR_TRANSPARENT">
    	    <bitmap id="downIcon" x="110" y="220" filename="images/fontAwesome/down-white.png" />
     </drawable-list>
-    
+    <drawable-list id="upBlack">
+   	    <bitmap id="upBlackIcon" x="110" y="0" filename="images/fontAwesome/up.png" />
+    </drawable-list>
+    <drawable-list id="downBlack" background="Gfx.COLOR_TRANSPARENT">
+   	    <bitmap id="downBlackIcon" x="110" y="220" filename="images/fontAwesome/down.png" />
+    </drawable-list>
     <fonts>
    	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
     </fonts>
     <fitContributions>
 		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />
 		<fitField id="1" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="1" precision="0" dataLabel="@Strings.hrvRrIntervalsFieldLabel" unitLabel="@Strings.hrvRrIntervalsFieldUnits" chartTitle="@Strings.hrvRrIntervalsFieldChartTitle" fillColor="FFA500"  />
-		<fitField id="2" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="2" precision="2" dataLabel="@Strings.hrvSdrrFieldLabel" unitLabel="@Strings.hrvSdrrFieldUnits" />
-		<fitField id="3" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="3" precision="2" dataLabel="@Strings.hrvSdrrFirst5MinFieldLabel" unitLabel="@Strings.hrvSdrrFirst5MinFieldUnits" />
-		<fitField id="4" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="4" precision="2" dataLabel="@Strings.hrvSdrrLast5MinFieldLabel" unitLabel="@Strings.hrvSdrrLast5MinFieldUnits" />
-		<fitField id="5" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="5" precision="2" dataLabel="@Strings.hrvRmssdFieldLabel" unitLabel="@Strings.hrvRmssdFieldUnits" />
+		<fitField id="2" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="2" precision="2" dataLabel="@Strings.hrvSdrrFirst5MinFieldLabel" unitLabel="@Strings.hrvSdrrFirst5MinFieldUnits" />
+		<fitField id="3" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="3" precision="2" dataLabel="@Strings.hrvSdrrLast5MinFieldLabel" unitLabel="@Strings.hrvSdrrLast5MinFieldUnits" />
+		<fitField id="4" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="4" precision="2" dataLabel="@Strings.hrvRmssdFieldLabel" unitLabel="@Strings.hrvRmssdFieldUnits" />
 	</fitContributions>
 </resources>

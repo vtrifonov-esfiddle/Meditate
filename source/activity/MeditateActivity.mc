@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Timer;
 using Toybox.FitContributor;
+using Toybox.Timer;
 
 class MediateActivity {
 	private var mMeditateModel;
@@ -86,20 +87,19 @@ class MediateActivity {
 		me.mRefreshActivityTimer = null;
 		me.mVibeAlertsExecutor = null;
 	}
-	
-	function calculateSummaryFields() {			
+		
+	function calculateSummaryFields() {		
 		var activityInfo = Activity.getActivityInfo();		
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
 		
-		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();		
+		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
 		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
 		var hrvRmssd = me.mHrvMonitor.calculateHrvUsingRmssd();
-		var hrv = me.mHrvMonitor.calculateHrvUsingSdrr();
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv, hrvFirst5Min, hrvLast5Min, hrvRmssd);
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrvFirst5Min, hrvLast5Min, hrvRmssd);
 	}
-		
+			
 	function finish() {		
 		Sensor.setEnabledSensors( [] );
 		me.mSession.save();

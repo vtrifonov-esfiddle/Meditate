@@ -4,4 +4,5 @@
 	<property id="sessionDetailsIconsOffset" type="number">-4</property>
 	<property id="readyToStartOffsetYOffset" type="number">20</property>
 	<property id="summaryLineXOffset" type="number">15</property>
+	<property id="summaryLineXHrvOffset" type="number">-15</property>
 </properties>
