@@ -94,6 +94,7 @@ class HrvMonitor {
 		if (me.mBufferLast5MinCurrentIndex >= Buffer5MinLength) {
 			me.mBufferLast5MinCurrentIndex = 0;
 			me.mBufferLast5MinIsOverwritten = true;
+			result = 0;
 		}
 		else {
 			me.mBufferLast5MinCurrentIndex++;
@@ -120,7 +121,7 @@ class HrvMonitor {
 			me.mIntervalsBufferFirst5Min[index] = beatToBeatInterval;
 		}
 		else {
-			me.mIntervalsBufferLast5Min[storeNewLast5MinBufferIndex(index)] = beatToBeatInterval;
+			me.mIntervalsBufferLast5Min[me.storeNewLast5MinBufferIndex(index)] = beatToBeatInterval;
 		}	
 	}
 	
