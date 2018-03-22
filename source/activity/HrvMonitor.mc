@@ -103,17 +103,16 @@ class HrvMonitor {
 	}
 	
 	private function getLast5MinBufferIndex(index) {
-		var startIndex;
 		if (me.mBufferLast5MinIsOverwritten == true) {
-			startIndex = me.mBufferLast5MinCurrentIndex + 1;
+			var startBufferIndex = me.mBufferLast5MinCurrentIndex + 1;
+			var bufferIndex = index - (me.mBeatToBeatIntervalsCount - Buffer5MinLength);
+			var bufferIndexRewinded = (startBufferIndex + bufferIndex) % Buffer5MinLength;
+			return bufferIndexRewinded;
 		}
 		else {
-			startIndex = 0;
+			var bufferIndex = index - Buffer5MinLength;
+			return bufferIndex;
 		}
-		
-		var bufferIndex = me.mBeatToBeatIntervalsCount - index;
-		var bufferIndexWithOffset = (startIndex + bufferIndex) % Buffer5MinLength;
-		return bufferIndexWithOffset;
 	}
 	
 	private function storeBeatToBeatInterval(index, beatToBeatInterval) {
@@ -170,28 +169,7 @@ class HrvMonitor {
 		}
 		return sdrr;
 	}
-	
-	function calculateHrvStressTest(startIndex, count) {
-		if (me.mBeatToBeatIntervalsCount < 1) {
-			return null;
-		}
 		
-		var sumBeatToBeat = 0;
-		var actualIndex;
-		for (var i = startIndex; i < count; i ++) {
-			actualIndex = i % me.mBeatToBeatIntervalsCount;
-			sumBeatToBeat += me.getBeatToBeatInterval(actualIndex);
-		}
-		var meanBeatToBeat = sumBeatToBeat / count.toFloat();
-		
-		var sumSquaredDeviations = 0;
-		for (var i = startIndex; i < count; i ++) {	
-			actualIndex = i % me.mBeatToBeatIntervalsCount;		
-			sumSquaredDeviations += Math.pow(me.getBeatToBeatInterval(actualIndex) - meanBeatToBeat, 2);
-		}
-		return Math.sqrt(sumSquaredDeviations / count.toFloat());
-	}
-	
 	private function calculateHrvUsingSdrrSubset(startIndex, count) {
 		if (me.mBeatToBeatIntervalsCount < 1) {
 			return null;
