@@ -8,4 +8,8 @@
 	</layout>
 	<layout id="colorPicker">	
 	</layout>	
+	<layout id="calculatingResults">
+		<drawable id="blackBackground" />
+		<label id="calculatingResultsText" x="center" y="center" text="@Strings.activityCalculatingResultsText" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	</layout>
 </layouts>

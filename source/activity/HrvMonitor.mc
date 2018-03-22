@@ -19,7 +19,7 @@ class HrvMonitor {
 	}
 	
 	private const BufferFirst5MinLength = 300;
-	private const BufferLength = 60 * 60 - BufferFirst5MinLength;
+	private const BufferLength = 60 * 60;
 	private var mIntervalsBufferFirst5Min;
 	private var mIntervalsBuffer;
 	private var mHrvRmssdDataField;
@@ -171,14 +171,13 @@ class HrvMonitor {
 		for (var i = startIndex; i < count; i ++) {
 			sumBeatToBeat += me.getBeatToBeatInterval(i);
 		}
-		var meanBeatToBeat = sumBeatToBeat / me.mBeatToBeatIntervalsCount.toFloat();
+		var meanBeatToBeat = sumBeatToBeat / count.toFloat();
 		
 		var sumSquaredDeviations = 0;
 		for (var i = startIndex; i < count; i ++) {			
 			sumSquaredDeviations += Math.pow(me.getBeatToBeatInterval(i) - meanBeatToBeat, 2);
 		}
-		
-		return Math.sqrt(sumSquaredDeviations / me.mBeatToBeatIntervalsCount.toFloat());
+		return Math.sqrt(sumSquaredDeviations / count.toFloat());
 	}
 	
 	

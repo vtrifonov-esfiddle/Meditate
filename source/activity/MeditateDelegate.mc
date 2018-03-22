@@ -16,32 +16,23 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	}
 	
 	private function stopActivity() {
-		Ui.requestUpdate();
-		me.mMeditateActivity.stop();
-		me.finishActivity();
+		me.mMeditateActivity.stop();		
+		var calculatingResultsView = new CalculatingResultsView(method(:onFinishActivity));
+		Ui.switchToView(calculatingResultsView, me, Ui.SLIDE_IMMEDIATE);	
 	}
     
-    private function finishActivity() {    
-    	me.showSummaryView();
+    private function onFinishActivity() {  
+    	me.mMeditateActivity.calculateSummaryFields();
+    	var summaryViewDelegate = me.showSummaryView();
     	var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
     	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
-        Ui.pushView(confirmSaveDialog, new YesNoDelegate(method(:onConfirmedSave), method(:onDiscardedSave)), Ui.SLIDE_IMMEDIATE);
-    }
-    
-    private function onConfirmedSave() {
-    	var summaryModel = me.mMeditateActivity.finish(); 
-    	me.summaryView.createDetailsRenderer(summaryModel);
-    }
-    
-    private function onDiscardedSave() {
-    	var summaryModel = me.mMeditateActivity.discard();
-    	me.summaryView.createDetailsRenderer(summaryModel);
-    }
-    
-    private var summaryView;
-    private function showSummaryView() {    
-    	me.summaryView = new SummaryView();
-        Ui.switchToView(me.summaryView, new SummaryViewDelegate(), Ui.SLIDE_IMMEDIATE);
+        Ui.pushView(confirmSaveDialog, new YesNoDelegate(summaryViewDelegate.method(:onConfirmedSave), summaryViewDelegate.method(:onDiscardedSave)), Ui.SLIDE_IMMEDIATE);
+    }   
+       
+    private function showSummaryView() { 
+    	var summaryViewDelegate = new SummaryViewDelegate(me.mMeditateActivity);
+    	Ui.switchToView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT);  
+    	return summaryViewDelegate;
     }
     
     function onBack() {

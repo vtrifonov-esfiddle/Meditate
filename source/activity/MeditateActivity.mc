@@ -46,13 +46,11 @@ class MediateActivity {
 		
 	function start() {	
 		me.mSession.start(); 
-		
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);	
-		me.mMeditateModel.isSessionFinished = false;
 	}
-		
+			
 	private function refreshActivityStats() {	
 		if (me.mSession.isRecording() == false) {
 			return;
@@ -76,30 +74,30 @@ class MediateActivity {
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
-	}
-	   	
+	}	   	
+	
 	function stop() {	
 		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
+	    
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		me.mRefreshActivityTimer = null;
 		me.mVibeAlertsExecutor = null;
-		me.mMeditateModel.isSessionFinished = true;
-		Ui.requestUpdate();
-		
+	}
+	
+	function calculateSummaryFields() {			
 		var activityInfo = Activity.getActivityInfo();		
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
-				
+		
 		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();		
 		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
-		me.mHrvMonitor.calculateHrvUsingRmssd();
+		var hrvRmssd = me.mHrvMonitor.calculateHrvUsingRmssd();
 		var hrv = me.mHrvMonitor.calculateHrvUsingSdrr();
-				
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv, hrvFirst5Min, hrvLast5Min);
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrv, hrvFirst5Min, hrvLast5Min, hrvRmssd);
 	}
 		
 	function finish() {		
