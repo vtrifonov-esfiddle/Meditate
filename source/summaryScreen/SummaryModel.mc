@@ -1,14 +1,13 @@
 using Toybox.System;
 
 class SummaryModel {
-	function initialize(activityInfo, minHr, hrvFirst5Min, hrvLast5Min, hrvRmssd) {
+	function initialize(activityInfo, minHr, hrvFirst5Min, hrvLast5Min) {
 		me.elapsedTime = activityInfo.elapsedTime / 1000; 
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
 		me.hrvFirst5Min = me.initializeHeartRateVariability(hrvFirst5Min);
 		me.hrvLast5Min = me.initializeHeartRateVariability(hrvLast5Min);
-		me.hrvRmssd = me.initializeHeartRateVariability(hrvRmssd);
 	}
 	
 	private function initializeHeartRate(heartRate) {
@@ -39,5 +38,4 @@ class SummaryModel {
 	
 	var hrvFirst5Min;
 	var hrvLast5Min;
-	var hrvRmssd;
 }

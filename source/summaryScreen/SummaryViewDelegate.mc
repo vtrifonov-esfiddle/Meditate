@@ -91,18 +91,17 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		var details = new DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary HRV";
+        details.title = "Summary\n HRV";
         details.titleColor = Gfx.COLOR_BLACK;
         details.setAllValuesOffset(5);
                       
-        details.detailLines[1].icon = Rez.Drawables.heartRateVariabilityIcon;
-        details.detailLines[1].value.text = Lang.format("First $1$ ms", [me.mSummaryModel.hrvFirst5Min]);
+        details.detailLines[2].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[2].value.text = "First 5 min";
+        details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvFirst5Min]);
         
-    	details.detailLines[2].icon = Rez.Drawables.heartRateVariabilityIcon;
-        details.detailLines[2].value.text = Lang.format("Last $1$ ms", [me.mSummaryModel.hrvLast5Min]);  
-        
-    	details.detailLines[3].icon = Rez.Drawables.heartRateVariabilityIcon;
-        details.detailLines[3].value.text = Lang.format("RMSSD $1$ ms", [me.mSummaryModel.hrvRmssd]);  
+    	details.detailLines[4].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[4].value.text = "Last 5 min";
+        details.detailLines[5].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvLast5Min]);  
          
         var summaryLineXOffset = App.getApp().getProperty("summaryLineXHrvOffset");
         for (var i = 1; i <= 5; i++) {

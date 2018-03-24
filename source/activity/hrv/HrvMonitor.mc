@@ -4,12 +4,10 @@ using Toybox.Application as App;
 
 class HrvMonitor {
 	function initialize(activitySession) {
-		me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
 		me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);
 		me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);
 		me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
 		
-		me.mHrvRmssd = new HrvRmssd();
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
 		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);
 	}
@@ -18,9 +16,7 @@ class HrvMonitor {
 	
 	private var mHrvSdrrFirst5Min;
 	private var mHrvSdrrLast5Min;
-	private var mHrvRmssd;
 	
-	private var mHrvRmssdDataField;
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;
@@ -28,18 +24,6 @@ class HrvMonitor {
 	private static const HrvBeatToBeatIntervalsFieldId = 1;		
 	private static const HrvSdrrFirst5MinFieldId = 2;
 	private static const HrvSdrrLast5MinFieldId = 3;	
-	private static const HrvRmssdFieldId = 4;
-	
-	
-	private static function createHrvRmssdDataField(activitySession) {
-		var hrvRmssdDataField = activitySession.createField(
-            "hrv_rmssd",
-            HrvMonitor.HrvRmssdFieldId,
-            FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
-        );
-        return hrvRmssdDataField;
-	}
 		
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
 		var hrvSdrrFirst5MinDataField = activitySession.createField(
@@ -78,7 +62,6 @@ class HrvMonitor {
 			
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
-			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
 		}
 	}
 	
@@ -96,13 +79,5 @@ class HrvMonitor {
 			me.mHrvSdrrLast5MinDataField.setData(sdrr);
 		}
 		return sdrr;
-	}
-		
-	public function calculateHrvUsingRmssd() {
-		var hrv = me.mHrvRmssd.calculate();
-		if (hrv != null) {
-			me.mHrvRmssdDataField.setData(hrv);
-		}
-		return hrv;
 	}
 }

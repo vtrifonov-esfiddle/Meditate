@@ -61,9 +61,6 @@
 	<string id="minHrField">Min HR</string>
 	<string id="minHrFieldUnits">bpm</string>
 		
-	<string id="hrvRmssdFieldLabel">HRV RMSSD</string>
-	<string id="hrvRmssdFieldUnits">ms</string>
-		
 	<string id="hrvSdrrFirst5MinFieldLabel">HRV SDRR First 5 min</string>
 	<string id="hrvSdrrFirst5MinFieldUnits">ms</string>
 	

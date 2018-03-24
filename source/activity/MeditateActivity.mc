@@ -95,8 +95,7 @@ class MediateActivity {
 		
 		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
 		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
-		var hrvRmssd = me.mHrvMonitor.calculateHrvUsingRmssd();
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrvFirst5Min, hrvLast5Min, hrvRmssd);
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrvFirst5Min, hrvLast5Min);
 	}
 			
 	function finish() {		
