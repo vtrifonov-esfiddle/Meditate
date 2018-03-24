@@ -70,8 +70,7 @@ class MediateActivity {
 	    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
 	    	}
 	    }
-	    
-    	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	    
+    	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	 
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    

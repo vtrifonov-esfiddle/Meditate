@@ -9,35 +9,25 @@ class HrvMonitor {
 		me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);
 		me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
 		
-		me.mPreviousBeatToBeatInterval = null;
-		me.mSquareOfSuccessiveBtbDifferences = 0.0;
-		me.mBeatToBeatIntervalsCount = 0;
-		
-		me.mIntervalsBufferFirst5Min = new [Buffer5MinLength];	
-		me.mIntervalsBufferLast5Min = new [Buffer5MinLength];
-		me.mBufferLast5MinCurrentIndex = 0;
-		me.mBufferLast5MinIsOverwritten = false;
+		me.mHrvRmssd = new HrvRmssd();
+		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
+		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);
 	}
 	
 	private const Buffer5MinLength = 300;
-	private var mIntervalsBufferFirst5Min;
-	private var mIntervalsBufferLast5Min;
-	private var mBufferLast5MinCurrentIndex;
-	private var mBufferLast5MinIsOverwritten;
+	
+	private var mHrvSdrrFirst5Min;
+	private var mHrvSdrrLast5Min;
+	private var mHrvRmssd;
+	
 	private var mHrvRmssdDataField;
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;
-	
-	private var mPreviousBeatToBeatInterval;
-	private var mSquareOfSuccessiveBtbDifferences;	
-	private var mBeatToBeatIntervalsCount;
 			
-	private static const HrvBeatToBeatIntervalsFieldId = 1;	
-	
+	private static const HrvBeatToBeatIntervalsFieldId = 1;		
 	private static const HrvSdrrFirst5MinFieldId = 2;
-	private static const HrvSdrrLast5MinFieldId = 3;
-	
+	private static const HrvSdrrLast5MinFieldId = 3;	
 	private static const HrvRmssdFieldId = 4;
 	
 	
@@ -85,73 +75,15 @@ class HrvMonitor {
 		if (hr != null) {
 			var beatToBeatInterval = 60000.toFloat() / hr.toFloat();		
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
-			me.addBeatToBeatInterval(beatToBeatInterval);
-		}
-	}
-	
-	private function storeNewLast5MinBufferIndex(index) {
-		var result = me.mBufferLast5MinCurrentIndex;
-		if (me.mBufferLast5MinCurrentIndex >= Buffer5MinLength) {
-			me.mBufferLast5MinCurrentIndex = 0;
-			me.mBufferLast5MinIsOverwritten = true;
-			result = 0;
-		}
-		else {
-			me.mBufferLast5MinCurrentIndex++;
-		}
-		return result;
-	}
-	
-	private function getLast5MinBufferIndex(index) {
-		if (me.mBufferLast5MinIsOverwritten == true) {
-			var startBufferIndex = me.mBufferLast5MinCurrentIndex + 1;
-			var bufferIndex = index - (me.mBeatToBeatIntervalsCount - Buffer5MinLength);
-			var bufferIndexRewinded = (startBufferIndex + bufferIndex) % Buffer5MinLength;
-			return bufferIndexRewinded;
-		}
-		else {
-			var bufferIndex = index - Buffer5MinLength;
-			return bufferIndex;
-		}
-	}
-	
-	private function storeBeatToBeatInterval(index, beatToBeatInterval) {
-		if (index < Buffer5MinLength) {
-			me.mIntervalsBufferFirst5Min[index] = beatToBeatInterval;
-		}
-		else {
-			me.mIntervalsBufferLast5Min[me.storeNewLast5MinBufferIndex(index)] = beatToBeatInterval;
-		}	
-	}
-	
-	private function getBeatToBeatInterval(index) {
-		if (index < Buffer5MinLength) {
-			return me.mIntervalsBufferFirst5Min[index];
-		}
-		else {
-			return me.mIntervalsBufferLast5Min[getLast5MinBufferIndex(index)];
-		}
-	}
-		
-	private function addBeatToBeatInterval(beatToBeatInterval) {
-		if (me.mPreviousBeatToBeatInterval != null) {
-			me.mBeatToBeatIntervalsCount++;		
 			
-			me.storeBeatToBeatInterval(me.mBeatToBeatIntervalsCount - 1, beatToBeatInterval);
-			me.mSquareOfSuccessiveBtbDifferences += Math.pow(beatToBeatInterval - me.mPreviousBeatToBeatInterval, 2);
-		}		
-		me.mPreviousBeatToBeatInterval = beatToBeatInterval;
+			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
+			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
+			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
+		}
 	}
 	
-	public function calculateHrvFirst5MinSdrr() {
-		var count;
-		if (me.mBeatToBeatIntervalsCount > Buffer5MinLength) {
-			count = Buffer5MinLength;
-		}
-		else {
-			count = me.mBeatToBeatIntervalsCount;
-		}
-		var sdrr = me.calculateHrvUsingSdrrSubset(0, count);
+	public function calculateHrvFirst5MinSdrr() {		
+		var sdrr = me.mHrvSdrrFirst5Min.calculate();
 		if (sdrr != null) {
 			me.mHrvSdrrFirst5MinDataField.setData(sdrr);
 		}
@@ -159,42 +91,18 @@ class HrvMonitor {
 	}
 	
 	public function calculateHrvLast5MinSdrr() {
-		var startIndex = me.mBeatToBeatIntervalsCount - Buffer5MinLength - 1;
-		if (startIndex < 0) {
-			startIndex = 0;
-		}
-		var sdrr = me.calculateHrvUsingSdrrSubset(startIndex, me.mBeatToBeatIntervalsCount);
+		var sdrr = me.mHrvSdrrLast5Min.calculate();
 		if (sdrr != null) {
 			me.mHrvSdrrLast5MinDataField.setData(sdrr);
 		}
 		return sdrr;
 	}
 		
-	private function calculateHrvUsingSdrrSubset(startIndex, count) {
-		if (me.mBeatToBeatIntervalsCount < 1) {
-			return null;
-		}
-		
-		var sumBeatToBeat = 0;
-		for (var i = startIndex; i < count; i ++) {
-			sumBeatToBeat += me.getBeatToBeatInterval(i);
-		}
-		var meanBeatToBeat = sumBeatToBeat / count.toFloat();
-		
-		var sumSquaredDeviations = 0;
-		for (var i = startIndex; i < count; i ++) {			
-			sumSquaredDeviations += Math.pow(me.getBeatToBeatInterval(i) - meanBeatToBeat, 2);
-		}
-		return Math.sqrt(sumSquaredDeviations / count.toFloat());
-	}
-		
 	public function calculateHrvUsingRmssd() {
-		if (me.mBeatToBeatIntervalsCount < 1) {
-			return null;
+		var hrv = me.mHrvRmssd.calculate();
+		if (hrv != null) {
+			me.mHrvRmssdDataField.setData(hrv);
 		}
-		
-		var rootMeanSquareOfSuccessiveBtbDifferences = Math.sqrt(me.mSquareOfSuccessiveBtbDifferences / me.mBeatToBeatIntervalsCount);
-		me.mHrvRmssdDataField.setData(rootMeanSquareOfSuccessiveBtbDifferences);
-		return rootMeanSquareOfSuccessiveBtbDifferences;
+		return hrv;
 	}
 }
