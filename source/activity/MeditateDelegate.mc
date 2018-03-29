@@ -36,9 +36,8 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     }
     
     function onBack() {
-    	me.mMeditateActivity.stop();
-    	me.mMeditateActivity.discard();
-    	return false;
+    	//making sure the app doesn't exit during an activity until the user stops it
+    	return true;
     }
         
     function onKey(keyEvent) {
