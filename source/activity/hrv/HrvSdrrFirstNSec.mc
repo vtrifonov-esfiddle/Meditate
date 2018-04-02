@@ -18,7 +18,7 @@ class HrvSdrrFirstNSec {
 			me.mBeatToBeatIntervalsCount++;		
 			
 			var intervalsIndex = me.mBeatToBeatIntervalsCount - 1;
-			me.mIntervals[intervalsIndex] = beatToBeatInterval;
+			me.mIntervals[intervalsIndex] = beatToBeatInterval.toFloat();
 		}		
 	}
 	
@@ -27,15 +27,14 @@ class HrvSdrrFirstNSec {
 			return null;
 		}
 		
-		var sumBeatToBeat = 0;
-		for (var i = 0; i < me.mBeatToBeatIntervalsCount; i ++) {
+		var sumBeatToBeat = 0.0;
+		for (var i = 0; i < me.mBeatToBeatIntervalsCount; i++) {
 			sumBeatToBeat += me.mIntervals[i];
 		}
-		var meanBeatToBeat = sumBeatToBeat / me.mBeatToBeatIntervalsCount.toFloat();
-		
-		var sumSquaredDeviations = 0;
-		for (var i = 0; i < me.mBeatToBeatIntervalsCount; i ++) {			
-			sumSquaredDeviations += Math.pow(me.mIntervals[i] - meanBeatToBeat, 2);
+		var meanBeatToBeat = sumBeatToBeat / me.mBeatToBeatIntervalsCount.toFloat();		
+		var sumSquaredDeviations = 0.0;
+		for (var i = 0; i < me.mBeatToBeatIntervalsCount; i++) {
+			sumSquaredDeviations += Math.pow(me.mIntervals[i] - meanBeatToBeat, 2);	
 		}
 		return Math.sqrt(sumSquaredDeviations / me.mBeatToBeatIntervalsCount.toFloat());
 	}

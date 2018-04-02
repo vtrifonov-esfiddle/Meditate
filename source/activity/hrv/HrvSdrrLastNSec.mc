@@ -21,7 +21,7 @@ class HrvSdrrLastNSec {
 	}
 	
 	private function storeBeatToBeatInterval(beatToBeatInterval) {
-		me.mIntervals[me.mBufferCurrentIndex] = beatToBeatInterval;
+		me.mIntervals[me.mBufferCurrentIndex] = beatToBeatInterval.toFloat();
 		var bufferIndexRewinded = (me.mBufferCurrentIndex + 1) % me.mIntervalsCount;
 		me.mBufferCurrentIndex = bufferIndexRewinded;
 	}
@@ -31,14 +31,14 @@ class HrvSdrrLastNSec {
 			return null;
 		}
 		
-		var sumBeatToBeat = 0;
-		for (var i = 0; i < me.mIntervalsCount; i ++) {
+		var sumBeatToBeat = 0.0;
+		for (var i = 0; i < me.mIntervalsCount; i++) {
 			sumBeatToBeat += me.mIntervals[i];
 		}
 		var meanBeatToBeat = sumBeatToBeat / me.mIntervalsCount.toFloat();
 		
-		var sumSquaredDeviations = 0;
-		for (var i = 0; i < me.mIntervalsCount; i ++) {			
+		var sumSquaredDeviations = 0.0;
+		for (var i = 0; i < me.mIntervalsCount; i++) {			
 			sumSquaredDeviations += Math.pow(me.mIntervals[i] - meanBeatToBeat, 2);
 		}
 		return Math.sqrt(sumSquaredDeviations / me.mIntervalsCount.toFloat());
