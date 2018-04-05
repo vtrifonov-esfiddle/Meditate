@@ -79,5 +79,9 @@
 	<string id="hrvEbc16FieldUnits">ms</string>
 	<string id="hrvEbc16FieldChartTitle">Estimated breath cycle 16(ms)</string>
 	
+	<string id="hrvMaxMinHrWindowLabel">Max-Min HR 10 Sec Window(bmp)</string>
+	<string id="hrvMaxMinHrWindowUnits">bmp</string>
+	<string id="hrvMaxMinHrWindowTitle">Max-Min HR 10 Sec Window(bpm)</string>
+	
 	<string id="activityCalculatingResultsText">Finishing...</string>
 </strings>

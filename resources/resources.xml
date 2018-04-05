@@ -43,5 +43,6 @@
 		<fitField id="3" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="3" precision="2" dataLabel="@Strings.hrvSdrrLast5MinFieldLabel" unitLabel="@Strings.hrvSdrrLast5MinFieldUnits" />
 		<fitField id="4" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="4" precision="2" dataLabel="@Strings.hrvEbc10FieldLabel" unitLabel="@Strings.hrvEbc10FieldUnits" chartTitle="@Strings.hrvEbc10FieldChartTitle" fillColor="1D1AEF"  />
 		<fitField id="5" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="5" precision="2" dataLabel="@Strings.hrvEbc16FieldLabel" unitLabel="@Strings.hrvEbc16FieldUnits" chartTitle="@Strings.hrvEbc16FieldChartTitle" fillColor="B540B7"  />
+		<fitField id="6" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="6" precision="0" dataLabel="@Strings.hrvMaxMinHrWindowLabel" unitLabel="@Strings.hrvMaxMinHrWindowUnits" chartTitle="@Strings.hrvMaxMinHrWindowTitle" fillColor="379CE5"  />
 	</fitContributions>
 </resources>

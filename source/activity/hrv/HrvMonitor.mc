@@ -9,11 +9,13 @@ class HrvMonitor {
 		me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
 		me.mHrvEbc10DataField = HrvMonitor.createHrvEbc10DataField(activitySession);
 		me.mHrvEbc16DataField = HrvMonitor.createHrvEbc16DataField(activitySession);
+		me.mMaxMinHrWindowDataField = HrvMonitor.createMaxMinHrWindowDataField(activitySession);
 		
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
 		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);
 		me.mHrvEbc10 = new HrvEbc(10);
-		me.mHrvEbc16 = new HrvEbc(16);		
+		me.mHrvEbc16 = new HrvEbc(16);	
+		me.mMaxMinHrWindow10 = new MaxMinHrWindow(10);	
 	}
 	
 	private const Buffer5MinLength = 300;
@@ -22,18 +24,30 @@ class HrvMonitor {
 	private var mHrvSdrrLast5Min;	
 	private var mHrvEbc10;
 	private var mHrvEbc16;
+	private var mMaxMinHrWindow10;
 	
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;			
 	private var mHrvEbc10DataField;
 	private var mHrvEbc16DataField;		
+	private var mMaxMinHrWindowDataField;
 			
 	private static const HrvBeatToBeatIntervalsFieldId = 1;		
 	private static const HrvSdrrFirst5MinFieldId = 2;
 	private static const HrvSdrrLast5MinFieldId = 3;	
 	private static const HrvEbc10FieldId = 4;
 	private static const HrvEbc16FieldId = 5;
+	private static const MaxMinHrWindowDataFieldId = 6;
+	
+	private static function createMaxMinHrWindowDataField(activitySession) {
+		return activitySession.createField(
+            "hrv_mmhr",
+            HrvMonitor.MaxMinHrWindowDataFieldId,
+            FitContributor.DATA_TYPE_UINT16,
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"bmp"}
+        );
+	}
 		
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
 		var hrvSdrrFirst5MinDataField = activitySession.createField(
@@ -94,8 +108,17 @@ class HrvMonitor {
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvEbc10.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvEbc16.addBeatToBeatInterval(beatToBeatInterval);
+			me.mMaxMinHrWindow10.addHrSample(hr);
+			me.calculateMaxMinHrWindow10();
 			me.calculateHrvEbc10();
 			me.calculateHrvEbc16();
+		}
+	}
+	
+	private function calculateMaxMinHrWindow10() {
+		var result = me.mMaxMinHrWindow10.calculate();
+		if (result != null) {
+			me.mMaxMinHrWindowDataField.setData(result);
 		}
 	}
 	
