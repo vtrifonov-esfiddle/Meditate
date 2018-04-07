@@ -13,7 +13,7 @@ class PercentageHighlightLine {
 		me.isHighlightFilterReset = true;
 	}
 	
-	private const MaxHighlightsCount = 21;
+	private const MaxHighlightsCount = 50;
 	private var highlights;
 	private var latestAddedIndex;
 	var backgroundColor;	

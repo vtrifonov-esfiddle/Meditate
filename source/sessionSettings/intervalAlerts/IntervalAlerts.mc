@@ -102,6 +102,9 @@ class Alert {
 			var result = new [executionsCount];
 			for (var i = 0; i < executionsCount; i++) {
 				result[i] = percentageTime * (i + 1);
+				if (result[i] > 1.0) {
+					result[i] = 1.0;
+				}
 			}
 			return result;
 		}		 
