@@ -41,9 +41,14 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
     	me.mOnIntervalAlertDeleted.invoke(me.mIntervalAlertIndex);
     }
     
-    private function notifyIntervalAlertChanged() {    
-    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
+    private function notifyIntervalAlertChanged() {   
+    	var notifyChangeTimer = new Timer.Timer();
+		notifyChangeTimer.start(method(:onNotifyIntervalAlertChanged), 500, false); 
     }
+    
+    private function onNotifyIntervalAlertChanged() {    	
+    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
+    }    
     
     private function onOneOffDurationPicked(digits) {
     	var durationInMins = digits[0] * 60 + digits[1] * 10 + digits[2];

@@ -87,12 +87,18 @@ class Alert {
 	}		
 		
 	function getAlertPercentageTimes(sessionTime) {
+		if (sessionTime < 1 || me.time < 1) {
+			return [];
+		}
 		var percentageTime = me.time.toDouble() / sessionTime.toDouble();
 		if (me.type == IntervalAlertType.OneOff) {
 			return [percentageTime];
 		}
 		else {			
-			var executionsCount = sessionTime / me.time;
+			var executionsCount = (sessionTime / me.time) % MaxRepeatExecutionsCount;		
+			if (percentageTime < MinRepeatPercentageTime) {
+				percentageTime = MinRepeatPercentageTime;
+			}
 			var result = new [executionsCount];
 			for (var i = 0; i < executionsCount; i++) {
 				result[i] = percentageTime * (i + 1);
@@ -100,6 +106,9 @@ class Alert {
 			return result;
 		}		 
 	}	
+			
+	private const MaxRepeatExecutionsCount = 360;
+	private const MinRepeatPercentageTime = 0.0072;
 		
 	var type;
 	var time;//in seconds

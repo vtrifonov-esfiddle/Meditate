@@ -44,7 +44,6 @@ class DetailsViewRenderer {
     private const ProgressBarHeight = 16;
     
     private function drawPercentageHighlightLine(dc, lineNumber, highlights, backgroundColor, valueOffset) {
-    	var highlightKeys = highlights.keys();
     	var valuePosXOffset = dc.getWidth() / 3.4 + valueOffset;
     	var posY = me.getLinePosY(lineNumber) + 10;
 		
@@ -53,8 +52,7 @@ class DetailsViewRenderer {
 		
 		var highlightWidth = 0.03 * progressBarWidth;		
     	for (var i = 0; i < highlights.size(); i++) {
-    		var sectionKey = highlightKeys[i];
-    		var highlight = highlights[sectionKey];
+    		var highlight = highlights[i];
     		var valuePosX = valuePosXOffset + highlight.progressPercentage * progressBarWidth;
     		dc.setColor(highlight.color, Gfx.COLOR_TRANSPARENT);
     		dc.fillRectangle(valuePosX, posY, highlightWidth, ProgressBarHeight);    		

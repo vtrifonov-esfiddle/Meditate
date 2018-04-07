@@ -110,16 +110,14 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		private var mSession;
 		
 		function getAlertsLine() {
-	        var alertsLine = new PercentageHighlightLine();
+	        var alertsLine = new PercentageHighlightLine(me.mSession.intervalAlerts.count());
 	        alertsLine.backgroundColor = me.mSession.color;
 	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);
 	        me.AddHighlights(alertsLine, IntervalAlertType.OneOff);
 	        
 	        return alertsLine;
 		}
-		
-		private const MinPercentageOffset = 0.05;
-		
+				
 		private function AddHighlights(alertsLine, alertsType) {
 			var intervalAlerts = me.mSession.intervalAlerts;
 			
@@ -128,18 +126,12 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	        	if (alert.type == alertsType) {
 		        	var percentageTimes = alert.getAlertPercentageTimes(me.mSession.time);
 		        	var lastPercentageTime = -1;
-		        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {     	
-		        		if (isHighglightFiltered(percentageTimes[percentageIndex], lastPercentageTime) == false) {	
-		        			alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);	        			
-		        			lastPercentageTime = percentageTimes[percentageIndex];
-		        		}
+		        	alertsLine.resetHighlightsFilter();
+		        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {   		        			
+	        			alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);	
 		        	}
 	        	}
 	        }
-		}
-		
-		private function isHighglightFiltered(currentPercentageTime, lastPercentageTime) {
-			return (currentPercentageTime - lastPercentageTime) < MinPercentageOffset;
 		}
 	}
 }

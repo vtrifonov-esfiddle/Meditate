@@ -155,7 +155,7 @@ class VibeAlertsExecutor {
 	
 	private function fireIfRequiredRepeatIntervalAlerts() {
 		for (var i = 0; i < me.mRepeatIntervalAlerts.size(); i++) {
-			if (me.mMeditateModel.elapsedTime % me.mRepeatIntervalAlerts[i].time == 0) {
+			if (me.mRepeatIntervalAlerts[i].time > 0 && me.mMeditateModel.elapsedTime % me.mRepeatIntervalAlerts[i].time == 0) {
 	    		Vibe.vibrate(me.mRepeatIntervalAlerts[i].vibePattern);	    		
 	    	}	
 		}

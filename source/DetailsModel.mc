@@ -1,23 +1,57 @@
 using Toybox.Graphics as Gfx;
 
 class PercentageHighlightLine {
-	function initialize() {
-		me.highlights = {};
+	function initialize(highlightsCount) {
+		if (highlightsCount > 0) {
+			me.highlights = new [MaxHighlightsCount];
+		}
+		else {
+			me.highlights = [];
+		}
 		me.latestAddedIndex = -1;
 		me.backgroundColor = Gfx.COLOR_WHITE;
+		me.isHighlightFilterReset = true;
 	}
 	
+	private const MaxHighlightsCount = 21;
 	private var highlights;
 	private var latestAddedIndex;
 	var backgroundColor;	
 	
 	function addHighlight(color, progressPercentage) {
-		me.latestAddedIndex++;
-		me.highlights[latestAddedIndex] = new LineHighlight(color, progressPercentage);
+		if (latestAddedIndex + 1 < MaxHighlightsCount && me.isHighglightFiltered(progressPercentage) == false) {
+			me.latestAddedIndex++;
+			me.highlights[me.latestAddedIndex] = new LineHighlight(color, progressPercentage);
+		}
+	}
+	
+	private function isHighglightFiltered(currentPercentageTime) {
+		if (me.latestAddedIndex == -1) {
+			return false;
+		}
+		if (me.isHighlightFilterReset == true) {
+			me.isHighlightFilterReset = false;
+			return false;
+		}
+		var lastPercentageTime = me.highlights[me.latestAddedIndex].progressPercentage;
+		return (currentPercentageTime - lastPercentageTime) < MinPercentageOffset;
+	}
+		
+	private const MinPercentageOffset = 0.05;
+	
+	private var isHighlightFilterReset;
+	
+	function resetHighlightsFilter() {
+		me.isHighlightFilterReset = true;
 	}
 	
 	function getHighlights() {
-		return me.highlights;
+		if (me.highlights.size() == 0) {
+			return [];
+		}
+		else {
+			return me.highlights.slice(0, me.latestAddedIndex + 1);
+		}
 	}
 }
 
