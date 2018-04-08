@@ -83,5 +83,17 @@
 	<string id="hrvMaxMinHrWindowUnits">bmp</string>
 	<string id="hrvMaxMinHrWindowTitle">Max-Min HR 10 Sec Window(bpm)</string>
 	
+	<string id="stressMedianField">Stress Median</string>
+	<string id="stressMedianFieldUnits">bpm</string>
+	
+	<string id="stressNoField">No Stress</string>
+	<string id="stressNoFieldUnits">%</string>
+	
+	<string id="stressMediumField">Medium Stress</string>
+	<string id="stressMediumFieldUnits">%</string>
+	
+	<string id="stressHighField">High Stress</string>
+	<string id="stressHighFieldUnits">%</string>
+	
 	<string id="activityCalculatingResultsText">Finishing...</string>
 </strings>

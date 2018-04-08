@@ -8,7 +8,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mMeditateActivity;
 
 	function initialize(meditateActivity) {
-        ScreenPickerDelegate.initialize(0, 2);
+        ScreenPickerDelegate.initialize(0, 3);
         me.mSummaryModel = null;
         me.mMeditateActivity = meditateActivity;
 	}
@@ -29,6 +29,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		else if (me.mSelectedPageIndex == 0) {
 			renderer = me.createDetailsPageHr();
 		} 
+		else if (me.mSelectedPageIndex == 1) {
+			renderer = me.createDetailsPageStress();
+		}
 		else {
 			renderer = me.createDetailsPageHrv();
 		}
@@ -86,6 +89,32 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         
         return new DetailsViewRenderer(details);
 	}	
+	
+	private function createDetailsPageStress() {
+		var details = new DetailsModel();
+		details.color = Gfx.COLOR_BLACK;
+        details.backgroundColor = Gfx.COLOR_WHITE;
+        details.title = "Summary\n Stress";
+        details.titleColor = Gfx.COLOR_BLACK;
+        details.setAllValuesOffset(5);
+                      
+        details.detailLines[2].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[2].value.text = Lang.format("No: $1$ %", [me.mSummaryModel.noStress]);
+        
+    	details.detailLines[3].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[3].value.text = Lang.format("Some: $1$ %", [me.mSummaryModel.mediumStress]);  
+        
+    	details.detailLines[4].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[4].value.text = Lang.format("High: $1$ %", [me.mSummaryModel.highStress]);   
+         
+        var summaryLineXOffset = App.getApp().getProperty("summaryLineXStressOffset");
+        for (var i = 1; i <= 5; i++) {
+            details.detailLines[i].iconOffset = summaryLineXOffset;
+        	details.detailLines[i].valueOffset = summaryLineXOffset;
+        }
+        
+        return new DetailsViewRenderer(details);
+	}
 	
 	private function createDetailsPageHrv() {
 		var details = new DetailsModel();

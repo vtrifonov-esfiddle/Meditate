@@ -44,5 +44,9 @@
 		<fitField id="4" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="4" precision="2" dataLabel="@Strings.hrvEbc10FieldLabel" unitLabel="@Strings.hrvEbc10FieldUnits" chartTitle="@Strings.hrvEbc10FieldChartTitle" fillColor="1D1AEF"  />
 		<fitField id="5" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="5" precision="2" dataLabel="@Strings.hrvEbc16FieldLabel" unitLabel="@Strings.hrvEbc16FieldUnits" chartTitle="@Strings.hrvEbc16FieldChartTitle" fillColor="B540B7"  />
 		<fitField id="6" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="6" precision="0" dataLabel="@Strings.hrvMaxMinHrWindowLabel" unitLabel="@Strings.hrvMaxMinHrWindowUnits" chartTitle="@Strings.hrvMaxMinHrWindowTitle" fillColor="379CE5"  />
+		<fitField id="7" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="7" precision="2" dataLabel="@Strings.stressMedianField" unitLabel="@Strings.stressMedianFieldUnits" />
+		<fitField id="8" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="8" precision="2" dataLabel="@Strings.stressNoField" unitLabel="@Strings.stressNoFieldUnits" />
+		<fitField id="9" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="9" precision="2" dataLabel="@Strings.stressMediumField" unitLabel="@Strings.stressMediumFieldUnits" />
+		<fitField id="10" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="10" precision="2" dataLabel="@Strings.stressHighField" unitLabel="@Strings.stressHighFieldUnits" />
 	</fitContributions>
 </resources>

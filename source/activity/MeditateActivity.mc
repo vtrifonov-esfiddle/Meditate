@@ -93,9 +93,10 @@ class MediateActivity {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
 		
+		var stressStats = me.mHrvMonitor.calculateStressStats();
 		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
 		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, hrvFirst5Min, hrvLast5Min);
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min);
 	}
 			
 	function finish() {		

@@ -10,12 +10,17 @@ class HrvMonitor {
 		me.mHrvEbc10DataField = HrvMonitor.createHrvEbc10DataField(activitySession);
 		me.mHrvEbc16DataField = HrvMonitor.createHrvEbc16DataField(activitySession);
 		me.mMaxMinHrWindowDataField = HrvMonitor.createMaxMinHrWindowDataField(activitySession);
+		me.mStressMedianDataField = HrvMonitor.createStressMedianDataField(activitySession);
+		me.mNoStressDataField = HrvMonitor.createNoStressDataField(activitySession);
+		me.mMediumStressDataField = HrvMonitor.createMediumStressDataField(activitySession);
+		me.mHighStressDataField = HrvMonitor.createHighStressDataField(activitySession);
 		
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
 		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);
 		me.mHrvEbc10 = new HrvEbc(10);
 		me.mHrvEbc16 = new HrvEbc(16);	
 		me.mMaxMinHrWindow10 = new MaxMinHrWindow(10);	
+		me.mMaxMinHrWindowStats = new MaxMinHrWindowStats();
 	}
 	
 	private const Buffer5MinLength = 300;
@@ -25,6 +30,7 @@ class HrvMonitor {
 	private var mHrvEbc10;
 	private var mHrvEbc16;
 	private var mMaxMinHrWindow10;
+	private var mMaxMinHrWindowStats;
 	
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
@@ -32,6 +38,10 @@ class HrvMonitor {
 	private var mHrvEbc10DataField;
 	private var mHrvEbc16DataField;		
 	private var mMaxMinHrWindowDataField;
+	private var mStressMedianDataField;
+	private var mNoStressDataField;
+	private var mMediumStressDataField;
+	private var mHighStressDataField;
 			
 	private static const HrvBeatToBeatIntervalsFieldId = 1;		
 	private static const HrvSdrrFirst5MinFieldId = 2;
@@ -39,6 +49,46 @@ class HrvMonitor {
 	private static const HrvEbc10FieldId = 4;
 	private static const HrvEbc16FieldId = 5;
 	private static const MaxMinHrWindowDataFieldId = 6;
+	private static const StressMedianDataFieldId = 7;
+	private static const NoStressDataFieldId = 8;
+	private static const MediumStressDataFieldId = 9;
+	private static const HighStressDataFieldId = 10;
+	
+	private static function createStressMedianDataField(activitySession) {
+		return activitySession.createField(
+            "stress_m",
+            HrvMonitor.StressMedianDataFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"bmp"}
+        );
+	}
+	
+	private static function createNoStressDataField(activitySession) {
+		return activitySession.createField(
+            "stress_no",
+            HrvMonitor.NoStressDataFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
+        );
+	}
+	
+	private static function createMediumStressDataField(activitySession) {
+		return activitySession.createField(
+            "stress_med",
+            HrvMonitor.MediumStressDataFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
+        );
+	}
+	
+	private static function createHighStressDataField(activitySession) {
+		return activitySession.createField(
+            "stress_high",
+            HrvMonitor.HighStressDataFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
+        );
+	}
 	
 	private static function createMaxMinHrWindowDataField(activitySession) {
 		return activitySession.createField(
@@ -119,13 +169,14 @@ class HrvMonitor {
 		var result = me.mMaxMinHrWindow10.calculate();
 		if (result != null) {
 			me.mMaxMinHrWindowDataField.setData(result);
+			me.mMaxMinHrWindowStats.addMaxMinHrWindow(result);
 		}
 	}
 	
 	private function calculateHrvEbc10() {		
 		var ebc10 = me.mHrvEbc10.calculate();
 		if (ebc10 != null) {
-			me.mHrvEbc10DataField.setData(ebc10);
+			me.mHrvEbc10DataField.setData(ebc10);			
 		}
 	}
 	
@@ -134,6 +185,17 @@ class HrvMonitor {
 		if (ebc16 != null) {
 			me.mHrvEbc16DataField.setData(ebc16);
 		}
+	}
+	
+	public function calculateStressStats() {
+		var stressStats = me.mMaxMinHrWindowStats.calculate();		
+		if (stressStats.median != null) {
+			me.mStressMedianDataField.setData(stressStats.median);
+			me.mNoStressDataField.setData(stressStats.noStress);
+			me.mMediumStressDataField.setData(stressStats.mediumStress);
+			me.mHighStressDataField.setData(stressStats.highStress);
+		}
+		return stressStats;
 	}
 	
 	public function calculateHrvFirst5MinSdrr() {		

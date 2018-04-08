@@ -24,12 +24,30 @@ class MaxMinHrWindowStats {
 	
 	private function calculateMedian() {
 		if (me.mWindowsCount == 0) {
-			return 0.0;
+			return null;
+		}
+		if (me.mWindowsCount == 1) {
+			for (var i = 0; i < me.mBpmStatsCounts.size(); i++) {
+				if (me.mBpmStatsCounts[i] > 0) {
+					return i;
+				}
+			}
+		}
+		if (me.mWindowsCount == 2) {
+			var twoStatsSum = 0;
+			for (var i = 0; i < me.mBpmStatsCounts.size(); i++) {
+				if (me.mBpmStatsCounts[i] > 0) {
+					twoStatsSum += i;
+				}
+			}
+			return twoStatsSum.toFloat() / 2.0;
 		}
 		var medianCount = 0;
-		var targetMedianCount = me.mWindowsCount / 2;
-		
-		var isAveragingNeeded = me.mWindowsCount % 2 == 0;			
+		var targetMedianCount = me.mWindowsCount / 2;		
+		var isAveragingNeeded = me.mWindowsCount % 2 == 0;	
+		if (isAveragingNeeded == false) {
+			targetMedianCount++;
+		}
 		for (var i = 0; i < me.mBpmStatsCounts.size(); i++) {
 			if (medianCount < targetMedianCount) {
 				medianCount += me.mBpmStatsCounts[i];	
@@ -37,12 +55,16 @@ class MaxMinHrWindowStats {
 			}
 			
 			var medianValue;
-			if (medianCount - targetMedianCount > 0) {
+			if (medianCount - targetMedianCount == 0) {			
+				medianValue = i-1;
+				if (isAveragingNeeded == true) {
+					medianValue++;
+				}
+			}
+			else {				
 				medianValue = i-1;
 			}
-			else {
-				medianValue = i;
-			}
+			
 			if (isAveragingNeeded == true) {
 				var previousMedianValue;
 				if (me.mBpmStatsCounts[medianValue] > 1) {
@@ -69,20 +91,26 @@ class MaxMinHrWindowStats {
 	}
 	
 	private function getNoStress(medianIndex) {
+		if (medianIndex == 10) {
+			medianIndex = 9;
+		}
 		return me.getWindowsClacification(0, medianIndex);
 	}
 	
 	private function getMediumStress(medianIndex) {
+		if (medianIndex == 10) {
+			medianIndex = 9;
+		}
 		return me.getWindowsClacification(medianIndex + 1, MaxBpmWindow - 1);
 	}
 	
-	private function getHighStress(medianIndex) {
+	private function getHighStress() {
 		return me.getWindowsClacification(MaxBpmWindow, MaxBpmWindow);
 	}
 	
 	private function getWindowsClacification(startBpmStatsCountIndex, endBpmStatsCountIndex) {
 		if (me.mWindowsCount == 0) {
-			return 0.0;
+			return null;
 		}
 		var clacifiedWindowsCount = 0;
 		for (var i = startBpmStatsCountIndex; i <= endBpmStatsCountIndex; i++) {
@@ -96,11 +124,12 @@ class MaxMinHrWindowStats {
 		var hrStats = new HrStats();
 		
 		hrStats.median = me.calculateMedian();
-		
-		var medianIndex = hrStats.median.toNumber();
-		hrStats.noStress = getNoStress(medianIndex);
-		hrStats.mediumStress = getMediumStress(medianIndex);
-		hrStats.highStress = getHighStress(medianIndex);
+		if (hrStats.median != null) {
+			var medianIndex = hrStats.median.toNumber();
+			hrStats.noStress = getNoStress(medianIndex);
+			hrStats.mediumStress = getMediumStress(medianIndex);
+			hrStats.highStress = getHighStress();
+		}
 		return hrStats;
 	}	
 }
