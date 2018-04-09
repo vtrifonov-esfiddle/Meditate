@@ -12,7 +12,7 @@ class HrvMonitor {
 		me.mMaxMinHrWindowDataField = HrvMonitor.createMaxMinHrWindowDataField(activitySession);
 		me.mStressMedianDataField = HrvMonitor.createStressMedianDataField(activitySession);
 		me.mNoStressDataField = HrvMonitor.createNoStressDataField(activitySession);
-		me.mMediumStressDataField = HrvMonitor.createMediumStressDataField(activitySession);
+		me.mLowStressDataField = HrvMonitor.createLowStressDataField(activitySession);
 		me.mHighStressDataField = HrvMonitor.createHighStressDataField(activitySession);
 		
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
@@ -40,7 +40,7 @@ class HrvMonitor {
 	private var mMaxMinHrWindowDataField;
 	private var mStressMedianDataField;
 	private var mNoStressDataField;
-	private var mMediumStressDataField;
+	private var mLowStressDataField;
 	private var mHighStressDataField;
 			
 	private static const HrvBeatToBeatIntervalsFieldId = 1;		
@@ -51,7 +51,7 @@ class HrvMonitor {
 	private static const MaxMinHrWindowDataFieldId = 6;
 	private static const StressMedianDataFieldId = 7;
 	private static const NoStressDataFieldId = 8;
-	private static const MediumStressDataFieldId = 9;
+	private static const LowStressDataFieldId = 9;
 	private static const HighStressDataFieldId = 10;
 	
 	private static function createStressMedianDataField(activitySession) {
@@ -72,10 +72,10 @@ class HrvMonitor {
         );
 	}
 	
-	private static function createMediumStressDataField(activitySession) {
+	private static function createLowStressDataField(activitySession) {
 		return activitySession.createField(
             "stress_med",
-            HrvMonitor.MediumStressDataFieldId,
+            HrvMonitor.LowStressDataFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
         );
@@ -192,7 +192,7 @@ class HrvMonitor {
 		if (stressStats.median != null) {
 			me.mStressMedianDataField.setData(stressStats.median);
 			me.mNoStressDataField.setData(stressStats.noStress);
-			me.mMediumStressDataField.setData(stressStats.mediumStress);
+			me.mLowStressDataField.setData(stressStats.lowStress);
 			me.mHighStressDataField.setData(stressStats.highStress);
 		}
 		return stressStats;

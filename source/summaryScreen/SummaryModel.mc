@@ -8,8 +8,10 @@ class SummaryModel {
 		me.minHr = me.initializeHeartRate(minHr);
 		
 		me.noStress = me.initializeStressScore(stressStats.noStress);
-		me.mediumStress = me.initializeStressScore(stressStats.mediumStress);
+		me.lowStress = me.initializeStressScore(stressStats.lowStress);
 		me.highStress = me.initializeStressScore(stressStats.highStress);
+		
+		me.stressMedian = me.initializeStressMedian(stressStats.median);
 		
 		me.hrvFirst5Min = me.initializeHeartRateVariability(hrvFirst5Min);
 		me.hrvLast5Min = me.initializeHeartRateVariability(hrvLast5Min);
@@ -21,6 +23,15 @@ class SummaryModel {
 		}
 		else {
 			return heartRate;
+		}
+	}
+	
+	private function initializeStressMedian(median) {
+		if (median == null || median == 0) {
+			return me.InvalidHeartRate;
+		}
+		else {
+			return median.format("%2.1f");
 		}
 	}
 	
@@ -51,8 +62,10 @@ class SummaryModel {
 	var minHr;	
 	
 	var noStress;
-	var mediumStress;
+	var lowStress;
 	var highStress;
+	
+	var stressMedian;
 	
 	var hrvFirst5Min;
 	var hrvLast5Min;

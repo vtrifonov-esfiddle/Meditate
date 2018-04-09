@@ -12,13 +12,13 @@ class MaxMinHrWindowStatsTests {
 	(:test)
 	static function evenWindowsNoStress(logger) {
 		var stats = buildEvenWindowsCountStats();
-		return isResultExpected(stats.noStress, 50.0);		
+		return isResultExpected(stats.noStress, 62.5);		
 	}
 	
 	(:test)
-	static function evenWindowsMediumStress(logger) {
+	static function evenWindowsLowStress(logger) {
 		var stats = buildEvenWindowsCountStats();
-		return isResultExpected(stats.mediumStress, 25.0);		
+		return isResultExpected(stats.lowStress, 12.5);		
 	}
 	
 	(:test)
@@ -54,9 +54,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function oddWindowsMediumStress(logger) {
+	static function oddWindowsLowStress(logger) {
 		var stats = buildOddWindowsCountStats();
-		return isResultExpected(stats.mediumStress, 22.22);		
+		return isResultExpected(stats.lowStress, 22.22);		
 	}
 	
 	(:test)
@@ -134,9 +134,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function windows0to10MediumStress(logger) {
+	static function windows0to10LowStress(logger) {
 		var stats = build0to10WindowsStats();
-		return isResultExpected(stats.mediumStress, 36.3636);		
+		return isResultExpected(stats.lowStress, 36.3636);		
 	}
 	
 	(:test)
@@ -164,13 +164,13 @@ class MaxMinHrWindowStatsTests {
 	(:test)
 	static function windows0to9NoStress(logger) {
 		var stats = build0to9WindowsStats();
-		return isResultExpected(stats.noStress, 50.0);		
+		return isResultExpected(stats.noStress, 60.0);		
 	}
 	
 	(:test)
-	static function windows0to9MediumStress(logger) {
+	static function windows0to9LowStress(logger) {
 		var stats = build0to9WindowsStats();
-		return isResultExpected(stats.mediumStress, 50.0);		
+		return isResultExpected(stats.lowStress, 40.0);		
 	}
 	
 	(:test)
@@ -192,9 +192,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function mixedWindowsMediumStress(logger) {
+	static function mixedWindowsLowStress(logger) {
 		var stats = buildMixedWindowsStats();
-		return isResultExpected(stats.mediumStress, 20.0);		
+		return isResultExpected(stats.lowStress, 20.0);		
 	}
 	
 	(:test)
@@ -222,9 +222,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function window1MediumStress(logger) {
+	static function window1LowStress(logger) {
 		var stats = build1WindowStats();
-		return isResultExpected(stats.mediumStress, 0.0);		
+		return isResultExpected(stats.lowStress, 0.0);		
 	}
 	
 	(:test)
@@ -252,9 +252,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function window10MediumStress(logger) {
+	static function window10LowStress(logger) {
 		var stats = build10WindowStats();
-		return isResultExpected(stats.mediumStress, 0.0);		
+		return isResultExpected(stats.lowStress, 0.0);		
 	}
 	
 	(:test)
@@ -283,9 +283,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function windows1and10MediumStress(logger) {
+	static function windows1and10LowStress(logger) {
 		var stats = build1and10WindowsStats();
-		return isResultExpected(stats.mediumStress, 0.0);		
+		return isResultExpected(stats.lowStress, 0.0);		
 	}
 	
 	(:test)
@@ -312,9 +312,9 @@ class MaxMinHrWindowStatsTests {
 	}
 	
 	(:test)
-	static function noWindowMediumStress(logger) {
+	static function noWindowLowStress(logger) {
 		var stats = buildNoWindowsStats();
-		return stats.mediumStress == null;		
+		return stats.lowStress == null;		
 	}
 	
 	(:test)

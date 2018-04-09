@@ -8,7 +8,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mMeditateActivity;
 
 	function initialize(meditateActivity) {
-        ScreenPickerDelegate.initialize(0, 3);
+        ScreenPickerDelegate.initialize(0, 4);
         me.mSummaryModel = null;
         me.mMeditateActivity = meditateActivity;
 	}
@@ -31,6 +31,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		} 
 		else if (me.mSelectedPageIndex == 1) {
 			renderer = me.createDetailsPageStress();
+		}
+		else if (me.mSelectedPageIndex == 2) {
+			renderer = me.createDetailsMinMaxHrMedian();
 		}
 		else {
 			renderer = me.createDetailsPageHrv();
@@ -98,16 +101,37 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.titleColor = Gfx.COLOR_BLACK;
         details.setAllValuesOffset(5);
                       
-        details.detailLines[2].icon = Rez.Drawables.heartRateVariabilityIcon;
+        details.detailLines[2].icon = Rez.Drawables.noStressIcon;
         details.detailLines[2].value.text = Lang.format("No: $1$ %", [me.mSummaryModel.noStress]);
         
-    	details.detailLines[3].icon = Rez.Drawables.heartRateVariabilityIcon;
-        details.detailLines[3].value.text = Lang.format("Some: $1$ %", [me.mSummaryModel.mediumStress]);  
+    	details.detailLines[3].icon = Rez.Drawables.lowStressIcon;
+        details.detailLines[3].value.text = Lang.format("Low: $1$ %", [me.mSummaryModel.lowStress]);  
         
-    	details.detailLines[4].icon = Rez.Drawables.heartRateVariabilityIcon;
+    	details.detailLines[4].icon = Rez.Drawables.highStressIcon;
         details.detailLines[4].value.text = Lang.format("High: $1$ %", [me.mSummaryModel.highStress]);   
          
         var summaryLineXOffset = App.getApp().getProperty("summaryLineXStressOffset");
+        for (var i = 1; i <= 5; i++) {
+            details.detailLines[i].iconOffset = summaryLineXOffset;
+        	details.detailLines[i].valueOffset = summaryLineXOffset;
+        }
+        
+        return new DetailsViewRenderer(details);
+	}
+	
+	private function createDetailsMinMaxHrMedian() {
+		var details = new DetailsModel();
+		details.color = Gfx.COLOR_BLACK;
+        details.backgroundColor = Gfx.COLOR_WHITE;
+        details.title = "Summary\n Stress";
+        details.titleColor = Gfx.COLOR_BLACK;
+        details.setAllValuesOffset(5);
+                              
+        details.detailLines[3].icon = Rez.Drawables.pieChartIcon;
+        details.detailLines[3].value.text = "Median";   
+        details.detailLines[4].value.text = Lang.format("$1$ bpm", [me.mSummaryModel.stressMedian]);   
+         
+        var summaryLineXOffset = App.getApp().getProperty("summaryLineXOffset");
         for (var i = 1; i <= 5; i++) {
             details.detailLines[i].iconOffset = summaryLineXOffset;
         	details.detailLines[i].valueOffset = summaryLineXOffset;

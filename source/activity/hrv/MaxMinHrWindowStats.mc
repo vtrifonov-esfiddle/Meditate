@@ -1,3 +1,5 @@
+using Toybox.Math;
+
 class MaxMinHrWindowStats {
 	function initialize() {
 		me.mBpmStatsCounts = new [MaxBpmWindow+1];
@@ -97,15 +99,25 @@ class MaxMinHrWindowStats {
 		return me.getWindowsClacification(0, medianIndex);
 	}
 	
-	private function getMediumStress(medianIndex) {
-		if (medianIndex == 10) {
-			medianIndex = 9;
-		}
-		return me.getWindowsClacification(medianIndex + 1, MaxBpmWindow - 1);
+	private function getLowStress(medianIndex) {
+		var maxLowStressIndex = me.getHighStressThreshold(medianIndex) - 1;
+		return me.getWindowsClacification(medianIndex + 1, maxLowStressIndex);
 	}
 	
-	private function getHighStress() {
-		return me.getWindowsClacification(MaxBpmWindow, MaxBpmWindow);
+	private function getHighStressThreshold(medianIndex) {
+		if (medianIndex == 0) {
+			return 1;
+		}
+		var maxStressIndex = medianIndex * 3;
+		if (maxStressIndex > MaxBpmWindow) {
+			maxStressIndex = MaxBpmWindow;
+		}
+		return maxStressIndex;
+	}
+	
+	private function getHighStress(medianIndex) {
+		var startThreshold = me.getHighStressThreshold(medianIndex);
+		return me.getWindowsClacification(startThreshold, MaxBpmWindow);
 	}
 	
 	private function getWindowsClacification(startBpmStatsCountIndex, endBpmStatsCountIndex) {
@@ -125,10 +137,10 @@ class MaxMinHrWindowStats {
 		
 		hrStats.median = me.calculateMedian();
 		if (hrStats.median != null) {
-			var medianIndex = hrStats.median.toNumber();
+			var medianIndex = Math.round(hrStats.median).toNumber();
 			hrStats.noStress = getNoStress(medianIndex);
-			hrStats.mediumStress = getMediumStress(medianIndex);
-			hrStats.highStress = getHighStress();
+			hrStats.lowStress = getLowStress(medianIndex);
+			hrStats.highStress = getHighStress(medianIndex);
 		}
 		return hrStats;
 	}	
@@ -137,6 +149,6 @@ class MaxMinHrWindowStats {
 class HrStats {
 	var median;
 	var noStress;
-	var mediumStress;
+	var lowStress;
 	var highStress;
 }

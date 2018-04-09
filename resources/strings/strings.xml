@@ -89,8 +89,8 @@
 	<string id="stressNoField">No Stress</string>
 	<string id="stressNoFieldUnits">%</string>
 	
-	<string id="stressMediumField">Medium Stress</string>
-	<string id="stressMediumFieldUnits">%</string>
+	<string id="stressLowField">Low Stress</string>
+	<string id="stressLowFieldUnits">%</string>
 	
 	<string id="stressHighField">High Stress</string>
 	<string id="stressHighFieldUnits">%</string>
