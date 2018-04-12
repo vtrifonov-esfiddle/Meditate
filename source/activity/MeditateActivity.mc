@@ -9,6 +9,7 @@ class MediateActivity {
 	private var mSummaryModel;
 	private var mVibeAlertsExecutor;	
 	private var mHrvMonitor;
+	private var mStressMonitor;
 		
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
@@ -25,6 +26,7 @@ class MediateActivity {
 		me.createMinHrDataField();
 		me.mVibeAlertsExecutor = null;
 		me.mHrvMonitor = new HrvMonitor(me.mSession);
+		me.mStressMonitor = new StressMonitor(me.mSession);
 	}
 			
 	private function createMinHrDataField() {
@@ -71,6 +73,7 @@ class MediateActivity {
 	    	}
 	    }
     	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	 
+    	me.mStressMonitor.addHrSample(activityInfo.currentHeartRate);
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
@@ -93,7 +96,7 @@ class MediateActivity {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
 		
-		var stressStats = me.mHrvMonitor.calculateStressStats();
+		var stressStats = me.mStressMonitor.calculateStressStats();
 		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
 		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
 		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min);

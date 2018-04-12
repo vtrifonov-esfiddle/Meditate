@@ -7,11 +7,69 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mSummaryModel;
 	private var mMeditateActivity;
 
-	function initialize(meditateActivity) {
-        ScreenPickerDelegate.initialize(0, 4);
+	function initialize(meditateActivity) {		
+		var hrvTracking = GlobalSettings.loadHrvTracking();		
+		var stressTracking = GlobalSettings.loadStressTracking();
+		me.mPagesCount = SummaryViewDelegate.getPagesCount(hrvTracking, stressTracking);
+		setPageIndexes(hrvTracking, stressTracking);
+		
+        ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = null;
         me.mMeditateActivity = meditateActivity;
 	}
+		
+	private static function getPagesCount(hrvTracking, stressTracking) {		
+		var pagesCount = 4;
+		if (hrvTracking == HrvTracking.Off) {
+			pagesCount--;
+		}
+		if (stressTracking == StressTracking.Off) {
+			pagesCount -= 2;
+		}
+		else if (stressTracking == StressTracking.On) {
+			pagesCount--;
+		}
+		return pagesCount;
+	}
+	
+	private function setPageIndexes(hrvTracking, stressTracking) {
+		if (stressTracking == StressTracking.Off) {
+			me.mStressPageIndex = InvalidPageIndex;
+		}
+		else {
+			me.mStressPageIndex = 1;
+		}
+		
+		if (stressTracking == StressTracking.OnDetailed) {
+			me.mStressMedianPageIndex = 2;
+		}
+		else {
+			me.mStressMedianPageIndex = InvalidPageIndex;
+		}
+		
+		if (hrvTracking == HrvTracking.Off) {
+			me.mHrvPageIndex = InvalidPageIndex;
+		}
+		else {
+			if (stressTracking == StressTracking.Off) {
+				me.mHrvPageIndex = 1;
+			}
+			else if (stressTracking == StressTracking.On) {
+				me.mHrvPageIndex = 2;
+			}
+			else {
+				me.mHrvPageIndex = 3;
+			}
+		}
+	}
+	
+	private var mPagesCount;
+	
+	private var mHrvPageIndex;
+	private var mStressPageIndex;
+	private var mStressMedianPageIndex;
+	
+	private const InvalidPageIndex = -1;
 
 	private function exitApplication() {		
 		System.exit();
@@ -29,16 +87,24 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		else if (me.mSelectedPageIndex == 0) {
 			renderer = me.createDetailsPageHr();
 		} 
-		else if (me.mSelectedPageIndex == 1) {
+		else if (me.mSelectedPageIndex == me.mStressPageIndex) {
 			renderer = me.createDetailsPageStress();
 		}
-		else if (me.mSelectedPageIndex == 2) {
+		else if (me.mSelectedPageIndex == me.mStressMedianPageIndex) {
 			renderer = me.createDetailsMinMaxHrMedian();
 		}
-		else {
+		else if (me.mSelectedPageIndex == mHrvPageIndex){
 			renderer = me.createDetailsPageHrv();
 		}
-		me.mSummaryView = new SummaryView(renderer);
+		else {
+			renderer = me.createDetailsPageHr();
+		}
+		if (me.mPagesCount > 1) {
+			me.mSummaryView = new SummaryViewPaged(renderer);
+		}
+		else {
+			me.mSummaryView = new SummaryView(renderer);
+		}
 		return me.mSummaryView;
 	}
 	

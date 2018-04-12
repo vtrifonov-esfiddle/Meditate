@@ -7,12 +7,13 @@ class SummaryModel {
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
 		
-		me.noStress = me.initializeStressScore(stressStats.noStress);
-		me.lowStress = me.initializeStressScore(stressStats.lowStress);
-		me.highStress = me.initializeStressScore(stressStats.highStress);
-		
-		me.stressMedian = me.initializeStressMedian(stressStats.median);
-		
+		if (stressStats != null) {
+			me.noStress = me.initializeStressScore(stressStats.noStress);
+			me.lowStress = me.initializeStressScore(stressStats.lowStress);
+			me.highStress = me.initializeStressScore(stressStats.highStress);
+
+			me.stressMedian = me.initializeStressMedian(stressStats.median);
+		}
 		me.hrvFirst5Min = me.initializeHeartRateVariability(hrvFirst5Min);
 		me.hrvLast5Min = me.initializeHeartRateVariability(hrvLast5Min);
 	}
