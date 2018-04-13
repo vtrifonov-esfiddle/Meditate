@@ -14,6 +14,7 @@ class DetailsViewRenderer {
 	function initialize(detailsModel) {
 		me.mDetailsModel = detailsModel;
 		me.progressBarWidth = App.getApp().getProperty("progressBarWidth");
+		me.iconsArrayOffset = App.getApp().getProperty("iconsArrayOffset");
 	}
 	
 	function renderBackgroundColor(dc) {				        
@@ -31,6 +32,13 @@ class DetailsViewRenderer {
 			if (line.icon != null) {
 				me.displayIcon(dc, lineNumber, line.icon, line.iconOffset, line.yLineOffset);
 			}
+			else if (line.icons != null) {
+				var iconOffset = line.iconOffset;
+				for (var i = 0; i < line.icons.size(); i++) {					
+					me.displayIcon(dc, lineNumber, line.icons[i], iconOffset, line.yLineOffset);
+					iconOffset += me.iconsArrayOffset;
+				}
+			}
 			if (line.value instanceof TextLine) {
        			me.displayText(dc, lineNumber, line.value.text, line.valueOffset, line.yLineOffset);  
        		}
@@ -40,6 +48,7 @@ class DetailsViewRenderer {
        	}       
     }
     
+    private var iconsArrayOffset;
     private var progressBarWidth;
     private const ProgressBarHeight = 16;
     

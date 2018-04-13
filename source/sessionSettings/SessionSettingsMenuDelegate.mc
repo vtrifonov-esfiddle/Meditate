@@ -31,6 +31,10 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
    	        Ui.popView(Ui.SLIDE_IMMEDIATE);
         	Ui.pushView(confirmDeleteSessionDialog, new YesDelegate(method(:onConfirmedDeleteSession)), Ui.SLIDE_LEFT);
         }
+        else if (item == :globalSettings) {
+        	Ui.popView(Ui.SLIDE_IMMEDIATE);
+        	Ui.pushView(new Rez.Menus.globalSettingsMenu(), new GlobalSettingsMenuDelegate(method(:onGlobalSettingsChanged)), Ui.SLIDE_LEFT);  
+        }
     }
     
     private function createAddEditSessionMenu(selectedSessionIndex) {
@@ -44,6 +48,10 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
     	me.mSessionStorage.deleteSelectedSession();        	 	
     	me.mSessionPickerDelegate.setPagesCount(me.mSessionStorage.getSessionsCount());
     	me.mSessionPickerDelegate.select(me.mSessionStorage.getSelectedSessionIndex());      
+    }
+    
+    private function onGlobalSettingsChanged() {
+    	me.mSessionPickerDelegate.updateGlobalSettingsDetails();
     }
     
     private function onChangeSession(changedSessionModel) {

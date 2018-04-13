@@ -13,6 +13,20 @@
     <string id="menuSessionSettings_addNew">Add New</string>
     <string id="menuSessionSettings_edit">Edit</string>
     <string id="menuSessionSettings_delete">Delete</string>
+    <string id="menuSessionSettings_globalSettings">Global Settings</string>
+    
+    <string id="menuGlobalSettings_title">Global Settings</string>    
+    <string id="menuGlobalSettings_stressTracking">Stress Tracking</string>
+    <string id="menuGlobalSettings_hrvTracking">HRV Tracking</string>
+    
+    <string id="menuStressTrackingOptions_title">Stress Tracking</string>    
+    <string id="menuStressTrackingOptions_on">On (Default)</string>
+    <string id="menuStressTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuStressTrackingOptions_off">Off</string>
+    
+    <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
+    <string id="menuHrvTrackingOptions_on">On</string>
+    <string id="menuHrvTrackingOptions_off">Off (Default)</string>
     
     <string id="menuIntervalAlertSettings_Title">Interval Alerts</string>
     <string id="menuIntervalAlertSettings_addNew">Add New</string>

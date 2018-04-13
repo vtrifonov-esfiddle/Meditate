@@ -95,7 +95,10 @@ class Alert {
 			return [percentageTime];
 		}
 		else {			
-			var executionsCount = (sessionTime / me.time) % MaxRepeatExecutionsCount;		
+			var executionsCount = (sessionTime / me.time);
+			if (executionsCount > MaxRepeatExecutionsCount) {
+				executionsCount = MaxRepeatExecutionsCount;
+			}		
 			if (percentageTime < MinRepeatPercentageTime) {
 				percentageTime = MinRepeatPercentageTime;
 			}

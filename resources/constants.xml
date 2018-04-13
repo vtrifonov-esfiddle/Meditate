@@ -1,9 +1,10 @@
 <properties>
 	<property id="progressBarWidth" type="number">150</property>
-	<property id="readyToStartOffset" type="number">-20</property>
+	<property id="iconsArrayYOffset" type="number">20</property>
 	<property id="sessionDetailsIconsOffset" type="number">-4</property>
-	<property id="readyToStartOffsetYOffset" type="number">20</property>
 	<property id="summaryLineXOffset" type="number">15</property>
 	<property id="summaryLineXHrvOffset" type="number">10</property>
 	<property id="summaryLineXStressOffset" type="number">-10</property>
+	<property id="iconsArrayOffset" type="number">35</property>
+	<property id="iconsArrayInitialOffset" type="number">50</property>
 </properties>

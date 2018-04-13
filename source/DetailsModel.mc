@@ -75,6 +75,7 @@ class TextLine {
 class DetailsLine {
 	function initialize() {
 		me.icon = null;
+		me.icons = null;
 		me.valueOffset = 0;
 		me.iconOffset = 0;
 		me.yLineOffset = 0;
@@ -82,6 +83,7 @@ class DetailsLine {
 	}
 
 	var icon;
+	var icons;
 	var valueOffset;
 	var yLineOffset;
 	var iconOffset;

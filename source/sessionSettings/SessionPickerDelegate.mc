@@ -9,14 +9,14 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
 		me.mSelectedSessionDetails = new DetailsModel();
-		me.readyToStartOffset = App.getApp().getProperty("readyToStartOffset");
+		me.iconsArrayYOffset = App.getApp().getProperty("iconsArrayYOffset");
 		me.sessionDetailsIconsOffset = App.getApp().getProperty("sessionDetailsIconsOffset");
-		me.readyToStartOffsetYOffset = App.getApp().getProperty("readyToStartOffsetYOffset");
+		me.iconsArrayInitialOffset = App.getApp().getProperty("iconsArrayInitialOffset");
 	}
 	
-	private var readyToStartOffset;
+	private var iconsArrayYOffset;
 	private var sessionDetailsIconsOffset;
-	private var readyToStartOffsetYOffset;
+	private var iconsArrayInitialOffset;
 	
     function onMenu() {
 		return me.showSessionSettingsMenu();
@@ -92,10 +92,28 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine();
         
-        details.detailLines[4].valueOffset = me.readyToStartOffset;        
-        details.detailLines[4].yLineOffset = me.readyToStartOffsetYOffset; 
-        details.detailLines[4].value.text = "ready to start";
+        me.updateGlobalSettingsDetails();      
 	}	
+	
+	function updateGlobalSettingsDetails() {
+		var details = me.mSelectedSessionDetails;
+		var statusIcons = [];
+		
+		var stressTracking = GlobalSettings.loadStressTracking();
+		if (stressTracking == StressTracking.On) {
+			statusIcons.add(Rez.Drawables.stressTrackingIcon);
+		}
+		else if (stressTracking == StressTracking.OnDetailed) {
+			statusIcons.add(Rez.Drawables.stressTrackingIcon);
+			statusIcons.add(Rez.Drawables.pieChartWhiteIcon);
+		}    
+		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {
+			statusIcons.add(Rez.Drawables.heartRateVariabilityIcon);
+		}            
+        details.detailLines[4].icons = statusIcons;
+        details.detailLines[4].iconOffset = me.iconsArrayInitialOffset; 
+        details.detailLines[4].yLineOffset = me.iconsArrayYOffset;     
+	}
 	
 	function createScreenPickerView() {
 		me.setSelectedSessionDetails();
