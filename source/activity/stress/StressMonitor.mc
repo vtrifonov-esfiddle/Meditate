@@ -5,7 +5,7 @@ using Toybox.Application as App;
 class StressMonitor {
 	function initialize(activitySession) {	
 		me.mStressTracking = GlobalSettings.loadStressTracking();
-		if (mStressTracking == StressTracking.OnDetailed) {		
+		if (me.mStressTracking == StressTracking.OnDetailed) {		
 			me.mMaxMinHrWindowDataField = StressMonitor.createMaxMinHrWindowDataField(activitySession);
 		}
 		else {
@@ -15,6 +15,7 @@ class StressMonitor {
 			me.mStressMedianDataField = createStressMedianDataField(activitySession);
 			me.mNoStressDataField = StressMonitor.createNoStressDataField(activitySession);
 			me.mLowStressDataField = StressMonitor.createLowStressDataField(activitySession);
+			me.mHighStressDataField = StressMonitor.createHighStressDataField(activitySession);
 		}
 		else {
 			me.mStressMedianDataField = null;
@@ -38,11 +39,11 @@ class StressMonitor {
 	private var mLowStressDataField;
 	private var mHighStressDataField;
 				
-	private static const MaxMinHrWindowDataFieldId = 6;
-	private static const StressMedianDataFieldId = 7;
-	private static const NoStressDataFieldId = 8;
-	private static const LowStressDataFieldId = 9;
-	private static const HighStressDataFieldId = 10;
+	private static const MaxMinHrWindowDataFieldId = 4;
+	private static const StressMedianDataFieldId = 5;
+	private static const NoStressDataFieldId = 6;
+	private static const LowStressDataFieldId = 7;
+	private static const HighStressDataFieldId = 8;
 	
 	private static function createStressMedianDataField(activitySession) {
 		return activitySession.createField(
