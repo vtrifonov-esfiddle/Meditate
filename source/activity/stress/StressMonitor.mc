@@ -113,7 +113,9 @@ class StressMonitor {
 		}
 		var stressStats = me.mMaxMinHrWindowStats.calculate();		
 		if (stressStats.median != null) {
-			me.mStressMedianDataField.setData(stressStats.median);
+			if (me.mStressTracking == StressTracking.OnDetailed) {
+				me.mStressMedianDataField.setData(stressStats.median);
+			}
 			me.mNoStressDataField.setData(stressStats.noStress);
 			me.mLowStressDataField.setData(stressStats.lowStress);
 			me.mHighStressDataField.setData(stressStats.highStress);
