@@ -87,9 +87,9 @@
 	<string id="hrvRrIntervalsFieldUnits">ms</string>
 	<string id="hrvRrIntervalsFieldChartTitle">HRV beat-to-beat intervals(ms)</string>
 	
-	<string id="hrvMaxMinHrWindowLabel">Max-Min HR 10 Sec Window(bmp)</string>
-	<string id="hrvMaxMinHrWindowUnits">bmp</string>
-	<string id="hrvMaxMinHrWindowTitle">Max-Min HR 10 Sec Window(bpm)</string>
+	<string id="maxMinHrWindowLabel">Max-Min HR 10 Sec Window(bmp)</string>
+	<string id="maxMinHrWindowUnits">bmp</string>
+	<string id="maxMinHrWindowTitle">Max-Min HR 10 Sec Window(bpm)</string>
 	
 	<string id="stressMedianField">Stress Median</string>
 	<string id="stressMedianFieldUnits">bpm</string>

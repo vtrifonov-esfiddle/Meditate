@@ -43,13 +43,14 @@
     </fonts>
     <fitContributions>
 		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />
-		<fitField id="1" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="6" precision="0" dataLabel="@Strings.hrvRrIntervalsFieldLabel" unitLabel="@Strings.hrvRrIntervalsFieldUnits" chartTitle="@Strings.hrvRrIntervalsFieldChartTitle" fillColor="FFA500"  />
-		<fitField id="2" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="7" precision="2" dataLabel="@Strings.hrvSdrrFirst5MinFieldLabel" unitLabel="@Strings.hrvSdrrFirst5MinFieldUnits" />
-		<fitField id="3" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="8" precision="2" dataLabel="@Strings.hrvSdrrLast5MinFieldLabel" unitLabel="@Strings.hrvSdrrLast5MinFieldUnits" />
-		<fitField id="4" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="5" precision="0" dataLabel="@Strings.hrvMaxMinHrWindowLabel" unitLabel="@Strings.hrvMaxMinHrWindowUnits" chartTitle="@Strings.hrvMaxMinHrWindowTitle" fillColor="379CE5"  />
-		<fitField id="5" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="1" precision="1" dataLabel="@Strings.stressMedianField" unitLabel="@Strings.stressMedianFieldUnits" />
-		<fitField id="6" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="2" precision="2" dataLabel="@Strings.stressNoField" unitLabel="@Strings.stressNoFieldUnits" />
-		<fitField id="7" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="3" precision="2" dataLabel="@Strings.stressLowField" unitLabel="@Strings.stressLowFieldUnits" />
-		<fitField id="8" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="4" precision="2" dataLabel="@Strings.stressHighField" unitLabel="@Strings.stressHighFieldUnits" />
+		<fitField id="1" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="1" precision="1" dataLabel="@Strings.stressMedianField" unitLabel="@Strings.stressMedianFieldUnits" />
+		<fitField id="2" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="2" precision="2" dataLabel="@Strings.stressNoField" unitLabel="@Strings.stressNoFieldUnits" />
+		<fitField id="3" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="3" precision="2" dataLabel="@Strings.stressLowField" unitLabel="@Strings.stressLowFieldUnits" />
+		<fitField id="4" displayInChart="false" displayInActivityLaps="false" displayInActivitySummary="true" sortOrder="4" precision="2" dataLabel="@Strings.stressHighField" unitLabel="@Strings.stressHighFieldUnits" />
+		<fitField id="5" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="5" precision="0" dataLabel="@Strings.maxMinHrWindowLabel" unitLabel="@Strings.maxMinHrWindowUnits" chartTitle="@Strings.maxMinHrWindowTitle" fillColor="379CE5"  />
+		<fitField id="6" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="6" precision="0" dataLabel="@Strings.hrvRrIntervalsFieldLabel" unitLabel="@Strings.hrvRrIntervalsFieldUnits" chartTitle="@Strings.hrvRrIntervalsFieldChartTitle" fillColor="FFA500"  />
+		<fitField id="7" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="7" precision="2" dataLabel="@Strings.hrvSdrrFirst5MinFieldLabel" unitLabel="@Strings.hrvSdrrFirst5MinFieldUnits" />
+		<fitField id="8" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="8" precision="2" dataLabel="@Strings.hrvSdrrLast5MinFieldLabel" unitLabel="@Strings.hrvSdrrLast5MinFieldUnits" />
+
 	</fitContributions>
 </resources>

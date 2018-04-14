@@ -39,11 +39,11 @@ class StressMonitor {
 	private var mLowStressDataField;
 	private var mHighStressDataField;
 				
-	private static const MaxMinHrWindowDataFieldId = 4;
-	private static const StressMedianDataFieldId = 5;
-	private static const NoStressDataFieldId = 6;
-	private static const LowStressDataFieldId = 7;
-	private static const HighStressDataFieldId = 8;
+	private static const MaxMinHrWindowDataFieldId = 5;
+	private static const StressMedianDataFieldId = 1;
+	private static const NoStressDataFieldId = 2;
+	private static const LowStressDataFieldId = 3;
+	private static const HighStressDataFieldId = 4;
 	
 	private static function createStressMedianDataField(activitySession) {
 		return activitySession.createField(

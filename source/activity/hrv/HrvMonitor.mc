@@ -30,9 +30,9 @@ class HrvMonitor {
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;	
 			
-	private static const HrvBeatToBeatIntervalsFieldId = 1;		
-	private static const HrvSdrrFirst5MinFieldId = 2;
-	private static const HrvSdrrLast5MinFieldId = 3;	
+	private static const HrvBeatToBeatIntervalsFieldId = 6;		
+	private static const HrvSdrrFirst5MinFieldId = 7;
+	private static const HrvSdrrLast5MinFieldId = 8;	
 				
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
 		var hrvSdrrFirst5MinDataField = activitySession.createField(
