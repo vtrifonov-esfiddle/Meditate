@@ -65,7 +65,7 @@ class StressMonitor {
 	
 	private static function createLowStressDataField(activitySession) {
 		return activitySession.createField(
-            "stress_med",
+            "stress_low",
             LowStressDataFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}

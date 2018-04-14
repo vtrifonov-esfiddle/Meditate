@@ -22,7 +22,9 @@ class ColorPickerView extends ScreenPickerView {
         if (me.mColor == Gfx.COLOR_TRANSPARENT) {
         	dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
         	var transparentText = Ui.loadResource(Rez.Strings.intervalAlertTransparentColorText);
-        	dc.drawText(dc.getWidth() / 2, dc.getHeight() / 2, Gfx.FONT_SYSTEM_MEDIUM, transparentText, Gfx.TEXT_JUSTIFY_CENTER);
+        	var centerX = dc.getWidth() / 2;
+        	var centerY = dc.getHeight() / 2 - dc.getFontHeight(Gfx.FONT_SYSTEM_MEDIUM) / 2;
+        	dc.drawText(centerX, centerY, Gfx.FONT_SYSTEM_MEDIUM, transparentText, Gfx.TEXT_JUSTIFY_CENTER);
         }     
     }
 }
