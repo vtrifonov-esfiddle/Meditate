@@ -210,7 +210,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		var details = new DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n HRV";
+        details.title = "Summary\n HRV SDRR";
         details.titleColor = Gfx.COLOR_BLACK;
         details.setAllValuesOffset(5);
                       
