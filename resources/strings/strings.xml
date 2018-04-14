@@ -47,6 +47,8 @@
     <string id="addEditSessionMenu_vibePattern">Vibe Pattern</string>
 	<string id="addEditSessionMenu_intervalAlerts">Interval Alerts</string>
 	
+	<string id="intervalAlertTransparentColorText">Transparent</string>
+	
 	<string id="vibePatternMenu_title">Vibe Pattern</string>
 	<string id="vibePatternMenu_longPulsating">Long pulsating</string>
 	<string id="vibePatternMenu_longContinuous">Long continuous</string>
