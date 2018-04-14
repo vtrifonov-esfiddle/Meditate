@@ -25,7 +25,7 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 			Ui.pushView(new Rez.Menus.intervalTypeMenu(),  intervalTypeMenuDelegate, Ui.SLIDE_LEFT);        	
         }
         else if (item == :color) {
-	        var colors = [Gfx.COLOR_RED, Gfx.COLOR_YELLOW, Gfx.COLOR_GREEN, Gfx.COLOR_ORANGE, Gfx.COLOR_BLUE, Gfx.COLOR_LT_GRAY,  Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE, Gfx.COLOR_DK_BLUE, Gfx.COLOR_DK_RED, Gfx.COLOR_DK_GREEN, Gfx.COLOR_DK_GRAY];
+	        var colors = [Gfx.COLOR_RED, Gfx.COLOR_YELLOW, Gfx.COLOR_GREEN, Gfx.COLOR_ORANGE, Gfx.COLOR_BLUE, Gfx.COLOR_LT_GRAY,  Gfx.COLOR_PINK, Gfx.COLOR_PURPLE, Gfx.COLOR_WHITE, Gfx.COLOR_DK_BLUE, Gfx.COLOR_DK_RED, Gfx.COLOR_DK_GREEN, Gfx.COLOR_DK_GRAY, Gfx.COLOR_TRANSPARENT];
 	        
 	        Ui.pushView(new ColorPickerView(colors[0]), new ColorPickerDelegate(colors, method(:onColorPicked)), Ui.SLIDE_LEFT);  
         }
@@ -41,9 +41,14 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
     	me.mOnIntervalAlertDeleted.invoke(me.mIntervalAlertIndex);
     }
     
-    private function notifyIntervalAlertChanged() {    
-    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
+    private function notifyIntervalAlertChanged() {   
+    	var notifyChangeTimer = new Timer.Timer();
+		notifyChangeTimer.start(method(:onNotifyIntervalAlertChanged), 500, false); 
     }
+    
+    private function onNotifyIntervalAlertChanged() {    	
+    	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
+    }    
     
     private function onOneOffDurationPicked(digits) {
     	var durationInMins = digits[0] * 60 + digits[1] * 10 + digits[2];

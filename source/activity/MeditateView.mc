@@ -14,8 +14,6 @@ class MeditateView extends Ui.View {
         me.mIntervalAlertsRenderer = null;
     }
     
-
-
     // Load your resources here
     function onLayout(dc) {    
         var durationArcRadius = dc.getWidth() / 2;
@@ -46,20 +44,22 @@ class MeditateView extends Ui.View {
 	}
 	
     // Update the view
-    function onUpdate(dc) {   
+    function onUpdate(dc) {  
 		var elapsedTime = View.findDrawableById("elapsedTime");
 		elapsedTime.setColor(me.mMeditateModel.getColor());
 		elapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
 		
 		var hrStatusText = View.findDrawableById("hrStatusText");
 		hrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
-		
+				
         View.onUpdate(dc);
         		                        
         var alarmTime = me.mMeditateModel.getSessionTime();
 		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
-		me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
-		me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);	
+		if (me.mIntervalAlertsRenderer != null) {
+			me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
+			me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);
+		}	
     }
     
 

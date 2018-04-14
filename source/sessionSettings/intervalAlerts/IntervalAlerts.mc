@@ -81,25 +81,40 @@ class Alert {
 	
 	function reset() {
 		me.type = IntervalAlertType.OneOff;
-		me.time = 60;
+		me.time = 60 * 5;
 		me.color = Gfx.COLOR_RED;
 		me.vibePattern = VibePattern.ShorterContinuous;
 	}		
 		
 	function getAlertPercentageTimes(sessionTime) {
+		if (sessionTime < 1 || me.time < 1) {
+			return [];
+		}
 		var percentageTime = me.time.toDouble() / sessionTime.toDouble();
 		if (me.type == IntervalAlertType.OneOff) {
 			return [percentageTime];
 		}
 		else {			
-			var executionsCount = sessionTime / me.time;
+			var executionsCount = (sessionTime / me.time);
+			if (executionsCount > MaxRepeatExecutionsCount) {
+				executionsCount = MaxRepeatExecutionsCount;
+			}		
+			if (percentageTime < MinRepeatPercentageTime) {
+				percentageTime = MinRepeatPercentageTime;
+			}
 			var result = new [executionsCount];
 			for (var i = 0; i < executionsCount; i++) {
 				result[i] = percentageTime * (i + 1);
+				if (result[i] > 1.0) {
+					result[i] = 1.0;
+				}
 			}
 			return result;
 		}		 
 	}	
+			
+	private const MaxRepeatExecutionsCount = 360;
+	private const MinRepeatPercentageTime = 0.0072;
 		
 	var type;
 	var time;//in seconds

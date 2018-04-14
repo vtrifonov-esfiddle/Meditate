@@ -1,0 +1,5 @@
+<menu id="stressTrackingOptionsMenu" title="@Strings.menuStressTrackingOptions_title">
+    <menu-item id="on" label="@Strings.menuStressTrackingOptions_on" />
+    <menu-item id="onDetailed" label="@Strings.menuStressTrackingOptions_onDetailed" />
+    <menu-item id="off" label="@Strings.menuStressTrackingOptions_off" />
+</menu>

@@ -10,10 +10,10 @@ class MeditateModel {
 	
 	private var mSession;
 
-	public var currentHr;
-	public var minHr;
-	public var elapsedTime;
-	
+	var currentHr;
+	var minHr;
+	var elapsedTime;
+		
 	function getSessionTime() {
 		return me.mSession.time;
 	}
@@ -43,9 +43,5 @@ class MeditateModel {
 	
 	function getVibePattern() {
 		return me.mSession.vibePattern;
-	}
-	
-	function setSession(sessionModel) {
-		me.mSession = sessionModel;
 	}
 }

@@ -1,13 +1,15 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Timer;
 using Toybox.FitContributor;
+using Toybox.Timer;
 
 class MediateActivity {
 	private var mMeditateModel;
 	private var mSession;
-	private var mIsStarted;	
 	private var mSummaryModel;
 	private var mVibeAlertsExecutor;	
+	private var mHrvMonitor;
+	private var mStressMonitor;
 		
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
@@ -18,14 +20,15 @@ class MediateActivity {
                  :sport=>ActivityRecording.SPORT_GENERIC,      
                  :subSport=>ActivityRecording.SUB_SPORT_GENERIC
                 }
-           );  
-        me.mIsStarted = false;     
+           );      
 		me.mSummaryModel = null;		
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
 		me.createMinHrDataField();
 		me.mVibeAlertsExecutor = null;
+		me.mHrvMonitor = new HrvMonitor(me.mSession);
+		me.mStressMonitor = new StressMonitor(me.mSession);
 	}
-	
+			
 	private function createMinHrDataField() {
 		me.mMinHrField = me.mSession.createField(
             "min_hr",
@@ -44,17 +47,15 @@ class MediateActivity {
 	
 	private var mRefreshActivityTimer;
 		
-	function start() {
-		me.mIsStarted = true;		
+	function start() {	
 		me.mSession.start(); 
-		
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
-		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);		
+		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);	
 	}
-		
+			
 	private function refreshActivityStats() {	
-		if (me.mIsStarted == false) {
+		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
 	    
@@ -71,24 +72,36 @@ class MediateActivity {
 	    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
 	    	}
 	    }
-	    
+    	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	 
+    	me.mStressMonitor.addHrSample(activityInfo.currentHeartRate);
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
-	}
-	   	
-	function stop() {
-		me.mIsStarted = false;		
+	}	   	
+	
+	function stop() {	
+		if (me.mSession.isRecording() == false) {
+			return;
+	    }	
+	    
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
+		me.mRefreshActivityTimer = null;
+		me.mVibeAlertsExecutor = null;
+	}
 		
+	function calculateSummaryFields() {		
 		var activityInfo = Activity.getActivityInfo();		
 		if (me.mMeditateModel.minHr != null) {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr);
-	}
 		
+		var stressStats = me.mStressMonitor.calculateStressStats();
+		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
+		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
+		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min);
+	}
+			
 	function finish() {		
 		Sensor.setEnabledSensors( [] );
 		me.mSession.save();
@@ -99,10 +112,6 @@ class MediateActivity {
 		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();
 		return me.mSummaryModel;
-	}
-	
-	function isStarted() {
-		return me.mIsStarted;
 	}
 }
 
@@ -150,7 +159,7 @@ class VibeAlertsExecutor {
 	
 	private function fireIfRequiredRepeatIntervalAlerts() {
 		for (var i = 0; i < me.mRepeatIntervalAlerts.size(); i++) {
-			if (me.mMeditateModel.elapsedTime % me.mRepeatIntervalAlerts[i].time == 0) {
+			if (me.mRepeatIntervalAlerts[i].time > 0 && me.mMeditateModel.elapsedTime % me.mRepeatIntervalAlerts[i].time == 0) {
 	    		Vibe.vibrate(me.mRepeatIntervalAlerts[i].vibePattern);	    		
 	    	}	
 		}

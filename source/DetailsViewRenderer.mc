@@ -14,6 +14,7 @@ class DetailsViewRenderer {
 	function initialize(detailsModel) {
 		me.mDetailsModel = detailsModel;
 		me.progressBarWidth = App.getApp().getProperty("progressBarWidth");
+		me.iconsArrayOffset = App.getApp().getProperty("iconsArrayOffset");
 	}
 	
 	function renderBackgroundColor(dc) {				        
@@ -31,6 +32,13 @@ class DetailsViewRenderer {
 			if (line.icon != null) {
 				me.displayIcon(dc, lineNumber, line.icon, line.iconOffset, line.yLineOffset);
 			}
+			else if (line.icons != null) {
+				var iconOffset = line.iconOffset;
+				for (var i = 0; i < line.icons.size(); i++) {					
+					me.displayIcon(dc, lineNumber, line.icons[i], iconOffset, line.yLineOffset);
+					iconOffset += me.iconsArrayOffset;
+				}
+			}
 			if (line.value instanceof TextLine) {
        			me.displayText(dc, lineNumber, line.value.text, line.valueOffset, line.yLineOffset);  
        		}
@@ -40,11 +48,11 @@ class DetailsViewRenderer {
        	}       
     }
     
+    private var iconsArrayOffset;
     private var progressBarWidth;
     private const ProgressBarHeight = 16;
     
     private function drawPercentageHighlightLine(dc, lineNumber, highlights, backgroundColor, valueOffset) {
-    	var highlightKeys = highlights.keys();
     	var valuePosXOffset = dc.getWidth() / 3.4 + valueOffset;
     	var posY = me.getLinePosY(lineNumber) + 10;
 		
@@ -53,8 +61,7 @@ class DetailsViewRenderer {
 		
 		var highlightWidth = 0.03 * progressBarWidth;		
     	for (var i = 0; i < highlights.size(); i++) {
-    		var sectionKey = highlightKeys[i];
-    		var highlight = highlights[sectionKey];
+    		var highlight = highlights[i];
     		var valuePosX = valuePosXOffset + highlight.progressPercentage * progressBarWidth;
     		dc.setColor(highlight.color, Gfx.COLOR_TRANSPARENT);
     		dc.fillRectangle(valuePosX, posY, highlightWidth, ProgressBarHeight);    		
