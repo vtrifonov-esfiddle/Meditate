@@ -5,9 +5,9 @@
 - analyses in overlapping 10 Sec Windows Max-Min HR (reported as Max-Min HR 10 Sec Window chart on Connect IQ)
 - tracks the median of the Max-Min HR windows as a summary field (Stress Median field on Connect IQ)
 - calculates stress into 3 cathegories - No, Low and High
-    1. No - % of Max-Min Windows that are less than or equal to the stress median
-    2. Low - % of Max-Min Windows that are greater than stress median and less than 3x stress median
-    3. High - % of Max-Min Windows that are greater than or equal to 3x stress median
+    - No - % of Max-Min Windows that are less than or equal to the stress median
+    - Low - % of Max-Min Windows that are greater than stress median and less than 3x stress median
+    - High - % of Max-Min Windows that are greater than or equal to 3x stress median
 
 ### [HRV](https://en.wikipedia.org/wiki/Heart_rate_variability) (Heart Rate Variability) Feature
 - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
