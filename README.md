@@ -26,6 +26,8 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, st
 - Round Watches that support Connect IQ >= 2.4 (from [round-watches-publish](https://github.com/vtrifonov-esfiddle/Meditate/tree/round-watches-publish) branch)
   - Fenix 5 Family, Forerunner 645 Family, Forerunner 935, D2 Charlie
 
+## [User Guide](UserGuide.md)
+
 ## Screenshots
 ![meditate.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/meditate.png)
 ![sessionPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionPicker.PNG)
