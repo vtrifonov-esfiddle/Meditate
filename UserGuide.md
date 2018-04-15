@@ -1,5 +1,19 @@
 # User Guide
-## 1. Starting a session
+
+## Feature Details
+### Stress Feature
+- analyses in overlapping 10 Sec Windows Max-Min HR (reported as Max-Min HR 10 Sec Window chart on Connect IQ)
+- tracks the median of the Max-Min HR windows as a summary field (Stress Median field on Connect IQ)
+- calculates stress into 3 cathegories - No, Low and High
+    1. No - % of Max-Min Windows that are less than or equal to the stress median
+    2. Low - % of Max-Min Windows that are greater than stress median and less than 3x stress median
+    3. High - % of Max-Min Windows that are greater than or equal to 3x stress median
+
+### [HRV](https://en.wikipedia.org/wiki/Heart_rate_variability) (Heart Rate Variability) Feature
+- this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
+
+## How to Use
+### 1. Starting a session
 
 From the main screen on the currently selected session press the start button. You see the current elapsed time drawn as an arc with the color of the selected session. Once the arc becomes full circle the session time has elapsed.
 The small colored marks represent the time when interval alert will trigger. The interval alert trigger is drawn relative to the total session time.
@@ -8,7 +22,7 @@ The meditation session finishes once you press the stop button.
 Once you stop the session you have the option to save it.
 Finally you see the Summary Screen. Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV.
 
-## 2. Configuring a session
+### 2. Configuring a session
 
 Once you are on the main configuration session press the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu.
 In Add New/Edit you can configure:
@@ -22,11 +36,11 @@ In Add New/Edit you can configure:
     - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
 - Global Settings - see bellow section 4. Turning on/off Stress and HRV
 
-## 3. Selecting a session
+### 3. Selecting a session
 
 Once you have more than one session you can select a session by using the page up/down behaviour on the watch (Vivoactive 3 - swipe up/down). Each session is displayed in the configured color. The graph in the middle of the screen represent the relative time when interval alerts will trigger compared to the total session duration.
 
-## 4. Turning on/off Stress and HRV
+### 4. Turning on/off Stress and HRV
 
 Once you are on the main configuration session screen press the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. Select the setting you wish to change. Once you are done you can see which features are turned on the currently selected session in the bottom icons row.
 - Head Icon - Stress tracking is On (tracking summary metrics of No, Low and High Stress)
