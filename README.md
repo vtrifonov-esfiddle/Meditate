@@ -4,6 +4,7 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, st
 
 ## Features
 - shows up as a Connect IQ activity allowing to view the HR graph (optional)
+  - save activity as **Meditating** or **Yoga**
 - stress tracking
   - analyses in overlapping 10 Sec Windows Max-Min HR (reported as **Max-Min HR 10 Sec Window** chart on Connect IQ)
   - tracks the median of the Max-Min HR windows as a summary field (**Stress Median** field on Connect IQ)
