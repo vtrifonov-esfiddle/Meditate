@@ -1,4 +1,5 @@
 <menu id="globalSettingsMenu" title="@Strings.menuGlobalSettings_title">
     <menu-item id="stressTracking" label="@Strings.menuGlobalSettings_stressTracking" />
     <menu-item id="hrvTracking" label="@Strings.menuGlobalSettings_hrvTracking" />
+    <menu-item id="saveActivityType" label="@Strings.menuGlobalSettings_saveActivityType" />
 </menu>

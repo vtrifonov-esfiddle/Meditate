@@ -18,6 +18,11 @@
     <string id="menuGlobalSettings_title">Global Settings</string>    
     <string id="menuGlobalSettings_stressTracking">Stress Tracking</string>
     <string id="menuGlobalSettings_hrvTracking">HRV Tracking</string>
+    <string id="menuGlobalSettings_saveActivityType">Save Activity Type</string>
+    
+    <string id="menuSaveActivityTypeOptions_title">Save Activity Type</string>    
+    <string id="menuSaveActivityTypeOptions_meditating">Meditating</string>
+    <string id="menuSaveActivityTypeOptions_yoga">Yoga</string>
     
     <string id="menuStressTrackingOptions_title">Stress Tracking</string>    
     <string id="menuStressTrackingOptions_on">On (Default)</string>

@@ -7,6 +7,9 @@ class GlobalSettingsFixture {
 	static function resetHrvTracking() {
 		App.Storage.setValue("globalSettings_hrvTracking", null);
 	}
+	static function resetActivityType() {
+		App.Storage.setValue("globalSettings_activityType", null);
+	}
 }
 
 class GlobalSettingsTests {	
@@ -62,5 +65,28 @@ class GlobalSettingsTests {
 		GlobalSettings.saveHrvTracking(StressTracking.On);	
 		var actualHrvTracking = GlobalSettings.loadHrvTracking();
 		return actualHrvTracking == HrvTracking.On;
+	}
+	
+	(:test)
+	static function loadActivityTypeNoInitialValue(logger) {
+		GlobalSettingsFixture.resetActivityType();
+		var actualActivityType = GlobalSettings.loadActivityType();
+		return actualActivityType == SaveActivityType.Meditating;
+	}
+	
+	(:test)
+	static function loadActivityTypeMeditating(logger) {
+		GlobalSettingsFixture.resetActivityType();
+		GlobalSettings.saveActivityType(SaveActivityType.Meditating);
+		var actualActivityType = GlobalSettings.loadActivityType();
+		return actualActivityType == SaveActivityType.Meditating;
+	}
+	
+	(:test)
+	static function loadActivityTypeYoga(logger) {
+		GlobalSettingsFixture.resetActivityType();
+		GlobalSettings.saveActivityType(SaveActivityType.Yoga);
+		var actualActivityType = GlobalSettings.loadActivityType();
+		return actualActivityType == SaveActivityType.Yoga;
 	}
 }

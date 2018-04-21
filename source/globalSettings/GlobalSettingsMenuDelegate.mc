@@ -17,6 +17,19 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 			var hrvTrackingDelegate = new GlobalSettingsOptionsDelegate(method(:onHrvTrackingPicked));
         	Ui.pushView(new Rez.Menus.hrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
 		}
+		else if (item ==:saveActivityType) {
+			var saveActivityTypeDelegate = new GlobalSettingsOptionsDelegate(method(:onSaveActivityTypePicked));
+			Ui.pushView(new Rez.Menus.saveActivityTypeOptionsMenu(), saveActivityTypeDelegate, Ui.SLIDE_LEFT);
+		}
+	}
+	
+	private function onSaveActivityTypePicked(item) {
+		if (item == :meditating) {
+			GlobalSettings.saveActivityType(SaveActivityType.Meditating);
+		}
+		else if (item == :yoga) {
+			GlobalSettings.saveActivityType(SaveActivityType.Meditating);
+		}
 	}
 	
 	private function onStressTrackingPicked(item) {

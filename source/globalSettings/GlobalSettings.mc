@@ -28,6 +28,22 @@ class GlobalSettings {
 	static function saveHrvTracking(hrvTracking) {
 		App.Storage.setValue(HrvTrackingKey, hrvTracking);
 	}
+	
+	private static const ActivityTypeKey = "globalSettings_activityType";
+	
+	static function loadActivityType() {
+		var activityType = App.Storage.getValue(ActivityTypeKey);
+		if (activityType == null) {
+			return SaveActivityType.Meditating;
+		}
+		else {
+			return activityType;
+		}
+	}
+	
+	static function saveActivityType(activityType) {
+		App.Storage.setValue(ActivityTypeKey, activityType);
+	}
 }
 
 module StressTracking {
@@ -42,5 +58,12 @@ module HrvTracking {
 	enum {
 		Off = 0,
 		On = 1
+	}
+}
+
+module SaveActivityType {
+	enum {
+		Meditating = 0,
+		Yoga = 1,
 	}
 }

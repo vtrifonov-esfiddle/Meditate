@@ -10,17 +10,28 @@ class MediateActivity {
 	private var mVibeAlertsExecutor;	
 	private var mHrvMonitor;
 	private var mStressMonitor;
+	
+	private const SUB_SPORT_YOGA = 43;
 		
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
-		    	
-    	me.mSession = ActivityRecording.createSession(       
+		var activityType = GlobalSettings.loadActivityType();
+		if (activityType == SaveActivityType.Yoga) { 
+			me.mSession = ActivityRecording.createSession(       
                 {
-                 :name=>"Meditating",                              
-                 :sport=>ActivityRecording.SPORT_GENERIC,      
-                 :subSport=>ActivityRecording.SUB_SPORT_GENERIC
-                }
-           );      
+                 :name => "Yoga",                              
+                 :sport => ActivityRecording.SPORT_TRAINING,      
+                 :subSport => SUB_SPORT_YOGA
+                });    		
+        }
+        else {
+        	me.mSession = ActivityRecording.createSession(       
+                {
+                 :name => "Meditating",                              
+                 :sport => ActivityRecording.SPORT_GENERIC,      
+                 :subSport => ActivityRecording.SUB_SPORT_GENERIC
+                });
+        }      
 		me.mSummaryModel = null;		
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
 		me.createMinHrDataField();
@@ -43,7 +54,7 @@ class MediateActivity {
 	private const MinHrFieldId = 0;
 	private var mMinHrField;
 	
-	private var RefreshActivityInterval = 1000;
+	private const RefreshActivityInterval = 1000;
 	
 	private var mRefreshActivityTimer;
 		
@@ -51,7 +62,7 @@ class MediateActivity {
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
-		me.mRefreshActivityTimer.start(method(:refreshActivityStats), me.RefreshActivityInterval, true);	
+		me.mRefreshActivityTimer.start(method(:refreshActivityStats), RefreshActivityInterval, true);	
 	}
 			
 	private function refreshActivityStats() {	
