@@ -28,7 +28,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 			GlobalSettings.saveActivityType(SaveActivityType.Meditating);
 		}
 		else if (item == :yoga) {
-			GlobalSettings.saveActivityType(SaveActivityType.Meditating);
+			GlobalSettings.saveActivityType(SaveActivityType.Yoga);
 		}
 	}
 	
