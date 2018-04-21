@@ -2,6 +2,7 @@
 
 ## Features
 - shows up as a Connect IQ activity allowing to view the HR graph (optional)
+    - save activity as **Meditating** or **Yoga**
 - stress tracking
     - analyses in overlapping 10 Sec Windows Max-Min HR (reported as Max-Min HR 10 Sec Window chart on Connect IQ)
     - tracks the median of the Max-Min HR windows as a summary field (Stress Median field on Connect IQ)
@@ -52,3 +53,7 @@ Once you are on the main configuration session screen press the menu button (for
 - Head Icon - Stress tracking is On (tracking summary metrics of No, Low and High Stress)
 - Pie chart Icon - Detailed Stress tracking is On (tracks additionally stress median and Max-Min HR Windows Graph)
 - Purple Heart - HRV tracking is On (tracks the standard deviation HRV of the first and last 5 min intervals of the session)
+
+### 5. Connect IQ Activity Type
+
+You can save the activity either as **Meditating** or as **Yoga**. To do this go to the main configuration session screen, press the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu -> Save Activity Type 
