@@ -29,6 +29,9 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, st
 
 ## [User Guide](UserGuide.md)
 
+## Dependencies
+- Font for duration picker [Google Roboto](https://fonts.google.com/specimen/Roboto) ([Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0))
+- Status Icons - [Font Awesome free](https://fontawesome.com/license) (SIL OFL 1.1 License) 
 ## Screenshots
 ![meditate.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/meditate.png)
 ![sessionPicker.png](https://github.com/vtrifonov-esfiddle/Meditate/blob/master/screenshots/sessionPicker.PNG)
