@@ -78,7 +78,14 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		var details = me.mSelectedSessionDetails;
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
-        details.title = "Session " + (me.mSelectedPageIndex + 1);
+        var activityTypeText;
+        if (session.activityType == ActivityType.Yoga) {
+        	activityTypeText = "Yoga";
+        }
+        else {
+        	activityTypeText = "Meditate";
+        }
+        details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;
         details.setAllIconsOffset(me.sessionDetailsIconsOffset);
         

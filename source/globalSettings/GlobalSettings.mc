@@ -34,7 +34,7 @@ class GlobalSettings {
 	static function loadActivityType() {
 		var activityType = App.Storage.getValue(ActivityTypeKey);
 		if (activityType == null) {
-			return SaveActivityType.Meditating;
+			return ActivityType.Meditating;
 		}
 		else {
 			return activityType;
@@ -58,12 +58,5 @@ module HrvTracking {
 	enum {
 		Off = 0,
 		On = 1
-	}
-}
-
-module SaveActivityType {
-	enum {
-		Meditating = 0,
-		Yoga = 1,
 	}
 }

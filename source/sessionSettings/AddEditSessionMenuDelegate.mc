@@ -49,6 +49,21 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         	}
         	Ui.pushView(intervalAlertSettingsMenu, intervalAlertsMenuDelegate, Ui.SLIDE_LEFT);
         }
+        else if (item == :activityType) {
+        	var activityTypeDelegate = new MenuOptionsDelegate(method(:onActivityTypePicked));
+			Ui.pushView(new Rez.Menus.activityTypeMenu(), activityTypeDelegate, Ui.SLIDE_LEFT);
+        }
+    }
+    
+    private function onActivityTypePicked(item) {
+    	var sessionModel = new SessionModel();
+    	if (item == :meditating) {    		
+    		sessionModel.activityType = ActivityType.Meditating;
+    	}
+    	else if (item == :yoga) {
+    		sessionModel.activityType = ActivityType.Yoga;
+    	}    	
+		me.mOnChangeSession.invoke(sessionModel);	
     }
     
     private function onIntervalAlertsChanged(intervalAlerts) {

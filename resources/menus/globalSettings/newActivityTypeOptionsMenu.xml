@@ -1,0 +1,4 @@
+<menu id="newActivityTypeOptionsMenu" title="@Strings.menuNewActivityTypeOptions_title">
+    <menu-item id="meditating" label="@Strings.menuNewActivityTypeOptions_meditating" />
+    <menu-item id="yoga" label="@Strings.menuNewActivityTypeOptions_yoga" />
+</menu>
