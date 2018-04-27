@@ -1,6 +1,6 @@
 using Toybox.WatchUi as Ui;
 
-class GlobalSettingsOptionsDelegate extends Ui.MenuInputDelegate {
+class MenuOptionsDelegate extends Ui.MenuInputDelegate {
 	function initialize(onMenuItem) {
 		MenuInputDelegate.initialize();
 		mOnMenuItem = onMenuItem;

@@ -44,4 +44,8 @@ class MeditateModel {
 	function getVibePattern() {
 		return me.mSession.vibePattern;
 	}
+	
+	function getActivityType() {
+		return me.mSession.activityType;
+	}
 }

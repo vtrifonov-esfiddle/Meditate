@@ -71,22 +71,22 @@ class GlobalSettingsTests {
 	static function loadActivityTypeNoInitialValue(logger) {
 		GlobalSettingsFixture.resetActivityType();
 		var actualActivityType = GlobalSettings.loadActivityType();
-		return actualActivityType == SaveActivityType.Meditating;
+		return actualActivityType == ActivityType.Meditating;
 	}
 	
 	(:test)
 	static function loadActivityTypeMeditating(logger) {
 		GlobalSettingsFixture.resetActivityType();
-		GlobalSettings.saveActivityType(SaveActivityType.Meditating);
+		GlobalSettings.saveActivityType(ActivityType.Meditating);
 		var actualActivityType = GlobalSettings.loadActivityType();
-		return actualActivityType == SaveActivityType.Meditating;
+		return actualActivityType == ActivityType.Meditating;
 	}
 	
 	(:test)
 	static function loadActivityTypeYoga(logger) {
 		GlobalSettingsFixture.resetActivityType();
-		GlobalSettings.saveActivityType(SaveActivityType.Yoga);
+		GlobalSettings.saveActivityType(ActivityType.Yoga);
 		var actualActivityType = GlobalSettings.loadActivityType();
-		return actualActivityType == SaveActivityType.Yoga;
+		return actualActivityType == ActivityType.Yoga;
 	}
 }

@@ -18,11 +18,15 @@
     <string id="menuGlobalSettings_title">Global Settings</string>    
     <string id="menuGlobalSettings_stressTracking">Stress Tracking</string>
     <string id="menuGlobalSettings_hrvTracking">HRV Tracking</string>
-    <string id="menuGlobalSettings_saveActivityType">Save Activity Type</string>
+    <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     
-    <string id="menuSaveActivityTypeOptions_title">Save Activity Type</string>    
-    <string id="menuSaveActivityTypeOptions_meditating">Meditating</string>
-    <string id="menuSaveActivityTypeOptions_yoga">Yoga</string>
+    <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
+    <string id="menuNewActivityTypeOptions_meditating">Meditate</string>
+    <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
+    
+    <string id="activityTypeMenu_title">Activity Type</string>    
+    <string id="activityTypeMenu_meditating">Meditate</string>
+    <string id="activityTypeMenu_yoga">Yoga</string>
     
     <string id="menuStressTrackingOptions_title">Stress Tracking</string>    
     <string id="menuStressTrackingOptions_on">On (Default)</string>
@@ -51,6 +55,7 @@
     <string id="addEditSessionMenu_color">Color</string>
     <string id="addEditSessionMenu_vibePattern">Vibe Pattern</string>
 	<string id="addEditSessionMenu_intervalAlerts">Interval Alerts</string>
+	<string id="addEditSessionMenu_activityType">Activity Type</string>
 	
 	<string id="intervalAlertTransparentColorText">Transparent</string>
 	
