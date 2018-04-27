@@ -46,7 +46,7 @@ In Add New/Edit you can configure:
 
 ### 3. Selecting a session
 
-Once you have more than one session you can select a session by using the page up/down behaviour on the watch (Vivoactive 3 - swipe up/down). Each session is displayed in the configured color. The graph in the middle of the screen represent the relative time when interval alerts will trigger compared to the total session duration.
+Once you have more than one session you can select a session by using the page up/down behaviour on the watch (Vivoactive 3 - swipe up/down). Each session is displayed in the configured color. The session activity type - Meditate or Yoga is displayed in the title. The graph in the middle of the screen represent the relative time when interval alerts will trigger compared to the total session duration.
 
 ### 4. Turning on/off Stress and HRV
 
