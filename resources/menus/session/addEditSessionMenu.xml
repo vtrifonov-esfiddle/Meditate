@@ -3,4 +3,5 @@
     <menu-item id="color" label="@Strings.addEditSessionMenu_color"></menu-item>
     <menu-item id="vibePattern" label="@Strings.addEditSessionMenu_vibePattern"></menu-item>
     <menu-item id="intervalAlerts" label="@Strings.addEditSessionMenu_intervalAlerts"></menu-item>
+    <menu-item id="activityType" label="@Strings.addEditSessionMenu_activityType"></menu-item>
  </menu>

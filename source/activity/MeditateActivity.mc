@@ -15,8 +15,7 @@ class MediateActivity {
 		
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
-		var activityType = GlobalSettings.loadActivityType();
-		if (activityType == SaveActivityType.Yoga) { 
+		if (meditateModel.getActivityType() == ActivityType.Yoga) { 
 			me.mSession = ActivityRecording.createSession(       
                 {
                  :name => "Yoga",                              

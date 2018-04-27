@@ -41,6 +41,7 @@ In Add New/Edit you can configure:
     - Time - select one-off or repetitive alert; repetitive alerts allow shorter durations than a minute
     - Color - the color of the current interval alert used in the graphical controls. Select different colors for each alert to differentiate them during meditation. Select transparent color if you don't want to see visual marks for the alert during meditation
     - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
+- Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings (see section 5).
 - Global Settings - see bellow section 4. Turning on/off Stress and HRV
 
 ### 3. Selecting a session
@@ -54,6 +55,6 @@ Once you are on the main configuration session screen press the menu button (for
 - Pie chart Icon - Detailed Stress tracking is On (tracks additionally stress median and Max-Min HR Windows Graph)
 - Purple Heart - HRV tracking is On (tracks the standard deviation HRV of the first and last 5 min intervals of the session)
 
-### 5. Connect IQ Activity Type
+### 5. Connect IQ New Activity Type
 
-You can save the activity either as **Meditating** or as **Yoga**. To do this go to the main configuration session screen, press the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu -> Save Activity Type 
+You can set the default activity type for new session as **Meditating** or as **Yoga**. To do this go to the main configuration session screen, press the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu -> New Activity Type 

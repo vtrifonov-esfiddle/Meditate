@@ -17,6 +17,13 @@ module VibePattern {
 	}
 }
 
+module ActivityType {
+	enum {
+		Meditating = 0,
+		Yoga = 1
+	}
+}
+
 class SessionModel {
 	function initialize() {	
 	}
@@ -25,19 +32,28 @@ class SessionModel {
 		me.time = loadedSessionDictionary["time"];
 		me.color = loadedSessionDictionary["color"];
 		me.vibePattern = loadedSessionDictionary["vibePattern"];
-				
+		me.activityType = loadedSessionDictionary["activityType"];		
+		me.ensureActivityTypeExists();	
 		var serializedAlerts = loadedSessionDictionary["intervalAlerts"];		
 		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.fromDictionary(serializedAlerts);
 	}
 	
+	private function ensureActivityTypeExists() {
+		if (me.activityType == null) {
+			me.activityType = GlobalSettings.loadActivityType();
+		}	
+	}
+	
 	function toDictionary() {	
 		var serializedAlerts = me.intervalAlerts.toDictionary();
+		me.ensureActivityTypeExists();
 		return {
 			"time" => me.time,
 			"color" => me.color,
 			"vibePattern" => me.vibePattern,
-			"intervalAlerts" => serializedAlerts
+			"intervalAlerts" => serializedAlerts,
+			"activityType" => me.activityType
 		};
 	}
 		
@@ -45,6 +61,7 @@ class SessionModel {
 		me.time = 600;
 		me.color = Gfx.COLOR_BLUE;
 		me.vibePattern = VibePattern.LongContinuous;		
+		me.activityType = GlobalSettings.loadActivityType();
 		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.reset();
 	}
@@ -62,10 +79,14 @@ class SessionModel {
     	if (otherSession.intervalAlerts != null) {
     		me.intervalAlerts = otherSession.intervalAlerts;
     	}
+    	if (otherSession.activityType != null) {
+    		me.activityType = otherSession.activityType;
+    	}
 	}
 		
 	var time;
 	var color;
 	var vibePattern;
 	var intervalAlerts;
+	var activityType;
 }
