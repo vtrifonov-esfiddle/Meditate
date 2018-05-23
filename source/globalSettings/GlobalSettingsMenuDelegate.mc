@@ -10,11 +10,11 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 	
 	function onMenuItem(item) {
 		if (item == :stressTracking) {
-			var stressTrackingDelegate = new GlobalSettingsOptionsDelegate(method(:onStressTrackingPicked));
+			var stressTrackingDelegate = new MenuOptionsDelegate(method(:onStressTrackingPicked));
         	Ui.pushView(new Rez.Menus.stressTrackingOptionsMenu(), stressTrackingDelegate, Ui.SLIDE_LEFT);
 		}
 		else if (item ==:hrvTracking) {
-			var hrvTrackingDelegate = new GlobalSettingsOptionsDelegate(method(:onHrvTrackingPicked));
+			var hrvTrackingDelegate = new MenuOptionsDelegate(method(:onHrvTrackingPicked));
         	Ui.pushView(new Rez.Menus.hrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
 		}
 		else if (item ==:newActivityType) {
