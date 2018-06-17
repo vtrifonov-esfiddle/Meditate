@@ -46,7 +46,7 @@ In Add New/Edit you can configure:
 - Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings (see section 5).
 - Global Settings - see bellow section 4. Turning on/off Stress and HRV
 
-![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings](userGuideScreenshots/sessionSettingsMenu.png) ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
+![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings menu](userGuideScreenshots/sessionSettingsMenu.png) ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
 
 ### 3. Selecting a session
 
@@ -64,4 +64,4 @@ From the session picker screen hold the menu button (for Vivoactive 3 hold on th
 ![Global settings](userGuideScreenshots/globalSettings.png)
 ### 5. Connect IQ New Activity Type
 
-You can set the default activity type for new session as **Meditating** or as **Yoga**. To do this go to the main configuration session screen, press the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu -> New Activity Type 
+You can set the default activity type for new session as **Meditating** or as **Yoga**. To do this go to the session picker screen, hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu -> New Activity Type 
