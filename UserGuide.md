@@ -46,7 +46,7 @@ In Add New/Edit you can configure:
 - Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings (see section 5).
 - Global Settings - see bellow section 4. Turning on/off Stress and HRV
 
-![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings](userGuideScreenshots/sessionSettings.png) ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
+![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings](userGuideScreenshots/sessionSettingsMenu.png) ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
 
 ### 3. Selecting a session
 
