@@ -23,18 +23,28 @@
 ## How to Use
 ### 1. Starting a session
 
-From the session picker screen press the start button. You see the current elapsed time drawn as an arc with the color of the selected session. Once the arc becomes full circle the session time has elapsed.
-The small colored marks represent the time when interval alert will trigger. The interval alert trigger is drawn relative to the total session time.
-The time elapsed and the current HR are at the middle of the screen.
-The meditation session finishes once you press the stop button.
-Once you stop the session you have the option to save it.
-Finally you see the Summary Screen. Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV.
+1.1. From the session picker screen press the start button. 
 
-![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session in progress](userGuideScreenshots/sessionInProgress.png) ![Confirm save session](userGuideScreenshots/confirmSaveSession.png) ![Summary HR](userGuideScreenshots/summaryHr.png)![Summary Stress](userGuideScreenshots/summaryStress.png) ![Summary stress median](userGuideScreenshots/summaryStressMedian.png) ![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
+![Session Picker](userGuideScreenshots/sessionPicker.png)
+
+1.2. You see the current elapsed time drawn as an arc with the color of the selected session. Once the arc becomes full circle the session time has elapsed. The small colored marks represent the time when interval alert will trigger. The interval alert trigger is drawn relative to the total session time. The time elapsed and the current HR are at the middle of the screen. The meditation session finishes once you press the stop button.
+
+![Session in progress](userGuideScreenshots/sessionInProgress.png)
+
+1.3. Once you stop the session you have the option to save it.
+
+![Confirm save session](userGuideScreenshots/confirmSaveSession.png)
+
+1.4. Finally you see the Summary Screen. Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV.
+
+  ![Summary HR](userGuideScreenshots/summaryHr.png)![Summary Stress](userGuideScreenshots/summaryStress.png) ![Summary stress median](userGuideScreenshots/summaryStressMedian.png) ![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
 ### 2. Configuring a session
 
-From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu.
-In Add New/Edit you can configure:
+2.1 From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu.
+
+![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings menu](userGuideScreenshots/sessionSettingsMenu.png)
+
+2.2 In Add New/Edit you can configure:
 - Time - total duration of the session in H:MM
 - Color - the color of the session used in graphical controls; select by using page up/down behaviour on the watch (Vivoactive 3 - swipe up/down)
 - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
@@ -46,7 +56,7 @@ In Add New/Edit you can configure:
 - Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings (see section 5).
 - Global Settings - see bellow section 4. Turning on/off Stress and HRV
 
-![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings menu](userGuideScreenshots/sessionSettingsMenu.png) ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
+ ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
 
 ### 3. Selecting a session
 
