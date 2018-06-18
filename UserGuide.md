@@ -28,9 +28,19 @@
 
 ![Session Picker](userGuideScreenshots/sessionPicker.png)
 
-1.2. You see the current elapsed time drawn as an arc with the color of the selected session. Once the arc becomes full circle the session time has elapsed. The small colored marks represent the time when interval alert will trigger. The interval alert trigger is drawn relative to the total session time. The time elapsed and the current HR are at the middle of the screen. The meditation session finishes once you press the stop button.
+1.2. The session in-progress screen contains the following elements
+- time elapsed arc 
+    - shows the percentage of elapsed session time
+    - full circle means session time has elapsed
+- interval alert triggers 
+    - the small colored marks represent the time of trigerring an interval alert
+    - each marked position corresponts to an alert trigger time
+- time elapsed 
+- current HR
 
-![Session in progress](userGuideScreenshots/sessionInProgress.png)
+The meditation session finishes once you press the stop button.
+
+![Session in progress](userGuideScreenshots/sessionInProgressExplained.png)
 
 1.3. Once you stop the session you have the option to save it.
 
@@ -51,23 +61,36 @@
 - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
 - Interval Alerts - ability to configure multiple intermediate alerts
     - once you are on a specific interval alert you see in the menu title the Alert ID (e.g. Alert 1) relative to the current session interval alerts
-    - Time - select one-off or repetitive alert; repetitive alerts allow shorter durations than a minute
+    - Time 
+        - select one-off or repetitive alert
+        - repetitive alerts allow shorter durations than a minute
+        - only a single alert will execute at any given time
+        - priority of alerts with the same time
+          1. final session alert
+          2. last one-off alert
+          3. last repetative alert
     - Color - the color of the current interval alert used in the graphical controls. Select different colors for each alert to differentiate them during meditation. Select transparent color if you don't want to see visual marks for the alert during meditation
     - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
 - Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings (see section 5).
-- Global Settings - see bellow section 4. Turning on/off Stress and HRV
+- Global Settings - see bellow section 4
 
- ![Session settings state](userGuideScreenshots/sessionSettingsState.png)
+### 3. Picking a session
 
-### 3. Selecting a session
+From the session picker screen press page up/down buttons (for Vivoactive 3 - swipe up/down).
+On this screen you can see the applicable settings for the selected session
+- activity type - in the title
+  - Meditate
+  - Yoga
+- time - total duration of the session
+- vibe pattern
+- interval alert triggers - the graph in the middle of the screen represents the relative alert triger time compared to the total session time
+- Global settings - see section 4
 
-Once you have more than one session you can select a session by using the page up/down behaviour on the watch (Vivoactive 3 - swipe up/down). Each session is displayed in the configured color. The session activity type - Meditate or Yoga is displayed in the title. The graph in the middle of the screen represents the relative time when interval alerts will trigger compared to the total session duration.
-
-![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings state](userGuideScreenshots/sessionSettingsState.png)  ![Session settings state yoga](userGuideScreenshots/sessionSettingsStateYoga.png)
+![Session picker yoga explained](userGuideScreenshots/sessionPickerYogaExplained.png)
 
 ### 4. Turning on/off Stress and HRV
 
-From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. Select the setting you wish to change. Once you are done you can see which features are turned on the currently selected session in the bottom icons row.
+From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. Select the setting you wish to change. Once you are done you can see which features are turned by looking at the session picker screen's bottom icons row.
 - ![](userGuideScreenshots/globalSettingsStress.png) Stress tracking is On (tracking summary metrics of No, Low and High Stress)
 - ![](userGuideScreenshots/globalSettingsStressDetailed.png) Detailed Stress tracking is On (tracks additionally stress median and Max-Min HR Windows Graph)
 - ![](userGuideScreenshots/globalSettingsHrv.png) HRV tracking is On (tracks the standard deviation HRV of the first and last 5 min intervals of the session)
