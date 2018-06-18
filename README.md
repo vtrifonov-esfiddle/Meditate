@@ -24,6 +24,11 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, st
     - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
     - the Vivoactive 3 HR sensor is too unreliable to produce usable intervals data for algorithms that analyse successive beat-to-beat intervals like RMSSD (it flattens the readings)
 
+![Session picker yoga explained](userGuideScreenshots/sessionPicker.png)
+![Session in-progress explained](userGuideScreenshots/sessionInProgressExplained.png)
+![Summary stress](userGuideScreenshots/summaryStress.png)
+![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
+
 ## Supported Devices
 - Vivoactive 3 (from [vivoactive3-publish](https://github.com/vtrifonov-esfiddle/Meditate/tree/vivoactive3-publish) branch)
 - Round Watches that support Connect IQ >= 2.4 (from [round-watches-publish](https://github.com/vtrifonov-esfiddle/Meditate/tree/round-watches-publish) branch)
@@ -34,3 +39,5 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, st
 ## Dependencies
 - Font for duration picker [Google Roboto](https://fonts.google.com/specimen/Roboto) ([Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0))
 - Status Icons - [Font Awesome free](https://fontawesome.com/license) (SIL OFL 1.1 License) 
+
+
