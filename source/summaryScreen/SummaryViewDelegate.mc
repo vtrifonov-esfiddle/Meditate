@@ -76,7 +76,16 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	}
 
 	function onBack() {
-		me.exitApplication();
+		var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
+		if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
+			var sessionStorage = new SessionStorage();	
+			var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
+			Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_LEFT);
+			return true;
+		}
+		else {
+			exitApplication();
+		}
 	}
 	
 	function createScreenPickerView() {

@@ -120,6 +120,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[4].icons = statusIcons;
         details.detailLines[4].iconOffset = me.iconsArrayInitialOffset; 
         details.detailLines[4].value.font = Ui.loadResource(Rez.Fonts.fontAwesome);
+        details.detailLines[4].value.text = "";
         var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
         if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
         	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faSaveSession);

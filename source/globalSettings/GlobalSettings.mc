@@ -50,7 +50,7 @@ class GlobalSettings {
 	}
 	
 	static function loadContinueAfterFinishingSession() {
-		return SaveActivityConfirmation.AutoNo;
+		return ContinueAfterFinishingSession.Yes;
 	}
 }
 
