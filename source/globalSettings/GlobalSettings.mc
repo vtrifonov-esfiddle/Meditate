@@ -44,6 +44,29 @@ class GlobalSettings {
 	static function saveActivityType(activityType) {
 		App.Storage.setValue(ActivityTypeKey, activityType);
 	}
+	
+	static function loadSaveActivityConfirmation() {
+		return SaveActivityConfirmation.AutoYes;
+	}
+	
+	static function loadContinueAfterFinishingSession() {
+		return SaveActivityConfirmation.AutoNo;
+	}
+}
+
+module SaveActivityConfirmation {
+	enum {
+		Ask = 0,
+		AutoNo = 1,
+		AutoYes = 2
+	}
+}
+
+module ContinueAfterFinishingSession {
+	enum {
+		No = 0,
+		Yes = 1
+	}
 }
 
 module StressTracking {

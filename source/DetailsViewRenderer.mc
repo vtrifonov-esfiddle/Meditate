@@ -29,18 +29,24 @@ class DetailsViewRenderer {
 		for (var lineNumber = 1; lineNumber <= me.mDetailsModel.detailLines.size(); lineNumber++) {
         	dc.setColor(me.mDetailsModel.color, Gfx.COLOR_TRANSPARENT); 
 			var line = me.mDetailsModel.detailLines[lineNumber];
+			var iconOffset = line.iconOffset;
 			if (line.icon != null) {
-				me.displayIcon(dc, lineNumber, line.icon, line.iconOffset, line.yLineOffset);
+				me.displayIcon(dc, lineNumber, line.icon, iconOffset, line.yLineOffset);
 			}
 			else if (line.icons != null) {
-				var iconOffset = line.iconOffset;
+				
 				for (var i = 0; i < line.icons.size(); i++) {					
 					me.displayIcon(dc, lineNumber, line.icons[i], iconOffset, line.yLineOffset);
 					iconOffset += me.iconsArrayOffset;
 				}
 			}
 			if (line.value instanceof TextLine) {
-       			me.displayText(dc, lineNumber, line.value.text, line.valueOffset, line.yLineOffset);  
+				if (line.isIconsAlignedValueOffset == true) {
+					me.displayIconsAlignedText(dc, lineNumber, line.value.text, line.value.font, iconOffset, line.yLineOffset);  
+				}
+				else {
+       				me.displayText(dc, lineNumber, line.value.text, line.value.font, line.valueOffset, line.yLineOffset);  
+       			}
        		}
    			else if	(line.value instanceof PercentageHighlightLine) {
    				me.drawPercentageHighlightLine(dc, lineNumber, line.value.getHighlights(), line.value.backgroundColor, line.valueOffset);
@@ -89,10 +95,15 @@ class DetailsViewRenderer {
      	bitmap.draw(dc);
 	}
     
-    private function displayText(dc, lineNumber, text, valueOffset, yLineOffset) {   
+    private function displayText(dc, lineNumber, text, font, valueOffset, yLineOffset) {   
         var textX = dc.getWidth() / 3.4 + valueOffset;
         var posY = getLinePosY(lineNumber) + yLineOffset;		
-        
-        dc.drawText(textX, posY, Gfx.FONT_SYSTEM_SMALL, text, Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(textX, posY, font, text, Gfx.TEXT_JUSTIFY_LEFT);
     }    
+    
+    private function displayIconsAlignedText(dc, lineNumber, text, font, valueOffset, yLineOffset) { 
+    	var textX = IconX + valueOffset;
+        var posY = getLinePosY(lineNumber) + yLineOffset;		
+        dc.drawText(textX, posY, font, text, Gfx.TEXT_JUSTIFY_LEFT);
+    }
 }

@@ -119,6 +119,16 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		}            
         details.detailLines[4].icons = statusIcons;
         details.detailLines[4].iconOffset = me.iconsArrayInitialOffset; 
+        details.detailLines[4].value.font = Ui.loadResource(Rez.Fonts.fontAwesome);
+        var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
+        if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
+        	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faSaveSession);
+        }
+        var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
+        if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
+        	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faRepeatSession); 
+        }
+        details.detailLines[4].isIconsAlignedValueOffset = true;      
         details.detailLines[4].yLineOffset = me.iconsArrayYOffset;     
 	}
 	

@@ -67,9 +67,11 @@ class LineHighlight {
 class TextLine {
 	function initialize() {
 		me.text = "";
+		me.font = Gfx.FONT_SYSTEM_SMALL;
 	}
 
 	var text;
+	var font;
 }
 
 class DetailsLine {
@@ -80,11 +82,13 @@ class DetailsLine {
 		me.iconOffset = 0;
 		me.yLineOffset = 0;
 		me.value = new TextLine();
+		me.isIconsAlignedValueOffset = false;
 	}
 
 	var icon;
 	var icons;
 	var valueOffset;
+	var isIconsAlignedValueOffset;
 	var yLineOffset;
 	var iconOffset;
 	var value;

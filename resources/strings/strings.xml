@@ -114,4 +114,6 @@
 	<string id="stressHighFieldUnits">%</string>
 	
 	<string id="activityCalculatingResultsText">Finishing...</string>
+	<string id="faSaveSession"></string>
+	<string id="faRepeatSession"></string>
 </strings>
