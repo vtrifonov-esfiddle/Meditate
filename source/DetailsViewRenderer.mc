@@ -42,10 +42,10 @@ class DetailsViewRenderer {
 			}
 			if (line.value instanceof TextLine) {
 				if (line.isIconsAlignedValueOffset == true) {
-					me.displayIconsAlignedText(dc, lineNumber, line.value.text, line.value.font, iconOffset, line.yLineOffset);  
+					me.displayIconsAlignedText(dc, lineNumber, line.value, iconOffset, line.yLineOffset);  
 				}
 				else {
-       				me.displayText(dc, lineNumber, line.value.text, line.value.font, line.valueOffset, line.yLineOffset);  
+       				me.displayText(dc, lineNumber, line.value, line.valueOffset, line.yLineOffset);  
        			}
        		}
    			else if	(line.value instanceof PercentageHighlightLine) {
@@ -95,15 +95,17 @@ class DetailsViewRenderer {
      	bitmap.draw(dc);
 	}
     
-    private function displayText(dc, lineNumber, text, font, valueOffset, yLineOffset) {   
+    private function displayText(dc, lineNumber, textValue, valueOffset, yLineOffset) {   
         var textX = dc.getWidth() / 3.4 + valueOffset;
-        var posY = getLinePosY(lineNumber) + yLineOffset;		
-        dc.drawText(textX, posY, font, text, Gfx.TEXT_JUSTIFY_LEFT);
+        var posY = getLinePosY(lineNumber) + yLineOffset;	
+        dc.setColor(textValue.color, Gfx.COLOR_TRANSPARENT);	
+        dc.drawText(textX, posY, textValue.font, textValue.text, Gfx.TEXT_JUSTIFY_LEFT);
     }    
     
-    private function displayIconsAlignedText(dc, lineNumber, text, font, valueOffset, yLineOffset) { 
+    private function displayIconsAlignedText(dc, lineNumber, textValue, valueOffset, yLineOffset) { 
     	var textX = IconX + valueOffset;
-        var posY = getLinePosY(lineNumber) + yLineOffset;		
-        dc.drawText(textX, posY, font, text, Gfx.TEXT_JUSTIFY_LEFT);
+        var posY = getLinePosY(lineNumber) + yLineOffset;	
+        dc.setColor(textValue.color, Gfx.COLOR_TRANSPARENT);	
+        dc.drawText(textX, posY, textValue.font, textValue.text, Gfx.TEXT_JUSTIFY_LEFT);
     }
 }

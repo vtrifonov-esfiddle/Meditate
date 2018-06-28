@@ -68,10 +68,12 @@ class TextLine {
 	function initialize() {
 		me.text = "";
 		me.font = Gfx.FONT_SYSTEM_SMALL;
+		me.color = Gfx.COLOR_WHITE;
 	}
 
 	var text;
 	var font;
+	var color;
 }
 
 class DetailsLine {

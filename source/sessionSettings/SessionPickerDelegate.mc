@@ -122,7 +122,13 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[4].value.font = Ui.loadResource(Rez.Fonts.fontAwesome);
         details.detailLines[4].value.text = "";
         var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
+        //TODO - change to details.detailLines[4].fontIcons array
         if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
+        	details.detailLines[4].value.color = Gfx.COLOR_GREEN;
+        	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faSaveSession);
+        }
+        if (saveActivityConfirmation == SaveActivityConfirmation.AutoNo) {
+        	details.detailLines[4].value.color = Gfx.COLOR_RED;
         	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faSaveSession);
         }
         var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
