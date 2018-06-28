@@ -98,7 +98,6 @@ class DetailsViewRenderer {
     private function displayText(dc, lineNumber, textValue, valueOffset, yLineOffset) {   
         var textX = dc.getWidth() / 3.4 + valueOffset;
         var posY = getLinePosY(lineNumber) + yLineOffset;	
-        dc.setColor(textValue.color, Gfx.COLOR_TRANSPARENT);	
         dc.drawText(textX, posY, textValue.font, textValue.text, Gfx.TEXT_JUSTIFY_LEFT);
     }    
     
