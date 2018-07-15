@@ -87,10 +87,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	
 	function createScreenPickerView() {
 		var renderer;
-		if (me.mSummaryModel == null) {
-			renderer = me.createEmptySummaryPage(); 
-		}
-		else if (me.mSelectedPageIndex == 0) {
+		if (me.mSelectedPageIndex == 0) {
 			renderer = me.createDetailsPageHr();
 		} 
 		else if (me.mSelectedPageIndex == me.mStressPageIndex) {
