@@ -117,7 +117,10 @@
 	<string id="faSaveSession"></string>
 	<string id="faRepeatSession"></string>
 	<string id="faHourglassHalf"></string>
-
+	<string id="faClock"></string>
+	<string id="faHeartbeat"></string>
+	<string id="faPieChart"></string>
+	<string id="faHeart"></string>
 	<string id="meditateFontStress">1</string>
 	<string id="meditateFontIntervalAlertsTime">3</string>
 	<string id="meditateFontVibratePattern">2</string>

@@ -34,11 +34,7 @@ class DetailsViewRenderer {
 				me.displayIcon(dc, lineNumber, line.icon, iconOffset, line.yLineOffset);
 			}
 			else if (line.icons != null) {
-				
-				for (var i = 0; i < line.icons.size(); i++) {					
-					me.displayIcon(dc, lineNumber, line.icons[i], iconOffset, line.yLineOffset);
-					iconOffset += me.iconsArrayOffset;
-				}
+				me.displayFontIcons(dc, lineNumber, line.icons, line.iconsFont, line.iconsColor, line.iconOffset, line.yLineOffset);
 			}
 			if (line.value instanceof TextLine) {
 				if (line.isIconsAlignedValueOffset == true) {
@@ -93,6 +89,14 @@ class DetailsViewRenderer {
 	         :locY=>posY
      	});
      	bitmap.draw(dc);
+	}
+
+	private function displayFontIcons(dc, lineNumber, icons, iconsFont, iconsColor, iconOffset, yLineOffset) {
+		var textX = dc.getWidth() / 3.4 + iconOffset;
+		var iconsYOffset = 4;
+        var posY = getLinePosY(lineNumber) + yLineOffset + iconsYOffset;	
+        dc.setColor(iconsColor, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(textX, posY, iconsFont, icons, Gfx.TEXT_JUSTIFY_CENTER);
 	}
     
     private function displayText(dc, lineNumber, textValue, valueOffset, yLineOffset) {   

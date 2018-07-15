@@ -80,6 +80,8 @@ class DetailsLine {
 	function initialize() {
 		me.icon = null;
 		me.icons = null;
+		me.iconsFont = null;
+		me.iconsColor = Gfx.COLOR_WHITE;
 		me.valueOffset = 0;
 		me.iconOffset = 0;
 		me.yLineOffset = 0;
@@ -89,6 +91,8 @@ class DetailsLine {
 
 	var icon;
 	var icons;
+	var iconsColor;
+	var iconsFont;
 	var valueOffset;
 	var isIconsAlignedValueOffset;
 	var yLineOffset;

@@ -89,13 +89,22 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.titleColor = session.color;
         details.setAllIconsOffset(me.sessionDetailsIconsOffset);
         
-        details.detailLines[1].icon = Rez.Drawables.durationIcon;
+        details.detailLines[1].iconsFont = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
+        details.detailLines[1].icons = Ui.loadResource(Rez.Strings.faHourglassHalf);
+        //details.detailLines[1].iconOffset = -36;
+        //details.detailLines[1].icon = Rez.Drawables.durationIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
-        details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
+        details.detailLines[2].iconsFont = Ui.loadResource(Rez.Fonts.fontMeditateIcons);
+        details.detailLines[2].icons = Ui.loadResource(Rez.Strings.meditateFontVibratePattern);
+        //details.detailLines[2].iconOffset = -36;
+        //details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
-        details.detailLines[3].icon = Rez.Drawables.sessionDurationIcon;
+        details.detailLines[3].iconsFont = Ui.loadResource(Rez.Fonts.fontAwesomeFreeRegular);
+        details.detailLines[3].icons = Ui.loadResource(Rez.Strings.faClock);
+        //etails.detailLines[3].iconOffset = -36;
+        //details.detailLines[3].icon = Rez.Drawables.sessionDurationIcon;
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine();
         
@@ -117,14 +126,14 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {
 			statusIcons.add(Rez.Drawables.heartRateVariabilityIcon);
 		}          
-        details.detailLines[4].icons = statusIcons;
-        details.detailLines[4].iconOffset = me.iconsArrayInitialOffset; 
-        details.detailLines[4].value.font = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
-        details.detailLines[4].value.text = "";
+		details.detailLines[4].iconsFont = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
+		var heartBeatPurple = 0xFF00FF;
+		details.detailLines[4].iconsColor = heartBeatPurple;
+        details.detailLines[4].icons = Ui.loadResource(Rez.Strings.faHeartbeat) + Ui.loadResource(Rez.Strings.faPieChart)  + Ui.loadResource(Rez.Strings.faHeart);
+        details.detailLines[4].iconOffset = 50; 
+        details.detailLines[4].valueOffset = 30;
         var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
-        //TODO - change to details.detailLines[4].fontIcons array
-        details.detailLines[4].value.color = Gfx.COLOR_WHITE;
-    	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faHourglassHalf);
+        //details.detailLines[4].value.color = Gfx.COLOR_WHITE;
         /* if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
         	details.detailLines[4].value.color = Gfx.COLOR_WHITE;
         	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontSessionTime);
@@ -137,8 +146,8 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
         	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontIntervalAlertsTime); 
         }*/
-        details.detailLines[4].isIconsAlignedValueOffset = true;      
-        details.detailLines[4].yLineOffset = me.iconsArrayYOffset;     
+        //details.detailLines[4].isIconsAlignedValueOffset = true;      
+        details.detailLines[4].yLineOffset = 30;     
 	}
 	
 	function createScreenPickerView() {
