@@ -115,13 +115,24 @@ class MediateActivity {
 	function finish() {		
 		Sensor.setEnabledSensors( [] );
 		me.mSession.save();
+		me.mSession = null;
+	}
+	
+	function getSummary() {
 		return me.mSummaryModel;
 	}
 	
 	function discard() {		
 		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();
-		return me.mSummaryModel;
+		me.mSession = null;
+	}
+	
+	function discardDanglingActivity() {
+		var isDangling = me.mSession != null && !me.mSession.isRecording();
+		if (isDangling) {
+			me.discard();
+		}
 	}
 }
 
