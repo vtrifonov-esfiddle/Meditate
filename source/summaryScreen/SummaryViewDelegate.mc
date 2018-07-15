@@ -14,7 +14,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		setPageIndexes(hrvTracking, stressTracking);
 		
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
-        me.mSummaryModel = null;
+        me.mSummaryModel = meditateActivity.getSummary();
         me.mMeditateActivity = meditateActivity;
 	}
 		
@@ -71,18 +71,15 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	
 	private const InvalidPageIndex = -1;
 
-	private function exitApplication() {		
-		System.exit();
-	}
-
 	function onBack() {
-		me.exitApplication();
+		me.mMeditateActivity.discardDanglingActivity();
+		return false; //exit app
 	}
 	
 	function createScreenPickerView() {
 		var renderer;
 		if (me.mSummaryModel == null) {
-			renderer = null; 
+			renderer = me.createEmptySummaryPage(); 
 		}
 		else if (me.mSelectedPageIndex == 0) {
 			renderer = me.createDetailsPageHr();
@@ -106,23 +103,16 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 			me.mSummaryView = new SummaryView(renderer);
 		}
 		return me.mSummaryView;
-	}
-	
+	}	
+		
 	private var mSummaryView;
 	
-	private function refreshSummaryView() {
-		me.mSummaryView.mRenderer = me.createDetailsPageHr();
-		Ui.requestUpdate();
-	}
-	
  	function onConfirmedSave() {
-    	me.mSummaryModel = me.mMeditateActivity.finish(); 
-    	me.refreshSummaryView();
+    	me.mMeditateActivity.finish(); 
     }
     
     function onDiscardedSave() {
-    	me.mSummaryModel = me.mMeditateActivity.discard();
-    	me.refreshSummaryView();
+    	me.mMeditateActivity.discard();
     }
 	
 	private function formatHr(hr) {
@@ -158,7 +148,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         
         return new DetailsViewRenderer(details);
 	}	
-	
+		
 	private function createDetailsPageStress() {
 		var details = new DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
