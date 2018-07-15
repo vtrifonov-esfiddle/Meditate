@@ -35,6 +35,7 @@
 - interval alert triggers 
     - the small colored marks represent the time of trigerring an interval alert
     - each marked position corresponts to an alert trigger time
+    - you can hide them per alert by selecting transparent color from the [Interval Alerts settings menu](#2-configuring-a-session)
 - time elapsed 
 - current HR
 
