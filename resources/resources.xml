@@ -41,6 +41,7 @@
     <fonts>
    	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
    	    <font id="fontAwesome" filename="fonts/fontAwesome/fontAwesome.fnt" />
+   	    <font id="fontMeditateIcons" filename="fonts/meditateIcons/meditateIcons.fnt" />
     </fonts>
     <fitContributions>
 		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />
