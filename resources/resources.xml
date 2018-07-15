@@ -40,7 +40,8 @@
     </drawable-list>
     <fonts>
    	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
-   	    <font id="fontAwesome" filename="fonts/fontAwesome/fontAwesome.fnt" />
+   	    <font id="fontAwesomeFreeSolid" filename="fonts/fontAwesome/fontAwesomeFreeSolid.fnt" />
+   	    <font id="fontAwesomeFreeRegular" filename="fonts/fontAwesome/fontAwesomeFreeRegular.fnt" />
    	    <font id="fontMeditateIcons" filename="fonts/meditateIcons/meditateIcons.fnt" />
     </fonts>
     <fitContributions>

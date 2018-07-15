@@ -119,11 +119,13 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		}          
         details.detailLines[4].icons = statusIcons;
         details.detailLines[4].iconOffset = me.iconsArrayInitialOffset; 
-        details.detailLines[4].value.font = Ui.loadResource(Rez.Fonts.fontMeditateIcons);
+        details.detailLines[4].value.font = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
         details.detailLines[4].value.text = "";
         var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
         //TODO - change to details.detailLines[4].fontIcons array
-        if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
+        details.detailLines[4].value.color = Gfx.COLOR_WHITE;
+    	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.faHourglassHalf);
+        /* if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
         	details.detailLines[4].value.color = Gfx.COLOR_WHITE;
         	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontSessionTime);
         }
@@ -134,8 +136,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
         if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
         	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontIntervalAlertsTime); 
-        }
-        details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontVibratePattern); 
+        }*/
         details.detailLines[4].isIconsAlignedValueOffset = true;      
         details.detailLines[4].yLineOffset = me.iconsArrayYOffset;     
 	}

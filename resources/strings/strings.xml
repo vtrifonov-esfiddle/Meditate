@@ -116,7 +116,8 @@
 	<string id="activityCalculatingResultsText">Finishing...</string>
 	<string id="faSaveSession"></string>
 	<string id="faRepeatSession"></string>
-	
+	<string id="faHourglassHalf"></string>
+
 	<string id="meditateFontStress">1</string>
 	<string id="meditateFontIntervalAlertsTime">3</string>
 	<string id="meditateFontVibratePattern">2</string>
