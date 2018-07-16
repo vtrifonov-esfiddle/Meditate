@@ -69,35 +69,61 @@ class TextLine {
 		me.text = "";
 		me.font = Gfx.FONT_SYSTEM_SMALL;
 		me.color = Gfx.COLOR_WHITE;
+		me.xOffset = 0;
 	}
 
 	var text;
 	var font;
 	var color;
+	var xOffset;
+}
+
+class Icon {
+	function initialize(rezFont) {
+		me.symbols = "";
+		me.font = Ui.loadResource(rezFont);
+		me.color = Gfx.COLOR_WHITE;
+		me.xOffset = 0;
+	}
+
+	function addSymbol(symbol) {
+		me.symbols += Ui.loadResource(symbol);
+	}
+	var symbols;
+	var font;
+	var color;
+	var xOffset;
+}
+
+class IconMeditate extends Icon {
+	function initialize() {
+		Icon.initialize(Rez.font.fontMeditateIcons);
+	}
+}
+
+class IconFontAwesomeSolid extends Icon {
+	function initialize() {
+		Icon.initialize(Rez.font.fontAwesomeFreeSolid);
+	}
+}
+
+class IconFontAwesomeRegular extends Icon {
+	function initialize() {
+		Icon.initialize(Rez.font.fontAwesomeFreeRegular);
+	}
 }
 
 class DetailsLine {
 	function initialize() {
 		me.icon = null;
-		me.icons = null;
-		me.iconsFont = null;
 		me.iconsColor = Gfx.COLOR_WHITE;
-		me.valueOffset = 0;
-		me.iconOffset = 0;
 		me.yLineOffset = 0;
 		me.value = new TextLine();
-		me.isIconsAlignedValueOffset = false;
 	}
 
-	var icon;
-	var icons;
-	var iconsColor;
-	var iconsFont;
-	var valueOffset;
-	var isIconsAlignedValueOffset;
-	var yLineOffset;
-	var iconOffset;
+	var icon;	
 	var value;
+	var yLineOffset;
 }
 
 class DetailsModel{

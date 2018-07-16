@@ -5,6 +5,5 @@
 	<property id="summaryLineXOffset" type="number">15</property>
 	<property id="summaryLineXHrvOffset" type="number">10</property>
 	<property id="summaryLineXStressOffset" type="number">-10</property>
-	<property id="iconsArrayOffset" type="number">35</property>
 	<property id="iconsArrayInitialOffset" type="number">10</property>
 </properties>

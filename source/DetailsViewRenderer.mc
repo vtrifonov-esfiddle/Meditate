@@ -8,13 +8,13 @@ class DetailsViewRenderer {
 	private const TextPosYOffset = 30;
 	private const TitlePosY = 20;
 	private const IconX = 30;
+	private const IconsYOffset = 4;
 	
 	private var mDetailsModel;
 	
 	function initialize(detailsModel) {
 		me.mDetailsModel = detailsModel;
 		me.progressBarWidth = App.getApp().getProperty("progressBarWidth");
-		me.iconsArrayOffset = App.getApp().getProperty("iconsArrayOffset");
 	}
 	
 	function renderBackgroundColor(dc) {				        
@@ -29,28 +29,18 @@ class DetailsViewRenderer {
 		for (var lineNumber = 1; lineNumber <= me.mDetailsModel.detailLines.size(); lineNumber++) {
         	dc.setColor(me.mDetailsModel.color, Gfx.COLOR_TRANSPARENT); 
 			var line = me.mDetailsModel.detailLines[lineNumber];
-			var iconOffset = line.iconOffset;
 			if (line.icon != null) {
-				me.displayIcon(dc, lineNumber, line.icon, iconOffset, line.yLineOffset);
-			}
-			else if (line.icons != null) {
-				me.displayFontIcons(dc, lineNumber, line.icons, line.iconsFont, line.iconsColor, line.iconOffset, line.yLineOffset);
+				me.displayFontIcon(dc, lineNumber, line.icon, line.yLineOffset);
 			}
 			if (line.value instanceof TextLine) {
-				if (line.isIconsAlignedValueOffset == true) {
-					me.displayIconsAlignedText(dc, lineNumber, line.value, iconOffset, line.yLineOffset);  
-				}
-				else {
-       				me.displayText(dc, lineNumber, line.value, line.valueOffset, line.yLineOffset);  
-       			}
-       		}
+				me.displayText(dc, lineNumber, line.value, line.yLineOffset);  
+   			}
    			else if	(line.value instanceof PercentageHighlightLine) {
    				me.drawPercentageHighlightLine(dc, lineNumber, line.value.getHighlights(), line.value.backgroundColor, line.valueOffset);
    			}
        	}       
     }
     
-    private var iconsArrayOffset;
     private var progressBarWidth;
     private const ProgressBarHeight = 16;
     
@@ -79,36 +69,16 @@ class DetailsViewRenderer {
     	return lineNumber * TextPosYOffset + InitialTextPosY;
     }
         	
-	private function displayIcon(dc, lineNumber, drawableId, iconOffset, yLineOffset) {
-        var posX = IconX + iconOffset;
-        var posY = getLinePosY(lineNumber) + yLineOffset;
-        
-		var bitmap = new Ui.Bitmap({
-	         :rezId=>drawableId,
-	         :locX=>posX,
-	         :locY=>posY
-     	});
-     	bitmap.draw(dc);
-	}
-
-	private function displayFontIcons(dc, lineNumber, icons, iconsFont, iconsColor, iconOffset, yLineOffset) {
-		var textX = dc.getWidth() / 3.4 + iconOffset;
-		var iconsYOffset = 4;
-        var posY = getLinePosY(lineNumber) + yLineOffset + iconsYOffset;	
-        dc.setColor(iconsColor, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(textX, posY, iconsFont, icons, Gfx.TEXT_JUSTIFY_CENTER);
+	private function displayFontIcon(dc, lineNumber, icon, yLineOffset) {
+		var textX = dc.getWidth() / 3.4 + icon.xOffset;
+        var posY = getLinePosY(lineNumber) + yLineOffset + IconsYOffset;	
+        dc.setColor(icon.color, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(textX, posY, icon.font, icon.symbols, Gfx.TEXT_JUSTIFY_CENTER);
 	}
     
-    private function displayText(dc, lineNumber, textValue, valueOffset, yLineOffset) {   
-        var textX = dc.getWidth() / 3.4 + valueOffset;
+    private function displayText(dc, lineNumber, textValue, yLineOffset) {   
+        var textX = dc.getWidth() / 3.4 + value.xOffset;
         var posY = getLinePosY(lineNumber) + yLineOffset;	
         dc.drawText(textX, posY, textValue.font, textValue.text, Gfx.TEXT_JUSTIFY_LEFT);
     }    
-    
-    private function displayIconsAlignedText(dc, lineNumber, textValue, valueOffset, yLineOffset) { 
-    	var textX = IconX + valueOffset;
-        var posY = getLinePosY(lineNumber) + yLineOffset;	
-        dc.setColor(textValue.color, Gfx.COLOR_TRANSPARENT);	
-        dc.drawText(textX, posY, textValue.font, textValue.text, Gfx.TEXT_JUSTIFY_LEFT);
-    }
 }
