@@ -16,7 +16,12 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = meditateActivity.getSummary();
         me.mMeditateActivity = meditateActivity;
+        me.iconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
+        me.valueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
 	}
+	
+	private var iconsXPos;
+	private var valueXPos;
 		
 	private static function getPagesCount(hrvTracking, stressTracking) {		
 		var pagesCount = 4;
@@ -131,26 +136,38 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary HR";
         details.titleColor = Gfx.COLOR_BLACK;
-        details.setAllValuesOffset(5);
+
         
-        details.detailLines[1].icon = Rez.Drawables.timeIcon;
+        var timeIcon = new IconFontAwesomeSolid();
+        timeIcon.setSymbol(Rez.Strings.faHourglassEnd);
+        timeIcon.color = Gfx.COLOR_BLACK;
+        details.detailLines[1].icon = timeIcon;
+        details.detailLines[1].value.color = Gfx.COLOR_BLACK;
         details.detailLines[1].value.text = TimeFormatter.format(me.mSummaryModel.elapsedTime);
-                
-        details.detailLines[2].icon = Rez.Drawables.heartRateMinIcon;
+        
+        var hrMinIcon = new IconFontMeditateIcons();
+        hrMinIcon.setSymbol(Rez.Strings.meditateFontHrMin);                
+        hrMinIcon.color = Gfx.COLOR_RED;        
+        details.detailLines[2].icon = hrMinIcon;
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;
         details.detailLines[2].value.text = me.formatHr(me.mSummaryModel.minHr);
                 
-        details.detailLines[3].icon = Rez.Drawables.heartRateAvgIcon;
+        var hrAvgIcon = new IconFontMeditateIcons();
+        hrAvgIcon.setSymbol(Rez.Strings.meditateFontHrAvg);                
+        hrAvgIcon.color = Gfx.COLOR_RED;                
+        details.detailLines[3].icon = hrAvgIcon;
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;  
         details.detailLines[3].value.text = me.formatHr(me.mSummaryModel.avgHr);
         
-        details.detailLines[4].icon = Rez.Drawables.heartRateMaxIcon;
+        var hrMaxIcon = new IconFontMeditateIcons();
+        hrMaxIcon.setSymbol(Rez.Strings.meditateFontHrMax);                
+        hrMaxIcon.color = Gfx.COLOR_RED;    
+        details.detailLines[4].icon = hrMaxIcon;    
+        details.detailLines[4].value.color = Gfx.COLOR_BLACK; 
         details.detailLines[4].value.text = me.formatHr(me.mSummaryModel.maxHr);
                 
-                
-        var summaryLineXOffset = App.getApp().getProperty("summaryLineXOffset");
-        for (var i = 1; i <= 5; i++) {
-            details.detailLines[i].iconOffset = summaryLineXOffset;
-        	details.detailLines[i].valueOffset = summaryLineXOffset;
-        }
+        details.setAllIconsXPos(me.iconsXPos);
+        details.setAllValuesXPos(me.valueXPos);   
         
         return new DetailsViewRenderer(details);
 	}	

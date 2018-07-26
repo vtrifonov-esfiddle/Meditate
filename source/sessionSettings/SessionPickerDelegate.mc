@@ -9,14 +9,18 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
 		me.mSelectedSessionDetails = new DetailsModel();
-		me.iconsArrayYOffset = App.getApp().getProperty("iconsArrayYOffset");
-		me.sessionDetailsIconsOffset = App.getApp().getProperty("sessionDetailsIconsOffset");
-		me.iconsArrayInitialOffset = App.getApp().getProperty("iconsArrayInitialOffset");
+		me.globalSettingsIconsYOffset = App.getApp().getProperty("globalSettingsIconsYOffset");
+		me.sessionDetailsIconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
+		me.sessionDetailsValueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
+		me.globalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
+		me.sessionDetailsAlertsLineYOffset = App.getApp().getProperty("sessionDetailsAlertsLineYOffset");
 	}
 	
-	private var iconsArrayYOffset;
-	private var sessionDetailsIconsOffset;
-	private var iconsArrayInitialOffset;
+	private var globalSettingsIconsYOffset;
+	private var sessionDetailsIconsXPos;
+	private var sessionDetailsValueXPos;
+	private var globalSettingsIconsXPos;
+	private var sessionDetailsAlertsLineYOffset;
 	
     function onMenu() {
 		return me.showSessionSettingsMenu();
@@ -87,67 +91,61 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         }
         details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;
-        details.setAllIconsOffset(me.sessionDetailsIconsOffset);
         
-        details.detailLines[1].iconsFont = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
-        details.detailLines[1].icons = Ui.loadResource(Rez.Strings.faHourglassHalf);
-        //details.detailLines[1].iconOffset = -36;
-        //details.detailLines[1].icon = Rez.Drawables.durationIcon;
+        var timeIcon = new IconFontAwesomeSolid();
+        timeIcon.setSymbol(Rez.Strings.faHourglassHalf);
+        details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
-        details.detailLines[2].iconsFont = Ui.loadResource(Rez.Fonts.fontMeditateIcons);
-        details.detailLines[2].icons = Ui.loadResource(Rez.Strings.meditateFontVibratePattern);
-        //details.detailLines[2].iconOffset = -36;
-        //details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
+        var vibePatternIcon = new IconFontMeditateIcons();
+        vibePatternIcon.setSymbol(Rez.Strings.meditateFontVibratePattern);
+        details.detailLines[2].icon = vibePatternIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
-        details.detailLines[3].iconsFont = Ui.loadResource(Rez.Fonts.fontAwesomeFreeRegular);
-        details.detailLines[3].icons = Ui.loadResource(Rez.Strings.faClock);
-        //etails.detailLines[3].iconOffset = -36;
-        //details.detailLines[3].icon = Rez.Drawables.sessionDurationIcon;
+        var alertsLineIcon = new IconFontAwesomeRegular();
+        alertsLineIcon.setSymbol(Rez.Strings.faClock);
+        details.detailLines[3].icon = alertsLineIcon;
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
-        details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine();
+        details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine(me.sessionDetailsValueXPos, me.sessionDetailsAlertsLineYOffset);
         
-        me.updateGlobalSettingsDetails();      
+        details.setAllIconsXPos(me.sessionDetailsIconsXPos);
+        details.setAllValuesXPos(me.sessionDetailsValueXPos);
+        
+        //TODO: fix out of memmory issue
+        //me.updateGlobalSettingsDetails();      
 	}	
 	
 	function updateGlobalSettingsDetails() {
 		var details = me.mSelectedSessionDetails;
-		var statusIcons = [];
-		
+		var statusIcons = new IconsLine(4);
+		statusIcons.xPos = me.globalSettingsIconsXPos;
 		var stressTracking = GlobalSettings.loadStressTracking();
 		if (stressTracking == StressTracking.On) {
-			statusIcons.add(Rez.Drawables.stressTrackingIcon);
+			statusIcons.addIcon(Rez.Fonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);		
 		}
-		else if (stressTracking == StressTracking.OnDetailed) {
-			statusIcons.add(Rez.Drawables.stressTrackingIcon);
-			statusIcons.add(Rez.Drawables.pieChartWhiteIcon);
+		else if (stressTracking == StressTracking.OnDetailed) {			
+			statusIcons.addIcon(Rez.Fonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);			
+			statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faPieChart, Gfx.COLOR_WHITE);
 		}    
-		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {
-			statusIcons.add(Rez.Drawables.heartRateVariabilityIcon);
+		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {			
+			var heartBeatPurpleColor = 0xFF00FF;
+			statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faHeartbeat, heartBeatPurpleColor);
 		}          
-		details.detailLines[4].iconsFont = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
-		var heartBeatPurple = 0xFF00FF;
-		details.detailLines[4].iconsColor = heartBeatPurple;
-        details.detailLines[4].icons = Ui.loadResource(Rez.Strings.faHeartbeat) + Ui.loadResource(Rez.Strings.faPieChart)  + Ui.loadResource(Rez.Strings.faHeart);
-        details.detailLines[4].iconOffset = 50; 
-        details.detailLines[4].valueOffset = 30;
+				
         var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
-        //details.detailLines[4].value.color = Gfx.COLOR_WHITE;
-        /* if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
-        	details.detailLines[4].value.color = Gfx.COLOR_WHITE;
-        	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontSessionTime);
+        if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
+        	statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_GREEN);
         }
         if (saveActivityConfirmation == SaveActivityConfirmation.AutoNo) {
-        	details.detailLines[4].value.color = Gfx.COLOR_RED;
-        	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontStress);
+        	statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_RED);
         }
         var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
         if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
-        	details.detailLines[4].value.text += Ui.loadResource(Rez.Strings.meditateFontIntervalAlertsTime); 
-        }*/
-        //details.detailLines[4].isIconsAlignedValueOffset = true;      
-        details.detailLines[4].yLineOffset = 30;     
+        	statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faRepeatSession, Gfx.COLOR_WHITE);
+        }
+        
+        statusIcons.yLineOffset = me.globalSettingsIconsYOffset;         
+		details.detailLines[4] = statusIcons;
 	}
 	
 	function createScreenPickerView() {
@@ -162,9 +160,12 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		
 		private var mSession;
 		
-		function getAlertsLine() {
+		function getAlertsLine(alertsLineXPos, alertsLineYOffset) {
 	        var alertsLine = new PercentageHighlightLine(me.mSession.intervalAlerts.count());
-	        alertsLine.backgroundColor = me.mSession.color;
+	        alertsLine.backgroundColor = me.mSession.color;	        
+	        alertsLine.startPosX = alertsLineXPos;
+	        alertsLine.yOffset = alertsLineYOffset;
+	        
 	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);
 	        me.AddHighlights(alertsLine, IntervalAlertType.OneOff);
 	        

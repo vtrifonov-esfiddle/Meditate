@@ -1,9 +1,11 @@
 <properties>
-	<property id="progressBarWidth" type="number">150</property>
-	<property id="iconsArrayYOffset" type="number">20</property>
-	<property id="sessionDetailsIconsOffset" type="number">-20</property>
+	<property id="progressBarWidth" type="number">170</property>
+	<property id="globalSettingsIconsYOffset" type="number">5</property>
+	<property id="sessionDetailsIconsXPos" type="number">40</property>
+	<property id="sessionDetailsValueXPos" type="number">64</property>
+	<property id="sessionDetailsAlertsLineYOffset" type="number">6</property>
 	<property id="summaryLineXOffset" type="number">15</property>
 	<property id="summaryLineXHrvOffset" type="number">10</property>
 	<property id="summaryLineXStressOffset" type="number">-10</property>
-	<property id="iconsArrayInitialOffset" type="number">10</property>
+	<property id="globalSettingsIconsXPos" type="number">80</property>
 </properties>

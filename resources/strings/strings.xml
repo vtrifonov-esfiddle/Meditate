@@ -117,6 +117,7 @@
 	<string id="faSaveSession"></string>
 	<string id="faRepeatSession"></string>
 	<string id="faHourglassHalf"></string>
+	<string id="faHourglassEnd"></string>
 	<string id="faClock"></string>
 	<string id="faHeartbeat"></string>
 	<string id="faPieChart"></string>
