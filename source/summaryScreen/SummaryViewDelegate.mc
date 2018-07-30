@@ -16,13 +16,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = meditateActivity.getSummary();
         me.mMeditateActivity = meditateActivity;
-        me.iconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
-        me.valueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
 	}
-	
-	private var iconsXPos;
-	private var valueXPos;
-		
+			
 	private static function getPagesCount(hrvTracking, stressTracking) {		
 		var pagesCount = 4;
 		if (hrvTracking == HrvTracking.Off) {
@@ -138,36 +133,42 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.titleColor = Gfx.COLOR_BLACK;
 
         
-        var timeIcon = new IconFontAwesomeSolid();
+        var timeIcon = new Icon();
+        timeIcon.font = IconFonts.fontAwesomeFreeSolid;
         timeIcon.setSymbol(Rez.Strings.faHourglassEnd);
         timeIcon.color = Gfx.COLOR_BLACK;
         details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.color = Gfx.COLOR_BLACK;
         details.detailLines[1].value.text = TimeFormatter.format(me.mSummaryModel.elapsedTime);
         
-        var hrMinIcon = new IconFontMeditateIcons();
+        var hrMinIcon = new Icon();
+        hrMinIcon.font= IconFonts.fontMeditateIcons;
         hrMinIcon.setSymbol(Rez.Strings.meditateFontHrMin);                
         hrMinIcon.color = Gfx.COLOR_RED;        
         details.detailLines[2].icon = hrMinIcon;
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;
         details.detailLines[2].value.text = me.formatHr(me.mSummaryModel.minHr);
                 
-        var hrAvgIcon = new IconFontMeditateIcons();
+        var hrAvgIcon = new Icon();
+        hrAvgIcon.font = IconFonts.fontMeditateIcons;
         hrAvgIcon.setSymbol(Rez.Strings.meditateFontHrAvg);                
         hrAvgIcon.color = Gfx.COLOR_RED;                
         details.detailLines[3].icon = hrAvgIcon;
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;  
         details.detailLines[3].value.text = me.formatHr(me.mSummaryModel.avgHr);
         
-        var hrMaxIcon = new IconFontMeditateIcons();
+        var hrMaxIcon = new Icon();
+        hrMaxIcon.font = IconFonts.fontMeditateIcons;
         hrMaxIcon.setSymbol(Rez.Strings.meditateFontHrMax);                
         hrMaxIcon.color = Gfx.COLOR_RED;    
         details.detailLines[4].icon = hrMaxIcon;    
         details.detailLines[4].value.color = Gfx.COLOR_BLACK; 
         details.detailLines[4].value.text = me.formatHr(me.mSummaryModel.maxHr);
-                
-        details.setAllIconsXPos(me.iconsXPos);
-        details.setAllValuesXPos(me.valueXPos);   
+		
+        var hrIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
+        var hrValueXPos = App.getApp().getProperty("summaryHrValueXPos");                
+        details.setAllIconsXPos(hrIconsXPos);
+        details.setAllValuesXPos(hrValueXPos);   
         
         return new DetailsViewRenderer(details);
 	}	
@@ -178,22 +179,35 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
-        details.setAllValuesOffset(5);
-                      
-        details.detailLines[2].icon = Rez.Drawables.noStressIcon;
+        
+        var noStressIcon = new Icon();
+        noStressIcon.font = IconFonts.fontMeditateIcons;
+        noStressIcon.setSymbol(Rez.Strings.meditateFontStress);                
+        noStressIcon.color = Gfx.COLOR_GREEN;        
+        details.detailLines[2].icon = noStressIcon;  
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;            
         details.detailLines[2].value.text = Lang.format("No: $1$ %", [me.mSummaryModel.noStress]);
         
-    	details.detailLines[3].icon = Rez.Drawables.lowStressIcon;
+        var lowStressIcon = new Icon();
+        lowStressIcon.font = IconFonts.fontMeditateIcons;
+        lowStressIcon.setSymbol(Rez.Strings.meditateFontStress);                
+        lowStressIcon.color = Gfx.COLOR_YELLOW;        
+        details.detailLines[3].icon = lowStressIcon;
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("Low: $1$ %", [me.mSummaryModel.lowStress]);  
         
-    	details.detailLines[4].icon = Rez.Drawables.highStressIcon;
+        var highStressIcon = new Icon();
+        highStressIcon.font = IconFonts.fontMeditateIcons;
+        highStressIcon.setSymbol(Rez.Strings.meditateFontStress);                
+        highStressIcon.color = Gfx.COLOR_RED;        
+        details.detailLines[4].icon = highStressIcon;
+        details.detailLines[4].value.color = Gfx.COLOR_BLACK;
         details.detailLines[4].value.text = Lang.format("High: $1$ %", [me.mSummaryModel.highStress]);   
          
-        var summaryLineXOffset = App.getApp().getProperty("summaryLineXStressOffset");
-        for (var i = 1; i <= 5; i++) {
-            details.detailLines[i].iconOffset = summaryLineXOffset;
-        	details.detailLines[i].valueOffset = summaryLineXOffset;
-        }
+        var summaryStressIconsXPos = App.getApp().getProperty("summaryStressIconsXPos");
+        var summaryStressValueXPos = App.getApp().getProperty("summaryStressValueXPos");
+        details.setAllIconsXPos(summaryStressIconsXPos);
+        details.setAllValuesXPos(summaryStressValueXPos);   
         
         return new DetailsViewRenderer(details);
 	}
@@ -204,17 +218,21 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
-        details.setAllValuesOffset(5);
-                              
-        details.detailLines[3].icon = Rez.Drawables.pieChartIcon;
+                             
+		var pieChartIcon = new Icon();
+		pieChartIcon.font = IconFonts.fontAwesomeFreeSolid;
+        pieChartIcon.setSymbol(Rez.Strings.faPieChart);                
+        pieChartIcon.color = Gfx.COLOR_BLACK;        
+        details.detailLines[3].icon = pieChartIcon;                
         details.detailLines[3].value.text = "Median";   
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[4].value.color = Gfx.COLOR_BLACK;
         details.detailLines[4].value.text = Lang.format("$1$ bpm", [me.mSummaryModel.stressMedian]);   
          
-        var summaryLineXOffset = App.getApp().getProperty("summaryLineXOffset");
-        for (var i = 1; i <= 5; i++) {
-            details.detailLines[i].iconOffset = summaryLineXOffset;
-        	details.detailLines[i].valueOffset = summaryLineXOffset;
-        }
+        var summaryStressMedianIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
+        var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrValueXPos");
+        details.setAllIconsXPos(summaryStressMedianIconsXPos);
+        details.setAllValuesXPos(summaryStressMeidanValueXPos); 
         
         return new DetailsViewRenderer(details);
 	}
@@ -225,21 +243,30 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV SDRR";
         details.titleColor = Gfx.COLOR_BLACK;
-        details.setAllValuesOffset(5);
-                      
-        details.detailLines[2].icon = Rez.Drawables.heartRateVariabilityIcon;
+        
+        var hrvIcon = new Icon();        
+        hrvIcon.font = IconFonts.fontAwesomeFreeSolid;
+        hrvIcon.setSymbol(Rez.Strings.faHeartbeat);    
+        var heartBeatPurpleColor = 0xFF00FF;            
+        hrvIcon.color = heartBeatPurpleColor;        
+        details.detailLines[2].icon = hrvIcon;      
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
         details.detailLines[2].value.text = "First 5 min";
+        
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvFirst5Min]);
         
-    	details.detailLines[4].icon = Rez.Drawables.heartRateVariabilityIcon;
+    	details.detailLines[4].icon = hrvIcon;
+    	details.detailLines[4].value.color = Gfx.COLOR_BLACK;
         details.detailLines[4].value.text = "Last 5 min";
+        details.detailLines[5].value.color = Gfx.COLOR_BLACK;
         details.detailLines[5].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvLast5Min]);  
          
-        var summaryLineXOffset = App.getApp().getProperty("summaryLineXHrvOffset");
-        for (var i = 1; i <= 5; i++) {
-            details.detailLines[i].iconOffset = summaryLineXOffset;
-        	details.detailLines[i].valueOffset = summaryLineXOffset;
-        }
+        var summaryStressMedianIconsXPos = App.getApp().getProperty("summaryHrvIconsXPos");
+        var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
+        details.setAllIconsXPos(summaryStressMedianIconsXPos);
+        details.setAllValuesXPos(summaryStressMeidanValueXPos); 
+        //details.setAllLinesYOffset(-10);
         
         return new DetailsViewRenderer(details);
 	}	

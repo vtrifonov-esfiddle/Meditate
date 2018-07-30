@@ -1,11 +1,14 @@
 <properties>
-	<property id="progressBarWidth" type="number">170</property>
+	<property id="progressBarWidth" type="number">170</property>	
+	<property id="globalSettingsIconsXPos" type="number">70</property>
 	<property id="globalSettingsIconsYOffset" type="number">5</property>
 	<property id="sessionDetailsIconsXPos" type="number">40</property>
 	<property id="sessionDetailsValueXPos" type="number">64</property>
 	<property id="sessionDetailsAlertsLineYOffset" type="number">6</property>
-	<property id="summaryLineXOffset" type="number">15</property>
-	<property id="summaryLineXHrvOffset" type="number">10</property>
-	<property id="summaryLineXStressOffset" type="number">-10</property>
-	<property id="globalSettingsIconsXPos" type="number">80</property>
+	<property id="summaryHrIconsXPos" type="number">60</property>
+	<property id="summaryHrValueXPos" type="number">80</property>
+	<property id="summaryStressIconsXPos" type="number">50</property>
+	<property id="summaryStressValueXPos" type="number">70</property>
+	<property id="summaryHrvIconsXPos" type="number">50</property>
+	<property id="summaryHrvValueXPos" type="number">70</property>
 </properties>

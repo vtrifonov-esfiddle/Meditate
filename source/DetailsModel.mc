@@ -83,38 +83,26 @@ class TextValue {
 }
 
 class Icon {
-	function initialize(rezFont) {
+	function initialize() {
 		me.symbol = "";
-		me.font = Ui.loadResource(rezFont);
+		me.font = null;
 		me.color = Gfx.COLOR_WHITE;
 		me.xPos = 0;
-	}
+	}	
 
 	function setSymbol(symbol) {
 		me.symbol = Ui.loadResource(symbol);
 	}
 	var symbol;
-	var font;
 	var color;
 	var xPos;
+	var font;
 }
 
-class IconFontMeditateIcons extends Icon {
-	function initialize() {
-		Icon.initialize(Rez.Fonts.fontMeditateIcons);
-	}
-}
-
-class IconFontAwesomeSolid extends Icon {
-	function initialize() {
-		Icon.initialize(Rez.Fonts.fontAwesomeFreeSolid);
-	}
-}
-
-class IconFontAwesomeRegular extends Icon {
-	function initialize() {
-		Icon.initialize(Rez.Fonts.fontAwesomeFreeRegular);
-	}
+module IconFonts {
+	var fontMeditateIcons = Ui.loadResource(Rez.Fonts.fontMeditateIcons);
+	var fontAwesomeFreeSolid = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
+	var fontAwesomeFreeRegular = Ui.loadResource(Rez.Fonts.fontAwesomeFreeRegular);
 }
 
 class IconsLine extends DetailsLineBase {
@@ -143,7 +131,7 @@ class IconsLine extends DetailsLineBase {
 
 class IconsLineValue {
 	function initialize(font, symbol, color) {	
-		me.font = Ui.loadResource(font);
+		me.font = font;
 		me.symbol = Ui.loadResource(symbol);
 		me.color = color;
 	}
@@ -178,7 +166,7 @@ class DetailsLineBase {
 		return InitialPosY + me.mLineNumber * LineOffsetY + me.yLineOffset;
 	}
 	
-	private const LineOffsetY = 36;
+	private const LineOffsetY = 32;
 	private const InitialPosY = 30;
 }
 
@@ -213,7 +201,7 @@ class DetailsModel{
 			}
 		}
 	}
-	
+		
 	var title;
 	var titleColor;
 	var detailLines;

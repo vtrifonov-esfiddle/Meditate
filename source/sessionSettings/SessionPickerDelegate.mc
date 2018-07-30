@@ -92,27 +92,29 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;
         
-        var timeIcon = new IconFontAwesomeSolid();
+        var timeIcon = new Icon();
+        timeIcon.font = IconFonts.fontAwesomeFreeSolid;
         timeIcon.setSymbol(Rez.Strings.faHourglassHalf);
         details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
-        var vibePatternIcon = new IconFontMeditateIcons();
+        var vibePatternIcon = new Icon();
+        vibePatternIcon.font = IconFonts.fontMeditateIcons;
         vibePatternIcon.setSymbol(Rez.Strings.meditateFontVibratePattern);
         details.detailLines[2].icon = vibePatternIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
-        var alertsLineIcon = new IconFontAwesomeRegular();
+        var alertsLineIcon = new Icon();
+        alertsLineIcon.font = IconFonts.fontAwesomeFreeRegular;
         alertsLineIcon.setSymbol(Rez.Strings.faClock);
         details.detailLines[3].icon = alertsLineIcon;
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine(me.sessionDetailsValueXPos, me.sessionDetailsAlertsLineYOffset);
         
         details.setAllIconsXPos(me.sessionDetailsIconsXPos);
-        details.setAllValuesXPos(me.sessionDetailsValueXPos);
+        details.setAllValuesXPos(me.sessionDetailsValueXPos);       
         
-        //TODO: fix out of memmory issue
-        //me.updateGlobalSettingsDetails();      
+        me.updateGlobalSettingsDetails();      
 	}	
 	
 	function updateGlobalSettingsDetails() {
@@ -121,27 +123,27 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		statusIcons.xPos = me.globalSettingsIconsXPos;
 		var stressTracking = GlobalSettings.loadStressTracking();
 		if (stressTracking == StressTracking.On) {
-			statusIcons.addIcon(Rez.Fonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);		
+			statusIcons.addIcon(IconFonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);		
 		}
 		else if (stressTracking == StressTracking.OnDetailed) {			
-			statusIcons.addIcon(Rez.Fonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);			
-			statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faPieChart, Gfx.COLOR_WHITE);
+			statusIcons.addIcon(IconFonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);			
+			statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faPieChart, Gfx.COLOR_WHITE);
 		}    
 		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {			
 			var heartBeatPurpleColor = 0xFF00FF;
-			statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faHeartbeat, heartBeatPurpleColor);
+			statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faHeartbeat, heartBeatPurpleColor);
 		}          
 				
         var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
         if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
-        	statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_GREEN);
+        	statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_GREEN);
         }
         if (saveActivityConfirmation == SaveActivityConfirmation.AutoNo) {
-        	statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_RED);
+        	statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_RED);
         }
         var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
         if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
-        	statusIcons.addIcon(Rez.Fonts.fontAwesomeFreeSolid, Rez.Strings.faRepeatSession, Gfx.COLOR_WHITE);
+        	statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faRepeatSession, Gfx.COLOR_WHITE);
         }
         
         statusIcons.yLineOffset = me.globalSettingsIconsYOffset;         
