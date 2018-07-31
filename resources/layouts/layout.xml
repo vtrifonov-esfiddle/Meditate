@@ -3,7 +3,7 @@
 		<drawable id="blackBackground" />
 		<drawable id="meditate" />
    	    <label id="elapsedTime" x="center" y="center" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-   	    <drawable id="hrStatus" />
+   	    <label id="hrStatus" x="80" y="155" text="@Strings.faHeart" color="Gfx.COLOR_RED" font="@Fonts.fontAwesomeFreeSolid" justification="Gfx.TEXT_JUSTIFY_CENTER" />
    	    <label id="hrStatusText" x="center" y="150" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
 	</layout>
 	<layout id="colorPicker">	

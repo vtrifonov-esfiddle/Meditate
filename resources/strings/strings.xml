@@ -122,6 +122,10 @@
 	<string id="faHeartbeat"></string>
 	<string id="faPieChart"></string>
 	<string id="faHeart"></string>
+	<string id="faCheckCircle"></string>
+	<string id="faCheck"></string>
+	<string id="faSortUp"></string>
+	<string id="faSortDown"></string>
 	
 	<string id="meditateFontStress">1</string>
 	<string id="meditateFontIntervalAlertsTime">3</string>

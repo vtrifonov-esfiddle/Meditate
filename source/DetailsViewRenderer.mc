@@ -69,11 +69,13 @@ class DetailsViewRenderer {
         dc.drawText(xPos, yPos, icon.font, icon.symbol, Gfx.TEXT_JUSTIFY_CENTER);
 	}
 	
+	private const StatusIconsWidth = 32;
+	
 	private function displayFontIcons(dc, icons, xPos, yPos) {
 		for (var i = 0; i < icons.size(); i++) {			
 			var icon = icons[i];
 			me.displayFontIcon(dc, icon, xPos, yPos);
-			xPos += dc.getTextWidthInPixels(icon.symbol, icon.font);
+			xPos += StatusIconsWidth;
 		}
 	}
     
