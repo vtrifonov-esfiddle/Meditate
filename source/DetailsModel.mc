@@ -10,7 +10,6 @@ class PercentageHighlightLine {
 		}
 		me.latestAddedIndex = -1;
 		me.backgroundColor = Gfx.COLOR_WHITE;
-		me.isHighlightFilterReset = true;
 	}
 	
 	private const MaxHighlightsCount = 50;
@@ -19,32 +18,12 @@ class PercentageHighlightLine {
 	var backgroundColor;	
 	
 	function addHighlight(color, progressPercentage) {
-		if (latestAddedIndex + 1 < MaxHighlightsCount && me.isHighglightFiltered(progressPercentage) == false) {
+		if (latestAddedIndex + 1 < MaxHighlightsCount) {
 			me.latestAddedIndex++;
 			me.highlights[me.latestAddedIndex] = new LineHighlight(color, progressPercentage);
 		}
 	}
-	
-	private function isHighglightFiltered(currentPercentageTime) {
-		if (me.latestAddedIndex == -1) {
-			return false;
-		}
-		if (me.isHighlightFilterReset == true) {
-			me.isHighlightFilterReset = false;
-			return false;
-		}
-		var lastPercentageTime = me.highlights[me.latestAddedIndex].progressPercentage;
-		return (currentPercentageTime - lastPercentageTime) < MinPercentageOffset;
-	}
 		
-	private const MinPercentageOffset = 0.05;
-	
-	private var isHighlightFilterReset;
-	
-	function resetHighlightsFilter() {
-		me.isHighlightFilterReset = true;
-	}
-	
 	function getHighlights() {
 		if (me.highlights.size() == 0) {
 			return [];
