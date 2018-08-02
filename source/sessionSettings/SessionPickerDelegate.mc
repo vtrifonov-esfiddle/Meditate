@@ -164,11 +164,12 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		
 		function getAlertsLine(alertsLineXPos, alertsLineYOffset) {
 	        var alertsLine = new PercentageHighlightLine(me.mSession.intervalAlerts.count());
+
 	        alertsLine.backgroundColor = me.mSession.color;	        
 	        alertsLine.startPosX = alertsLineXPos;
 	        alertsLine.yOffset = alertsLineYOffset;
-	        
-	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);
+	        	        
+	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);      
 	        me.AddHighlights(alertsLine, IntervalAlertType.OneOff);
 	        
 	        return alertsLine;
@@ -180,9 +181,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			for (var i = 0; i < intervalAlerts.count(); i++) {
 	        	var alert = intervalAlerts.get(i);
 	        	if (alert.type == alertsType) {
-		        	var percentageTimes = alert.getAlertPercentageTimes(me.mSession.time);
-		        	var lastPercentageTime = -1;
-		        	alertsLine.resetHighlightsFilter();
+		        	var percentageTimes = alert.getAlertProgressBarPercentageTimes(me.mSession.time);
 		        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {   		        			
 	        			alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);	
 		        	}
