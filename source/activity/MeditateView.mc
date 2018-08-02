@@ -26,13 +26,12 @@ class MeditateView extends Ui.View {
         	me.mMeditateModel.getRepeatIntervalAlerts(), intervalAlertsArcRadius, intervalAlertsArcWidth);
         setLayout(Rez.Layouts.mainLayout(dc));
         
-        me.mHrStatus = new Ui.Text({
-        	:text=>Ui.loadResource(Rez.Strings.faHeartbeat),
-            :color=>Graphics.COLOR_RED,
-            :font=>IconFonts.fontAwesomeFreeSolid,
-            :locX =>80,
-            :locY=>155,
-            :justification => Gfx.TEXT_JUSTIFY_CENTER
+        me.mHrStatus = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHeart,
+        	:color=>Graphics.COLOR_RED,
+        	:xPos => 80,
+        	:yPos => 155        	
         });
     }
      

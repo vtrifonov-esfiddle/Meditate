@@ -62,20 +62,49 @@ class TextValue {
 }
 
 class Icon {
-	function initialize() {
-		me.symbol = "";
-		me.font = null;
-		me.color = Gfx.COLOR_WHITE;
-		me.xPos = 0;
+	function initialize(icon) {
+		var iconDrawableParams = {};
+		if (icon[:symbol] != null) {
+			iconDrawableParams[:text] = Ui.loadResource(icon[:symbol]);
+		}
+		else {
+			iconDrawableParams[:text] = "";
+		}
+		if (icon[:color] != null) {
+			iconDrawableParams[:color] = icon[:color];
+		}
+		else {
+			iconDrawableParams[:color] = Gfx.COLOR_WHITE;
+		}
+		if (icon[:font] != null) {
+			iconDrawableParams[:font] = icon[:font];
+		}
+		if (icon[:xPos] != null) {
+			iconDrawableParams[:locX] = icon[:xPos];
+		}
+		else {
+			iconDrawableParams[:locX] = 0;
+		}
+		if (icon[:yPos] != null) {
+			iconDrawableParams[:locY] = icon[:yPos];
+		}
+		iconDrawableParams[:justification] = Gfx.TEXT_JUSTIFY_CENTER;		
+		me.mIconDrawable = new Ui.Text(iconDrawableParams);
 	}	
+	
+	private var mIconDrawable;
 
-	function setSymbol(symbol) {
-		me.symbol = Ui.loadResource(symbol);
+	function setXPos(xPos) {
+		me.mIconDrawable.locX = xPos;
 	}
-	var symbol;
-	var color;
-	var xPos;
-	var font;
+	
+	function setYPos(yPos) {
+		me.mIconDrawable.locY = yPos;
+	}
+	
+	function draw(dc) {
+		me.mIconDrawable.draw(dc);
+	}
 }
 
 module IconFonts {
@@ -98,26 +127,14 @@ class IconsLine extends DetailsLineBase {
 	
 	var xPos;
 	
-	function addIcon(font, symbol, color) {
-		me.mIcons[me.mIconsCount] = new IconsLineValue(font, symbol, color);
+	function addIcon(iconParams) {
+		me.mIcons[me.mIconsCount] = new Icon(iconParams);
 		me.mIconsCount++;
 	}
 	
 	function getIcons() {
 		return me.mIcons.slice(0, me.mIconsCount);
 	}
-}
-
-class IconsLineValue {
-	function initialize(font, symbol, color) {	
-		me.font = font;
-		me.symbol = Ui.loadResource(symbol);
-		me.color = color;
-	}
-		
-	var font;
-	var symbol;
-	var color;
 }
 
 class DetailsLine extends DetailsLineBase {
@@ -168,7 +185,7 @@ class DetailsModel{
 	function setAllIconsXPos(xPos) {
 		for (var i = 1; i <= LinesCount; i++) {
 			if (me.detailLines[i] instanceof DetailsLine && detailLines[i].icon instanceof Icon) {
-				me.detailLines[i].icon.xPos = xPos;
+				me.detailLines[i].icon.setXPos(xPos);
 			}
 		}
 	}

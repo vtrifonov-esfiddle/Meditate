@@ -25,11 +25,11 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     	me.mMeditateActivity.calculateSummaryFields();
     	var summaryViewDelegate = me.showSummaryView();
     	
-    	var activityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
-    	if (activityConfirmation == SaveActivityConfirmation.AutoYes) { 
+    	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();
+    	if (confirmSaveActivity == ConfirmSaveActivity.AutoYes) { 
     		summaryViewDelegate.onConfirmedSave();    		
         }
-        else if (activityConfirmation == SaveActivityConfirmation.AutoNo) {
+        else if (confirmSaveActivity == ConfirmSaveActivity.AutoNo) {
         	summaryViewDelegate.onDiscardedSave(); 
         }   
         else { 	

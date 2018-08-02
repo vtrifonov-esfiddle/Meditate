@@ -21,6 +21,37 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 			var newActivityTypeDelegate = new MenuOptionsDelegate(method(:onNewActivityTypePicked));
 			Ui.pushView(new Rez.Menus.newActivityTypeOptionsMenu(), newActivityTypeDelegate, Ui.SLIDE_LEFT);
 		}
+		else if (item ==:confirmSaveActivity) {
+			var confirmSaveActivityDelegate = new MenuOptionsDelegate(method(:onConfirmSaveActivityPicked));
+			Ui.pushView(new Rez.Menus.confirmSaveActivityOptionsMenu(), confirmSaveActivityDelegate, Ui.SLIDE_LEFT);
+		}
+		else if (item ==:multiSession) {
+			var multiSessionDelegate = new MenuOptionsDelegate(method(:onMultiSessionPicked));
+			Ui.pushView(new Rez.Menus.multiSessionOptionsMenu(), multiSessionDelegate, Ui.SLIDE_LEFT);
+		}
+	}
+	
+	private function onConfirmSaveActivityPicked(item) {
+		if (item == :ask) {
+			GlobalSettings.saveConfirmSaveActivity(ConfirmSaveActivity.Ask);
+		}
+		else if (item == :autoYes) {
+			GlobalSettings.saveConfirmSaveActivity(ConfirmSaveActivity.AutoYes);
+		}
+		else if (item == :autoNo) {
+			GlobalSettings.saveConfirmSaveActivity(ConfirmSaveActivity.AutoNo);
+		}
+		mOnGlobalSettingsChanged.invoke();
+	}
+	
+	private function onMultiSessionPicked(item) {
+		if (item == :yes) {
+			GlobalSettings.saveMultiSession(MultiSession.Yes);
+		}
+		else if (item == :no) {
+			GlobalSettings.saveMultiSession(MultiSession.No);
+		}
+		mOnGlobalSettingsChanged.invoke();
 	}
 	
 	private function onNewActivityTypePicked(item) {

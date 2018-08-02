@@ -73,11 +73,11 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 
 	function onBack() {
 		me.mMeditateActivity.discardDanglingActivity();
-		var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
-		if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
+		var continueAfterFinishingSession = GlobalSettings.loadMultiSession();
+		if (continueAfterFinishingSession == MultiSession.Yes) {
 			var sessionStorage = new SessionStorage();	
 			var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
-			Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_LEFT);
+			Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
 			return true;
 		}
 		else {
@@ -133,34 +133,38 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.titleColor = Gfx.COLOR_BLACK;
 
         
-        var timeIcon = new Icon();
-        timeIcon.font = IconFonts.fontAwesomeFreeSolid;
-        timeIcon.setSymbol(Rez.Strings.faHourglassEnd);
-        timeIcon.color = Gfx.COLOR_BLACK;
+        var timeIcon = new Icon({       
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHourglassEnd,
+        	:color=>Graphics.COLOR_BLACK  	
+    	});
         details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.color = Gfx.COLOR_BLACK;
         details.detailLines[1].value.text = TimeFormatter.format(me.mSummaryModel.elapsedTime);
         
-        var hrMinIcon = new Icon();
-        hrMinIcon.font= IconFonts.fontMeditateIcons;
-        hrMinIcon.setSymbol(Rez.Strings.meditateFontHrMin);                
-        hrMinIcon.color = Gfx.COLOR_RED;        
+        var hrMinIcon = new Icon({       
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontHrMin,
+        	:color=>Graphics.COLOR_RED   	
+    	});     
         details.detailLines[2].icon = hrMinIcon;
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;
         details.detailLines[2].value.text = me.formatHr(me.mSummaryModel.minHr);
                 
-        var hrAvgIcon = new Icon();
-        hrAvgIcon.font = IconFonts.fontMeditateIcons;
-        hrAvgIcon.setSymbol(Rez.Strings.meditateFontHrAvg);                
-        hrAvgIcon.color = Gfx.COLOR_RED;                
+        var hrAvgIcon = new Icon({       
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontHrAvg,
+        	:color=>Graphics.COLOR_RED   	
+    	});            
         details.detailLines[3].icon = hrAvgIcon;
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;  
         details.detailLines[3].value.text = me.formatHr(me.mSummaryModel.avgHr);
         
-        var hrMaxIcon = new Icon();
-        hrMaxIcon.font = IconFonts.fontMeditateIcons;
-        hrMaxIcon.setSymbol(Rez.Strings.meditateFontHrMax);                
-        hrMaxIcon.color = Gfx.COLOR_RED;    
+        var hrMaxIcon = new Icon({       
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontHrMax,
+        	:color=>Graphics.COLOR_RED   	
+    	});              
         details.detailLines[4].icon = hrMaxIcon;    
         details.detailLines[4].value.color = Gfx.COLOR_BLACK; 
         details.detailLines[4].value.text = me.formatHr(me.mSummaryModel.maxHr);
@@ -180,26 +184,29 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
         
-        var noStressIcon = new Icon();
-        noStressIcon.font = IconFonts.fontMeditateIcons;
-        noStressIcon.setSymbol(Rez.Strings.meditateFontStress);                
-        noStressIcon.color = Gfx.COLOR_GREEN;        
+        var noStressIcon = new Icon({       
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontStress,
+        	:color=>Graphics.COLOR_GREEN   	
+    	});           
         details.detailLines[2].icon = noStressIcon;  
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;            
         details.detailLines[2].value.text = Lang.format("No: $1$ %", [me.mSummaryModel.noStress]);
         
-        var lowStressIcon = new Icon();
-        lowStressIcon.font = IconFonts.fontMeditateIcons;
-        lowStressIcon.setSymbol(Rez.Strings.meditateFontStress);                
-        lowStressIcon.color = Gfx.COLOR_YELLOW;        
+        var lowStressIcon = new Icon({       
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontStress,
+        	:color=>Graphics.COLOR_YELLOW   	
+    	});      
         details.detailLines[3].icon = lowStressIcon;
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("Low: $1$ %", [me.mSummaryModel.lowStress]);  
         
-        var highStressIcon = new Icon();
-        highStressIcon.font = IconFonts.fontMeditateIcons;
-        highStressIcon.setSymbol(Rez.Strings.meditateFontStress);                
-        highStressIcon.color = Gfx.COLOR_RED;        
+        var highStressIcon = new Icon({       
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontStress,
+        	:color=>Graphics.COLOR_RED   	
+    	});        
         details.detailLines[4].icon = highStressIcon;
         details.detailLines[4].value.color = Gfx.COLOR_BLACK;
         details.detailLines[4].value.text = Lang.format("High: $1$ %", [me.mSummaryModel.highStress]);   
@@ -219,10 +226,11 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
                              
-		var pieChartIcon = new Icon();
-		pieChartIcon.font = IconFonts.fontAwesomeFreeSolid;
-        pieChartIcon.setSymbol(Rez.Strings.faPieChart);                
-        pieChartIcon.color = Gfx.COLOR_BLACK;        
+		var pieChartIcon = new Icon({       
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faPieChart,
+        	:color=>Graphics.COLOR_BLACK  	
+    	});      
         details.detailLines[3].icon = pieChartIcon;                
         details.detailLines[3].value.text = "Median";   
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
@@ -243,12 +251,13 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV SDRR";
         details.titleColor = Gfx.COLOR_BLACK;
-        
-        var hrvIcon = new Icon();        
-        hrvIcon.font = IconFonts.fontAwesomeFreeSolid;
-        hrvIcon.setSymbol(Rez.Strings.faHeartbeat);    
+                
         var heartBeatPurpleColor = 0xFF00FF;            
-        hrvIcon.color = heartBeatPurpleColor;        
+        var hrvIcon = new Icon({       
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHeartbeat,
+        	:color=>heartBeatPurpleColor  	
+    	});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
         details.detailLines[2].value.text = "First 5 min";

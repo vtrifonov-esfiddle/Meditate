@@ -48,9 +48,16 @@ class DurationPickerView extends Ui.View {
 				
     	View.onUpdate(dc);	
 		if (me.mModel.isFinishPos()) {		
-			dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);			
-     		var isFinishedYPos = dc.getHeight() / 2 + dc.getFontHeight(Gfx.FONT_XTINY);
-			dc.drawText(dc.getWidth() / 2, isFinishedYPos, IconFonts.fontAwesomeFreeRegular, Ui.loadResource(Rez.Strings.faCheckCircle), Gfx.TEXT_JUSTIFY_CENTER);		
+			var xPos = 	dc.getWidth() / 2;	
+			var yPos = dc.getHeight() / 2 + dc.getFontHeight(Gfx.FONT_XTINY);
+     		var tickIcon = new Icon({
+     			:font => IconFonts.fontAwesomeFreeSolid,
+     			:symbol => Rez.Strings.faCheck,
+     			:xPos => xPos,
+     			:yPos => yPos,
+     			:color => Gfx.COLOR_GREEN
+     		});
+     		tickIcon.draw(dc);
 		}				
     }
 

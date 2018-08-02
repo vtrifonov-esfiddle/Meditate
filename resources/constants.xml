@@ -1,9 +1,9 @@
 <properties>
 	<property id="progressBarWidth" type="number">170</property>	
-	<property id="globalSettingsIconsXPos" type="number">70</property>
+	<property id="globalSettingsIconsXPos" type="number">64</property>
 	<property id="globalSettingsIconsYOffset" type="number">5</property>
-	<property id="sessionDetailsIconsXPos" type="number">40</property>
-	<property id="sessionDetailsValueXPos" type="number">64</property>
+	<property id="sessionDetailsIconsXPos" type="number">30</property>
+	<property id="sessionDetailsValueXPos" type="number">54</property>
 	<property id="sessionDetailsAlertsLineYOffset" type="number">6</property>
 	<property id="summaryHrIconsXPos" type="number">60</property>
 	<property id="summaryHrValueXPos" type="number">80</property>

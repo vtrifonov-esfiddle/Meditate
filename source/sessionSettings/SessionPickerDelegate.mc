@@ -80,6 +80,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	
 	function updateSelectedSessionDetails(session) {
 		var details = me.mSelectedSessionDetails;
+				
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
         var activityTypeText;
@@ -92,21 +93,24 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;
         
-        var timeIcon = new Icon();
-        timeIcon.font = IconFonts.fontAwesomeFreeSolid;
-        timeIcon.setSymbol(Rez.Strings.faHourglassHalf);
+        var timeIcon = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHourglassHalf
+        });
         details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
-        var vibePatternIcon = new Icon();
-        vibePatternIcon.font = IconFonts.fontMeditateIcons;
-        vibePatternIcon.setSymbol(Rez.Strings.meditateFontVibratePattern);
+        var vibePatternIcon = new Icon({        
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontVibratePattern
+        });
         details.detailLines[2].icon = vibePatternIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
-        var alertsLineIcon = new Icon();
-        alertsLineIcon.font = IconFonts.fontAwesomeFreeRegular;
-        alertsLineIcon.setSymbol(Rez.Strings.faClock);
+        var alertsLineIcon = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeRegular,
+        	:symbol => Rez.Strings.faClock
+        });
         details.detailLines[3].icon = alertsLineIcon;
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine(me.sessionDetailsValueXPos, me.sessionDetailsAlertsLineYOffset);
@@ -123,27 +127,54 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		statusIcons.xPos = me.globalSettingsIconsXPos;
 		var stressTracking = GlobalSettings.loadStressTracking();
 		if (stressTracking == StressTracking.On) {
-			statusIcons.addIcon(IconFonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);		
+			statusIcons.addIcon({        
+	        	:font => IconFonts.fontMeditateIcons,
+	        	:symbol => Rez.Strings.meditateFontStress,
+	        	:color => Gfx.COLOR_WHITE
+	        });		
 		}
 		else if (stressTracking == StressTracking.OnDetailed) {			
-			statusIcons.addIcon(IconFonts.fontMeditateIcons, Rez.Strings.meditateFontStress, Gfx.COLOR_WHITE);			
-			statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faPieChart, Gfx.COLOR_WHITE);
+			statusIcons.addIcon({        
+	        	:font => IconFonts.fontMeditateIcons,
+	        	:symbol => Rez.Strings.meditateFontStress,
+	        	:color => Gfx.COLOR_WHITE
+	        });	
+			statusIcons.addIcon({        
+	        	:font => IconFonts.fontAwesomeFreeSolid,
+	        	:symbol => Rez.Strings.faPieChart,
+	        	:color => Gfx.COLOR_WHITE
+	        });	
 		}    
 		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {			
 			var heartBeatPurpleColor = 0xFF00FF;
-			statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faHeartbeat, heartBeatPurpleColor);
+			statusIcons.addIcon({        
+	        	:font => IconFonts.fontAwesomeFreeSolid,
+	        	:symbol => Rez.Strings.faHeartbeat,
+	        	:color => heartBeatPurpleColor
+	        });	
 		}          
 				
-        var saveActivityConfirmation = GlobalSettings.loadSaveActivityConfirmation();
-        if (saveActivityConfirmation == SaveActivityConfirmation.AutoYes) {
-        	statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_GREEN);
+        var saveActivityConfirmation = GlobalSettings.loadConfirmSaveActivity();
+        if (saveActivityConfirmation == ConfirmSaveActivity.AutoYes) {
+        	statusIcons.addIcon({        
+	        	:font => IconFonts.fontAwesomeFreeSolid,
+	        	:symbol => Rez.Strings.faSaveSession,
+	        	:color => Gfx.COLOR_GREEN
+	        });	
         }
-        if (saveActivityConfirmation == SaveActivityConfirmation.AutoNo) {
-        	statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faSaveSession, Gfx.COLOR_RED);
+        if (saveActivityConfirmation == ConfirmSaveActivity.AutoNo) {
+        	statusIcons.addIcon({        
+	        	:font => IconFonts.fontAwesomeFreeSolid,
+	        	:symbol => Rez.Strings.faSaveSession,
+	        	:color => Gfx.COLOR_RED
+	        });	
         }
-        var continueAfterFinishingSession = GlobalSettings.loadContinueAfterFinishingSession();
-        if (continueAfterFinishingSession == ContinueAfterFinishingSession.Yes) {
-        	statusIcons.addIcon(IconFonts.fontAwesomeFreeSolid, Rez.Strings.faRepeatSession, Gfx.COLOR_WHITE);
+        var multiSession = GlobalSettings.loadMultiSession();
+        if (multiSession == MultiSession.Yes) {
+        	statusIcons.addIcon({        
+	        	:font => IconFonts.fontAwesomeFreeSolid,
+	        	:symbol => Rez.Strings.faRepeatSession
+	        });	
         }
         
         statusIcons.yLineOffset = me.globalSettingsIconsYOffset;         

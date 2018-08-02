@@ -30,7 +30,7 @@ class DetailsViewRenderer {
 			}		
 			else {
 				if (line.icon != null) {
-					me.displayFontIcon(dc, line.icon, line.icon.xPos, line.getYPos());
+					me.displayFontIcon(dc, line.icon, line.getYPos());
 				}
 				if (line.value instanceof TextValue) {
 					me.displayText(dc, line.value, line.getYPos());  
@@ -64,9 +64,9 @@ class DetailsViewRenderer {
         dc.drawText(textX, TitlePosY, Gfx.FONT_SYSTEM_MEDIUM, title, Gfx.TEXT_JUSTIFY_CENTER);
     }	      
         	
-	private function displayFontIcon(dc, icon, xPos, yPos) {
-        dc.setColor(icon.color, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(xPos, yPos, icon.font, icon.symbol, Gfx.TEXT_JUSTIFY_CENTER);
+	private function displayFontIcon(dc, icon, yPos) {
+		icon.setYPos(yPos);
+		icon.draw(dc);
 	}
 	
 	private const StatusIconsWidth = 32;
@@ -74,7 +74,8 @@ class DetailsViewRenderer {
 	private function displayFontIcons(dc, icons, xPos, yPos) {
 		for (var i = 0; i < icons.size(); i++) {			
 			var icon = icons[i];
-			me.displayFontIcon(dc, icon, xPos, yPos);
+			icon.setXPos(xPos);
+			me.displayFontIcon(dc, icon, yPos);
 			xPos += StatusIconsWidth;
 		}
 	}
