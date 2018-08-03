@@ -11,4 +11,7 @@
 	<property id="summaryStressValueXPos" type="number">70</property>
 	<property id="summaryHrvIconsXPos" type="number">50</property>
 	<property id="summaryHrvValueXPos" type="number">70</property>
+	<property id="summaryLinesYOffset" type="number">0</property>
+	<property id="meditateActivityHrXPos" type="number">80</property>
+	<property id="meditateActivityHrYPos" type="number">155</property>
 </properties>

@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Lang;
 using Toybox.Graphics as Gfx;
+using Toybox.Application as App;
 
 class MeditateView extends Ui.View {
 	private var mMeditateModel;
@@ -12,7 +13,12 @@ class MeditateView extends Ui.View {
         me.mMeditateModel = meditateModel;
         me.mMainDuationRenderer = null;
         me.mIntervalAlertsRenderer = null;
+        me.mHrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
+        me.mHrStatusY = App.getApp().getProperty("meditateActivityHrYPos");
     }
+    
+    private var mHrStatusX;
+    private var mHrStatusY;
     
     // Load your resources here
     function onLayout(dc) {    
@@ -23,16 +29,17 @@ class MeditateView extends Ui.View {
         var intervalAlertsArcRadius = dc.getWidth() / 2;
         var intervalAlertsArcWidth = dc.getWidth() / 16;
         me.mIntervalAlertsRenderer = new IntervalAlertsRenderer(me.mMeditateModel.getSessionTime(), me.mMeditateModel.getOneOffIntervalAlerts(), 
-        	me.mMeditateModel.getRepeatIntervalAlerts(), intervalAlertsArcRadius, intervalAlertsArcWidth);
-        setLayout(Rez.Layouts.mainLayout(dc));
+        	me.mMeditateModel.getRepeatIntervalAlerts(), intervalAlertsArcRadius, intervalAlertsArcWidth);        
         
         me.mHrStatus = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeart,
         	:color=>Graphics.COLOR_RED,
-        	:xPos => 80,
-        	:yPos => 155        	
+        	:xPos => me.mHrStatusX,
+        	:yPos => me.mHrStatusY
         });
+        
+    	setLayout(Rez.Layouts.mainLayout(dc));
     }
      
 	private var mHrStatus;

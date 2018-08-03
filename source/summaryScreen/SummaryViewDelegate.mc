@@ -16,7 +16,10 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = meditateActivity.getSummary();
         me.mMeditateActivity = meditateActivity;
+        me.mSummaryLinesYOffset = App.getApp().getProperty("summaryLinesYOffset");
 	}
+		
+	private var mSummaryLinesYOffset;
 			
 	private static function getPagesCount(hrvTracking, stressTracking) {		
 		var pagesCount = 4;
@@ -173,6 +176,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         var hrValueXPos = App.getApp().getProperty("summaryHrValueXPos");                
         details.setAllIconsXPos(hrIconsXPos);
         details.setAllValuesXPos(hrValueXPos);   
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
         return new DetailsViewRenderer(details);
 	}	
@@ -215,6 +219,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         var summaryStressValueXPos = App.getApp().getProperty("summaryStressValueXPos");
         details.setAllIconsXPos(summaryStressIconsXPos);
         details.setAllValuesXPos(summaryStressValueXPos);   
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
         return new DetailsViewRenderer(details);
 	}
@@ -241,6 +246,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrValueXPos");
         details.setAllIconsXPos(summaryStressMedianIconsXPos);
         details.setAllValuesXPos(summaryStressMeidanValueXPos); 
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
         return new DetailsViewRenderer(details);
 	}
@@ -275,7 +281,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
         details.setAllIconsXPos(summaryStressMedianIconsXPos);
         details.setAllValuesXPos(summaryStressMeidanValueXPos); 
-        //details.setAllLinesYOffset(-10);
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
         return new DetailsViewRenderer(details);
 	}	

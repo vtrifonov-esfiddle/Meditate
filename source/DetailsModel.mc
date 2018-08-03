@@ -197,6 +197,14 @@ class DetailsModel{
 			}
 		}
 	}
+	
+	function setAllLinesYOffset(yOffset) {
+		for (var i = 1; i <= LinesCount; i++) {
+			if (me.detailLines[i]) {
+				me.detailLines[i].yLineOffset = yOffset;
+			}
+		}
+	}
 		
 	var title;
 	var titleColor;
