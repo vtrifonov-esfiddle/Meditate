@@ -45,7 +45,7 @@ The meditation session finishes once you press the stop button.
 
 1.3. Once you stop the session you have the option to save it.
 
-1.3.1 You can configure to auto save or auto discard session in [Global Settings](#4-Global-Settings)
+1.3.1 You can configure to auto save or auto discard session in [Global Settings](#4-global-settings)
 
 ![Confirm save session](userGuideScreenshots/confirmSaveSession.png)
 
@@ -53,7 +53,7 @@ The meditation session finishes once you press the stop button.
 
   ![Summary HR](userGuideScreenshots/summaryHr.png)![Summary Stress](userGuideScreenshots/summaryStress.png) ![Summary stress median](userGuideScreenshots/summaryStressMedian.png) ![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
 
-1.5 Depending on the chosen option for [Confirm Save](#4.3-Confirm-Save) in [Global Settings](#4-Global-Settings) when you go back from this view you either exit the app (the default) or go back to the session picker screen
+1.5 Depending on the chosen option for [Confirm Save](#4.3-Confirm-Save) in [Global Settings](#4-global-settings) when you go back from this view you either exit the app (the default) or go back to the session picker screen
 
 ### 2. Configuring a session
 
@@ -77,11 +77,11 @@ The meditation session finishes once you press the stop button.
           3. last repetative alert
     - Color - the color of the current interval alert used in the graphical controls. Select different colors for each alert to differentiate them during meditation. Select transparent color if you don't want to see visual marks for the alert during meditation
     - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
-- Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings ([see section 4](#4-Global-Settings)).
+- Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings ([see section 4](#4-global-settings)).
 
 2.3 Delete - deletes a session after asking for confirmation
 
-2.4 Global Settings - [see section 4](#4-Global-Settings)
+2.4 Global Settings - [see section 4](#4-global-settings)
 
 ### 3. Picking a session
 
