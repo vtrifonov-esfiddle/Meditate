@@ -50,7 +50,7 @@ class LineHighlight {
 class TextValue {
 	function initialize() {
 		me.text = "";
-		me.font = Gfx.FONT_SYSTEM_SMALL;
+		me.font = Gfx.FONT_SYSTEM_TINY;
 		me.color = Gfx.COLOR_WHITE;
 		me.xPos = 0;
 	}
@@ -102,6 +102,10 @@ class Icon {
 		me.mIconDrawable.locY = yPos;
 	}
 	
+	function setColor(color) {
+		me.mIconDrawable.setColor(color);
+	}
+	
 	function draw(dc) {
 		me.mIconDrawable.draw(dc);
 	}
@@ -111,30 +115,6 @@ module IconFonts {
 	var fontMeditateIcons = Ui.loadResource(Rez.Fonts.fontMeditateIcons);
 	var fontAwesomeFreeSolid = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
 	var fontAwesomeFreeRegular = Ui.loadResource(Rez.Fonts.fontAwesomeFreeRegular);
-}
-
-class IconsLine extends DetailsLineBase {
-	function initialize(lineNumber) {
-		DetailsLineBase.initialize(lineNumber);
-		me.mIcons = new [MaxIconsCount];
-		me.mIconsCount = 0;
-		me.xPos = 0;
-	}
-	
-	private var mIcons;
-	private const MaxIconsCount = 7;
-	private var mIconsCount;
-	
-	var xPos;
-	
-	function addIcon(iconParams) {
-		me.mIcons[me.mIconsCount] = new Icon(iconParams);
-		me.mIconsCount++;
-	}
-	
-	function getIcons() {
-		return me.mIcons.slice(0, me.mIconsCount);
-	}
 }
 
 class DetailsLine extends DetailsLineBase {
@@ -169,8 +149,10 @@ class DetailsLineBase {
 class DetailsModel{
 	function initialize() {
 		me.title = "";
+		me.titleFont = Gfx.FONT_SYSTEM_MEDIUM;
 		me.color = null;
 		me.titleColor = null;
+		me.backgroundColor = null;
 		me.detailLines = {
 			1 => new DetailsLine(1),
 			2 => new DetailsLine(2),
@@ -207,6 +189,7 @@ class DetailsModel{
 	}
 		
 	var title;
+	var titleFont;
 	var titleColor;
 	var detailLines;
 	var color;

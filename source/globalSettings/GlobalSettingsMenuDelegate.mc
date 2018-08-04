@@ -61,6 +61,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		else if (item == :yoga) {
 			GlobalSettings.saveActivityType(ActivityType.Yoga);
 		}
+		mOnGlobalSettingsChanged.invoke();
 	}
 	
 	private function onStressTrackingPicked(item) {

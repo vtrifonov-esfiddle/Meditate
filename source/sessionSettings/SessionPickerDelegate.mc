@@ -117,73 +117,13 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         
         details.setAllIconsXPos(me.sessionDetailsIconsXPos);
         details.setAllValuesXPos(me.sessionDetailsValueXPos);       
-        
-        me.updateGlobalSettingsDetails();      
 	}	
 	
-	function updateGlobalSettingsDetails() {
-		var details = me.mSelectedSessionDetails;
-		var statusIcons = new IconsLine(4);
-		statusIcons.xPos = me.globalSettingsIconsXPos;
-		var stressTracking = GlobalSettings.loadStressTracking();
-		if (stressTracking == StressTracking.On) {
-			statusIcons.addIcon({        
-	        	:font => IconFonts.fontMeditateIcons,
-	        	:symbol => Rez.Strings.meditateFontStress,
-	        	:color => Gfx.COLOR_WHITE
-	        });		
-		}
-		else if (stressTracking == StressTracking.OnDetailed) {			
-			statusIcons.addIcon({        
-	        	:font => IconFonts.fontMeditateIcons,
-	        	:symbol => Rez.Strings.meditateFontStress,
-	        	:color => Gfx.COLOR_WHITE
-	        });	
-			statusIcons.addIcon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faPieChart,
-	        	:color => Gfx.COLOR_WHITE
-	        });	
-		}    
-		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {			
-			var heartBeatPurpleColor = 0xFF00FF;
-			statusIcons.addIcon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faHeartbeat,
-	        	:color => heartBeatPurpleColor
-	        });	
-		}          
-				
-        var saveActivityConfirmation = GlobalSettings.loadConfirmSaveActivity();
-        if (saveActivityConfirmation == ConfirmSaveActivity.AutoYes) {
-        	statusIcons.addIcon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faSaveSession,
-	        	:color => Gfx.COLOR_GREEN
-	        });	
-        }
-        if (saveActivityConfirmation == ConfirmSaveActivity.AutoNo) {
-        	statusIcons.addIcon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faSaveSession,
-	        	:color => Gfx.COLOR_RED
-	        });	
-        }
-        var multiSession = GlobalSettings.loadMultiSession();
-        if (multiSession == MultiSession.Yes) {
-        	statusIcons.addIcon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faRepeatSession
-	        });	
-        }
-        
-        statusIcons.yLineOffset = me.globalSettingsIconsYOffset;         
-		details.detailLines[4] = statusIcons;
-	}
+	
 	
 	function createScreenPickerView() {
 		me.setSelectedSessionDetails();
-		return new SessionPickerView(me.mSelectedSessionDetails);
+		return new ScreenPickerDetailsView(me.mSelectedSessionDetails);
 	}
 	
 	class AlertsToHighlightsLine {

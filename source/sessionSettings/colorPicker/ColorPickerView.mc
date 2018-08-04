@@ -5,11 +5,11 @@ class ColorPickerView extends ScreenPickerView {
 	private var mColor;
 	
 	function initialize(color) {
-		ScreenPickerView.initialize();
+		ScreenPickerView.initialize(Gfx.COLOR_WHITE);
 		me.mColor = color;
 	}
 	
-	function onUpdate(dc) {		
+	function onUpdate(dc) {		        
 		if(me.mColor != Gfx.COLOR_TRANSPARENT) {		        
         	dc.setColor(Gfx.COLOR_TRANSPARENT, me.mColor);
         }
@@ -17,8 +17,10 @@ class ColorPickerView extends ScreenPickerView {
         	dc.setColor(Gfx.COLOR_TRANSPARENT, Gfx.COLOR_BLACK);
         }        
         dc.clear();
-        
-        ScreenPickerView.onUpdate(dc);
+        if (me.mColor == Gfx.COLOR_WHITE) {
+        	me.setArrowsColor(Gfx.COLOR_BLACK);
+        }   
+       	ScreenPickerView.onUpdate(dc);      
         if (me.mColor == Gfx.COLOR_TRANSPARENT) {
         	dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
         	var transparentText = Ui.loadResource(Rez.Strings.intervalAlertTransparentColorText);

@@ -1,5 +1,0 @@
-<resources>
-    <drawable-list id="meditate">
-    	<bitmap id="meditateIcon" x="50" y="35" filename="../resources/images/meditate.png" />
-    </drawable-list>  
- </resources>

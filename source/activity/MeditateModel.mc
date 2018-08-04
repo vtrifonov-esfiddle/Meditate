@@ -22,6 +22,10 @@ class MeditateModel {
 		return me.getIntervalAlerts(IntervalAlertType.OneOff);
 	}	
 	
+	function hasIntervalAlerts() {
+		return me.mSession.intervalAlerts.count() > 0;
+	}
+	
 	private function getIntervalAlerts(alertType) {
 		var result = {};
 		for (var i = 0; i < me.mSession.intervalAlerts.count(); i++) {

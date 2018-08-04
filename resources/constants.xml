@@ -1,7 +1,8 @@
 <properties>
 	<property id="progressBarWidth" type="number">170</property>	
-	<property id="globalSettingsIconsXPos" type="number">64</property>
-	<property id="globalSettingsIconsYOffset" type="number">5</property>
+	<property id="globalSettingsIconsXPos" type="number">47</property>
+	<property id="globalSettingsValueXPos" type="number">68</property>
+	<property id="globalSettingsLinesYOffset" type="number">0</property>
 	<property id="sessionDetailsIconsXPos" type="number">30</property>
 	<property id="sessionDetailsValueXPos" type="number">54</property>
 	<property id="sessionDetailsAlertsLineYOffset" type="number">6</property>
@@ -13,5 +14,7 @@
 	<property id="summaryHrvValueXPos" type="number">70</property>
 	<property id="summaryLinesYOffset" type="number">0</property>
 	<property id="meditateActivityHrXPos" type="number">80</property>
-	<property id="meditateActivityHrYPos" type="number">155</property>
+	<property id="meditateActivityHrYPos" type="number">160</property>
+	<property id="meditateActivityMeditateIconX" type="number">60</property>
+	<property id="meditateActivityMeditateIconY" type="number">50</property>
 </properties>

@@ -30,6 +30,9 @@ class IntervalAlertsRenderer {
     }
     
     private function createPercentageTimes(intervalAlerts) {
+    	if (intervalAlerts.size() == 0) {
+    		return [];
+    	}
     	var resultPercentageTimes = new [intervalAlerts.size()];
 		for (var i = 0; i < intervalAlerts.size(); i++) {
     		var intervalAlert = intervalAlerts[i];	

@@ -1,8 +1,6 @@
 <resources>
     <bitmap id="launcherIcon" filename="images/launcher_icon.png" />
-    <drawable-list id="meditate">
-    	<bitmap id="meditateIcon" x="60" y="50" filename="images/meditate.png" />
-    </drawable-list>    
+    <bitmap id="meditateIcon" x="60" y="50" filename="images/meditate.png" />
     <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
     <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
     <fonts>

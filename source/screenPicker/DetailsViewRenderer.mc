@@ -20,27 +20,22 @@ class DetailsViewRenderer {
     
     function renderDetailsView(dc) {
         dc.setColor(me.mDetailsModel.titleColor, Gfx.COLOR_TRANSPARENT); 
-       	me.displayTitle(dc, me.mDetailsModel.title);
+       	me.displayTitle(dc, me.mDetailsModel.title, me.mDetailsModel.titleFont);
 		
 		for (var lineNumber = 1; lineNumber <= me.mDetailsModel.detailLines.size(); lineNumber++) {
         	dc.setColor(me.mDetailsModel.color, Gfx.COLOR_TRANSPARENT); 
 			var line = me.mDetailsModel.detailLines[lineNumber];	
-			if (line instanceof IconsLine) {
-				me.displayFontIcons(dc, line.getIcons(), line.xPos, line.getYPos());
-			}		
-			else {
-				if (line.icon != null) {
-					me.displayFontIcon(dc, line.icon, line.getYPos());
-				}
-				if (line.value instanceof TextValue) {
-					me.displayText(dc, line.value, line.getYPos());  
-	   			}
-	   			else if	(line.value instanceof PercentageHighlightLine) {
-	   				var alertsLineYPos = line.getYPos() + line.value.yOffset;
-	   				me.drawPercentageHighlightLine(dc, line.value.getHighlights(), line.value.backgroundColor, line.value.startPosX, alertsLineYPos);
-	   			}
+			if (line.icon != null) {
+				me.displayFontIcon(dc, line.icon, line.getYPos());
+			}
+			if (line.value instanceof TextValue) {
+				me.displayText(dc, line.value, line.getYPos());  
    			}
-       	}       
+   			else if	(line.value instanceof PercentageHighlightLine) {
+   				var alertsLineYPos = line.getYPos() + line.value.yOffset;
+   				me.drawPercentageHighlightLine(dc, line.value.getHighlights(), line.value.backgroundColor, line.value.startPosX, alertsLineYPos);
+   			}
+   		}   
     }
     
     private var progressBarWidth;
@@ -59,27 +54,16 @@ class DetailsViewRenderer {
     	}
     }
     
-    private function displayTitle(dc, title) {
+    private function displayTitle(dc, title, titleFont) {
         var textX = dc.getWidth() / 2;	
-        dc.drawText(textX, TitlePosY, Gfx.FONT_SYSTEM_MEDIUM, title, Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(textX, TitlePosY, titleFont, title, Gfx.TEXT_JUSTIFY_CENTER);
     }	      
         	
 	private function displayFontIcon(dc, icon, yPos) {
 		icon.setYPos(yPos);
 		icon.draw(dc);
 	}
-	
-	private const StatusIconsWidth = 32;
-	
-	private function displayFontIcons(dc, icons, xPos, yPos) {
-		for (var i = 0; i < icons.size(); i++) {			
-			var icon = icons[i];
-			icon.setXPos(xPos);
-			me.displayFontIcon(dc, icon, yPos);
-			xPos += StatusIconsWidth;
-		}
-	}
-    
+	    
     private function displayText(dc, value, yPos) {   
         dc.setColor(value.color, Gfx.COLOR_TRANSPARENT);
         dc.drawText(value.xPos, yPos, value.font, value.text, Gfx.TEXT_JUSTIFY_LEFT);

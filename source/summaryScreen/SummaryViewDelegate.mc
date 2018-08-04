@@ -89,33 +89,30 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	}
 	
 	function createScreenPickerView() {
-		var renderer;
+		var details;
 		if (me.mSelectedPageIndex == 0) {
-			renderer = me.createDetailsPageHr();
+			details = me.createDetailsPageHr();
 		} 
 		else if (me.mSelectedPageIndex == me.mStressPageIndex) {
-			renderer = me.createDetailsPageStress();
+			details = me.createDetailsPageStress();
 		}
 		else if (me.mSelectedPageIndex == me.mStressMedianPageIndex) {
-			renderer = me.createDetailsMinMaxHrMedian();
+			details = me.createDetailsMinMaxHrMedian();
 		}
 		else if (me.mSelectedPageIndex == mHrvPageIndex){
-			renderer = me.createDetailsPageHrv();
+			details = me.createDetailsPageHrv();
 		}
 		else {
-			renderer = me.createDetailsPageHr();
+			details = me.createDetailsPageHr();
 		}
 		if (me.mPagesCount > 1) {
-			me.mSummaryView = new SummaryViewPaged(renderer);
+			return new ScreenPickerDetailsView(details);
 		}
 		else {
-			me.mSummaryView = new SummaryView(renderer);
+			return new ScreenPickerDetailsSinglePageView(details);
 		}
-		return me.mSummaryView;
 	}	
-		
-	private var mSummaryView;
-	
+			
  	function onConfirmedSave() {
     	me.mMeditateActivity.finish(); 
     }
@@ -178,7 +175,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.setAllValuesXPos(hrValueXPos);   
         details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
-        return new DetailsViewRenderer(details);
+        return details;
 	}	
 		
 	private function createDetailsPageStress() {
@@ -221,7 +218,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.setAllValuesXPos(summaryStressValueXPos);   
         details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
-        return new DetailsViewRenderer(details);
+        return details;
 	}
 	
 	private function createDetailsMinMaxHrMedian() {
@@ -248,7 +245,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.setAllValuesXPos(summaryStressMeidanValueXPos); 
         details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
-        return new DetailsViewRenderer(details);
+        return details;
 	}
 	
 	private function createDetailsPageHrv() {
@@ -283,6 +280,6 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.setAllValuesXPos(summaryStressMeidanValueXPos); 
         details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
-        return new DetailsViewRenderer(details);
+        return details;
 	}	
 }
