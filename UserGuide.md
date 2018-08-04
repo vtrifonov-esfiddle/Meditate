@@ -45,11 +45,16 @@ The meditation session finishes once you press the stop button.
 
 1.3. Once you stop the session you have the option to save it.
 
+1.3.1 You can configure to auto save or auto discard session in [Global Settings](#4-Global-Settings)
+
 ![Confirm save session](userGuideScreenshots/confirmSaveSession.png)
 
 1.4. Finally you see the Summary Screen. Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV.
 
   ![Summary HR](userGuideScreenshots/summaryHr.png)![Summary Stress](userGuideScreenshots/summaryStress.png) ![Summary stress median](userGuideScreenshots/summaryStressMedian.png) ![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
+
+1.5 Depending on the chosen option for [Confirm Save](#4.3-Confirm-Save) in [Global Settings](#4-Global-Settings) when you go back from this view you either exit the app (the default) or go back to the session picker screen
+
 ### 2. Configuring a session
 
 2.1 From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu.
@@ -72,8 +77,11 @@ The meditation session finishes once you press the stop button.
           3. last repetative alert
     - Color - the color of the current interval alert used in the graphical controls. Select different colors for each alert to differentiate them during meditation. Select transparent color if you don't want to see visual marks for the alert during meditation
     - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
-- Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings (see section 5).
-- Global Settings - see bellow section 4
+- Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings ([see section 4](#4-Global-Settings)).
+
+2.3 Delete - deletes a session after asking for confirmation
+
+2.4 Global Settings - [see section 4](#4-Global-Settings)
 
 ### 3. Picking a session
 
@@ -85,18 +93,45 @@ On this screen you can see the applicable settings for the selected session
 - time - total duration of the session
 - vibe pattern
 - interval alert triggers - the graph in the middle of the screen represents the relative alert triger time compared to the total session time
-- Global settings - see section 4
+- Global settings - [see section 4](#4-Global-Settings)
 
 ![Session picker yoga explained](userGuideScreenshots/sessionPickerYogaExplained.png)
 
-### 4. Turning on/off Stress and HRV
-
-From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. Select the setting you wish to change. Once you are done you can see which features are turned by looking at the session picker screen's bottom icons row.
-- ![](userGuideScreenshots/globalSettingsStress.png) Stress tracking is On (tracking summary metrics of No, Low and High Stress)
-- ![](userGuideScreenshots/globalSettingsStressDetailed.png) Detailed Stress tracking is On (tracks additionally stress median and Max-Min HR Windows Graph)
-- ![](userGuideScreenshots/globalSettingsHrv.png) HRV tracking is On (tracks the standard deviation HRV of the first and last 5 min intervals of the session)
+### 4. Global Settings
+From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. You see a view with the states of the global settings.
 
 ![Global settings](userGuideScreenshots/globalSettings.png)
-### 5. Connect IQ New Activity Type
 
-You can set the default activity type for new session as **Meditating** or as **Yoga**. To do this go to the session picker screen, hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu -> New Activity Type 
+To change the settings hold the menu button (for Vivoactive 3 hold on the screen) until you see the Global Settings menu. There you can select the setting you want to change.
+
+#### 4.1 Stress Tracking
+
+- On - tracks summary stress metrics into tree categories: No, Low and High stress
+- On Detailed - tracks additionally stress median and Max-Min HR Windows Graph
+- Off - no stress tracking
+
+#### 4.2 HRV Tracking
+
+- On 
+  - tracks the standard deviation HRV of the first and last 5 min intervals of the session
+  - produces beat-to-beat intervals graph in ConnectIQ when activity is saved
+- Off - no HRV tracking
+
+#### 4.3 Confirm Save
+
+- Ask - when an activity finihes asks for confirmation whether to save the activity
+- Auto Yes - when an activity finihes auto saves it
+- Auto No - when an activity finihes auto discards it
+
+#### 4.4 Multi-Session
+
+- Yes 
+  - the app continues to run after finishing session
+  - this allows you to record multiple sessions
+- No - the app exits after finishing session
+
+#### 4.5 New Activity Type
+You can set the default activity type for new sessions.
+
+- Meditating
+- Yoga
