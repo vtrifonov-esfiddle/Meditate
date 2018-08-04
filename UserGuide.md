@@ -93,7 +93,6 @@ On this screen you can see the applicable settings for the selected session
 - time - total duration of the session
 - vibe pattern
 - interval alert triggers - the graph in the middle of the screen represents the relative alert triger time compared to the total session time
-- Global settings - [see section 4](#4-Global-Settings)
 
 ![Session picker yoga explained](userGuideScreenshots/sessionPickerYogaExplained.png)
 
