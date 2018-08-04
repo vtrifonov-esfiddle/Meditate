@@ -34,7 +34,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
     function onBack() {
     	var sessionStorage = new SessionStorage();	    	    	
     	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
-    	Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_LEFT);
+    	Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
     	return true;
     }
     
