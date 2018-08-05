@@ -1,13 +1,4 @@
-<layouts>
-	<layout id="mainLayout">	
-		<drawable id="blackBackground" />
-		<drawable id="meditate" />
-   	    <label id="elapsedTime" x="center" y="center" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-   	    <drawable id="hrStatus" />
-   	    <label id="hrStatusText" x="center" y="150" text="" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
-	</layout>
-	<layout id="colorPicker">	
-	</layout>	
+<layouts>	
 	<layout id="calculatingResults">
 		<drawable id="blackBackground" />
 		<label id="calculatingResultsText" x="center" y="center" text="@Strings.activityCalculatingResultsText" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />

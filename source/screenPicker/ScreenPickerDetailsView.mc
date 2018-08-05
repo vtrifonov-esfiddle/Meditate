@@ -1,11 +1,11 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
-class SessionPickerView extends ScreenPickerView {	
+class ScreenPickerDetailsView extends ScreenPickerView {	
 	private var mRenderer;
 	
 	function initialize(detailsModel) {	
-		ScreenPickerView.initialize();
+		ScreenPickerView.initialize(detailsModel.color);
 		me.mRenderer = new DetailsViewRenderer(detailsModel);
 	}
 	

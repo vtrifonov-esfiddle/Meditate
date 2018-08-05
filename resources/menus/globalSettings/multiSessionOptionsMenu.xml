@@ -1,0 +1,4 @@
+<menu id="multiSessionOptionsMenu" title="@Strings.menuMultiSessionOptions_title">
+    <menu-item id="yes" label="@Strings.menuMultiSessionOptions_yes" />
+    <menu-item id="no" label="@Strings.menuMultiSessionOptions_no" />
+</menu>
