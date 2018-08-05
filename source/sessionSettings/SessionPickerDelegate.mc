@@ -9,14 +9,18 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
 		me.mSelectedSessionDetails = new DetailsModel();
-		me.iconsArrayYOffset = App.getApp().getProperty("iconsArrayYOffset");
-		me.sessionDetailsIconsOffset = App.getApp().getProperty("sessionDetailsIconsOffset");
-		me.iconsArrayInitialOffset = App.getApp().getProperty("iconsArrayInitialOffset");
+		me.globalSettingsIconsYOffset = App.getApp().getProperty("globalSettingsIconsYOffset");
+		me.sessionDetailsIconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
+		me.sessionDetailsValueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
+		me.globalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
+		me.sessionDetailsAlertsLineYOffset = App.getApp().getProperty("sessionDetailsAlertsLineYOffset");
 	}
 	
-	private var iconsArrayYOffset;
-	private var sessionDetailsIconsOffset;
-	private var iconsArrayInitialOffset;
+	private var globalSettingsIconsYOffset;
+	private var sessionDetailsIconsXPos;
+	private var sessionDetailsValueXPos;
+	private var globalSettingsIconsXPos;
+	private var sessionDetailsAlertsLineYOffset;
 	
     function onMenu() {
 		return me.showSessionSettingsMenu();
@@ -76,6 +80,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	
 	function updateSelectedSessionDetails(session) {
 		var details = me.mSelectedSessionDetails;
+				
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
         var activityTypeText;
@@ -87,44 +92,38 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         }
         details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;
-        details.setAllIconsOffset(me.sessionDetailsIconsOffset);
         
-        details.detailLines[1].icon = Rez.Drawables.durationIcon;
+        var timeIcon = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHourglassHalf
+        });
+        details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
-        details.detailLines[2].icon = Rez.Drawables.vibrateIcon;
+        var vibePatternIcon = new Icon({        
+        	:font => IconFonts.fontMeditateIcons,
+        	:symbol => Rez.Strings.meditateFontVibratePattern
+        });
+        details.detailLines[2].icon = vibePatternIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
-        details.detailLines[3].icon = Rez.Drawables.sessionDurationIcon;
+        var alertsLineIcon = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeRegular,
+        	:symbol => Rez.Strings.faClock
+        });
+        details.detailLines[3].icon = alertsLineIcon;
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
-        details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine();
+        details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine(me.sessionDetailsValueXPos, me.sessionDetailsAlertsLineYOffset);
         
-        me.updateGlobalSettingsDetails();      
+        details.setAllIconsXPos(me.sessionDetailsIconsXPos);
+        details.setAllValuesXPos(me.sessionDetailsValueXPos);       
 	}	
 	
-	function updateGlobalSettingsDetails() {
-		var details = me.mSelectedSessionDetails;
-		var statusIcons = [];
-		
-		var stressTracking = GlobalSettings.loadStressTracking();
-		if (stressTracking == StressTracking.On) {
-			statusIcons.add(Rez.Drawables.stressTrackingIcon);
-		}
-		else if (stressTracking == StressTracking.OnDetailed) {
-			statusIcons.add(Rez.Drawables.stressTrackingIcon);
-			statusIcons.add(Rez.Drawables.pieChartWhiteIcon);
-		}    
-		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {
-			statusIcons.add(Rez.Drawables.heartRateVariabilityIcon);
-		}            
-        details.detailLines[4].icons = statusIcons;
-        details.detailLines[4].iconOffset = me.iconsArrayInitialOffset; 
-        details.detailLines[4].yLineOffset = me.iconsArrayYOffset;     
-	}
+	
 	
 	function createScreenPickerView() {
 		me.setSelectedSessionDetails();
-		return new SessionPickerView(me.mSelectedSessionDetails);
+		return new ScreenPickerDetailsView(me.mSelectedSessionDetails);
 	}
 	
 	class AlertsToHighlightsLine {
@@ -134,10 +133,14 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		
 		private var mSession;
 		
-		function getAlertsLine() {
+		function getAlertsLine(alertsLineXPos, alertsLineYOffset) {
 	        var alertsLine = new PercentageHighlightLine(me.mSession.intervalAlerts.count());
-	        alertsLine.backgroundColor = me.mSession.color;
-	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);
+
+	        alertsLine.backgroundColor = me.mSession.color;	        
+	        alertsLine.startPosX = alertsLineXPos;
+	        alertsLine.yOffset = alertsLineYOffset;
+	        	        
+	        me.AddHighlights(alertsLine, IntervalAlertType.Repeat);      
 	        me.AddHighlights(alertsLine, IntervalAlertType.OneOff);
 	        
 	        return alertsLine;
@@ -149,9 +152,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			for (var i = 0; i < intervalAlerts.count(); i++) {
 	        	var alert = intervalAlerts.get(i);
 	        	if (alert.type == alertsType) {
-		        	var percentageTimes = alert.getAlertPercentageTimes(me.mSession.time);
-		        	var lastPercentageTime = -1;
-		        	alertsLine.resetHighlightsFilter();
+		        	var percentageTimes = alert.getAlertProgressBarPercentageTimes(me.mSession.time);
 		        	for (var percentageIndex = 0; percentageIndex < percentageTimes.size(); percentageIndex++) {   		        			
 	        			alertsLine.addHighlight(alert.color, percentageTimes[percentageIndex]);	
 		        	}

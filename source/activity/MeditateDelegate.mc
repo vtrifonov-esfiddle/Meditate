@@ -24,9 +24,19 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     private function onFinishActivity() {  
     	me.mMeditateActivity.calculateSummaryFields();
     	var summaryViewDelegate = me.showSummaryView();
-    	var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
-    	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
-        Ui.pushView(confirmSaveDialog, new YesNoDelegate(summaryViewDelegate.method(:onConfirmedSave), summaryViewDelegate.method(:onDiscardedSave)), Ui.SLIDE_IMMEDIATE);
+    	
+    	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();
+    	if (confirmSaveActivity == ConfirmSaveActivity.AutoYes) { 
+    		summaryViewDelegate.onConfirmedSave();    		
+        }
+        else if (confirmSaveActivity == ConfirmSaveActivity.AutoNo) {
+        	summaryViewDelegate.onDiscardedSave(); 
+        }   
+        else { 	
+	    	var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
+	    	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
+	        Ui.pushView(confirmSaveDialog, new YesNoDelegate(summaryViewDelegate.method(:onConfirmedSave), summaryViewDelegate.method(:onDiscardedSave)), Ui.SLIDE_IMMEDIATE);
+        }
     }   
        
     private function showSummaryView() { 

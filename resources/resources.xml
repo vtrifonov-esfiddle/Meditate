@@ -1,45 +1,13 @@
 <resources>
     <bitmap id="launcherIcon" filename="images/launcher_icon.png" />
-    <bitmap id="heartRateIcon" filename="images/fontAwesome/heartRate.png" />    
-    <bitmap id="heartRateMinIcon" filename="images/fontAwesome/heartRateMin.png" />
-    <bitmap id="heartRateAvgIcon" filename="images/fontAwesome/heartRateAvg.png" />
-    <bitmap id="heartRateMaxIcon" filename="images/fontAwesome/heartRateMax.png" />
-    <bitmap id="heartRateVariabilityIcon" filename="images/fontAwesome/heartRateVariability.png" />
-    <bitmap id="vibrateIcon" filename="images/fontAwesome/clock-white-vibrate.png" />
-    <bitmap id="durationIcon" filename="images/fontAwesome/hourglass-white.png" />
-    <bitmap id="timeIcon" filename="images/fontAwesome/hourglass-end.png" />
-    <bitmap id="sessionDurationIcon" filename="images/fontAwesome/clock-white.png" />
-    <bitmap id="noStressIcon" filename="images/noStress.png" />
-    <bitmap id="lowStressIcon" filename="images/lowStress.png" />
-    <bitmap id="highStressIcon" filename="images/highStress.png" /> 
-    <bitmap id="pieChartIcon" filename="images/fontAwesome/pie-chart.png" /> 
-    <bitmap id="pieChartWhiteIcon" filename="images/fontAwesome/pie-chart-white.png" /> 
-    <bitmap id="stressTrackingIcon" filename="images/stressTracking.png" /> 
-    <drawable-list id="done">
-    	<bitmap id="doneIcon"  x="95" y="140" filename="images/done.png" />
-    </drawable-list>
-    <drawable-list id="meditate">
-    	<bitmap id="meditateIcon" x="60" y="50" filename="images/meditate.png" />
-    </drawable-list>    
+    <bitmap id="meditateIcon" x="60" y="50" filename="images/meditate.png" />
     <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
     <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
-    <drawable-list id="hrStatus">
-    	<bitmap id="heartRateIcon" x="60" y="150" filename="images/fontAwesome/heartRate.png" />
-    </drawable-list>    
-    <drawable-list id="up">
-   	    <bitmap id="upIcon" x="110" y="0" filename="images/fontAwesome/up-white.png" />
-    </drawable-list>
-    <drawable-list id="down" background="Gfx.COLOR_TRANSPARENT">
-   	    <bitmap id="downIcon" x="110" y="220" filename="images/fontAwesome/down-white.png" />
-    </drawable-list>
-    <drawable-list id="upBlack">
-   	    <bitmap id="upBlackIcon" x="110" y="0" filename="images/fontAwesome/up.png" />
-    </drawable-list>
-    <drawable-list id="downBlack" background="Gfx.COLOR_TRANSPARENT">
-   	    <bitmap id="downBlackIcon" x="110" y="220" filename="images/fontAwesome/down.png" />
-    </drawable-list>
     <fonts>
    	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
+   	    <font id="fontAwesomeFreeSolid" filename="fonts/fontAwesome/fontAwesomeFreeSolid.fnt" />
+   	    <font id="fontAwesomeFreeRegular" filename="fonts/fontAwesome/fontAwesomeFreeRegular.fnt" />
+   	    <font id="fontMeditateIcons" filename="fonts/meditateIcons/meditateIcons.fnt" />
     </fonts>
     <fitContributions>
 		<fitField id="0" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="0" precision="0" dataLabel="@Strings.minHrField" unitLabel="@Strings.minHrFieldUnits" />

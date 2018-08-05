@@ -7,30 +7,44 @@ class IntervalAlertsRenderer {
 		me.mOneOffIntervalAlerts = oneOffIntervalAlerts;
 		me.mRepeatIntervalAlerts = repeatIntervalAlerts;	
 		me.mRadius = radius;
-		me.mWidth = width;
+		me.mWidth = width;	
+		me.mOneOffPercentageTimes = me.createPercentageTimes(oneOffIntervalAlerts);
+		me.mRepeatPercentageTimes = me.createPercentageTimes(repeatIntervalAlerts);	
 	}
 	
 	private var mSessionTime;
 	private var mOneOffIntervalAlerts;
 	private var mRepeatIntervalAlerts;
 	private var mRadius;
-	private var mWidth;
+	private var mWidth;	
+    private var mOneOffPercentageTimes;
+    private var mRepeatPercentageTimes;
 	private const StartDegreeOffset = 90;
 
     function drawOneOffIntervalAlerts(dc) {
-		me.drawIntervalAlerts(dc, me.mOneOffIntervalAlerts);
-    }
+		me.drawIntervalAlerts(dc, me.mOneOffIntervalAlerts, me.mOneOffPercentageTimes);
+    }    
     
     function drawRepeatIntervalAlerts(dc) {    
-		me.drawIntervalAlerts(dc, me.mRepeatIntervalAlerts);
+		me.drawIntervalAlerts(dc, me.mRepeatIntervalAlerts, me.mRepeatPercentageTimes);
     }
     
-    private function drawIntervalAlerts(dc, intervalAlerts) {
+    private function createPercentageTimes(intervalAlerts) {
+    	if (intervalAlerts.size() == 0) {
+    		return [];
+    	}
+    	var resultPercentageTimes = new [intervalAlerts.size()];
 		for (var i = 0; i < intervalAlerts.size(); i++) {
     		var intervalAlert = intervalAlerts[i];	
-    		var percentageTimes = intervalAlert.getAlertPercentageTimes(me.mSessionTime);
-    		for (var pIndex = 0; pIndex < percentageTimes.size(); pIndex++) {
-    			me.drawIntervalAlert(dc, percentageTimes[pIndex], intervalAlert.color);
+    		resultPercentageTimes[i] = intervalAlert.getAlertArcPercentageTimes(me.mSessionTime);
+    	}
+    	return resultPercentageTimes;
+    }
+    
+    private function drawIntervalAlerts(dc, intervalAlerts, percentageTimes) {
+		for (var i = 0; i < intervalAlerts.size(); i++) {
+    		for (var pIndex = 0; pIndex < percentageTimes[i].size(); pIndex++) {
+    			me.drawIntervalAlert(dc, percentageTimes[i][pIndex], intervalAlerts[i].color);
     		}
     	}
     }    

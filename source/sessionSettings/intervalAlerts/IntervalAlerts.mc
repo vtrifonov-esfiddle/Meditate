@@ -85,8 +85,11 @@ class Alert {
 		me.color = Gfx.COLOR_RED;
 		me.vibePattern = VibePattern.ShorterContinuous;
 	}		
-		
-	function getAlertPercentageTimes(sessionTime) {
+	
+	function getAlertArcPercentageTimes(sessionTime) {
+		return me.getAlertPercentageTimes(sessionTime, ArcMaxRepeatExecutionsCount, ArcMinRepeatPercentageTime);
+	}
+	private function getAlertPercentageTimes(sessionTime, maxRepeatExecutionsCount, minRepeatPercentageTime) {
 		if (sessionTime < 1 || me.time < 1) {
 			return [];
 		}
@@ -96,11 +99,11 @@ class Alert {
 		}
 		else {			
 			var executionsCount = (sessionTime / me.time);
-			if (executionsCount > MaxRepeatExecutionsCount) {
-				executionsCount = MaxRepeatExecutionsCount;
+			if (executionsCount > maxRepeatExecutionsCount) {
+				executionsCount = maxRepeatExecutionsCount;
 			}		
-			if (percentageTime < MinRepeatPercentageTime) {
-				percentageTime = MinRepeatPercentageTime;
+			if (percentageTime < minRepeatPercentageTime) {
+				percentageTime = minRepeatPercentageTime;
 			}
 			var result = new [executionsCount];
 			for (var i = 0; i < executionsCount; i++) {
@@ -111,10 +114,17 @@ class Alert {
 			}
 			return result;
 		}		 
-	}	
-			
-	private const MaxRepeatExecutionsCount = 360;
-	private const MinRepeatPercentageTime = 0.0072;
+	}
+	
+	function getAlertProgressBarPercentageTimes(sessionTime) {
+		return me.getAlertPercentageTimes(sessionTime, ProgressBarRepeatExecutionsCount, ProgressBarRepeatPercentageTime);	 
+	}
+	
+	private const ProgressBarRepeatExecutionsCount = 20;
+	private const ProgressBarRepeatPercentageTime = 0.05;
+				
+	private const ArcMaxRepeatExecutionsCount = 139;
+	private const ArcMinRepeatPercentageTime = 0.0072;
 		
 	var type;
 	var time;//in seconds

@@ -12,7 +12,7 @@ class ScreenPickerDelegate extends Ui.BehaviorDelegate {
 			
 	function createScreenPickerView() {
 	}
-	
+		
 	function setPagesCount(pagesCount) {
 		me.mPagesCount = pagesCount;
 	}

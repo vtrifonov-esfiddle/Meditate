@@ -4,13 +4,11 @@ using Toybox.Lang;
 
 class DurationPickerView extends Ui.View {
 	private var mModel;
-	private var mDone;
 	private var mDigitsLayoutBuilder;
 	
     function initialize(model, digitsLayoutBuilder) {
         View.initialize();     
         me.mModel = model;
-        me.mDone = new Rez.Drawables.done();
         me.mDigitsLayoutBuilder = digitsLayoutBuilder;
     }
         
@@ -48,10 +46,18 @@ class DurationPickerView extends Ui.View {
    	    	me.mDigitsOutput.setSelectedDigit(me.mModel.getPickerPos(), me.mModel.getDigits());	
    	    }
 				
-    	View.onUpdate(dc);
-    	     	
-		if (me.mModel.isFinishPos()) {							
-       		me.mDone.draw(dc);
+    	View.onUpdate(dc);	
+		if (me.mModel.isFinishPos()) {		
+			var xPos = 	dc.getWidth() / 2;	
+			var yPos = dc.getHeight() / 2 + dc.getFontHeight(Gfx.FONT_XTINY);
+     		var tickIcon = new Icon({
+     			:font => IconFonts.fontAwesomeFreeSolid,
+     			:symbol => Rez.Strings.faCheck,
+     			:xPos => xPos,
+     			:yPos => yPos,
+     			:color => Gfx.COLOR_GREEN
+     		});
+     		tickIcon.draw(dc);
 		}				
     }
 
