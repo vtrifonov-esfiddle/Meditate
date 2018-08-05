@@ -14,21 +14,13 @@ class MeditateView extends Ui.View {
         me.mMeditateModel = meditateModel;
         me.mMainDuationRenderer = null;
         me.mIntervalAlertsRenderer = null;
-        me.mHrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
-        me.mHrStatusY = App.getApp().getProperty("meditateActivityHrYPos");
-        me.mMeditateIconX = App.getApp().getProperty("meditateActivityMeditateIconX");
-        me.mMeditateIconY = App.getApp().getProperty("meditateActivityMeditateIconY");
         me.mElapsedTime = null; 
         me.mHrStatusText = null;
         me.mMeditateIcon = null;
     }
     
-    private var mHrStatusX;
-    private var mHrStatusY;
     private var mElapsedTime;
     private var mHrStatusText;
-    private var mMeditateIconX;
-    private var mMeditateIconY;
     private var mMeditateIcon;
     
     private function createMeditateText(color, font, xPos, yPos) {
@@ -44,19 +36,34 @@ class MeditateView extends Ui.View {
     
     private static const TextFont = Gfx.FONT_MEDIUM;
     
-    private function renderBackgroundColor(dc) {				        
+    private function renderBackground(dc) {				        
         dc.setColor(Gfx.COLOR_TRANSPARENT, Gfx.COLOR_BLACK);        
         dc.clear();        
     }
-                
-    // Load your resources here
-    function onLayout(dc) {      	
+    
+    function renderLayoutStaticElements(dc) { 	
     	var xPosCenter = dc.getWidth() / 2;
     	var yPosCenter = dc.getHeight() / 2;
     	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter);
     	var yPosCenterNextLine = yPosCenter + dc.getFontHeight(TextFont);
       	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine); 
       	
+  	    var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
+        var hrStatusY = App.getApp().getProperty("meditateActivityHrYPos"); 
+  	    me.mHrStatus = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHeart,
+        	:color=>Graphics.COLOR_RED,
+        	:xPos => hrStatusX,
+        	:yPos => hrStatusY
+        });
+    }
+                
+    // Load your resources here
+    function onLayout(dc) {   
+        renderBackground(dc);     
+		renderLayoutStaticElements(dc);
+        
         var durationArcRadius = dc.getWidth() / 2;
         var mainDurationArcWidth = dc.getWidth() / 4;
         me.mMainDuationRenderer = new ElapsedDuationRenderer(me.mMeditateModel.getColor(), durationArcRadius, mainDurationArcWidth);
@@ -71,16 +78,7 @@ class MeditateView extends Ui.View {
     		me.mIntervalAlertsRenderer = null;
     	}    
         
-        me.mHrStatus = new Icon({        
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHeart,
-        	:color=>Graphics.COLOR_RED,
-        	:xPos => me.mHrStatusX,
-        	:yPos => me.mHrStatusY
-        });
-        
         delayedShowMeditateIcon();
-        renderBackgroundColor(dc);
     }
     
     private function delayedShowMeditateIcon() {
@@ -104,15 +102,18 @@ class MeditateView extends Ui.View {
 		}
 	}
 	
-    private static const MinMeditateIconFreeMemory = 20500;
+    private static const MinMeditateIconFreeMemory = 21000;
     
 	private function onLoadMeditateIcon() {
-    	var stats = System.getSystemStats();
-		if (stats.freeMemory > MinMeditateIconFreeMemory) {
+    	var stats = System.getSystemStats();    	
+        var meditateIconX = App.getApp().getProperty("meditateActivityMeditateIconX");
+        var meditateIconY = App.getApp().getProperty("meditateActivityMeditateIconY");
+        
+		if (stats.freeMemory > MinMeditateIconFreeMemory) {		
 	        me.mMeditateIcon = new Ui.Bitmap({
 	        	:rezId => Rez.Drawables.meditateIcon,
-	        	:locX => me.mMeditateIconX,
-	        	:locY => me.mMeditateIconY
+	        	:locX => meditateIconX,
+	        	:locY => meditateIconY
         	});
 		}
 	}
