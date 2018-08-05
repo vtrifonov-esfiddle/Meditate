@@ -41,11 +41,9 @@ class MeditateView extends Ui.View {
         dc.clear();        
     }
     
-    function renderLayoutStaticElements(dc) { 	
+    function renderHrStatusLayout(dc) {
     	var xPosCenter = dc.getWidth() / 2;
-    	var yPosCenter = dc.getHeight() / 2;
-    	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter);
-    	var yPosCenterNextLine = yPosCenter + dc.getFontHeight(TextFont);
+    	var yPosCenterNextLine = dc.getHeight() / 2 + dc.getFontHeight(TextFont);
       	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine); 
       	
   	    var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
@@ -58,11 +56,18 @@ class MeditateView extends Ui.View {
         	:yPos => hrStatusY
         });
     }
+    
+    function renderLayoutElapsedTime(dc) { 	
+    	var xPosCenter = dc.getWidth() / 2;
+    	var yPosCenter = dc.getHeight() / 2;
+    	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter);
+    }
                 
     // Load your resources here
     function onLayout(dc) {   
-        renderBackground(dc);     
-		renderLayoutStaticElements(dc);
+        renderBackground(dc);   
+        renderLayoutElapsedTime(dc);  
+		renderHrStatusLayout(dc);
         
         var durationArcRadius = dc.getWidth() / 2;
         var mainDurationArcWidth = dc.getWidth() / 4;
