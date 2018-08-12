@@ -6,7 +6,6 @@ using Toybox.Timer;
 class MediateActivity {
 	private var mMeditateModel;
 	private var mSession;
-	private var mSummaryModel;
 	private var mVibeAlertsExecutor;	
 	private var mHrvMonitor;
 	private var mStressMonitor;
@@ -30,8 +29,7 @@ class MediateActivity {
                  :sport => ActivityRecording.SPORT_GENERIC,      
                  :subSport => ActivityRecording.SUB_SPORT_GENERIC
                 });
-        }      
-		me.mSummaryModel = null;		
+        }      	
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
 		me.createMinHrDataField();
 		me.mVibeAlertsExecutor = null;
@@ -109,7 +107,8 @@ class MediateActivity {
 		var stressStats = me.mStressMonitor.calculateStressStats();
 		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
 		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
-		me.mSummaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min);
+		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min);
+		return summaryModel;
 	}
 			
 	function finish() {		
@@ -117,11 +116,7 @@ class MediateActivity {
 		me.mSession.save();
 		me.mSession = null;
 	}
-	
-	function getSummary() {
-		return me.mSummaryModel;
-	}
-	
+		
 	function discard() {		
 		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();

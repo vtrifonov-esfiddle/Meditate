@@ -19,8 +19,9 @@ class MeditateApp extends App.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {      	  
-    	var sessionStorage = new SessionStorage();	    	    	
-    	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
+    	var sessionStorage = new SessionStorage();	    	    
+    	var summaryRollupModel = new SummaryRollupModel();	
+    	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, summaryRollupModel);
     	
         return [ sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate ];
     }

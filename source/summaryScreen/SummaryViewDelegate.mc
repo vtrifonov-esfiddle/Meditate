@@ -5,17 +5,17 @@ using Toybox.Lang;
 
 class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mSummaryModel;
-	private var mMeditateActivity;
+	private var mDiscardDanglingActivity;
 
-	function initialize(meditateActivity) {		
+	function initialize(summaryModel, discardDanglingActivity) {		
 		var hrvTracking = GlobalSettings.loadHrvTracking();		
 		var stressTracking = GlobalSettings.loadStressTracking();
 		me.mPagesCount = SummaryViewDelegate.getPagesCount(hrvTracking, stressTracking);
 		setPageIndexes(hrvTracking, stressTracking);
 		
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
-        me.mSummaryModel = meditateActivity.getSummary();
-        me.mMeditateActivity = meditateActivity;
+        me.mSummaryModel = summaryModel;
+        me.mDiscardDanglingActivity = discardDanglingActivity;
         me.mSummaryLinesYOffset = App.getApp().getProperty("summaryLinesYOffset");
 	}
 		
@@ -75,17 +75,11 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private const InvalidPageIndex = -1;
 
 	function onBack() {
-		me.mMeditateActivity.discardDanglingActivity();
-		var continueAfterFinishingSession = GlobalSettings.loadMultiSession();
-		if (continueAfterFinishingSession == MultiSession.Yes) {
-			var sessionStorage = new SessionStorage();	
-			var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage);
-			Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
-			return true;
+		if (me.mDiscardDanglingActivity != null) {
+			me.mDiscardDanglingActivity.invoke();
 		}
-		else {
-			return false; //exit app
-		}
+		
+		return false;
 	}
 	
 	function createScreenPickerView() {
@@ -112,15 +106,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 			return new ScreenPickerDetailsSinglePageView(details);
 		}
 	}	
-			
- 	function onConfirmedSave() {
-    	me.mMeditateActivity.finish(); 
-    }
-    
-    function onDiscardedSave() {
-    	me.mMeditateActivity.discard();
-    }
-	
+				
 	private function formatHr(hr) {
 		return hr + " bpm";
 	}

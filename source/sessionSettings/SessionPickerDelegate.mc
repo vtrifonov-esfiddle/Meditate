@@ -4,10 +4,12 @@ using Toybox.Application as App;
 class SessionPickerDelegate extends ScreenPickerDelegate {
 	private var mSessionStorage;
 	private var mSelectedSessionDetails;
+	private var mSummaryRollupModel;
 	
-	function initialize(sessionStorage) {
+	function initialize(sessionStorage, summaryRollupModel) {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
+		me.mSummaryRollupModel = summaryRollupModel;
 		me.mSelectedSessionDetails = new DetailsModel();
 		me.globalSettingsIconsYOffset = App.getApp().getProperty("globalSettingsIconsYOffset");
 		me.sessionDetailsIconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
@@ -26,6 +28,37 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		return me.showSessionSettingsMenu();
     }
     
+    private const RollupExitOption = :exitApp;
+    
+    function onBack() {
+    	if (me.mSummaryRollupModel.getSummaries().size() > 0) {
+    		var summaries = me.mSummaryRollupModel.getSummaries();
+    		
+    		var summaryRollupMenu = new Ui.Menu();
+			summaryRollupMenu.setTitle(Ui.loadResource(Rez.Strings.summaryRollupMenu_title));
+			summaryRollupMenu.addItem(Ui.loadResource(Rez.Strings.summaryRollupMenuOption_exit), RollupExitOption);
+			for (var i = 0; i < summaries.size(); i++) {
+    			summaryRollupMenu.addItem(TimeFormatter.format(summaries[i].elapsedTime), i);
+    		}			
+			var summaryRollupMenuDelegate = new MenuOptionsDelegate(method(:onSummaryRollupMenuOption));
+			Ui.pushView(summaryRollupMenu, summaryRollupMenuDelegate, Ui.SLIDE_LEFT);	
+			return true;
+    	}
+    	return false;
+    }
+    
+    private function onSummaryRollupMenuOption(option) {
+    	if (option == RollupExitOption) {
+    		System.exit();
+    	}
+    	else {
+	    	var summaryIndex = option;
+	    	var summaryModel = me.mSummaryRollupModel.getSummary(summaryIndex);
+	    	var summaryViewDelegate = new SummaryViewDelegate(summaryModel, null);
+	    	Ui.pushView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT); 
+    	}
+    }
+    
     private function showSessionSettingsMenu() {
     	var sessionSettingsMenuDelegate = new SessionSettingsMenuDelegate(me.mSessionStorage, me);
         Ui.pushView(new Rez.Menus.sessionSettingsMenu(), sessionSettingsMenuDelegate, Ui.SLIDE_UP);
@@ -37,7 +70,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     	var meditateModel = new MeditateModel(selectedSession);  
     	  
         var meditateView = new MeditateView(meditateModel);
-        var mediateDelegate = new MeditateDelegate(meditateModel);
+        var mediateDelegate = new MeditateDelegate(meditateModel, me.mSummaryRollupModel);
 		Ui.switchToView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
 	}
 	
