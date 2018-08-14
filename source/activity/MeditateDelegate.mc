@@ -3,10 +3,12 @@ using Toybox.WatchUi as Ui;
 class MeditateDelegate extends Ui.BehaviorDelegate {
 	private var mMeditateModel;
 	private var mMeditateActivity;
+	private var mSummaryModels;
 	
-    function initialize(meditateModel) {
+    function initialize(meditateModel, summaryModels) {
         BehaviorDelegate.initialize();
         me.mMeditateModel = meditateModel;
+        me.mSummaryModels = summaryModels;
         me.mMeditateActivity = new MediateActivity(me.mMeditateModel);
         me.startActivity();
     }
@@ -14,35 +16,51 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	private function startActivity() {
 		me.mMeditateActivity.start();
 	}
-	
+		
 	private function stopActivity() {
-		me.mMeditateActivity.stop();		
+		me.mMeditateActivity.stop();				
 		var calculatingResultsView = new CalculatingResultsView(method(:onFinishActivity));
 		Ui.switchToView(calculatingResultsView, me, Ui.SLIDE_IMMEDIATE);	
 	}
     
     private function onFinishActivity() {  
-    	me.mMeditateActivity.calculateSummaryFields();
-    	var summaryViewDelegate = me.showSummaryView();
+    	showNextView();
     	
     	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();
     	if (confirmSaveActivity == ConfirmSaveActivity.AutoYes) { 
-    		summaryViewDelegate.onConfirmedSave();    		
+    		me.mMeditateActivity.finish();    		
         }
         else if (confirmSaveActivity == ConfirmSaveActivity.AutoNo) {
-        	summaryViewDelegate.onDiscardedSave(); 
+        	me.mMeditateActivity.discard(); 
         }   
         else { 	
 	    	var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
 	    	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
-	        Ui.pushView(confirmSaveDialog, new YesNoDelegate(summaryViewDelegate.method(:onConfirmedSave), summaryViewDelegate.method(:onDiscardedSave)), Ui.SLIDE_IMMEDIATE);
+	        Ui.pushView(confirmSaveDialog, new YesNoDelegate(me.mMeditateActivity.method(:finish), me.mMeditateActivity.method(:discard)), Ui.SLIDE_IMMEDIATE);
         }
     }   
        
-    private function showSummaryView() { 
-    	var summaryViewDelegate = new SummaryViewDelegate(me.mMeditateActivity);
+    private function showSummaryView(summaryModel) { 
+    	var summaryViewDelegate = new SummaryViewDelegate(summaryModel, me.mMeditateActivity.method(:discardDanglingActivity));
     	Ui.switchToView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT);  
-    	return summaryViewDelegate;
+    }
+    
+    private function showNextView() {    
+    	var summaryModel = me.mMeditateActivity.calculateSummaryFields();
+    	var continueAfterFinishingSession = GlobalSettings.loadMultiSession();
+		if (continueAfterFinishingSession == MultiSession.Yes) {
+			showSessionPickerView(summaryModel);
+		}
+		else {
+			showSummaryView(summaryModel);
+		}
+    }
+    
+    private function showSessionPickerView(summaryModel) {
+		var sessionStorage = new SessionStorage();	
+		me.mSummaryModels.addSummary(summaryModel);
+		var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, me.mSummaryModels);
+		Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
     }
     
     function onBack() {
@@ -50,8 +68,10 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     	return true;
     }
         
+	private const MinMeditateActivityStopTime = 1;
+	
     function onKey(keyEvent) {
-    	if (keyEvent.getKey() == Ui.KEY_ENTER) {
+    	if (keyEvent.getKey() == Ui.KEY_ENTER && me.mMeditateModel.elapsedTime >= MinMeditateActivityStopTime) {
 	    	me.stopActivity();
 	    	return true;
 	  	}
