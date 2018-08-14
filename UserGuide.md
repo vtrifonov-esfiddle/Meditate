@@ -45,15 +45,19 @@ The meditation session finishes once you press the stop button.
 
 1.3. Once you stop the session you have the option to save it.
 
-1.3.1 You can configure to auto save or auto discard session in [Global Settings](#4-global-settings)
+1.3.1 You can configure to auto save or auto discard the session via [Global Settings](#4-global-settings) -> [Confirm Save](#4.3-confirm-save)
 
 ![Confirm save session](userGuideScreenshots/confirmSaveSession.png)
 
-1.4. Finally you see the Summary Screen. Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV.
+1.4. If you are in single session mode (the default) at the end you see the Summary Screen (for Multi-Session mode see the next section **1.5**). Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV. Go back from this view to exit the app.
 
   ![Summary HR](userGuideScreenshots/summaryHr.png)![Summary Stress](userGuideScreenshots/summaryStress.png) ![Summary stress median](userGuideScreenshots/summaryStressMedian.png) ![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
 
-1.5 Depending on the chosen option for [Confirm Save](#4.3-Confirm-Save) in [Global Settings](#4-global-settings) when you go back from this view you either exit the app (the default) or go back to the session picker screen
+1.5 If you are in multi-session mode (determined by [Global Settings](#4-global-settings) -> [Multi-Session](#4.4-multi-session)) then you go back to the session picker screen. From there you can start another session. Once you finished your session you can go back from the session picker screen to enter the Sessions Summary view.
+
+![Summary Rollup](userGuideScreenshots/summaryRollup.png)
+
+1.6 From the Sessions Summary view you can drill-down into individual sessions or exit the app. Drilling-down shows summary stats of HR, Stress and HRV. If you go back from the Sessions Summary view you can continue doing more sessions.
 
 ### 2. Configuring a session
 

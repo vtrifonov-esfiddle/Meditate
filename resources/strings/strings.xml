@@ -53,6 +53,9 @@
     <string id="menuIntervalAlertSettings_edit">Edit</string>
     <string id="menuIntervalAlertSettings_deleteAll">Delete All</string>
     
+    <string id="summaryRollupMenu_title">Sessions Summary</string>
+    <string id="summaryRollupMenuOption_exit">Exit</string>
+    
     <string id="confirmDeleteIntervalAlertHeader">Delete Alert?</string>
     
     <string id="addEditIntervalAlertMenu_title">Alert</string>    
