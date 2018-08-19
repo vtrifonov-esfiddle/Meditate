@@ -79,7 +79,6 @@ class MediateActivity {
 			me.mMeditateModel.beatToBeatInterval = beatToBeatInterval;
     		me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);	 
     		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();
-			System.println("HR: " + hr);
     		me.mMeditateModel.currentHr = hr;
     		if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > hr) {
 	    		me.mMeditateModel.minHr = hr;
