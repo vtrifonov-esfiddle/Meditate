@@ -31,7 +31,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		}
 	}
 	
-	private function onConfirmSaveActivityPicked(item) {
+	function onConfirmSaveActivityPicked(item) {
 		if (item == :ask) {
 			GlobalSettings.saveConfirmSaveActivity(ConfirmSaveActivity.Ask);
 		}
@@ -44,7 +44,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	
-	private function onMultiSessionPicked(item) {
+	function onMultiSessionPicked(item) {
 		if (item == :yes) {
 			GlobalSettings.saveMultiSession(MultiSession.Yes);
 		}
@@ -54,7 +54,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	
-	private function onNewActivityTypePicked(item) {
+	function onNewActivityTypePicked(item) {
 		if (item == :meditating) {
 			GlobalSettings.saveActivityType(ActivityType.Meditating);
 		}
@@ -64,7 +64,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	
-	private function onStressTrackingPicked(item) {
+	function onStressTrackingPicked(item) {
 		if (item == :on) {
 			GlobalSettings.saveStressTracking(StressTracking.On);
 		}
@@ -77,7 +77,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	
-	private function onHrvTrackingPicked(item) {
+	function onHrvTrackingPicked(item) {
 		if (item == :on) {
 			GlobalSettings.saveHrvTracking(HrvTracking.On);
 		}

@@ -55,7 +55,7 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         }
     }
     
-    private function onActivityTypePicked(item) {
+    function onActivityTypePicked(item) {
     	var sessionModel = new SessionModel();
     	if (item == :meditating) {    		
     		sessionModel.activityType = ActivityType.Meditating;
@@ -66,13 +66,13 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
 		me.mOnChangeSession.invoke(sessionModel);	
     }
     
-    private function onIntervalAlertsChanged(intervalAlerts) {
+    function onIntervalAlertsChanged(intervalAlerts) {
     	var sessionModel = new SessionModel();
     	sessionModel.intervalAlerts = intervalAlerts;
 		me.mOnChangeSession.invoke(sessionModel);	
     }
     
-    private function onVibePatternPicked(vibePattern) {
+    function onVibePatternPicked(vibePattern) {
     	var sessionModel = new SessionModel();
     	sessionModel.vibePattern = vibePattern;
 		me.mOnChangeSession.invoke(sessionModel);	

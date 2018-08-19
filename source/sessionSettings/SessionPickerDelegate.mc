@@ -47,7 +47,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     	return false;
     }
     
-    private function onSummaryRollupMenuOption(option) {
+    function onSummaryRollupMenuOption(option) {
     	if (option == RollupExitOption) {
     		System.exit();
     	}

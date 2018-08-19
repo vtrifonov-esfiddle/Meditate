@@ -23,7 +23,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 		Ui.switchToView(calculatingResultsView, me, Ui.SLIDE_IMMEDIATE);	
 	}
     
-    private function onFinishActivity() {  
+    function onFinishActivity() {  
     	showNextView();
     	
     	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();

@@ -64,9 +64,8 @@ class HrvMonitor {
         return beatToBeatfield;
 	}
 		
-	function addHrSample(hr) {
-		if (hr != null && me.mHrvTracking == HrvTracking.On) {
-			var beatToBeatInterval = 60000.toFloat() / hr.toFloat();		
+	function addBeatToBeatInterval(beatToBeatInterval) {
+		if (me.mHrvTracking == HrvTracking.On) {	
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
 			
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);

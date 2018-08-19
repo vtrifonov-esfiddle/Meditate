@@ -16,11 +16,14 @@ class MeditateView extends Ui.View {
         me.mIntervalAlertsRenderer = null;
         me.mElapsedTime = null; 
         me.mHrStatusText = null;
-        me.mMeditateIcon = null;
+        me.mMeditateIcon = null;        
     }
     
     private var mElapsedTime;
-    private var mHrStatusText;
+    private var mHrStatusText;    
+	private var mHrStatus;
+	private var mBeatToBeatIcon;
+	private var mBeatToBeatText;	
     private var mMeditateIcon;
     
     private function createMeditateText(color, font, xPos, yPos) {
@@ -55,6 +58,14 @@ class MeditateView extends Ui.View {
         	:xPos => hrStatusX,
         	:yPos => hrStatusY
         });
+        me.mBeatToBeatIcon = new Icon({        
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHeartbeat,
+        	:color=>Graphics.COLOR_PURPLE,
+        	:xPos => hrStatusX,
+        	:yPos => hrStatusY + dc.getFontHeight(TextFont)
+        });
+        me.mBeatToBeatText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine + dc.getFontHeight(TextFont)); 
     }
     
     function renderLayoutElapsedTime(dc) { 	
@@ -91,7 +102,6 @@ class MeditateView extends Ui.View {
         mMeditateIconLoaderTimer.start(method(:onLoadMeditateIcon), 500, false);
     }
     
-	private var mHrStatus;
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
@@ -109,7 +119,7 @@ class MeditateView extends Ui.View {
 	
     private static const MinMeditateIconFreeMemory = 21000;
     
-	private function onLoadMeditateIcon() {
+	function onLoadMeditateIcon() {
     	var stats = System.getSystemStats();    	
         var meditateIconX = App.getApp().getProperty("meditateActivityMeditateIconX");
         var meditateIconY = App.getApp().getProperty("meditateActivityMeditateIconY");
@@ -134,7 +144,12 @@ class MeditateView extends Ui.View {
 		me.mHrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
 		me.mHrStatusText.draw(dc);
         
-     	me.mHrStatus.draw(dc);	                        
+     	me.mHrStatus.draw(dc);	   
+     	
+     	
+        me.mBeatToBeatIcon.draw(dc);
+        me.mBeatToBeatText.setText(me.formatHr(me.mMeditateModel.beatToBeatInterval));
+        me.mBeatToBeatText.draw(dc);                     
         var alarmTime = me.mMeditateModel.getSessionTime();
 		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
 		if (me.mIntervalAlertsRenderer != null) {

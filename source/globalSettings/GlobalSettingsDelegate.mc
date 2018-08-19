@@ -39,7 +39,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
     	return true;
     }
     
-    private function onGlobalSettingsChanged() {
+    function onGlobalSettingsChanged() {
     	me.updateGlobalSettingsDetails();
     	Ui.requestUpdate();
     }

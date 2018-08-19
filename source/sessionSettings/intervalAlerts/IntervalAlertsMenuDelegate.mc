@@ -47,12 +47,12 @@ class IntervalAlertsMenuDelegate extends Ui.MenuInputDelegate {
         }
     }
     
-    private function onDeleteIntervalAlert(intervalAlertIndex) {
+    function onDeleteIntervalAlert(intervalAlertIndex) {
     	me.mIntervalAlerts.delete(intervalAlertIndex);
     	me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
     }
     
-    private function editIntervalAlert(selectedIntervalAlertIndex) {
+    function editIntervalAlert(selectedIntervalAlertIndex) {
 		me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
 		var selectedIntervalAlert = me.mIntervalAlerts.get(selectedIntervalAlertIndex);
 		var intervalAlertMenu = new Rez.Menus.addEditIntervalAlertMenu();
@@ -62,13 +62,13 @@ class IntervalAlertsMenuDelegate extends Ui.MenuInputDelegate {
 		Ui.pushView(intervalAlertMenu, intervalAlertMenuDelegate, Ui.SLIDE_LEFT);
     }
     
-    private function onConfirmedDeleteAllIntervalAlerts() {
+    function onConfirmedDeleteAllIntervalAlerts() {
     	Ui.popView(Ui.SLIDE_IMMEDIATE);
     	me.mIntervalAlerts.reset();
     	me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
     }
     
-    private function onIntervalAlertChanged(intervalAlertIndex, intervalAlert) {
+    function onIntervalAlertChanged(intervalAlertIndex, intervalAlert) {
     	me.mIntervalAlerts.set(intervalAlertIndex, intervalAlert);
     	me.mOnIntervalAlertsChanged.invoke(me.mIntervalAlerts);
     }

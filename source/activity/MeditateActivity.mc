@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Timer;
 using Toybox.FitContributor;
 using Toybox.Timer;
+using Toybox.Math;
 
 class MediateActivity {
 	private var mMeditateModel;
@@ -31,12 +32,12 @@ class MediateActivity {
                 });
         }      	
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
-		me.createMinHrDataField();
+		me.createMinHrDataField();		
 		me.mVibeAlertsExecutor = null;
 		me.mHrvMonitor = new HrvMonitor(me.mSession);
 		me.mStressMonitor = new StressMonitor(me.mSession);
 	}
-			
+				
 	private function createMinHrDataField() {
 		me.mMinHrField = me.mSession.createField(
             "min_hr",
@@ -56,13 +57,38 @@ class MediateActivity {
 	private var mRefreshActivityTimer;
 		
 	function start() {	
+		Sensor.registerSensorDataListener(method(:onSensorData), {
+			:period => 1, 				// 1 second sample time
+			:heartBeatIntervals => {
+		        :enabled => true
+		    }
+		});
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), RefreshActivityInterval, true);	
-	}
+	}	
+	
+	function onSensorData(sensorData) {
+		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
+			return;
+		}
+		
+		for (var i = 0; i < sensorData.heartRateData.heartBeatIntervals.size(); i++) {
+			var beatToBeatInterval = sensorData.heartRateData.heartBeatIntervals[i];
+			me.mMeditateModel.beatToBeatInterval = beatToBeatInterval;
+    		me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);	 
+    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();
+			System.println("HR: " + hr);
+    		me.mMeditateModel.currentHr = hr;
+    		if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > hr) {
+	    		me.mMeditateModel.minHr = hr;
+	    	}
+    		me.mStressMonitor.addHrSample(hr);
+    	}
+	}		
 			
-	private function refreshActivityStats() {	
+	function refreshActivityStats() {	
 		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
@@ -74,14 +100,6 @@ class MediateActivity {
 		if (activityInfo.elapsedTime != null) {
 			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
 		} 
-		me.mMeditateModel.currentHr = activityInfo.currentHeartRate;
-		if (activityInfo.currentHeartRate != null) {
-	    	if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate) {
-	    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
-	    	}
-	    }
-    	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	 
-    	me.mStressMonitor.addHrSample(activityInfo.currentHeartRate);
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
 	    Ui.requestUpdate();	    
@@ -92,6 +110,7 @@ class MediateActivity {
 			return;
 	    }	
 	    
+	    Sensor.unregisterSensorDataListener();
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		me.mRefreshActivityTimer = null;
