@@ -9,14 +9,17 @@ class HrvMonitor {
 			me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);
 			me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);
 			me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
+			me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
 		}
 		else {
 			me.mHrvBeatToBeatIntervalsDataField = null;
 			me.mHrvSdrrFirst5MinDataField = null;
 			me.mHrvSdrrLast5MinDataField = null;
+			me.mHrvRmssdDataField = null;
 		}
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
-		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);		
+		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);	
+		me.mHrvRmssd = new HrvRmssd();	
 	}
 	
 	private var mHrvTracking;
@@ -25,14 +28,17 @@ class HrvMonitor {
 	
 	private var mHrvSdrrFirst5Min;
 	private var mHrvSdrrLast5Min;	
+	private var mHrvRmssd;
 		
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;	
+	private var mHrvRmssdDataField;
 			
 	private static const HrvBeatToBeatIntervalsFieldId = 6;		
 	private static const HrvSdrrFirst5MinFieldId = 7;
 	private static const HrvSdrrLast5MinFieldId = 8;	
+	private static const HrvRmssdFieldId = 9;
 				
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
 		var hrvSdrrFirst5MinDataField = activitySession.createField(
@@ -63,6 +69,16 @@ class HrvMonitor {
         );
         return beatToBeatfield;
 	}
+	
+	private static function createHrvRmssdDataField(activitySession) {
+		var hrvRmssdDataField = activitySession.createField(
+            "hrv_rmssd",
+            HrvMonitor.HrvRmssdFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
+        );
+        return hrvRmssdDataField;
+}
 		
 	function addBeatToBeatInterval(beatToBeatInterval) {
 		if (me.mHrvTracking == HrvTracking.On) {	
@@ -70,6 +86,7 @@ class HrvMonitor {
 			
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
+			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
 		}
 	}
 		
@@ -94,4 +111,15 @@ class HrvMonitor {
 		}
 		return sdrr;
 	}
+	
+	public function calculateHrvUsingRmssd() {
+		if (me.mHrvTracking == HrvTracking.Off) {
+			return null;
+		}
+		var hrv = me.mHrvRmssd.calculate();
+		if (hrv != null) {
+			me.mHrvRmssdDataField.setData(hrv);
+		}
+		return hrv;
+}
 }

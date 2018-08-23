@@ -1,11 +1,12 @@
 using Toybox.System;
 
 class SummaryModel {
-	function initialize(activityInfo, minHr, stressStats, hrvFirst5Min, hrvLast5Min) {
+	function initialize(activityInfo, minHr, stressStats, hrvFirst5Min, hrvLast5Min, hrvRmssd) {
 		me.elapsedTime = activityInfo.elapsedTime / 1000; 
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
+		me.hrvRmssd = me.initializeHeartRateVariability(hrvRmssd);
 		
 		if (stressStats != null) {
 			me.noStress = me.initializeStressScore(stressStats.noStress);
@@ -68,6 +69,7 @@ class SummaryModel {
 	
 	var stressMedian;
 	
+	var hrvRmssd;
 	var hrvFirst5Min;
 	var hrvLast5Min;
 }

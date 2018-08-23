@@ -22,9 +22,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mSummaryLinesYOffset;
 			
 	private static function getPagesCount(hrvTracking, stressTracking) {		
-		var pagesCount = 4;
+		var pagesCount = 5;
 		if (hrvTracking == HrvTracking.Off) {
-			pagesCount--;
+			pagesCount -= 2;
 		}
 		if (stressTracking == StressTracking.Off) {
 			pagesCount -= 2;
@@ -51,24 +51,27 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		}
 		
 		if (hrvTracking == HrvTracking.Off) {
-			me.mHrvPageIndex = InvalidPageIndex;
+			me.mHrvRmssdPageIndex = InvalidPageIndex;
+			me.mHrvSdrrPageIndex = InvalidPageIndex;
 		}
 		else {
 			if (stressTracking == StressTracking.Off) {
-				me.mHrvPageIndex = 1;
+				me.mHrvRmssdPageIndex = 1;
 			}
-			else if (stressTracking == StressTracking.On) {
-				me.mHrvPageIndex = 2;
+			else if (stressTracking == StressTracking.On) {				
+				me.mHrvRmssdPageIndex = 2;
 			}
 			else {
-				me.mHrvPageIndex = 3;
+				me.mHrvRmssdPageIndex = 3;
 			}
+			me.mHrvSdrrPageIndex = me.mHrvRmssdPageIndex + 1;
 		}
 	}
 	
 	private var mPagesCount;
 	
-	private var mHrvPageIndex;
+	private var mHrvRmssdPageIndex;
+	private var mHrvSdrrPageIndex;
 	private var mStressPageIndex;
 	private var mStressMedianPageIndex;
 	
@@ -93,9 +96,12 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		else if (me.mSelectedPageIndex == me.mStressMedianPageIndex) {
 			details = me.createDetailsMinMaxHrMedian();
 		}
-		else if (me.mSelectedPageIndex == mHrvPageIndex){
-			details = me.createDetailsPageHrv();
+		else if (me.mSelectedPageIndex == mHrvRmssdPageIndex){
+			details = me.createDetailsPageHrvRmssd();
 		}
+		else if (me.mSelectedPageIndex == mHrvSdrrPageIndex){
+			details = me.createDetailsPageHrvSdrr();
+		} 
 		else {
 			details = me.createDetailsPageHr();
 		}
@@ -234,7 +240,33 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         return details;
 	}
 	
-	private function createDetailsPageHrv() {
+	private function createDetailsPageHrvRmssd() {
+		var details = new DetailsModel();
+		details.color = Gfx.COLOR_BLACK;
+        details.backgroundColor = Gfx.COLOR_WHITE;
+        details.title = "Summary\n HRV RMSSD";
+        details.titleColor = Gfx.COLOR_BLACK;
+                
+        var heartBeatPurpleColor = 0xFF00FF;            
+        var hrvIcon = new Icon({       
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHeartbeat,
+        	:color=>heartBeatPurpleColor  	
+    	});            
+        details.detailLines[3].icon = hrvIcon;              
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvRmssd]);
+                 
+        var hrvIconsXPos = App.getApp().getProperty("summaryHrvIconsXPos");
+        var hrvValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
+        details.setAllIconsXPos(hrvIconsXPos);
+        details.setAllValuesXPos(hrvValueXPos); 
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
+        
+        return details;
+	}	
+	
+	private function createDetailsPageHrvSdrr() {
 		var details = new DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
@@ -260,10 +292,10 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[5].value.color = Gfx.COLOR_BLACK;
         details.detailLines[5].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvLast5Min]);  
          
-        var summaryStressMedianIconsXPos = App.getApp().getProperty("summaryHrvIconsXPos");
-        var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
-        details.setAllIconsXPos(summaryStressMedianIconsXPos);
-        details.setAllValuesXPos(summaryStressMeidanValueXPos); 
+        var hrvIconsXPos = App.getApp().getProperty("summaryHrvIconsXPos");
+        var hrvValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
+        details.setAllIconsXPos(hrvIconsXPos);
+        details.setAllValuesXPos(hrvValueXPos); 
         details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
         return details;

@@ -6,7 +6,7 @@ class MeditateModel {
 		me.elapsedTime = 0;
 		me.minHr = null;
 		me.currentHr = null;
-		me.beatToBeatInterval = null;
+		me.hrvRmssd = null;
 	}
 	
 	private var mSession;
@@ -14,7 +14,7 @@ class MeditateModel {
 	var currentHr;
 	var minHr;
 	var elapsedTime;
-	var beatToBeatInterval;
+	var hrvRmssd;
 		
 	function getSessionTime() {
 		return me.mSession.time;

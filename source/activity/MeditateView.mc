@@ -22,8 +22,8 @@ class MeditateView extends Ui.View {
     private var mElapsedTime;
     private var mHrStatusText;    
 	private var mHrStatus;
-	private var mBeatToBeatIcon;
-	private var mBeatToBeatText;	
+	private var mHrvRmssdIcon;
+	private var mHrvRmssdText;	
     private var mMeditateIcon;
     
     private function createMeditateText(color, font, xPos, yPos) {
@@ -58,14 +58,15 @@ class MeditateView extends Ui.View {
         	:xPos => hrStatusX,
         	:yPos => hrStatusY
         });
-        me.mBeatToBeatIcon = new Icon({        
+        var yPosCenterPreviousLine =  dc.getHeight() / 2 - dc.getFontHeight(TextFont);
+        me.mHrvRmssdIcon = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
         	:color=>Graphics.COLOR_PURPLE,
         	:xPos => hrStatusX,
-        	:yPos => hrStatusY + dc.getFontHeight(TextFont)
+        	:yPos => yPosCenterPreviousLine
         });
-        me.mBeatToBeatText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine + dc.getFontHeight(TextFont)); 
+        me.mHrvRmssdText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterPreviousLine); 
     }
     
     function renderLayoutElapsedTime(dc) { 	
@@ -78,8 +79,7 @@ class MeditateView extends Ui.View {
     function onLayout(dc) {   
         renderBackground(dc);   
         renderLayoutElapsedTime(dc);  
-		renderHrStatusLayout(dc);
-        
+		        
         var durationArcRadius = dc.getWidth() / 2;
         var mainDurationArcWidth = dc.getWidth() / 4;
         me.mMainDuationRenderer = new ElapsedDuationRenderer(me.mMeditateModel.getColor(), durationArcRadius, mainDurationArcWidth);
@@ -93,7 +93,7 @@ class MeditateView extends Ui.View {
     	else {
     		me.mIntervalAlertsRenderer = null;
     	}    
-        
+        renderHrStatusLayout(dc);
         delayedShowMeditateIcon();
     }
     
@@ -114,6 +114,17 @@ class MeditateView extends Ui.View {
 		}
 		else {
 			return hr.toString();
+		}
+	}
+		
+	private const InvalidHeartRate = "--";
+	
+	private function formatHrv(hrv) {
+		if (hrv == null) {
+			return InvalidHeartRate;
+		}
+		else {
+			return hrv.format("%3.2f");
 		}
 	}
 	
@@ -141,21 +152,21 @@ class MeditateView extends Ui.View {
         }
 		me.mElapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
 		me.mElapsedTime.draw(dc);
-		me.mHrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
-		me.mHrStatusText.draw(dc);
-        
-     	me.mHrStatus.draw(dc);	   
-     	
-     	
-        me.mBeatToBeatIcon.draw(dc);
-        me.mBeatToBeatText.setText(me.formatHr(me.mMeditateModel.beatToBeatInterval));
-        me.mBeatToBeatText.draw(dc);                     
+                    
         var alarmTime = me.mMeditateModel.getSessionTime();
 		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
 		if (me.mIntervalAlertsRenderer != null) {
 			me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
 			me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);
 		}	
+		
+		me.mHrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
+		me.mHrStatusText.draw(dc);        
+     	me.mHrStatus.draw(dc);	       	
+     	
+        me.mHrvRmssdIcon.draw(dc);
+        me.mHrvRmssdText.setText(me.formatHrv(me.mMeditateModel.hrvRmssd));
+        me.mHrvRmssdText.draw(dc); 
     }
     
 

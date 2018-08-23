@@ -99,33 +99,25 @@
 	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
 			
 	<string id="minHrField">Min HR</string>
-	<string id="minHrFieldUnits">bpm</string>
+	<string id="hrUnits">bpm</string>
 		
 	<string id="hrvSdrrFirst5MinFieldLabel">HRV SDRR First 5 min</string>
-	<string id="hrvSdrrFirst5MinFieldUnits">ms</string>
 	
 	<string id="hrvSdrrLast5MinFieldLabel">HRV SDRR Last 5 min</string>
-	<string id="hrvSdrrLast5MinFieldUnits">ms</string>
+	<string id="hrvFieldUnits">ms</string>
 	
-	<string id="hrvRrIntervalsFieldLabel">HRV beat-to-beat interval(ms)</string>
-	<string id="hrvRrIntervalsFieldUnits">ms</string>
-	<string id="hrvRrIntervalsFieldChartTitle">HRV beat-to-beat intervals(ms)</string>
+	<string id="hrvRmssdFieldLabel">HRV RMSSD</string>
 	
-	<string id="maxMinHrWindowLabel">Max-Min HR 10 Sec Window(bmp)</string>
-	<string id="maxMinHrWindowUnits">bmp</string>
-	<string id="maxMinHrWindowTitle">Max-Min HR 10 Sec Window(bpm)</string>
+	<string id="hrvRrIntervalsField">HRV beat-to-beat interval(ms)</string>
+	
+	<string id="maxMinHrWindowField">Max-Min HR 10 Sec Window(bmp)</string>
 	
 	<string id="stressMedianField">Stress Median</string>
-	<string id="stressMedianFieldUnits">bpm</string>
 	
 	<string id="stressNoField">No Stress</string>
-	<string id="stressNoFieldUnits">%</string>
-	
-	<string id="stressLowField">Low Stress</string>
-	<string id="stressLowFieldUnits">%</string>
-	
+	<string id="stressUnits">%</string>	
+	<string id="stressLowField">Low Stress</string>	
 	<string id="stressHighField">High Stress</string>
-	<string id="stressHighFieldUnits">%</string>
 	
 	<string id="activityCalculatingResultsText">Finishing...</string>
 	<string id="faSaveSession"></string>
