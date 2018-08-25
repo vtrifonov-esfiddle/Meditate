@@ -44,7 +44,7 @@ class MeditateView extends Ui.View {
         dc.clear();        
     }
     
-    function renderHrStatusLayout(dc) {
+    private function renderHrStatusLayout(dc) {
     	var xPosCenter = dc.getWidth() / 2;
     	var yPosCenterNextLine = dc.getHeight() / 2 + dc.getFontHeight(TextFont);
       	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine, Gfx.TEXT_JUSTIFY_CENTER); 
@@ -58,7 +58,12 @@ class MeditateView extends Ui.View {
         	:xPos => hrStatusX,
         	:yPos => hrStatusY
         });
-        var hrvRmssdTextYPos =  hrStatusY - 2 * dc.getFontHeight(TextFont);
+    }
+    
+    private function renderHrvRmssdStatusLayout(dc) {
+    	var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
+        var hrStatusY = App.getApp().getProperty("meditateActivityHrYPos");
+    	var hrvRmssdTextYPos =  hrStatusY - 2 * dc.getFontHeight(TextFont);
         var hrvRmssdIconYPos = hrvRmssdTextYPos + 3;
         me.mHrvRmssdIcon = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
@@ -96,6 +101,9 @@ class MeditateView extends Ui.View {
     		me.mIntervalAlertsRenderer = null;
     	}    
         renderHrStatusLayout(dc);
+        if (me.mMeditateModel.isHrvOn() == true) {
+	        renderHrvRmssdStatusLayout(dc);
+        }
         delayedShowMeditateIcon();
     }
     
@@ -166,9 +174,11 @@ class MeditateView extends Ui.View {
 		me.mHrStatusText.draw(dc);        
      	me.mHrStatus.draw(dc);	       	
      	
-        me.mHrvRmssdIcon.draw(dc);
-        me.mHrvRmssdText.setText(me.formatHrv(me.mMeditateModel.hrvRmssd));
-        me.mHrvRmssdText.draw(dc); 
+ 	    if (me.mMeditateModel.isHrvOn() == true) {
+	        me.mHrvRmssdIcon.draw(dc);
+	        me.mHrvRmssdText.setText(me.formatHrv(me.mMeditateModel.hrvRmssd));
+	        me.mHrvRmssdText.draw(dc); 
+        }
     }
     
 

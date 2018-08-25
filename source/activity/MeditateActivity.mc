@@ -76,13 +76,11 @@ class MediateActivity {
 		
 		for (var i = 0; i < sensorData.heartRateData.heartBeatIntervals.size(); i++) {
 			var beatToBeatInterval = sensorData.heartRateData.heartBeatIntervals[i];
-    		me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);	 
-    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();
-    		me.mMeditateModel.currentHr = hr;
-    		if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > hr) {
-	    		me.mMeditateModel.minHr = hr;
-	    	}
-    		me.mStressMonitor.addHrSample(hr);
+			if (beatToBeatInterval != null) {
+	    		me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);	 
+	    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
+	    		me.mStressMonitor.addHrSample(hr);
+    		}
     	}
 	}		
 			
@@ -98,6 +96,10 @@ class MediateActivity {
 		if (activityInfo.elapsedTime != null) {
 			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
 		}
+		me.mMeditateModel.currentHr = activityInfo.currentHeartRate;
+		if (activityInfo.currentHeartRate != null && (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate)) {
+    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
+    	}
 		me.mMeditateModel.hrvRmssd = me.mHrvMonitor.calculateHrvUsingRmssd();
 		me.mVibeAlertsExecutor.firePendingAlerts();
 	    
