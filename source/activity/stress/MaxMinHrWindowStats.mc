@@ -11,7 +11,7 @@ class MaxMinHrWindowStats {
 	
 	private var mWindowsCount;	
 	private var mBpmStatsCounts;
-	private const MaxBpmWindow = 10;
+	private const MaxBpmWindow = 20;
 	
 	function addMaxMinHrWindow(windowCalculation) {
 		me.mWindowsCount++;
@@ -93,8 +93,8 @@ class MaxMinHrWindowStats {
 	}
 	
 	private function getNoStress(medianIndex) {
-		if (medianIndex == 10) {
-			medianIndex = 9;
+		if (medianIndex >= me.MaxBpmWindow) {
+			medianIndex = me.MaxBpmWindow - 1;
 		}
 		return me.getWindowsClacification(0, medianIndex);
 	}

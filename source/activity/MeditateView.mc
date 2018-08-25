@@ -26,12 +26,12 @@ class MeditateView extends Ui.View {
 	private var mHrvRmssdText;	
     private var mMeditateIcon;
     
-    private function createMeditateText(color, font, xPos, yPos) {
+    private function createMeditateText(color, font, xPos, yPos, justification) {
     	return new Ui.Text({
         	:text => "",
         	:font => font,
         	:color => color,
-        	:justification => Gfx.TEXT_JUSTIFY_CENTER,
+        	:justification =>justification,
         	:locX => xPos,
         	:locY => yPos
     	});
@@ -47,7 +47,7 @@ class MeditateView extends Ui.View {
     function renderHrStatusLayout(dc) {
     	var xPosCenter = dc.getWidth() / 2;
     	var yPosCenterNextLine = dc.getHeight() / 2 + dc.getFontHeight(TextFont);
-      	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine); 
+      	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine, Gfx.TEXT_JUSTIFY_CENTER); 
       	
   	    var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
         var hrStatusY = App.getApp().getProperty("meditateActivityHrYPos"); 
@@ -58,21 +58,23 @@ class MeditateView extends Ui.View {
         	:xPos => hrStatusX,
         	:yPos => hrStatusY
         });
-        var yPosCenterPreviousLine =  dc.getHeight() / 2 - dc.getFontHeight(TextFont);
+        var hrvRmssdTextYPos =  hrStatusY - 2 * dc.getFontHeight(TextFont);
+        var hrvRmssdIconYPos = hrvRmssdTextYPos + 3;
         me.mHrvRmssdIcon = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
         	:color=>Graphics.COLOR_PURPLE,
         	:xPos => hrStatusX,
-        	:yPos => yPosCenterPreviousLine
+        	:yPos => hrvRmssdIconYPos
         });
-        me.mHrvRmssdText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterPreviousLine); 
+        var hrvRmssdTextXPos = hrStatusX + 20;
+        me.mHrvRmssdText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvRmssdTextXPos, hrvRmssdTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
     }
     
     function renderLayoutElapsedTime(dc) { 	
     	var xPosCenter = dc.getWidth() / 2;
     	var yPosCenter = dc.getHeight() / 2;
-    	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter);
+    	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter, Gfx.TEXT_JUSTIFY_CENTER);
     }
                 
     // Load your resources here
