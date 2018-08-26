@@ -8,8 +8,10 @@ class HrvConsecutive {
 	private var mCurrentBeatToBeatInterval;
 	
 	function addBeatToBeatInterval(beatToBeatInterval) {
-		me.mCurrentBeatToBeatInterval = beatToBeatInterval;	
-		me.mPreviousBeatToBeatInterval = me.mCurrentBeatToBeatInterval;
+		if (beatToBeatInterval != null) {
+			me.mPreviousBeatToBeatInterval = me.mCurrentBeatToBeatInterval;
+			me.mCurrentBeatToBeatInterval = beatToBeatInterval;	
+		}	
 	}
 	
 	function calculate() {
