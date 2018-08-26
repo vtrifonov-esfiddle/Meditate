@@ -76,6 +76,8 @@ class MediateActivity {
 		
 		for (var i = 0; i < sensorData.heartRateData.heartBeatIntervals.size(); i++) {
 			var beatToBeatInterval = sensorData.heartRateData.heartBeatIntervals[i];
+			
+			me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);			
 			if (beatToBeatInterval != null) {
 	    		me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);	 
 	    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
@@ -100,9 +102,9 @@ class MediateActivity {
 		if (activityInfo.currentHeartRate != null && (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate)) {
     		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
     	}
-		me.mMeditateModel.hrvRmssd = me.mHrvMonitor.calculateHrvUsingRmssd();
-		me.mVibeAlertsExecutor.firePendingAlerts();
-	    
+		me.mVibeAlertsExecutor.firePendingAlerts();	    
+    	me.mMeditateModel.hrv = me.mHrvMonitor.calculateHrvConsecutive();
+    	
 	    Ui.requestUpdate();	    
 	}	   	
 	

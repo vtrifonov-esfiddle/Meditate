@@ -22,8 +22,8 @@ class MeditateView extends Ui.View {
     private var mElapsedTime;
     private var mHrStatusText;    
 	private var mHrStatus;
-	private var mHrvRmssdIcon;
-	private var mHrvRmssdText;	
+	private var mHrvIcon;
+	private var mHrvText;	
     private var mMeditateIcon;
     
     private function createMeditateText(color, font, xPos, yPos, justification) {
@@ -60,20 +60,20 @@ class MeditateView extends Ui.View {
         });
     }
     
-    private function renderHrvRmssdStatusLayout(dc) {
+    private function renderHrvStatusLayout(dc) {
     	var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
         var hrStatusY = App.getApp().getProperty("meditateActivityHrYPos");
-    	var hrvRmssdTextYPos =  hrStatusY - 2 * dc.getFontHeight(TextFont);
-        var hrvRmssdIconYPos = hrvRmssdTextYPos + 3;
-        me.mHrvRmssdIcon = new Icon({        
+    	var hrvTextYPos =  hrStatusY - 2 * dc.getFontHeight(TextFont);
+        var hrvIconYPos = hrvTextYPos + 3;
+        me.mHrvIcon = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
-        	:color=>Graphics.COLOR_PURPLE,
+        	:color=>Graphics.COLOR_BLUE,
         	:xPos => hrStatusX,
-        	:yPos => hrvRmssdIconYPos
+        	:yPos => hrvIconYPos
         });
-        var hrvRmssdTextXPos = hrStatusX + 20;
-        me.mHrvRmssdText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvRmssdTextXPos, hrvRmssdTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
+        var hrvTextXPos = hrStatusX + 20;
+        me.mHrvText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvTextXPos, hrvTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
     }
     
     function renderLayoutElapsedTime(dc) { 	
@@ -102,7 +102,7 @@ class MeditateView extends Ui.View {
     	}    
         renderHrStatusLayout(dc);
         if (me.mMeditateModel.isHrvOn() == true) {
-	        renderHrvRmssdStatusLayout(dc);
+	        renderHrvStatusLayout(dc);
         }
         delayedShowMeditateIcon();
     }
@@ -175,9 +175,9 @@ class MeditateView extends Ui.View {
      	me.mHrStatus.draw(dc);	       	
      	
  	    if (me.mMeditateModel.isHrvOn() == true) {
-	        me.mHrvRmssdIcon.draw(dc);
-	        me.mHrvRmssdText.setText(me.formatHrv(me.mMeditateModel.hrvRmssd));
-	        me.mHrvRmssdText.draw(dc); 
+	        me.mHrvIcon.draw(dc);
+	        me.mHrvText.setText(me.formatHrv(me.mMeditateModel.hrv));
+	        me.mHrvText.draw(dc); 
         }
     }
     
