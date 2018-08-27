@@ -125,10 +125,8 @@ class MediateActivity {
 		}
 		
 		var stressStats = me.mStressMonitor.calculateStressStats();
-		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
-		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
-		var hrvRmssd = me.mHrvMonitor.calculateHrvUsingRmssd();
-		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min, hrvRmssd);
+		var hrvSummary = me.mHrvMonitor.calculateHrvSummary();
+		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvSummary);
 		return summaryModel;
 	}
 			

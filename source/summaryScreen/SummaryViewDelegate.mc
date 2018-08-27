@@ -22,9 +22,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mSummaryLinesYOffset;
 			
 	private static function getPagesCount(hrvTracking, stressTracking) {		
-		var pagesCount = 5;
+		var pagesCount = 6;
 		if (hrvTracking == HrvTracking.Off) {
-			pagesCount -= 2;
+			pagesCount -= 3;
 		}
 		if (stressTracking == StressTracking.Off) {
 			pagesCount -= 2;
@@ -53,6 +53,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		if (hrvTracking == HrvTracking.Off) {
 			me.mHrvRmssdPageIndex = InvalidPageIndex;
 			me.mHrvSdrrPageIndex = InvalidPageIndex;
+			me.mHrvPnnxPageIndex = InvalidPageIndex;
 		}
 		else {
 			if (stressTracking == StressTracking.Off) {
@@ -64,7 +65,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 			else {
 				me.mHrvRmssdPageIndex = 3;
 			}
-			me.mHrvSdrrPageIndex = me.mHrvRmssdPageIndex + 1;
+			me.mHrvPnnxPageIndex = me.mHrvRmssdPageIndex + 1;			
+			me.mHrvSdrrPageIndex = me.mHrvRmssdPageIndex + 2;
 		}
 	}
 	
@@ -72,6 +74,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	
 	private var mHrvRmssdPageIndex;
 	private var mHrvSdrrPageIndex;
+	private var mHrvPnnxPageIndex;
 	private var mStressPageIndex;
 	private var mStressMedianPageIndex;
 	
@@ -99,6 +102,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		else if (me.mSelectedPageIndex == mHrvRmssdPageIndex){
 			details = me.createDetailsPageHrvRmssd();
 		}
+		else if (me.mSelectedPageIndex == mHrvPnnxPageIndex){
+			details = me.createDetailsPageHrvPnnx();
+		} 
 		else if (me.mSelectedPageIndex == mHrvSdrrPageIndex){
 			details = me.createDetailsPageHrvSdrr();
 		} 
@@ -257,6 +263,41 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvRmssd]);
                  
+        var hrvIconsXPos = App.getApp().getProperty("summaryHrvIconsXPos");
+        var hrvValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
+        details.setAllIconsXPos(hrvIconsXPos);
+        details.setAllValuesXPos(hrvValueXPos); 
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
+        
+        return details;
+	}	
+	
+	private function createDetailsPageHrvPnnx() {
+		var details = new DetailsModel();
+		details.color = Gfx.COLOR_BLACK;
+        details.backgroundColor = Gfx.COLOR_WHITE;
+        details.title = "Summary\n HRV pNNx";
+        details.titleColor = Gfx.COLOR_BLACK;
+                
+        var heartBeatPurpleColor = 0xFF00FF;            
+        var hrvIcon = new Icon({       
+        	:font => IconFonts.fontAwesomeFreeSolid,
+        	:symbol => Rez.Strings.faHeartbeat,
+        	:color=>heartBeatPurpleColor  	
+    	});            
+        details.detailLines[2].icon = hrvIcon;      
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
+        details.detailLines[2].value.text = "pNN20";
+        
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[3].value.text = Lang.format("$1$ %", [me.mSummaryModel.hrvPnn20]);
+        
+    	details.detailLines[4].icon = hrvIcon;
+    	details.detailLines[4].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[4].value.text = "pNN50";
+        details.detailLines[5].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[5].value.text = Lang.format("$1$ %", [me.mSummaryModel.hrvPnn50]);  
+         
         var hrvIconsXPos = App.getApp().getProperty("summaryHrvIconsXPos");
         var hrvValueXPos = App.getApp().getProperty("summaryHrvValueXPos");
         details.setAllIconsXPos(hrvIconsXPos);

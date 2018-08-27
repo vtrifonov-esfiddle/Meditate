@@ -106,8 +106,12 @@
 	<string id="hrvSdrrLast5MinFieldLabel">HRV SDRR Last 5 min</string>
 	<string id="hrvFieldUnits">ms</string>
 	
-	<string id="hrvField">HRV(ms)</string>
+	<string id="hrvField">HRV Consecutive Beats(ms)</string>
 	<string id="hrvRmssdFieldLabel">HRV RMSSD</string>
+	<string id="hrvPnn20FieldLabel">HRV pNN20</string>
+	<string id="hrvPnn50FieldLabel">HRV pNN50</string>
+	
+	<string id="percentUnits">%</string>
 	
 	<string id="hrvRrIntervalsField">HRV beat-to-beat interval(ms)</string>
 	

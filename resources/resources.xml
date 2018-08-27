@@ -21,5 +21,7 @@
 		<fitField id="8" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="8" precision="0" dataLabel="@Strings.hrvRrIntervalsField" unitLabel="@Strings.hrvFieldUnits" chartTitle="@Strings.hrvRrIntervalsField" fillColor="FFA500"  />
 		<fitField id="9" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="9" precision="2" dataLabel="@Strings.hrvSdrrFirst5MinFieldLabel" unitLabel="@Strings.hrvFieldUnits" />
 		<fitField id="10" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="10" precision="2" dataLabel="@Strings.hrvSdrrLast5MinFieldLabel" unitLabel="@Strings.hrvFieldUnits" />
+		<fitField id="11" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="11" precision="2" dataLabel="@Strings.hrvPnn50FieldLabel" unitLabel="@Strings.percentUnits" />
+		<fitField id="12" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="12" precision="2" dataLabel="@Strings.hrvPnn20FieldLabel" unitLabel="@Strings.percentUnits" />
 	</fitContributions>
 </resources>

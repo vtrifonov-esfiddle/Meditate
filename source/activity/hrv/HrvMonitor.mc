@@ -11,16 +11,22 @@ class HrvMonitor {
 			me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
 			me.mHrvDataField = HrvMonitor.createHrvDataField(activitySession);
 			me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
+			me.mHrvPnn50DataField = HrvMonitor.createHrvPnn50DataField(activitySession);
+			me.mHrvPnn20DataField = HrvMonitor.createHrvPnn20DataField(activitySession);
 		}
 		else {
 			me.mHrvBeatToBeatIntervalsDataField = null;
 			me.mHrvSdrrFirst5MinDataField = null;
 			me.mHrvSdrrLast5MinDataField = null;
 			me.mHrvRmssdDataField = null;
+			me.mHrvPnn50DataField = null;
+			me.mHrvPnn20DataField = null;
 		}
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
 		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);	
 		me.mHrvRmssd = new HrvRmssd();	
+		me.mHrvPnn50 = new HrvPnnx(50);
+		me.mHrvPnn20 = new HrvPnnx(20);
 		me.mHrvConsecutive = new HrvConsecutive();
 	}
 	
@@ -32,68 +38,87 @@ class HrvMonitor {
 	private var mHrvSdrrLast5Min;	
 	private var mHrvRmssd;
 	private var mHrvConsecutive;
+	private var mHrvPnn50;
+	private var mHrvPnn20;
 		
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;	
 	private var mHrvDataField;
 	private var mHrvRmssdDataField;
+	private var mHrvPnn50DataField;
+	private var mHrvPnn20DataField;
 			
 	private static const HrvFieldId = 6;
 	private static const HrvRmssdFieldId = 7;	
 	private static const HrvBeatToBeatIntervalsFieldId = 8;		
 	private static const HrvSdrrFirst5MinFieldId = 9;
 	private static const HrvSdrrLast5MinFieldId = 10;		
+	private static const HrvPnn50FieldId = 11;
+	private static const HrvPnn20FieldId = 12;
 				
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
-		var hrvSdrrFirst5MinDataField = activitySession.createField(
+		return activitySession.createField(
             "hrv_sdrr_f",
             HrvMonitor.HrvSdrrFirst5MinFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
         );
-        return hrvSdrrFirst5MinDataField;
 	}
 	
 	private static function createHrvSdrrLast5MinDataField(activitySession) {
-		var hrvSdrrLast5MinDataField = activitySession.createField(
+		return activitySession.createField(
             "hrv_sdrr_l",
             HrvMonitor.HrvSdrrLast5MinFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
         );
-        return hrvSdrrLast5MinDataField;
 	}
 	
 	private static function createHrvBeatToBeatIntervalsDataField(activitySession) {
-		var beatToBeatfield = activitySession.createField(
+		return activitySession.createField(
             "hrv_btb",
             HrvMonitor.HrvBeatToBeatIntervalsFieldId,
             FitContributor.DATA_TYPE_UINT16,
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
-        return beatToBeatfield;
 	}
 	
 	private static function createHrvDataField(activitySession) {
-		var hrvDataField = activitySession.createField(
+		return activitySession.createField(
             "hrv_c",
             HrvMonitor.HrvFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
-        return hrvDataField;
 	}
 	
 	private static function createHrvRmssdDataField(activitySession) {
-		var hrvRmssdDataField = activitySession.createField(
+		return activitySession.createField(
             "hrv_rmssd",
             HrvMonitor.HrvRmssdFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
         );
-        return hrvRmssdDataField;
-}
+	}
+	
+	private static function createHrvPnn50DataField(activitySession) {
+		return activitySession.createField(
+            "hrv_pnn50",
+            HrvMonitor.HrvPnn50FieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
+        );
+	}
+	
+	private static function createHrvPnn20DataField(activitySession) {
+		return activitySession.createField(
+            "hrv_pnn20",
+            HrvMonitor.HrvPnn20FieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
+        );
+	}
 		
 	function addBeatToBeatInterval(beatToBeatInterval) {
 		if (me.mHrvTracking == HrvTracking.On) {	
@@ -103,31 +128,11 @@ class HrvMonitor {
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
+			me.mHrvPnn50.addBeatToBeatInterval(beatToBeatInterval);
+			me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);
 		}
 	}
-		
-	public function calculateHrvFirst5MinSdrr() {		
-		if (me.mHrvTracking == HrvTracking.Off) {
-			return null;
-		}
-		var sdrr = me.mHrvSdrrFirst5Min.calculate();
-		if (sdrr != null) {
-			me.mHrvSdrrFirst5MinDataField.setData(sdrr);
-		}
-		return sdrr;
-	}
-	
-	public function calculateHrvLast5MinSdrr() {
-		if (me.mHrvTracking == HrvTracking.Off) {
-			return null;
-		}
-		var sdrr = me.mHrvSdrrLast5Min.calculate();
-		if (sdrr != null) {
-			me.mHrvSdrrLast5MinDataField.setData(sdrr);
-		}
-		return sdrr;
-	}
-	
+			
 	public function calculateHrvConsecutive() {
 		if (me.mHrvTracking == HrvTracking.Off) {
 			return null;
@@ -139,14 +144,43 @@ class HrvMonitor {
 		return hrv;
 	}
 	
-	public function calculateHrvUsingRmssd() {
+	public function calculateHrvSummary() {
 		if (me.mHrvTracking == HrvTracking.Off) {
 			return null;
 		}
-		var hrv = me.mHrvRmssd.calculate();
-		if (hrv != null) {
-			me.mHrvRmssdDataField.setData(hrv);
+		var hrvSummary = new HrvSummary();
+		hrvSummary.rmssd = me.mHrvRmssd.calculate();
+		if (hrvSummary.rmssd != null) {
+			me.mHrvRmssdDataField.setData(hrvSummary.rmssd);
 		}
-		return hrv;
+		hrvSummary.pnn50 = me.mHrvPnn50.calculate();
+		if (hrvSummary.pnn50 != null) {
+			me.mHrvPnn50DataField.setData(hrvSummary.pnn50);
+		}
+		hrvSummary.pnn20 = me.mHrvPnn20.calculate();
+		if (hrvSummary.pnn20 != null) {
+			me.mHrvPnn20DataField.setData(hrvSummary.pnn20);
+		}
+		hrvSummary.rmssd = me.mHrvRmssd.calculate();
+		if (hrvSummary.rmssd != null) {
+			me.mHrvRmssdDataField.setData(hrvSummary.rmssd);
+		}
+		hrvSummary.first5MinSdrr = me.mHrvSdrrFirst5Min.calculate();
+		if (hrvSummary.first5MinSdrr != null) {
+			me.mHrvSdrrFirst5MinDataField.setData(hrvSummary.first5MinSdrr);
+		}
+		hrvSummary.last5MinSdrr = me.mHrvSdrrLast5Min.calculate();
+		if (hrvSummary.last5MinSdrr != null) {
+			me.mHrvSdrrLast5MinDataField.setData(hrvSummary.last5MinSdrr);
+		}
+		return hrvSummary;
 	}
+}
+
+class HrvSummary {
+	var rmssd;
+	var pnn50;
+	var pnn20;
+	var first5MinSdrr;
+	var last5MinSdrr;
 }
