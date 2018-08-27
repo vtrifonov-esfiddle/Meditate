@@ -77,11 +77,12 @@ class MediateActivity {
 		for (var i = 0; i < sensorData.heartRateData.heartBeatIntervals.size(); i++) {
 			var beatToBeatInterval = sensorData.heartRateData.heartBeatIntervals[i];				
 			if (beatToBeatInterval != null) {			
-	    		me.mHrvMonitor.addBeatToBeatInterval(beatToBeatInterval);	 
+	    		me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	 
 	    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
 	    		me.mStressMonitor.addHrSample(hr);
     		}
-    	}
+    		me.mHrvMonitor.addNonFilteredBeatToBeatInterval(beatToBeatInterval);	 
+    	}    	
 	}		
 			
 	function refreshActivityStats() {	

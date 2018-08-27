@@ -120,16 +120,21 @@ class HrvMonitor {
         );
 	}
 		
-	function addBeatToBeatInterval(beatToBeatInterval) {
-		if (me.mHrvTracking == HrvTracking.On) {	
+	function addValidBeatToBeatInterval(beatToBeatInterval) {
+		if (me.mHrvTracking == HrvTracking.On) {			
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
-			
+								
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
-			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvPnn50.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);
+		}
+	}
+	
+	function addNonFilteredBeatToBeatInterval(beatToBeatInterval) {
+		if (me.mHrvTracking == HrvTracking.On) {		
+			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);
 		}
 	}
 			
