@@ -30,7 +30,7 @@ class HrvPnnx {
 		if (me.mTotalIntervalsCount == 0) {
 			return null;
 		}
-		return me.mOverThresholdIntervalsCount.toFloat() / me.mTotalIntervalsCount.toFloat();
+		return (me.mOverThresholdIntervalsCount.toFloat() / me.mTotalIntervalsCount.toFloat()) * 100.0;
 	}
 }
 
