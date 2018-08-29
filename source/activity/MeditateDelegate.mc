@@ -5,18 +5,14 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	private var mMeditateActivity;
 	private var mSummaryModels;
 	
-    function initialize(meditateModel, summaryModels) {
+    function initialize(meditateModel, meditateActivity, summaryModels) {
         BehaviorDelegate.initialize();
         me.mMeditateModel = meditateModel;
         me.mSummaryModels = summaryModels;
-        me.mMeditateActivity = new MediateActivity(me.mMeditateModel);
-        me.startActivity();
+        me.mMeditateActivity = meditateActivity;
+        me.mMeditateActivity.start(me.mMeditateModel);
     }
-		
-	private function startActivity() {
-		me.mMeditateActivity.start();
-	}
-		
+				
 	private function stopActivity() {
 		me.mMeditateActivity.stop();				
 		var calculatingResultsView = new CalculatingResultsView(method(:onFinishActivity));

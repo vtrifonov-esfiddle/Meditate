@@ -71,11 +71,10 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 		}		
 		details.detailLines[1].value.text = "Stress: " +  stressTrackingSetting; 
 		
-		var heartBeatPurpleColor = 0xFF00FF;
 		var hrvIcon = new Icon({        
 	        	:font => IconFonts.fontAwesomeFreeSolid,
 	        	:symbol => Rez.Strings.faHeartbeat,
-	        	:color => heartBeatPurpleColor
+	        	:color => Icon.HeartBeatPurpleColor
 	        });	
 	    details.detailLines[2].icon = hrvIcon;
 	    var hrvTrackingSetting;

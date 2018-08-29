@@ -123,6 +123,8 @@ class HrvMonitor {
 	function addValidBeatToBeatInterval(beatToBeatInterval) {
 		if (me.mHrvTracking == HrvTracking.On) {			
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
+			
+			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);
 								
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
@@ -131,13 +133,7 @@ class HrvMonitor {
 			me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);
 		}
 	}
-	
-	function addNonFilteredBeatToBeatInterval(beatToBeatInterval) {
-		if (me.mHrvTracking == HrvTracking.On) {		
-			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);
-		}
-	}
-			
+				
 	public function calculateHrvConsecutive() {
 		if (me.mHrvTracking == HrvTracking.Off) {
 			return null;

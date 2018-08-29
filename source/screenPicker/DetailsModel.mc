@@ -109,6 +109,8 @@ class Icon {
 	function draw(dc) {
 		me.mIconDrawable.draw(dc);
 	}
+	
+	const HeartBeatPurpleColor = 0xFF00FF;
 }
 
 module IconFonts {

@@ -10,32 +10,26 @@ class MediateActivity {
 	private var mVibeAlertsExecutor;	
 	private var mHrvMonitor;
 	private var mStressMonitor;
+	private var mOnHrvReady;
 	
 	private const SUB_SPORT_YOGA = 43;
 		
-	function initialize(meditateModel) {
-		me.mMeditateModel = meditateModel;
-		if (meditateModel.getActivityType() == ActivityType.Yoga) { 
-			me.mSession = ActivityRecording.createSession(       
-                {
-                 :name => "Yoga",                              
-                 :sport => ActivityRecording.SPORT_TRAINING,      
-                 :subSport => SUB_SPORT_YOGA
-                });    		
-        }
-        else {
-        	me.mSession = ActivityRecording.createSession(       
-                {
-                 :name => "Meditating",                              
-                 :sport => ActivityRecording.SPORT_GENERIC,      
-                 :subSport => ActivityRecording.SUB_SPORT_GENERIC
-                });
-        }      	
-		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
-		me.createMinHrDataField();		
-		me.mVibeAlertsExecutor = null;
-		me.mHrvMonitor = new HrvMonitor(me.mSession);
-		me.mStressMonitor = new StressMonitor(me.mSession);
+	function initialize(onHrvReady) {
+		me.mOnHrvReady = onHrvReady;
+		me.mMeditateModel = null;
+				
+		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
+		var hrvTracking = GlobalSettings.loadHrvTracking();
+		var stressTracking = GlobalSettings.loadStressTracking();
+		Sensor.unregisterSensorDataListener();
+		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {		
+			Sensor.registerSensorDataListener(method(:onSensorData), {
+				:period => 1, 				// 1 second sample time
+				:heartBeatIntervals => {
+			        :enabled => true
+			    }
+			});			
+		}
 	}
 				
 	private function createMinHrDataField() {
@@ -56,13 +50,28 @@ class MediateActivity {
 	
 	private var mRefreshActivityTimer;
 		
-	function start() {	
-		Sensor.registerSensorDataListener(method(:onSensorData), {
-			:period => 1, 				// 1 second sample time
-			:heartBeatIntervals => {
-		        :enabled => true
-		    }
-		});
+	function start(meditateModel) {
+		me.mMeditateModel = meditateModel;			
+		me.mOnHrvReady = null;
+		if (me.mMeditateModel.getActivityType() == ActivityType.Yoga) { 
+			me.mSession = ActivityRecording.createSession(       
+                {
+                 :name => "Yoga",                              
+                 :sport => ActivityRecording.SPORT_TRAINING,      
+                 :subSport => SUB_SPORT_YOGA
+                });    		
+        }
+        else {
+        	me.mSession = ActivityRecording.createSession(       
+                {
+                 :name => "Meditating",                              
+                 :sport => ActivityRecording.SPORT_GENERIC,      
+                 :subSport => ActivityRecording.SUB_SPORT_GENERIC
+                });
+        }           
+		me.createMinHrDataField();	
+		me.mHrvMonitor = new HrvMonitor(me.mSession);
+		me.mStressMonitor = new StressMonitor(me.mSession);
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
@@ -71,6 +80,13 @@ class MediateActivity {
 	
 	function onSensorData(sensorData) {
 		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
+			me.mOnHrvReady.invoke(false);
+			return;
+		}
+		if (me.mOnHrvReady != null) {
+			var heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
+			var isHrvReady = heartBeatIntervals.size() > 0 && heartBeatIntervals[0] != null;
+			me.mOnHrvReady.invoke(isHrvReady);
 			return;
 		}
 		
@@ -80,8 +96,7 @@ class MediateActivity {
 	    		me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	 
 	    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
 	    		me.mStressMonitor.addHrSample(hr);
-    		}
-    		me.mHrvMonitor.addNonFilteredBeatToBeatInterval(beatToBeatInterval);	 
+    		} 
     	}    	
 	}		
 			

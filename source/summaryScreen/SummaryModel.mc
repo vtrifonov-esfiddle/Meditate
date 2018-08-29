@@ -6,7 +6,6 @@ class SummaryModel {
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
-		me.hrvRmssd = me.initializeHeartRateVariability(hrvSummary.rmssd);
 		
 		if (stressStats != null) {
 			me.noStress = me.initializePercentageValue(stressStats.noStress);
@@ -15,10 +14,13 @@ class SummaryModel {
 
 			me.stressMedian = me.initializeStressMedian(stressStats.median);
 		}
-		me.hrvFirst5Min = me.initializeHeartRateVariability(hrvSummary.first5MinSdrr);
-		me.hrvLast5Min = me.initializeHeartRateVariability(hrvSummary.last5MinSdrr);
-		me.hrvPnn50 = me.initializePercentageValue(hrvSummary.pnn50);
-		me.hrvPnn20 = me.initializePercentageValue(hrvSummary.pnn20);
+		if (hrvSummary != null) {
+			me.hrvRmssd = me.initializeHeartRateVariability(hrvSummary.rmssd);
+			me.hrvFirst5Min = me.initializeHeartRateVariability(hrvSummary.first5MinSdrr);
+			me.hrvLast5Min = me.initializeHeartRateVariability(hrvSummary.last5MinSdrr);
+			me.hrvPnn50 = me.initializePercentageValue(hrvSummary.pnn50);
+			me.hrvPnn20 = me.initializePercentageValue(hrvSummary.pnn20);
+		}
 	}
 	
 	private function initializeHeartRate(heartRate) {

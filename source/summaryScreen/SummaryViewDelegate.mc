@@ -252,12 +252,11 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV RMSSD";
         details.titleColor = Gfx.COLOR_BLACK;
-                
-        var heartBeatPurpleColor = 0xFF00FF;            
+                           
         var hrvIcon = new Icon({       
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
-        	:color=>heartBeatPurpleColor  	
+        	:color=> Icon.HeartBeatPurpleColor  	
     	});            
         details.detailLines[3].icon = hrvIcon;              
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
@@ -278,12 +277,11 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV pNNx";
         details.titleColor = Gfx.COLOR_BLACK;
-                
-        var heartBeatPurpleColor = 0xFF00FF;            
+                            
         var hrvIcon = new Icon({       
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
-        	:color=>heartBeatPurpleColor  	
+        	:color=> Icon.HeartBeatPurpleColor  	
     	});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
@@ -313,12 +311,11 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV SDRR";
         details.titleColor = Gfx.COLOR_BLACK;
-                
-        var heartBeatPurpleColor = 0xFF00FF;            
+                        
         var hrvIcon = new Icon({       
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
-        	:color=>heartBeatPurpleColor  	
+        	:color=> Icon.HeartBeatPurpleColor  	
     	});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
