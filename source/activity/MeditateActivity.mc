@@ -147,13 +147,11 @@ class MediateActivity {
 	}
 			
 	function finish() {		
-		Sensor.setEnabledSensors( [] );
 		me.mSession.save();
 		me.mSession = null;
 	}
 		
 	function discard() {		
-		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();
 		me.mSession = null;
 	}

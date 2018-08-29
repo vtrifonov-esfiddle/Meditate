@@ -41,7 +41,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			if (isHrvReady == true) {
 				hrvStatusLine.icon.setColor(Icon.HeartBeatPurpleColor);
 		        hrvStatusLine.value.text = "Ready";
-		        Vibe.vibrate(VibePattern.MediumContinuous);
+		        Vibe.vibrate(VibePattern.ShorterContinuous);
 	        }
 	        else {
 	        	hrvStatusLine.icon.setColor(Gfx.COLOR_TRANSPARENT);
