@@ -16,10 +16,7 @@ class MeditateView extends Ui.View {
         me.mIntervalAlertsRenderer = null;
         me.mElapsedTime = null; 
         me.mHrStatusText = null;
-        me.mMeditateIcon = null; 
-        
-        me.mHrvSensorDataNullCount = null;
-        me.mHrvBeatToBeatIntervalsNullCount = null;       
+        me.mMeditateIcon = null;        
     }
     
     private var mElapsedTime;
@@ -28,9 +25,6 @@ class MeditateView extends Ui.View {
 	private var mHrvIcon;
 	private var mHrvText;	
     private var mMeditateIcon;
-    
-    private var mHrvSensorDataNullCount;
-    private var mHrvBeatToBeatIntervalsNullCount;
     
     private function createMeditateText(color, font, xPos, yPos, justification) {
     	return new Ui.Text({
@@ -80,10 +74,6 @@ class MeditateView extends Ui.View {
         });
         var hrvTextXPos = hrStatusX + 20;
         me.mHrvText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvTextXPos, hrvTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
-        
-        var hrvNullCountYPos = hrStatusY - 3 * dc.getFontHeight(TextFont);
-        me.mHrvSensorDataNullCount = createMeditateText(Gfx.COLOR_WHITE, TextFont, 60, hrvNullCountYPos, Gfx.TEXT_JUSTIFY_LEFT);
-        me.mHrvBeatToBeatIntervalsNullCount = createMeditateText(Gfx.COLOR_WHITE, TextFont, 110, hrvNullCountYPos, Gfx.TEXT_JUSTIFY_LEFT);
     }
     
     function renderLayoutElapsedTime(dc) { 	
@@ -112,8 +102,7 @@ class MeditateView extends Ui.View {
     	}    
         renderHrStatusLayout(dc);
         if (me.mMeditateModel.isHrvOn() == true) {
-	        renderHrvStatusLayout(dc);	        
-	        
+	        renderHrvStatusLayout(dc);
         }
         delayedShowMeditateIcon();
     }
@@ -189,11 +178,6 @@ class MeditateView extends Ui.View {
 	        me.mHrvIcon.draw(dc);
 	        me.mHrvText.setText(me.formatHrv(me.mMeditateModel.hrv));
 	        me.mHrvText.draw(dc); 
-	        
-	        me.mHrvSensorDataNullCount.setText("S: " + me.mMeditateModel.hrvSensorDataNullCount.toString());
-	        me.mHrvSensorDataNullCount.draw(dc);
-	        me.mHrvBeatToBeatIntervalsNullCount.setText("B: " + me.mMeditateModel.hrvBeatToBeatIntervalsNullCount.toString());
-	        me.mHrvBeatToBeatIntervalsNullCount.draw(dc);
         }
     }
     

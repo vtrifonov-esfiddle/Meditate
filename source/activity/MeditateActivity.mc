@@ -81,9 +81,6 @@ class MediateActivity {
 	
 	function onSensorData(sensorData) {
 		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
-			if (me.mMeditateModel != null) {
-				me.mMeditateModel.hrvSensorDataNullCount++;
-			}
 			return;
 		}
 		if (me.mOnHrvReady != null) {
@@ -103,9 +100,6 @@ class MediateActivity {
 		    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
 		    		me.mStressMonitor.addHrSample(hr);
 	    		}
-    		}
-    		else {
-    			me.mMeditateModel.hrvBeatToBeatIntervalsNullCount++;
     		} 
     	}    	
 	}		
