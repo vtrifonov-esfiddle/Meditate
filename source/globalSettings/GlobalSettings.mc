@@ -15,12 +15,12 @@ class GlobalSettings {
 		App.Storage.setValue(StressTrackingKey, stressTracking);		
 	}
 	
-	private static const HrvTrackingKey = "globalSettings_hrvTracking";
+	private static const HrvTrackingKey = "globalSettings_hrvTracking2";
 	
 	static function loadHrvTracking() {
 		var hrvTracking = App.Storage.getValue(HrvTrackingKey);
 		if (hrvTracking == null) {
-			hrvTracking = HrvTracking.Off;
+			hrvTracking = HrvTracking.On;
 		}
 		return hrvTracking;
 	}
@@ -104,6 +104,7 @@ module StressTracking {
 module HrvTracking {
 	enum {
 		Off = 0,
-		On = 1
+		On = 1,
+		OnDetailed = 2
 	}
 }

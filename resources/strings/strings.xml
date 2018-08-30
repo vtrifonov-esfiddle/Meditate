@@ -36,8 +36,9 @@
     <string id="menuStressTrackingOptions_off">Off</string>
     
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
-    <string id="menuHrvTrackingOptions_on">On</string>
-    <string id="menuHrvTrackingOptions_off">Off (Default)</string>
+    <string id="menuHrvTrackingOptions_on">On (Default)</string>
+    <string id="menuHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuHrvTrackingOptions_off">Off</string>
     
     <string id="menuConfirmSaveActivityOptions_title">Confirm Save</string>    
     <string id="menuConfirmSaveActivityOptions_ask">Ask (Default)</string>

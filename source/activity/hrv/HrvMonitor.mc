@@ -5,22 +5,17 @@ using Toybox.Application as App;
 class HrvMonitor {
 	function initialize(activitySession) {
 		me.mHrvTracking = GlobalSettings.loadHrvTracking();
-		if (me.mHrvTracking != HrvTracking.Off) {
-			me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);
+		if (me.mHrvTracking == HrvTracking.OnDetailed) {
+			me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);			
 			me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);
 			me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
+		}
+		if (me.mHrvTracking != HrvTracking.Off) {
+			
 			me.mHrvDataField = HrvMonitor.createHrvDataField(activitySession);
 			me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
 			me.mHrvPnn50DataField = HrvMonitor.createHrvPnn50DataField(activitySession);
 			me.mHrvPnn20DataField = HrvMonitor.createHrvPnn20DataField(activitySession);
-		}
-		else {
-			me.mHrvBeatToBeatIntervalsDataField = null;
-			me.mHrvSdrrFirst5MinDataField = null;
-			me.mHrvSdrrLast5MinDataField = null;
-			me.mHrvRmssdDataField = null;
-			me.mHrvPnn50DataField = null;
-			me.mHrvPnn20DataField = null;
 		}
 		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
 		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);	
@@ -121,13 +116,14 @@ class HrvMonitor {
 	}
 		
 	function addValidBeatToBeatInterval(beatToBeatInterval) {
-		if (me.mHrvTracking == HrvTracking.On) {			
+		if (me.mHrvTracking == HrvTracking.OnDetailed) {			
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
 			
-			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);
-								
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
+		}
+		if (me.mHrvTracking != HrvTracking.Off) {
+			me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);								
 			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvPnn50.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);

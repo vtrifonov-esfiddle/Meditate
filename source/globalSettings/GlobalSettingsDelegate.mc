@@ -78,9 +78,13 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	        });	
 	    details.detailLines[2].icon = hrvIcon;
 	    var hrvTrackingSetting;
-		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {			
+	    var hrvTracking = GlobalSettings.loadHrvTracking();
+		if (hrvTracking == HrvTracking.On) {			
 			hrvTrackingSetting = "On";
 		}          
+		else if (hrvTracking == HrvTracking.OnDetailed) {
+			hrvTrackingSetting = "On Detailed";
+		}
 		else {
 			hrvTrackingSetting = "Off";
 		}

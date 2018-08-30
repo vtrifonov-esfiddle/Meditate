@@ -26,6 +26,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		if (hrvTracking == HrvTracking.Off) {
 			pagesCount -= 3;
 		}
+		else if (hrvTracking == HrvTracking.On) {
+			pagesCount -= 1;
+		}
 		if (stressTracking == StressTracking.Off) {
 			pagesCount -= 2;
 		}
@@ -65,8 +68,13 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 			else {
 				me.mHrvRmssdPageIndex = 3;
 			}
-			me.mHrvPnnxPageIndex = me.mHrvRmssdPageIndex + 1;			
-			me.mHrvSdrrPageIndex = me.mHrvRmssdPageIndex + 2;
+			me.mHrvPnnxPageIndex = me.mHrvRmssdPageIndex + 1;		
+			if (hrvTracking == HrvTracking.OnDetailed) {	
+				me.mHrvSdrrPageIndex = me.mHrvRmssdPageIndex + 2;
+			}
+			else {
+				me.mHrvSdrrPageIndex = InvalidPageIndex;
+			}
 		}
 	}
 	

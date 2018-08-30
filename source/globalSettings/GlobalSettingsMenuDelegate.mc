@@ -81,6 +81,9 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		if (item == :on) {
 			GlobalSettings.saveHrvTracking(HrvTracking.On);
 		}
+		else if (item == :onDetailed) {
+			GlobalSettings.saveHrvTracking(HrvTracking.OnDetailed);
+		}
 		else if (item == :off) {
 			GlobalSettings.saveHrvTracking(HrvTracking.Off);
 		}

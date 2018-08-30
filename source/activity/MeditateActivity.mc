@@ -11,7 +11,8 @@ class MediateActivity {
 	private var mHrvMonitor;
 	private var mStressMonitor;
 	private var mOnHrvReady;
-	
+	private var mHrvTracking;
+	private var mStressTracking;
 	private const SUB_SPORT_YOGA = 43;
 		
 	function initialize(onHrvReady) {
@@ -19,10 +20,10 @@ class MediateActivity {
 		me.mMeditateModel = null;
 				
 		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
-		var hrvTracking = GlobalSettings.loadHrvTracking();
-		var stressTracking = GlobalSettings.loadStressTracking();
+		me.mHrvTracking = GlobalSettings.loadHrvTracking();
+		me.mStressTracking = GlobalSettings.loadStressTracking();
 		Sensor.unregisterSensorDataListener();
-		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {		
+		if (me.mHrvTracking != HrvTracking.Off || me.mStressTracking != StressTracking.Off) {		
 			Sensor.registerSensorDataListener(method(:onSensorData), {
 				:period => 1, 				// 1 second sample time
 				:heartBeatIntervals => {
@@ -80,7 +81,6 @@ class MediateActivity {
 	
 	function onSensorData(sensorData) {
 		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
-			me.mOnHrvReady.invoke(false);
 			return;
 		}
 		if (me.mOnHrvReady != null) {
@@ -92,10 +92,14 @@ class MediateActivity {
 		
 		for (var i = 0; i < sensorData.heartRateData.heartBeatIntervals.size(); i++) {
 			var beatToBeatInterval = sensorData.heartRateData.heartBeatIntervals[i];				
-			if (beatToBeatInterval != null) {			
-	    		me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	 
-	    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
-	    		me.mStressMonitor.addHrSample(hr);
+			if (beatToBeatInterval != null) {	
+				if (me.mHrvTracking != HrvTracking.Off) {		
+	    			me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	
+	    		} 
+	    		if (me.mStressTracking != StressTracking.Off) {
+		    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
+		    		me.mStressMonitor.addHrSample(hr);
+	    		}
     		} 
     	}    	
 	}		
