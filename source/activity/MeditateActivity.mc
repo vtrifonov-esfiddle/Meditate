@@ -14,7 +14,8 @@ class MediateActivity {
 	private var mHrvTracking;
 	private var mStressTracking;
 	private const SUB_SPORT_YOGA = 43;
-	private const SamplePeriodSeconds = 2; //2 seconds to prevent HRV ready test from blinking	
+	private const TestSamplePeriodSeconds = 3;
+	private const SessionSamplePeriodSeconds = 1;
 		
 	function initialize(onHrvReady) {
 		me.mOnHrvReady = onHrvReady;
@@ -25,8 +26,8 @@ class MediateActivity {
 		me.mStressTracking = GlobalSettings.loadStressTracking();
 		Sensor.unregisterSensorDataListener();
 		if (me.mHrvTracking != HrvTracking.Off || me.mStressTracking != StressTracking.Off) {		
-			Sensor.registerSensorDataListener(method(:onSensorData), {
-				:period => SamplePeriodSeconds, 				
+			Sensor.registerSensorDataListener(method(:onTestSensorData), {
+				:period => TestSamplePeriodSeconds, 				
 				:heartBeatIntervals => {
 			        :enabled => true
 			    }
@@ -55,6 +56,15 @@ class MediateActivity {
 	function start(meditateModel) {
 		me.mMeditateModel = meditateModel;			
 		me.mOnHrvReady = null;
+		Sensor.unregisterSensorDataListener();
+		if (me.mHrvTracking != HrvTracking.Off || me.mStressTracking != StressTracking.Off) {		
+			Sensor.registerSensorDataListener(method(:onSessionSensorData), {
+				:period => SessionSamplePeriodSeconds, 				
+				:heartBeatIntervals => {
+			        :enabled => true
+			    }
+			});			
+		}
 		if (me.mMeditateModel.getActivityType() == ActivityType.Yoga) { 
 			me.mSession = ActivityRecording.createSession(       
                 {
@@ -80,7 +90,7 @@ class MediateActivity {
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), RefreshActivityInterval, true);	
 	}	
 	
-	function onSensorData(sensorData) {
+	function onTestSensorData(sensorData) {
 		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
 			return;
 		}
@@ -88,6 +98,12 @@ class MediateActivity {
 			var heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
 			var isHrvReady = heartBeatIntervals.size() > 0 && heartBeatIntervals[0] != null;
 			me.mOnHrvReady.invoke(isHrvReady);
+			return;
+		}		
+	}	
+	
+	function onSessionSensorData(sensorData) {
+		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
 			return;
 		}
 		
