@@ -129,6 +129,13 @@ class HrvMonitor {
 			me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);
 		}
 	}
+	
+	function addInvalidBeatToBeatInterval() {
+		if (me.mHrvTracking != HrvTracking.Off) {
+			me.mHrvConsecutive.addBeatToBeatInterval(null);	
+		}
+	}
+			
 				
 	public function calculateHrvConsecutive() {
 		if (me.mHrvTracking == HrvTracking.Off) {
