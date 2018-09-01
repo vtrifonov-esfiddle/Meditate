@@ -103,6 +103,10 @@ class MediateActivity {
 	    		}
     		} 
     	}
+    	
+    	if (sensorData.heartRateData.heartBeatIntervals.size() < 1) {
+    		me.mMeditateModel.droppedHrvCount++;
+    	}
 	}		
 			
 	function refreshActivityStats() {	
