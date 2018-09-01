@@ -14,6 +14,7 @@ class MediateActivity {
 	private var mHrvTracking;
 	private var mStressTracking;
 	private const SUB_SPORT_YOGA = 43;
+	private const SamplePeriodSeconds = 2; //2 seconds to prevent HRV ready test from blinking	
 		
 	function initialize(onHrvReady) {
 		me.mOnHrvReady = onHrvReady;
@@ -25,7 +26,7 @@ class MediateActivity {
 		Sensor.unregisterSensorDataListener();
 		if (me.mHrvTracking != HrvTracking.Off || me.mStressTracking != StressTracking.Off) {		
 			Sensor.registerSensorDataListener(method(:onSensorData), {
-				:period => 1, 				// 1 second sample time
+				:period => SamplePeriodSeconds, 				
 				:heartBeatIntervals => {
 			        :enabled => true
 			    }
@@ -101,7 +102,7 @@ class MediateActivity {
 		    		me.mStressMonitor.addHrSample(hr);
 	    		}
     		} 
-    	}    	
+    	}
 	}		
 			
 	function refreshActivityStats() {	
