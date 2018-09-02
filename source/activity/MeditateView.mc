@@ -16,9 +16,7 @@ class MeditateView extends Ui.View {
         me.mIntervalAlertsRenderer = null;
         me.mElapsedTime = null; 
         me.mHrStatusText = null;
-        me.mMeditateIcon = null;    
-        
-        me.mHrvBeatToBeatIntervalsNullCount = null;        
+        me.mMeditateIcon = null;     
     }
     
     private var mElapsedTime;
@@ -27,9 +25,7 @@ class MeditateView extends Ui.View {
 	private var mHrvIcon;
 	private var mHrvText;	
     private var mMeditateIcon;
-    
-    private var mHrvBeatToBeatIntervalsNullCount;
-    
+        
     private function createMeditateText(color, font, xPos, yPos, justification) {
     	return new Ui.Text({
         	:text => "",
@@ -62,9 +58,6 @@ class MeditateView extends Ui.View {
         	:xPos => hrStatusX,
         	:yPos => hrStatusY
         });
-        
-        var hrvNullCountYPos = hrStatusY - 3 * dc.getFontHeight(TextFont);
-        me.mHrvBeatToBeatIntervalsNullCount = createMeditateText(Gfx.COLOR_WHITE, TextFont, 100, hrvNullCountYPos, Gfx.TEXT_JUSTIFY_LEFT);
     }
     
     private function renderHrvStatusLayout(dc) {
@@ -185,9 +178,6 @@ class MeditateView extends Ui.View {
 	        me.mHrvIcon.draw(dc);
 	        me.mHrvText.setText(me.formatHrv(me.mMeditateModel.hrv));
 	        me.mHrvText.draw(dc); 
-	        
-	        me.mHrvBeatToBeatIntervalsNullCount.setText("B: " + me.mMeditateModel.droppedHrvCount.toString());
-	        me.mHrvBeatToBeatIntervalsNullCount.draw(dc);
         }
     }
     

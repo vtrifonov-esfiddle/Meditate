@@ -119,11 +119,6 @@ class MediateActivity {
 	    		}
     		} 
     	}
-    	
-    	if (sensorData.heartRateData.heartBeatIntervals.size() < 1) {    		
-    		me.mHrvMonitor.addInvalidBeatToBeatInterval();	
-    		me.mMeditateModel.droppedHrvCount++;
-    	}
 	}		
 			
 	function refreshActivityStats() {	
