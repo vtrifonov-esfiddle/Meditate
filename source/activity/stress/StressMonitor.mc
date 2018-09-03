@@ -101,6 +101,7 @@ class StressMonitor {
 	
 	function addOneSecBeatToBeatIntervals(beatToBeatIntervals) {
 		me.mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(beatToBeatIntervals);
+		me.calculateMaxMinHrvWindow10();
 	}
 	
 	private function calculateMaxMinHrWindow10() {

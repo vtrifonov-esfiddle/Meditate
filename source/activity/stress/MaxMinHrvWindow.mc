@@ -31,10 +31,10 @@ class MaxMinHrvWindow {
 					if (maxInterval == null) {
 						maxInterval = sample;
 					}
-					if (sample < minHr) {
+					if (sample < minInterval) {
 						minInterval = sample;
 					}
-					if (sample > maxHr) {
+					if (sample > maxInterval) {
 						maxInterval = sample;
 					}
 				}
