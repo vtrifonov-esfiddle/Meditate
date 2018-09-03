@@ -7,6 +7,7 @@ class MeditateModel {
 		me.minHr = null;
 		me.currentHr = null;
 		me.hrv = null;
+		me.mIsHrvOn = GlobalSettings.loadHrvTracking() != HrvTracking.Off;
 	}
 	
 	private var mSession;

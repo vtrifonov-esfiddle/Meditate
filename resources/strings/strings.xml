@@ -118,6 +118,7 @@
 	
 	<string id="maxMinHrWindowField">Max-Min HR 10 Sec Window(bmp)</string>
 	
+	<string id="maxMinHrvWindowField">Max-Min HRV 10 Sec Window(ms)</string>
 	<string id="stressMedianField">Stress Median</string>
 	
 	<string id="stressNoField">No Stress</string>

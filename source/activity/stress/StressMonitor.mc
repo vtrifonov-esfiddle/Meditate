@@ -7,9 +7,7 @@ class StressMonitor {
 		me.mStressTracking = GlobalSettings.loadStressTracking();
 		if (me.mStressTracking == StressTracking.OnDetailed) {		
 			me.mMaxMinHrWindowDataField = StressMonitor.createMaxMinHrWindowDataField(activitySession);
-		}
-		else {
-			me.mMaxMinHrWindowDataField = null;
+			me.mMaxMinHrvWindowDataField = StressMonitor.createMaxMinHrvWindowDataField(activitySession);
 		}
 		if (me.mStressTracking != StressTracking.Off) {
 			me.mStressMedianDataField = createStressMedianDataField(activitySession);
@@ -17,28 +15,25 @@ class StressMonitor {
 			me.mLowStressDataField = StressMonitor.createLowStressDataField(activitySession);
 			me.mHighStressDataField = StressMonitor.createHighStressDataField(activitySession);
 		}
-		else {
-			me.mStressMedianDataField = null;
-			me.mNoStressDataField = null;
-			me.mLowStressDataField = null;
-			me.mHighStressDataField = null;
-		}
-		me.mMaxMinHrWindow10 = new MaxMinHrWindow(10);	
-		me.mMaxMinHrWindowStats = new MaxMinHrWindowStats();
-				
+		me.mMaxMinHrWindow10 = new MaxMinHrWindow(10);			
+		me.mMaxMinHrvWindow10 = new MaxMinHrvWindow(10);
+		me.mMaxMinHrWindowStats = new MaxMinHrWindowStats();				
 	}
 					
 	private var mStressTracking;
 		
 	private var mMaxMinHrWindow10;
+	private var mMaxMinHrvWindow10;
 	private var mMaxMinHrWindowStats;
-			
+	
+	private var mMaxMinHrvWindowDataField;		
 	private var mMaxMinHrWindowDataField;
 	private var mStressMedianDataField;
 	private var mNoStressDataField;
 	private var mLowStressDataField;
 	private var mHighStressDataField;
-				
+	
+	private static const MaxMinHrvWindowDataFieldId = 6;			
 	private static const MaxMinHrWindowDataFieldId = 5;
 	private static const StressMedianDataFieldId = 1;
 	private static const NoStressDataFieldId = 2;
@@ -88,13 +83,24 @@ class StressMonitor {
             FitContributor.DATA_TYPE_UINT16,
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"bmp"}
         );
-	}		
+	}	
+	
+	private static function createMaxMinHrvWindowDataField(activitySession) {
+		return activitySession.createField(
+            "hrv_mmhrv",
+            MaxMinHrvWindowDataFieldId,
+            FitContributor.DATA_TYPE_UINT16,
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
+        );
+	}	
 		
 	function addHrSample(hr) {
-		if (hr != null) {
-			me.mMaxMinHrWindow10.addHrSample(hr);
-			me.calculateMaxMinHrWindow10();
-		}
+		me.mMaxMinHrWindow10.addHrSample(hr);
+		me.calculateMaxMinHrWindow10();
+	}
+	
+	function addOneSecBeatToBeatIntervals(beatToBeatIntervals) {
+		me.mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(beatToBeatIntervals);
 	}
 	
 	private function calculateMaxMinHrWindow10() {
@@ -104,6 +110,15 @@ class StressMonitor {
 				me.mMaxMinHrWindowDataField.setData(result);
 			}
 			me.mMaxMinHrWindowStats.addMaxMinHrWindow(result);
+		}
+	}
+	
+	private function calculateMaxMinHrvWindow10() {
+		var result = me.mMaxMinHrvWindow10.calculate();
+		if (result != null) {
+			if (me.mMaxMinHrvWindowDataField != null) {
+				me.mMaxMinHrvWindowDataField.setData(result);
+			}
 		}
 	}
 		

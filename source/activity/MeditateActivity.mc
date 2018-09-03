@@ -106,9 +106,9 @@ class MediateActivity {
 		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
 			return;
 		}
-		
-		for (var i = 0; i < sensorData.heartRateData.heartBeatIntervals.size(); i++) {
-			var beatToBeatInterval = sensorData.heartRateData.heartBeatIntervals[i];				
+		var heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
+		for (var i = 0; i < heartBeatIntervals.size(); i++) {
+			var beatToBeatInterval = heartBeatIntervals[i];				
 			if (beatToBeatInterval != null) {	
 				if (me.mHrvTracking != HrvTracking.Off) {		
 	    			me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	
@@ -118,6 +118,9 @@ class MediateActivity {
 		    		me.mStressMonitor.addHrSample(hr);
 	    		}
     		} 
+    	}
+    	if (me.mStressTracking == StressTracking.OnDetailed) {
+    		me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
     	}
 	}		
 			
