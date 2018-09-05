@@ -44,13 +44,13 @@ class HrvMonitor {
 	private var mHrvPnn50DataField;
 	private var mHrvPnn20DataField;
 			
-	private static const HrvFieldId = 7;
-	private static const HrvRmssdFieldId = 8;	
-	private static const HrvBeatToBeatIntervalsFieldId = 9;		
-	private static const HrvSdrrFirst5MinFieldId = 10;
-	private static const HrvSdrrLast5MinFieldId = 11;		
-	private static const HrvPnn50FieldId = 12;
-	private static const HrvPnn20FieldId = 13;
+	private static const HrvFieldId = 6;
+	private static const HrvRmssdFieldId = 7;	
+	private static const HrvBeatToBeatIntervalsFieldId = 8;		
+	private static const HrvSdrrFirst5MinFieldId = 9;
+	private static const HrvSdrrLast5MinFieldId = 10;		
+	private static const HrvPnn50FieldId = 11;
+	private static const HrvPnn20FieldId = 12;
 				
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
 		return activitySession.createField(

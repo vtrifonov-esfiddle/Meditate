@@ -113,13 +113,9 @@ class MediateActivity {
 				if (me.mHrvTracking != HrvTracking.Off) {		
 	    			me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	
 	    		} 
-	    		if (me.mStressTracking != StressTracking.Off) {
-		    		var hr = Math.round((60.0 / (beatToBeatInterval / 1000.0))).toNumber();    		
-		    		me.mStressMonitor.addHrSample(hr);
-	    		}
     		} 
     	}
-    	if (me.mStressTracking == StressTracking.OnDetailed) {
+    	if (me.mStressTracking != StressTracking.Off) {
     		me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
     	}
 	}		

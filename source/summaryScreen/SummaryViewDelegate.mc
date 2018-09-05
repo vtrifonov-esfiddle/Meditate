@@ -105,7 +105,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 			details = me.createDetailsPageStress();
 		}
 		else if (me.mSelectedPageIndex == me.mStressMedianPageIndex) {
-			details = me.createDetailsMinMaxHrMedian();
+			details = me.createDetailsStressMedian();
 		}
 		else if (me.mSelectedPageIndex == mHrvRmssdPageIndex){
 			details = me.createDetailsPageHrvRmssd();
@@ -227,7 +227,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         return details;
 	}
 	
-	private function createDetailsMinMaxHrMedian() {
+	private function createDetailsStressMedian() {
 		var details = new DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
@@ -243,7 +243,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[3].value.text = "Median";   
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[4].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[4].value.text = Lang.format("$1$ bpm", [me.mSummaryModel.stressMedian]);   
+        details.detailLines[4].value.text = Lang.format("$1$ ms x10", [me.mSummaryModel.stressMedian]);   
          
         var summaryStressMedianIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
         var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrValueXPos");

@@ -125,6 +125,7 @@
 	<string id="stressUnits">%</string>	
 	<string id="stressLowField">Low Stress</string>	
 	<string id="stressHighField">High Stress</string>
+	<string id="medianUnits">ms x10</string>
 	
 	<string id="activityCalculatingResultsText">Finishing...</string>
 	<string id="faSaveSession"></string>

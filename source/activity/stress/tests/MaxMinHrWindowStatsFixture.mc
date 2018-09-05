@@ -2,135 +2,135 @@ using Toybox.Test;
 using Toybox.Math;
 using Toybox.System;
 
-class MaxMinHrWindowStatsFixture {
+class MaxMinHrvWindowStatsFixture {
 	static function buildEvenWindowsCountStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(5);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);		
-		maxMinHrWindowStats.addMaxMinHrWindow(13);
-		maxMinHrWindowStats.addMaxMinHrWindow(12);
-		maxMinHrWindowStats.addMaxMinHrWindow(6);
-		maxMinHrWindowStats.addMaxMinHrWindow(7);		
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
+		maxMinHrvWindowStats.addMaxMinHrvWindow(40);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(45);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(50);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(40);		
+		maxMinHrvWindowStats.addMaxMinHrvWindow(130);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(120);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(66);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(72);		
 		
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 	
 	static function buildOddWindowsCountStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(5);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);		
-		maxMinHrWindowStats.addMaxMinHrWindow(13);
-		maxMinHrWindowStats.addMaxMinHrWindow(12);
-		maxMinHrWindowStats.addMaxMinHrWindow(6);
-		maxMinHrWindowStats.addMaxMinHrWindow(7);		
-		maxMinHrWindowStats.addMaxMinHrWindow(2);
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
+		maxMinHrvWindowStats.addMaxMinHrvWindow(40);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(45);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(50);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(40);		
+		maxMinHrvWindowStats.addMaxMinHrvWindow(130);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(120);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(66);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(72);	
+		maxMinHrvWindowStats.addMaxMinHrvWindow(23);
 		
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 	
 	static function buildMixedWindowsStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(5);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
-		maxMinHrWindowStats.addMaxMinHrWindow(13);
-		maxMinHrWindowStats.addMaxMinHrWindow(12);
-		maxMinHrWindowStats.addMaxMinHrWindow(6);
-		maxMinHrWindowStats.addMaxMinHrWindow(7);
-		maxMinHrWindowStats.addMaxMinHrWindow(2);
-		maxMinHrWindowStats.addMaxMinHrWindow(3);
-		maxMinHrWindowStats.addMaxMinHrWindow(9);
-		maxMinHrWindowStats.addMaxMinHrWindow(13);
-		maxMinHrWindowStats.addMaxMinHrWindow(12);
-		maxMinHrWindowStats.addMaxMinHrWindow(6);
-		maxMinHrWindowStats.addMaxMinHrWindow(7);
-		maxMinHrWindowStats.addMaxMinHrWindow(3);
-		maxMinHrWindowStats.addMaxMinHrWindow(7);
-		maxMinHrWindowStats.addMaxMinHrWindow(2);
-		maxMinHrWindowStats.addMaxMinHrWindow(3);
-		maxMinHrWindowStats.addMaxMinHrWindow(17);
-		maxMinHrWindowStats.addMaxMinHrWindow(20);
-		maxMinHrWindowStats.addMaxMinHrWindow(25);
-		maxMinHrWindowStats.addMaxMinHrWindow(8);
-		maxMinHrWindowStats.addMaxMinHrWindow(3);
-		maxMinHrWindowStats.addMaxMinHrWindow(4);
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
+		maxMinHrvWindowStats.addMaxMinHrvWindow(43);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(44);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(55);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(43);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(137);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(123);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(62);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(74);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(26);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(33);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(92);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(130);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(124);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(63);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(72);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(33);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(74);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(26);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(39);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(170);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(202);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(253);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(87);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(38);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(44);
 		
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 	
 	static function build9OnesAnd2to9() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
 		for (var i = 1; i <= 9; i++) {
-			maxMinHrWindowStats.addMaxMinHrWindow(1);
+			maxMinHrvWindowStats.addMaxMinHrvWindow(10);
 		}
 		for (var i = 2; i <= 9; i++) {
-			maxMinHrWindowStats.addMaxMinHrWindow(i);
+			maxMinHrvWindowStats.addMaxMinHrvWindow(i * 10);
 		}
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 	
 	static function build10Zeroes() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
 		for (var i = 1; i <= 10; i++) {
-			maxMinHrWindowStats.addMaxMinHrWindow(0);
+			maxMinHrvWindowStats.addMaxMinHrvWindow(0);
 		}
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 	
 	static function build0to10WindowsStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
 		
 		for (var i=0; i <=10; i++) {
-			maxMinHrWindowStats.addMaxMinHrWindow(i);
+			maxMinHrvWindowStats.addMaxMinHrvWindow(i * 10);
 		}
 		
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 			
 	static function build0to9WindowsStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();
 		
 		for (var i=0; i <=9; i++) {
-			maxMinHrWindowStats.addMaxMinHrWindow(i);
+			maxMinHrvWindowStats.addMaxMinHrvWindow(i * 10);
 		}
 		
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 			
 	static function build10WindowStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();		
-		maxMinHrWindowStats.addMaxMinHrWindow(10);
-		return calculate(maxMinHrWindowStats);
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();		
+		maxMinHrvWindowStats.addMaxMinHrvWindow(10);
+		return calculate(maxMinHrvWindowStats);
 	}
 		
 	static function build1and10WindowsStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();		
-		maxMinHrWindowStats.addMaxMinHrWindow(1);
-		maxMinHrWindowStats.addMaxMinHrWindow(10);
-		return MaxMinHrWindowStatsFixture.calculate(maxMinHrWindowStats);
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();		
+		maxMinHrvWindowStats.addMaxMinHrvWindow(1);
+		maxMinHrvWindowStats.addMaxMinHrvWindow(10);
+		return MaxMinHrvWindowStatsFixture.calculate(maxMinHrvWindowStats);
 	}
 	
 	static function buildNoWindowsStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();		
-		return maxMinHrWindowStats.calculate();
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();		
+		return maxMinHrvWindowStats.calculate();
 	}
 	
 	static function build1WindowStats() {
-		var maxMinHrWindowStats = new MaxMinHrWindowStats();		
-		maxMinHrWindowStats.addMaxMinHrWindow(1);
-		return maxMinHrWindowStats.calculate();
+		var maxMinHrvWindowStats = new MaxMinHrvWindowStats();		
+		maxMinHrvWindowStats.addMaxMinHrvWindow(1);
+		return maxMinHrvWindowStats.calculate();
 	}
 	
-	static function calculate(maxMinHrWindowStats) {
-		var stats = maxMinHrWindowStats.calculate();
+	static function calculate(maxMinHrvWindowStats) {
+		var stats = maxMinHrvWindowStats.calculate();
 		var totalStress = stats.noStress + stats.lowStress + stats.highStress;
-		System.println("Max-Min HR total stress: " + totalStress + "; expected: 100%");
-		var areEqual = MaxMinHrWindowStatsFixture.isResultExpectedGeneric(totalStress, 100.0);
+		System.println("Max-Min HRV total stress: " + totalStress + "; expected: 100%");
+		var areEqual = MaxMinHrvWindowStatsFixture.isResultExpectedGeneric(totalStress, 100.0);
 		Test.assert(areEqual);
 		return stats;
 	}	
@@ -142,7 +142,7 @@ class MaxMinHrWindowStatsFixture {
 	}
 			
 	static function isResultExpected(actual, expected) {		
-		System.println("Max-Min HR Window Stats: " + actual + "; expected: " + expected);
+		System.println("Max-Min HRV Window Stats: " + actual + "; expected: " + expected);
 		return isResultExpectedGeneric(actual, expected);	
 	}
 }
