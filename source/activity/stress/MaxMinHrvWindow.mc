@@ -44,6 +44,6 @@ class MaxMinHrvWindow {
 		if (minInterval == null || maxInterval == null) {
 			return null;
 		}
-		return maxInterval.abs() - minInterval.abs();
+		return maxInterval - minInterval;
 	}
 }

@@ -11,7 +11,7 @@ class MaxMinHrvWindowStats {
 	
 	private var mWindowsCount;	
 	private var mStatsCounts;
-	private const MaxStatsWindow = 20;
+	private const MaxStatsWindow = 30;
 	
 	function addMaxMinHrvWindow(windowCalculation) {
 		me.mWindowsCount++;
@@ -35,7 +35,7 @@ class MaxMinHrvWindowStats {
 		if (me.mWindowsCount == 1) {
 			for (var i = 0; i < me.mStatsCounts.size(); i++) {
 				if (me.mStatsCounts[i] > 0) {
-					return i;
+					return i.toFloat();
 				}
 			}
 		}
@@ -128,12 +128,12 @@ class MaxMinHrvWindowStats {
 		if (me.mWindowsCount == 0) {
 			return null;
 		}
-		var clacifiedWindowsCount = 0;
+		var classifiedWindowsCount = 0;
 		for (var i = startStatsCountIndex; i <= endStatsCountIndex; i++) {
-			clacifiedWindowsCount += me.mStatsCounts[i];
+			classifiedWindowsCount += me.mStatsCounts[i];
 		}
-		var clacificationPercentage = (clacifiedWindowsCount.toFloat() / me.mWindowsCount.toFloat()) * 100;
-		return clacificationPercentage;
+		var classificationPercentage = (classifiedWindowsCount.toFloat() / me.mWindowsCount.toFloat()) * 100;
+		return classificationPercentage;
 	}
 	
 	function calculate() {
