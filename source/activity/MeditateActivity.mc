@@ -52,11 +52,15 @@ class MediateActivity {
 	private const RefreshActivityInterval = 1000;
 	
 	private var mRefreshActivityTimer;
+	
+	function stopSensorTest() {
+		me.mOnHrvReady = null;
+		Sensor.unregisterSensorDataListener();
+	}
 		
 	function start(meditateModel) {
 		me.mMeditateModel = meditateModel;			
-		me.mOnHrvReady = null;
-		Sensor.unregisterSensorDataListener();
+		me.stopSensorTest();
 		if (me.mHrvTracking != HrvTracking.Off || me.mStressTracking != StressTracking.Off) {		
 			Sensor.registerSensorDataListener(method(:onSessionSensorData), {
 				:period => SessionSamplePeriodSeconds, 				

@@ -57,7 +57,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     
     private const RollupExitOption = :exitApp;
     
-    function onBack() {
+    function onBack() {   	
     	if (me.mSummaryRollupModel.getSummaries().size() > 0) {
     		var summaries = me.mSummaryRollupModel.getSummaries();
     		
@@ -71,11 +71,13 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			Ui.pushView(summaryRollupMenu, summaryRollupMenuDelegate, Ui.SLIDE_LEFT);	
 			return true;
     	}
+    	me.mMeditateActivity.stopSensorTest(); 
     	return false;
     }
     
     function onSummaryRollupMenuOption(option) {
     	if (option == RollupExitOption) {
+    		me.mMeditateActivity.stopSensorTest();
     		System.exit();
     	}
     	else {
