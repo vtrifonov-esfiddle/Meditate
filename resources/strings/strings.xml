@@ -86,9 +86,6 @@
 	<string id="vibePatternMenu_shortAscending">Short ascending</string>
 	
 	<string id="intervalVibePatternMenu_title">Vibe Pattern</string>
-	<string id="intervalVibePatternMenu_shortContinuous">Short continuous</string>
-	<string id="intervalVibePatternMenu_shortPulsating">Short pulsating</string>
-	<string id="intervalVibePatternMenu_shortAscending">Short ascending</string>
 	<string id="intervalVibePatternMenu_shorterContinuous">Shorter continuous</string>
 	<string id="intervalVibePatternMenu_shorterAscending">Shorter ascending</string>
 	<string id="intervalVibePatternMenu_blip">Blip</string>
