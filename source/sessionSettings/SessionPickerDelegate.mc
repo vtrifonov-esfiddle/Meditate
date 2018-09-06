@@ -5,25 +5,18 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	private var mSessionStorage;
 	private var mSelectedSessionDetails;
 	private var mSummaryRollupModel;
-	private var mMeditateActivity;
-	private var mIsHrvReady;
 	
 	function initialize(sessionStorage, summaryRollupModel) {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
 		me.mSummaryRollupModel = summaryRollupModel;
 		me.mSelectedSessionDetails = new DetailsModel();		
-        me.mMeditateActivity = new MediateActivity(method(:onHrvReady));
-        me.mIsHrvReady = false;
         
 		me.globalSettingsIconsYOffset = App.getApp().getProperty("globalSettingsIconsYOffset");
 		me.sessionDetailsIconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
 		me.sessionDetailsValueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
 		me.globalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
 		me.sessionDetailsAlertsLineYOffset = App.getApp().getProperty("sessionDetailsAlertsLineYOffset");
-		me.sessionHrvStatusLineYOffset = App.getApp().getProperty("sessionHrvStatusLineYOffset");
-		me.sessionHrvStatusLineIconXPos = App.getApp().getProperty("sessionHrvStatusLineIconXPos");
-		me.sessionHrvStatusLineTextXPos = App.getApp().getProperty("sessionHrvStatusLineTextXPos");
 	}
 	
 	private var globalSettingsIconsYOffset;
@@ -31,26 +24,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	private var sessionDetailsValueXPos;
 	private var globalSettingsIconsXPos;
 	private var sessionDetailsAlertsLineYOffset;
-	private var sessionHrvStatusLineYOffset;
-	private var sessionHrvStatusLineIconXPos;
-	private var sessionHrvStatusLineTextXPos;
-	
-	function onHrvReady(isHrvReady) {
-		if (isHrvReady != me.mIsHrvReady) {
-			var hrvStatusLine = me.mSelectedSessionDetails.detailLines[4];
-			if (isHrvReady == true) {
-				hrvStatusLine.icon.setColor(Icon.HeartBeatPurpleColor);
-		        hrvStatusLine.value.text = "Ready";
-	        }
-	        else {
-	        	hrvStatusLine.icon.setColor(Gfx.COLOR_TRANSPARENT);
-	        	hrvStatusLine.value.text = "";	        	
-	        }
-	        Ui.requestUpdate();
-			me.mIsHrvReady = isHrvReady;
-		}
-	}
-	
+		
     function onMenu() {
 		return me.showSessionSettingsMenu();
     }
@@ -71,13 +45,11 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			Ui.pushView(summaryRollupMenu, summaryRollupMenuDelegate, Ui.SLIDE_LEFT);	
 			return true;
     	}
-    	me.mMeditateActivity.stopSensorTest(); 
     	return false;
     }
     
     function onSummaryRollupMenuOption(option) {
     	if (option == RollupExitOption) {
-    		me.mMeditateActivity.stopSensorTest();
     		System.exit();
     	}
     	else {
@@ -96,10 +68,9 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		
 	private function startActivity() {
     	var selectedSession = me.mSessionStorage.loadSelectedSession();
-    	var meditateModel = new MeditateModel(selectedSession);  
-    	  
+    	var meditateModel = new MeditateModel(selectedSession);      	  
         var meditateView = new MeditateView(meditateModel);
-        var mediateDelegate = new MeditateDelegate(meditateModel, me.mMeditateActivity, me.mSummaryRollupModel);
+        var mediateDelegate = new MeditateDelegate(meditateModel, me.mSummaryRollupModel);
 		Ui.switchToView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
 	}
 	
@@ -179,21 +150,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         
         details.setAllIconsXPos(me.sessionDetailsIconsXPos);
         details.setAllValuesXPos(me.sessionDetailsValueXPos);   
-		var hrvStatusLine = details.detailLines[4];			
-        hrvStatusLine.yLineOffset = sessionHrvStatusLineYOffset;
-        hrvStatusLine.icon = new Icon({        
-		        	:font => IconFonts.fontAwesomeFreeSolid,
-		        	:symbol => Rez.Strings.faHeartbeat,
-		        	:color => Gfx.COLOR_TRANSPARENT,
-		        	:xPos => me.sessionHrvStatusLineIconXPos
-		        });
-		if (me.mIsHrvReady == true) {
-			hrvStatusLine.icon.setColor(Icon.HeartBeatPurpleColor);
-		}
-       	hrvStatusLine.value.xPos = me.sessionHrvStatusLineTextXPos;
-	}	
-	
-	
+	}		
 	
 	function createScreenPickerView() {
 		me.setSelectedSessionDetails();
