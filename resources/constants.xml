@@ -13,8 +13,7 @@
 	<property id="summaryHrvIconsXPos" type="number">50</property>
 	<property id="summaryHrvValueXPos" type="number">70</property>
 	<property id="summaryLinesYOffset" type="number">0</property>
-	<property id="meditateActivityHrXPos" type="number">80</property>
-	<property id="meditateActivityHrYPos" type="number">160</property>
+	<property id="meditateActivityIconsXPos" type="number">80</property>
 	<property id="meditateActivityMeditateIconX" type="number">60</property>
-	<property id="meditateActivityMeditateIconY" type="number">50</property>
+	<property id="meditateActivityMeditateIconY" type="number">40</property>
 </properties>

@@ -45,12 +45,12 @@ class MeditateView extends Ui.View {
     }
     
     private function renderHrStatusLayout(dc) {
-    	var xPosCenter = dc.getWidth() / 2;
-    	var yPosCenterNextLine = dc.getHeight() / 2 + dc.getFontHeight(TextFont);
-      	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosCenter, yPosCenterNextLine, Gfx.TEXT_JUSTIFY_CENTER); 
+    	var xPosText = dc.getWidth() / 2;
+    	var yPosText = getYPosOffsetFromCenter(dc, 0);
+      	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosText, xPosText, Gfx.TEXT_JUSTIFY_CENTER); 
       	
-  	    var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
-        var hrStatusY = App.getApp().getProperty("meditateActivityHrYPos"); 
+  	    var hrStatusX = App.getApp().getProperty("meditateActivityIconsXPos");
+        var hrStatusY = getYPosOffsetFromCenter(dc, 0) + YIconOffset; 
   	    me.mHrStatus = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeart,
@@ -61,24 +61,30 @@ class MeditateView extends Ui.View {
     }
     
     private function renderHrvStatusLayout(dc) {
-    	var hrStatusX = App.getApp().getProperty("meditateActivityHrXPos");
-        var hrStatusY = App.getApp().getProperty("meditateActivityHrYPos");
-    	var hrvTextYPos =  hrStatusY - 2 * dc.getFontHeight(TextFont);
-        var hrvIconYPos = hrvTextYPos + 3;
+    	var hrvIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
+    	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 1);
+        var hrvIconYPos = hrvTextYPos + YIconOffset;
         me.mHrvIcon = new Icon({        
         	:font => IconFonts.fontAwesomeFreeSolid,
         	:symbol => Rez.Strings.faHeartbeat,
-        	:color=>Graphics.COLOR_BLUE,
-        	:xPos => hrStatusX,
+        	:color=> Icon.HeartBeatPurpleColor,
+        	:xPos => hrvIconXPos,
         	:yPos => hrvIconYPos
         });
-        var hrvTextXPos = hrStatusX + 20;
+        var hrvTextXPos = hrvIconXPos + XHrvTextOffset;
         me.mHrvText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvTextXPos, hrvTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
     }
     
+    private function getYPosOffsetFromCenter(dc, lineOffset) {
+    	return dc.getHeight() / 2 + lineOffset * dc.getFontHeight(TextFont);
+    }
+    
+    private const XHrvTextOffset = 20;
+    private const YIconOffset = 5;
+    
     function renderLayoutElapsedTime(dc) { 	
     	var xPosCenter = dc.getWidth() / 2;
-    	var yPosCenter = dc.getHeight() / 2;
+    	var yPosCenter = getYPosOffsetFromCenter(dc, -1);
     	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter, Gfx.TEXT_JUSTIFY_CENTER);
     }
                 
@@ -97,9 +103,7 @@ class MeditateView extends Ui.View {
 	        me.mIntervalAlertsRenderer = new IntervalAlertsRenderer(me.mMeditateModel.getSessionTime(), me.mMeditateModel.getOneOffIntervalAlerts(), 
 	        	me.mMeditateModel.getRepeatIntervalAlerts(), intervalAlertsArcRadius, intervalAlertsArcWidth);    
     	}
-    	else {
-    		me.mIntervalAlertsRenderer = null;
-    	}    
+    	  
         renderHrStatusLayout(dc);
         if (me.mMeditateModel.isHrvOn() == true) {
 	        renderHrvStatusLayout(dc);
@@ -168,7 +172,7 @@ class MeditateView extends Ui.View {
 		if (me.mIntervalAlertsRenderer != null) {
 			me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
 			me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);
-		}	
+		}
 		
 		me.mHrStatusText.setText(me.formatHr(me.mMeditateModel.currentHr));
 		me.mHrStatusText.draw(dc);        

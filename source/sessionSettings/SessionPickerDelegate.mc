@@ -149,7 +149,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine(me.sessionDetailsValueXPos, me.sessionDetailsAlertsLineYOffset);
         
         details.setAllIconsXPos(me.sessionDetailsIconsXPos);
-        details.setAllValuesXPos(me.sessionDetailsValueXPos);   
+        details.setAllValuesXPos(me.sessionDetailsValueXPos);
 	}		
 	
 	function createScreenPickerView() {
