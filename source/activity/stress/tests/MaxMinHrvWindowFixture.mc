@@ -17,23 +17,22 @@ class MaxMinHrvWindow10Fixture {
 		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([983]);
 		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([966]);
 		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([1000]);
-		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([1000]);
 	}
 		
 	function addNormalSampleLow() {
-		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(58);
+		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([1100]);
 	}
 	
 	function addNormalSampleHigh() {
-		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(61);
+		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([600]);
 	}
 	
 	function addOutlierHigh() {
-		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(75);
+		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([800]);
 	}
 	
 	function addOutlierLow() {
-		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(53);
+		mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals([1500]);
 	}
 	
 	function calculate() {
@@ -46,8 +45,8 @@ class MaxMinHrvWindow10Fixture {
 	}	
 }
 
-class ExpectedMaxMinHr10 {
-	const NormalSamples = 7;
-	const NormalSamplesAndOutlierHigh = 17;
-	const NormalSamplesAndOutlierLow = 12;
+class ExpectedMaxMinHrv10 {
+	const NormalSamples = 134;
+	const NormalSamplesAndOutlierHigh = 300;
+	const NormalSamplesAndOutlierLow = 534;
 }

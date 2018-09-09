@@ -61,10 +61,15 @@ class MaxMinHrvWindowStats {
 			}
 			
 			var medianValue;
+			var previousMedianValue = null;
 			if (medianCount - targetMedianCount == 0) {			
 				medianValue = i-1;
 				if (isAveragingNeeded == true) {
-					medianValue++;
+					previousMedianValue = medianValue;
+					do {
+						medianValue++;					
+					}
+					while (me.mStatsCounts[medianValue] == 0 && medianValue < me.mStatsCounts.size());										
 				}
 			}
 			else {				
@@ -72,8 +77,7 @@ class MaxMinHrvWindowStats {
 			}
 			
 			if (isAveragingNeeded == true) {
-				var previousMedianValue;
-				if (me.mStatsCounts[medianValue] > 1) {
+				if (me.mStatsCounts[medianValue] > 1 && previousMedianValue == null) {					
 					previousMedianValue = medianValue;
 				}
 				else {
@@ -85,7 +89,8 @@ class MaxMinHrvWindowStats {
 						}
 						previousMedianIndex--;
 					}
-				}				
+				}	
+					
 				return (medianValue + previousMedianValue).toFloat() / 2.0;
 			}
 			else {
