@@ -7,9 +7,15 @@
     - e.g. a 20 min session with 1 min recurring alerts, triggering a different alert on the 10th minute
     - each session supports interval vibration alerts
     - interval alerts can trigger from a few seconds up to few hours
+- [HRV](https://en.wikipedia.org/wiki/Heart_rate_variability) (Heart Rate Variability)
+    - RMSSD - Root Mean Square of Successive Differences (beat-to-beat intervals)
+    - pNN20 - % of successive beat-to-beat intervals that differ by more than 20 ms
+    - pNN50 - % of successive beat-to-beat intervals that differ by more than 50 ms
+    - HRV Successive Beats - difference between current and previous beat-to-beat intervals
+    - SDRR - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
 - stress tracking
-    - analyses in overlapping 10 Sec Windows Max-Min HR (reported as Max-Min HR 10 Sec Window chart on Connect IQ)
-    - tracks the median of the Max-Min HR windows as a summary field (Stress Median field on Connect IQ)
+    - analyses in overlapping 10 Sec Windows Max-Min beat-to-beat intervals (reported as Max-Min HRV 10 Sec Window chart on Connect IQ)
+    - tracks the median of the Max-Min HRV windows as a summary field (Stress Median field on Connect IQ)
     - calculates stress into 3 cathegories - **No**, **Low** and **High**
         - No - % of Max-Min Windows that are <= **stress median**
         - Low - % of Max-Min Windows that are > **stress median** and < 3x **stress median**
@@ -18,8 +24,6 @@
     - tracks the overall min, avg and max HR
     - Stress
     - HRV
-- [HRV](https://en.wikipedia.org/wiki/Heart_rate_variability) (Heart Rate Variability) - optional
-    - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
 
 ## How to Use
 ### 1. Starting a session
