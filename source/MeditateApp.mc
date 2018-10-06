@@ -18,7 +18,8 @@ class MeditateApp extends App.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() {      	  
+    function getInitialView() {     
+    	MediteActivity.enableHrSensor(); 	  
     	var sessionStorage = new SessionStorage();	    	    
     	var summaryRollupModel = new SummaryRollupModel();	
     	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, summaryRollupModel);

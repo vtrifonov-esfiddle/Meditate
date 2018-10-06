@@ -114,8 +114,17 @@ class HrvMonitor {
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
         );
 	}
+	
+	function addOneSecBeatToBeatIntervals(beatToBeatIntervals) {
+		for (var i = 0; i < beatToBeatIntervals.size(); i++) {
+			var beatToBeatInterval = beatToBeatIntervals[i];				
+			if (beatToBeatInterval != null) {		
+    			me.addValidBeatToBeatInterval(beatToBeatInterval);	
+    		}
+    	}
+	}
 		
-	function addValidBeatToBeatInterval(beatToBeatInterval) {
+	private function addValidBeatToBeatInterval(beatToBeatInterval) {
 		if (me.mHrvTracking == HrvTracking.OnDetailed) {			
 			me.mHrvBeatToBeatIntervalsDataField.setData(beatToBeatInterval.toNumber());
 			

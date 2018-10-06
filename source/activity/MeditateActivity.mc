@@ -3,8 +3,9 @@ using Toybox.Timer;
 using Toybox.FitContributor;
 using Toybox.Timer;
 using Toybox.Math;
+using Toybox.Sensor;
 
-class MediateActivity {
+class MediteActivity {
 	private var mMeditateModel;
 	private var mSession;
 	private var mVibeAlertsExecutor;	
@@ -18,9 +19,12 @@ class MediateActivity {
 	function initialize(meditateModel) {
 		me.mMeditateModel = meditateModel;
 				
-		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
 		me.mHrvTracking = GlobalSettings.loadHrvTracking();
 		me.mStressTracking = GlobalSettings.loadStressTracking();
+	}
+	
+	static function enableHrSensor() {		
+		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
 	}
 				
 	private function createMinHrDataField() {
@@ -77,17 +81,13 @@ class MediateActivity {
 		
 	function onSessionSensorData(sensorData) {
 		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
-			return;
-		}
+			return;			
+		}		
+		
 		var heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
-		for (var i = 0; i < heartBeatIntervals.size(); i++) {
-			var beatToBeatInterval = heartBeatIntervals[i];				
-			if (beatToBeatInterval != null) {	
-				if (me.mHrvTracking != HrvTracking.Off) {		
-	    			me.mHrvMonitor.addValidBeatToBeatInterval(beatToBeatInterval);	
-	    		} 
-    		} 
-    	}
+		if (me.mHrvTracking != HrvTracking.Off) {		
+			me.mHrvMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);	
+		} 
     	if (me.mStressTracking != StressTracking.Off) {
     		me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
     	}

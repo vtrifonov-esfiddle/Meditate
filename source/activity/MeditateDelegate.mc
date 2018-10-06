@@ -9,7 +9,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
         BehaviorDelegate.initialize();
         me.mMeditateModel = meditateModel;
         me.mSummaryModels = summaryModels;
-        me.mMeditateActivity = new MediateActivity(meditateModel);
+        me.mMeditateActivity = new MediteActivity(meditateModel);
         me.mMeditateActivity.start();
     }
 				
