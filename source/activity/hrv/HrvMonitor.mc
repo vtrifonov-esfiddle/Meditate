@@ -113,7 +113,7 @@ class HrvMonitor {
             "hrv_rmssd15s",
             HrvMonitor.HrvRmssd15SecFieldId,
             FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
 	}
 	
@@ -122,7 +122,7 @@ class HrvMonitor {
             "hrv_rmssd30s",
             HrvMonitor.HrvRmssd30SecFieldId,
             FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms"}
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
 	}
 	
