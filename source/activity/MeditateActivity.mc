@@ -14,13 +14,13 @@ class MediteActivity {
 	private var mHrvTracking;
 	private var mStressTracking;
 	private const SUB_SPORT_YOGA = 43;
-	private const SessionSamplePeriodSeconds = 1;
 		
-	function initialize(meditateModel) {
+	function initialize(meditateModel, heartbeatIntervalsSensor) {
 		me.mMeditateModel = meditateModel;
 				
 		me.mHrvTracking = GlobalSettings.loadHrvTracking();
 		me.mStressTracking = GlobalSettings.loadStressTracking();
+		me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
 	}
 	
 	static function enableHrSensor() {		
@@ -44,16 +44,10 @@ class MediteActivity {
 	private const RefreshActivityInterval = 1000;
 	
 	private var mRefreshActivityTimer;
+	private var mHeartbeatIntervalsSensor;
 			
-	function start() {	
-		if (me.mHrvTracking != HrvTracking.Off || me.mStressTracking != StressTracking.Off) {		
-			Sensor.registerSensorDataListener(method(:onSessionSensorData), {
-				:period => SessionSamplePeriodSeconds, 				
-				:heartBeatIntervals => {
-			        :enabled => true
-			    }
-			});			
-		}
+	function start() {
+		me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onOneSecBeatToBeatIntervals));
 		if (me.mMeditateModel.getActivityType() == ActivityType.Yoga) { 
 			me.mSession = ActivityRecording.createSession(       
                 {
@@ -79,12 +73,7 @@ class MediteActivity {
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), RefreshActivityInterval, true);	
 	}	
 		
-	function onSessionSensorData(sensorData) {
-		if (!(sensorData has :heartRateData) || sensorData.heartRateData == null) {
-			return;			
-		}		
-		
-		var heartBeatIntervals = sensorData.heartRateData.heartBeatIntervals;
+	function onOneSecBeatToBeatIntervals(heartBeatIntervals) {
 		if (me.mHrvTracking != HrvTracking.Off) {		
 			me.mHrvMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);	
 		} 
@@ -119,8 +108,8 @@ class MediteActivity {
 		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
-	    
-	    Sensor.unregisterSensorDataListener();
+	    me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
+	    me.mHeartbeatIntervalsSensor.stop();
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		me.mRefreshActivityTimer = null;

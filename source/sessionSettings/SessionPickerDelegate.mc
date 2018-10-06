@@ -10,20 +10,39 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
 		me.mSummaryRollupModel = summaryRollupModel;
-		me.mSelectedSessionDetails = new DetailsModel();		
+		me.mSelectedSessionDetails = new DetailsModel();	
+		me.initializeHeartbeatIntervalsSensor();
         
 		me.globalSettingsIconsYOffset = App.getApp().getProperty("globalSettingsIconsYOffset");
 		me.sessionDetailsIconsXPos = App.getApp().getProperty("sessionDetailsIconsXPos");
 		me.sessionDetailsValueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
 		me.globalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
 		me.sessionDetailsAlertsLineYOffset = App.getApp().getProperty("sessionDetailsAlertsLineYOffset");
+		me.sessionHrvStatusLineYOffset = App.getApp().getProperty("sessionHrvStatusLineYOffset");
+		me.sessionHrvStatusLineIconXPos = App.getApp().getProperty("sessionHrvStatusLineIconXPos");
+		me.sessionHrvStatusLineTextXPos = App.getApp().getProperty("sessionHrvStatusLineTextXPos");
 	}
 	
+	private function initializeHeartbeatIntervalsSensor() {
+		me.mHeartbeatIntervalsSensor = new HeartbeatIntervalsSensor();
+		var hrvTracking = GlobalSettings.loadHrvTracking();
+		var stressTracking = GlobalSettings.loadStressTracking();
+		me.mNoHrvSeconds = 0;
+		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {	
+	        me.mHeartbeatIntervalsSensor.start();
+	        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onHeartbeatIntervalsListener));
+        }
+	}
+	
+	private var mHeartbeatIntervalsSensor;
 	private var globalSettingsIconsYOffset;
 	private var sessionDetailsIconsXPos;
 	private var sessionDetailsValueXPos;
 	private var globalSettingsIconsXPos;
 	private var sessionDetailsAlertsLineYOffset;
+	private var sessionHrvStatusLineYOffset;
+	private var sessionHrvStatusLineIconXPos;
+	private var sessionHrvStatusLineTextXPos;
 		
     function onMenu() {
 		return me.showSessionSettingsMenu();
@@ -31,7 +50,8 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     
     private const RollupExitOption = :exitApp;
     
-    function onBack() {   	
+    function onBack() {   
+        me.mHeartbeatIntervalsSensor.stop();	
     	if (me.mSummaryRollupModel.getSummaries().size() > 0) {
     		var summaries = me.mSummaryRollupModel.getSummaries();
     		
@@ -49,7 +69,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     }
     
     function onSummaryRollupMenuOption(option) {
-    	if (option == RollupExitOption) {
+    	if (option == RollupExitOption) {    		
     		System.exit();
     	}
     	else {
@@ -70,7 +90,8 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     	var selectedSession = me.mSessionStorage.loadSelectedSession();
     	var meditateModel = new MeditateModel(selectedSession);      	  
         var meditateView = new MeditateView(meditateModel);
-        var mediateDelegate = new MeditateDelegate(meditateModel, me.mSummaryRollupModel);
+        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
+        var mediateDelegate = new MeditateDelegate(meditateModel, me.mSummaryRollupModel, me.mHeartbeatIntervalsSensor);
 		Ui.switchToView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
 	}
 	
@@ -109,6 +130,34 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			case VibePattern.ShortPulsating:
 				return "Short Pulsating";
 		}
+	}
+	
+	private var mSuccessiveEmptyHeartbeatIntervalsCount;
+	
+	private var mNoHrvSeconds;
+	private const MinSecondsNoHrvDetected = 3;
+	
+	function onHeartbeatIntervalsListener(heartBeatIntervals) {
+		if (heartBeatIntervals.size() == 0) {
+			me.mNoHrvSeconds++;
+		}
+		else {
+			me.mNoHrvSeconds = 0;
+		}
+		me.setHrvReadyStatus();
+	}
+	
+	private function setHrvReadyStatus() {
+		var hrvStatusLine = me.mSelectedSessionDetails.detailLines[4];
+		if (me.mNoHrvSeconds >= MinSecondsNoHrvDetected) {
+			hrvStatusLine.icon.setColor(Gfx.COLOR_TRANSPARENT);
+			hrvStatusLine.value.text = "";
+		}
+		else {			
+			hrvStatusLine.icon.setColor(Icon.HeartBeatPurpleColor);
+			hrvStatusLine.value.text = "Ready";
+		}
+		Ui.requestUpdate();
 	}
 	
 	function updateSelectedSessionDetails(session) {
@@ -150,6 +199,17 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         
         details.setAllIconsXPos(me.sessionDetailsIconsXPos);
         details.setAllValuesXPos(me.sessionDetailsValueXPos);
+        
+        var hrvStatusLine = details.detailLines[4];			
+        hrvStatusLine.yLineOffset = sessionHrvStatusLineYOffset;
+        hrvStatusLine.icon = new Icon({        
+		        	:font => IconFonts.fontAwesomeFreeSolid,
+		        	:symbol => Rez.Strings.faHeartbeat,
+		        	:color => Gfx.COLOR_TRANSPARENT,
+		        	:xPos => me.sessionHrvStatusLineIconXPos
+		        });
+        hrvStatusLine.value.text = "";
+       	hrvStatusLine.value.xPos = me.sessionHrvStatusLineTextXPos;
 	}		
 	
 	function createScreenPickerView() {
