@@ -27,7 +27,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		me.mHeartbeatIntervalsSensor = new HeartbeatIntervalsSensor();
 		var hrvTracking = GlobalSettings.loadHrvTracking();
 		var stressTracking = GlobalSettings.loadStressTracking();
-		me.mNoHrvSeconds = 0;
+		me.mNoHrvSeconds = MinSecondsNoHrvDetected;
 		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {	
 	        me.mHeartbeatIntervalsSensor.start();
 	        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onHeartbeatIntervalsListener));
