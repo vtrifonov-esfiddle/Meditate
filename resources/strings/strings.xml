@@ -110,7 +110,7 @@
 	<string id="hrvPnn50FieldLabel">HRV pNN50</string>
 	
 	<string id="hrvRmssd30SecField">HRV RMSSD 30 Sec(ms)</string>
-	<string id="hrvRmssd15SecField">HRV RMSSD 15 Sec(ms)</string>
+	<string id="hrvRmssd1MinField">HRV RMSSD 1 Min(ms)</string>
 	
 	<string id="percentUnits">%</string>
 	
