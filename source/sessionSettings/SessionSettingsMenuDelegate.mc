@@ -33,7 +33,7 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
         }
         else if (item == :globalSettings) {
         	Ui.popView(Ui.SLIDE_IMMEDIATE);
-        	var globalSettingsDelegate = new GlobalSettingsDelegate();
+        	var globalSettingsDelegate = new GlobalSettingsDelegate(me.mSessionPickerDelegate);
         	Ui.switchToView(globalSettingsDelegate.createScreenPickerView(), globalSettingsDelegate, Ui.SLIDE_LEFT);  
         }
     }

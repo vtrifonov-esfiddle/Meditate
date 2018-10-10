@@ -48,6 +48,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 			showSessionPickerView(summaryModel);
 		}
 		else {
+			me.mHeartbeatIntervalsSensor.stop();
 			showSummaryView(summaryModel);
 		}
     }

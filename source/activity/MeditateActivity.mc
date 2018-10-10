@@ -109,7 +109,6 @@ class MediteActivity {
 			return;
 	    }	
 	    me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
-	    me.mHeartbeatIntervalsSensor.stop();
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		me.mRefreshActivityTimer = null;

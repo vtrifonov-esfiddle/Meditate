@@ -5,8 +5,9 @@ using Toybox.Graphics as Gfx;
 class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	protected var mColors;
 	private var mOnColorSelected;
+	private var mSessionPickerDelegate;
 	
-	function initialize() {
+	function initialize(sessionPickerDelegate) {
 		ScreenPickerDelegate.initialize(0, 1);	
 		
 		me.mGlobalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
@@ -14,6 +15,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 		me.mGlobalSettingsLinesYOffset = App.getApp().getProperty("globalSettingsLinesYOffset");
 		me.mGlobalSettingsTitle = Ui.loadResource(Rez.Strings.menuGlobalSettings_title);
 		me.mGlobalSettingsDetailsModel = new DetailsModel();
+		me.mSessionPickerDelegate = sessionPickerDelegate;
 		updateGlobalSettingsDetails();
 	}
 	
@@ -32,10 +34,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
     }
     
     function onBack() {
-    	var sessionStorage = new SessionStorage();	 
-    	var summaryRollupModel = new SummaryRollupModel();	   	    	
-    	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, summaryRollupModel);
-    	Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
+    	Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     	return true;
     }
     

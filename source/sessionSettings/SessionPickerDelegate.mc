@@ -50,8 +50,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     
     private const RollupExitOption = :exitApp;
     
-    function onBack() {   
-        me.mHeartbeatIntervalsSensor.stop();	
+    function onBack() {         	
     	if (me.mSummaryRollupModel.getSummaries().size() > 0) {
     		var summaries = me.mSummaryRollupModel.getSummaries();
     		
@@ -65,11 +64,15 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			Ui.pushView(summaryRollupMenu, summaryRollupMenuDelegate, Ui.SLIDE_LEFT);	
 			return true;
     	}
-    	return false;
+    	else {    	
+			me.mHeartbeatIntervalsSensor.stop();  
+    		return false;
+    	}
     }
     
     function onSummaryRollupMenuOption(option) {
-    	if (option == RollupExitOption) {    		
+    	if (option == RollupExitOption) {   
+    		me.mHeartbeatIntervalsSensor.stop(); 		
     		System.exit();
     	}
     	else {
