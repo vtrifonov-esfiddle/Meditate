@@ -155,7 +155,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		}
 		else {			
 			hrvStatusLine.icon.setColor(Icon.HeartBeatPurpleColor);
-			hrvStatusLine.value.text = "Ready";
+			hrvStatusLine.value.text = "HRV Ready";
 		}
 		Ui.requestUpdate();
 	}
