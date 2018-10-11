@@ -6,10 +6,10 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	private var mSelectedSessionDetails;
 	private var mSummaryRollupModel;
 	
-	function initialize(sessionStorage, summaryRollupModel) {
+	function initialize(sessionStorage) {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
-		me.mSummaryRollupModel = summaryRollupModel;
+		me.mSummaryRollupModel = new SummaryRollupModel();
 		me.mSelectedSessionDetails = new DetailsModel();	
 		me.initializeHeartbeatIntervalsSensor();
         
@@ -30,6 +30,14 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		me.mNoHrvSeconds = MinSecondsNoHrvDetected;
 		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {	
 	        me.mHeartbeatIntervalsSensor.start();
+	        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onHeartbeatIntervalsListener));
+        }
+	}
+	
+	function setTestModeHeartbeatIntervalsSensor() {			
+		var hrvTracking = GlobalSettings.loadHrvTracking();
+		var stressTracking = GlobalSettings.loadStressTracking();
+		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {	
 	        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onHeartbeatIntervalsListener));
         }
 	}
@@ -94,7 +102,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
     	var meditateModel = new MeditateModel(selectedSession);      	  
         var meditateView = new MeditateView(meditateModel);
         me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
-        var mediateDelegate = new MeditateDelegate(meditateModel, me.mSummaryRollupModel, me.mHeartbeatIntervalsSensor);
+        var mediateDelegate = new MeditateDelegate(meditateModel, me.mSummaryRollupModel, me.mHeartbeatIntervalsSensor, me);
 		Ui.switchToView(meditateView, mediateDelegate, Ui.SLIDE_LEFT);
 	}
 	
@@ -161,6 +169,10 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			hrvStatusLine.value.text = "HRV Ready";
 		}
 		Ui.requestUpdate();
+	}
+	
+	function addSummary(summaryModel) {
+		me.mSummaryRollupModel.addSummary(summaryModel);
 	}
 	
 	function updateSelectedSessionDetails(session) {

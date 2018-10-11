@@ -4,13 +4,15 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	private var mMeditateModel;
 	private var mMeditateActivity;
 	private var mSummaryModels;
+	private var mSessionPickerDelegate;
 	
-    function initialize(meditateModel, summaryModels, heartbeatIntervalsSensor) {
+    function initialize(meditateModel, summaryModels, heartbeatIntervalsSensor, sessionPickerDelegate) {
         BehaviorDelegate.initialize();
         me.mMeditateModel = meditateModel;
         me.mSummaryModels = summaryModels;
         me.mMeditateActivity = new MediteActivity(meditateModel, heartbeatIntervalsSensor);
         me.mMeditateActivity.start();
+        me.mSessionPickerDelegate = sessionPickerDelegate;
     }
 				
 	private function stopActivity() {
@@ -53,11 +55,10 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 		}
     }
     
-    private function showSessionPickerView(summaryModel) {
-		var sessionStorage = new SessionStorage();	
-		me.mSummaryModels.addSummary(summaryModel);
-		var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, me.mSummaryModels);
-		Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
+    private function showSessionPickerView(summaryModel) {		
+		me.mSessionPickerDelegate.addSummary(summaryModel);
+		me.mSessionPickerDelegate.setTestModeHeartbeatIntervalsSensor();
+		Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     }
     
     function onBack() {
