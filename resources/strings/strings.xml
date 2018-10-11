@@ -111,12 +111,12 @@
 	
 	<string id="hrvRmssd30SecField">HRV RMSSD 30 Sec(ms)</string>
 	<string id="hrvRmssd1MinField">HRV RMSSD 1 Min(ms)</string>
-	
+		
 	<string id="percentUnits">%</string>
 	
 	<string id="hrvRrIntervalsField">HRV beat-to-beat interval(ms)</string>
 	
-	<string id="maxMinHrWindowField">Max-Min HR 10 Sec Window(bmp)</string>
+	<string id="hrPeaksWindow10Field">HR Peaks 10 Sec Window(bmp)</string>
 	
 	<string id="maxMinHrvWindowField">Max-Min HRV 10 Sec Window(ms)</string>
 	<string id="stressMedianField">Stress Median</string>

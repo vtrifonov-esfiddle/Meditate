@@ -3,26 +3,31 @@ using Toybox.Math;
 using Toybox.Application as App;
 
 class StressMonitor {
-	function initialize(activitySession) {	
+	function initialize(activitySession, restingHeartRate) {	
 		me.mStressTracking = GlobalSettings.loadStressTracking();
 		if (me.mStressTracking == StressTracking.OnDetailed) {		
 			me.mMaxMinHrvWindowDataField = StressMonitor.createMaxMinHrvWindowDataField(activitySession);
+			me.mHrPeaksWindow10DataField = StressMonitor.createHrPeaksWindow10DataField(activitySession);
 		}
 		if (me.mStressTracking != StressTracking.Off) {
 			me.mStressMedianDataField = createStressMedianDataField(activitySession);
 			me.mNoStressDataField = StressMonitor.createNoStressDataField(activitySession);
 			me.mLowStressDataField = StressMonitor.createLowStressDataField(activitySession);
 			me.mHighStressDataField = StressMonitor.createHighStressDataField(activitySession);
-		}			
+		}		
+		
+		me.mHrPeaksWindow10 = new HrPeaksWindow(10, restingHeartRate);
 		me.mMaxMinHrvWindow10 = new MaxMinHrvWindow(10);
 		me.mMaxMinHrvWindowStats = new MaxMinHrvWindowStats();				
 	}
 					
 	private var mStressTracking;
-		
+	
+	private var mHrPeaksWindow10;	
 	private var mMaxMinHrvWindow10;
 	private var mMaxMinHrvWindowStats;
 	
+	private var mHrPeaksWindow10DataField;
 	private var mMaxMinHrvWindowDataField;		
 	private var mStressMedianDataField;
 	private var mNoStressDataField;
@@ -34,6 +39,7 @@ class StressMonitor {
 	private static const NoStressDataFieldId = 2;
 	private static const LowStressDataFieldId = 3;
 	private static const HighStressDataFieldId = 4;
+	private static const HrPeaksWindow10DataFieldId = 15;
 	
 	private static function createStressMedianDataField(activitySession) {
 		return activitySession.createField(
@@ -79,10 +85,22 @@ class StressMonitor {
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
 	}	
+
+	private static function createHrPeaksWindow10DataField(activitySession) {
+		return activitySession.createField(
+            "stress_hrp",
+            HrPeaksWindow10DataFieldId,
+            FitContributor.DATA_TYPE_UINT16,
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"bpm"}
+        );
+	}
 	
 	function addOneSecBeatToBeatIntervals(beatToBeatIntervals) {
-		me.mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(beatToBeatIntervals);
+		me.mMaxMinHrvWindow10.addOneSecBeatToBeatIntervals(beatToBeatIntervals);		
 		me.calculateMaxMinHrvWindow10();
+		
+		me.mHrPeaksWindow10.addOneSecBeatToBeatIntervals(beatToBeatIntervals);
+		me.calculateHrPeaksWindow10();
 	}
 		
 	private function calculateMaxMinHrvWindow10() {
@@ -92,6 +110,15 @@ class StressMonitor {
 				me.mMaxMinHrvWindowDataField.setData(result);
 			}
 			me.mMaxMinHrvWindowStats.addMaxMinHrvWindow(result);
+		}
+	}
+	
+	private function calculateHrPeaksWindow10() {
+		var result = me.mHrPeaksWindow10.calculate();
+		if (result != null) {
+			if (me.mHrPeaksWindow10DataField != null) {
+				me.mHrPeaksWindow10DataField.setData(result);
+			}
 		}
 	}
 		

@@ -25,5 +25,6 @@
 		<fitField id="12" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="12" precision="2" dataLabel="@Strings.hrvPnn20FieldLabel" unitLabel="@Strings.percentUnits" />
 		<fitField id="13" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="13" precision="2" dataLabel="@Strings.hrvRmssd30SecField" unitLabel="@Strings.hrvFieldUnits" chartTitle="@Strings.hrvRmssd30SecField" fillColor="993366"  />
 		<fitField id="14" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="14" precision="2" dataLabel="@Strings.hrvRmssd1MinField" unitLabel="@Strings.hrvFieldUnits" chartTitle="@Strings.hrvRmssd1MinField" fillColor="990033"  />
+		<fitField id="15" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="15" precision="0" dataLabel="@Strings.hrPeaksWindow10Field" unitLabel="@Strings.hrUnits" chartTitle="@Strings.hrPeaksWindow10Field" fillColor="6666FF"  />
 	</fitContributions>
 </resources>

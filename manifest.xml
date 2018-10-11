@@ -7,6 +7,7 @@
             <iq:uses-permission id="Fit"/>
             <iq:uses-permission id="FitContributor"/>
             <iq:uses-permission id="Sensor"/>
+            <iq:uses-permission id="UserProfile"/>
         </iq:permissions>
         <iq:languages>
             <iq:language>eng</iq:language>
