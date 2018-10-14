@@ -138,7 +138,7 @@ class MeditateView extends Ui.View {
 			return InvalidHeartRate;
 		}
 		else {
-			return hrv.format("%3.2f");
+			return hrv.format("%3.0f");
 		}
 	}
 	
