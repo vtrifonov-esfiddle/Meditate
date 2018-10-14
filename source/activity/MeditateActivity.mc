@@ -68,7 +68,7 @@ class MediteActivity {
                 });
         }           
 		me.createMinHrDataField();	
-		me.mHrvMonitor = new HrvMonitor(me.mSession);
+		me.mHrvMonitor = new HrvMonitor(me.mSession, me.mRestingHeartRate);
 		me.mStressMonitor = new StressMonitor(me.mSession, me.mRestingHeartRate);
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);

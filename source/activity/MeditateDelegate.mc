@@ -5,16 +5,18 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	private var mMeditateActivity;
 	private var mSummaryModels;
 	private var mSessionPickerDelegate;
+	private var mHeartbeatIntervalsSensor;
 	
     function initialize(meditateModel, summaryModels, heartbeatIntervalsSensor, sessionPickerDelegate) {
         BehaviorDelegate.initialize();
         me.mMeditateModel = meditateModel;
         me.mSummaryModels = summaryModels;
+        me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
         me.mMeditateActivity = new MediteActivity(meditateModel, heartbeatIntervalsSensor);
         me.mMeditateActivity.start();
         me.mSessionPickerDelegate = sessionPickerDelegate;
     }
-				
+    				
 	private function stopActivity() {
 		me.mMeditateActivity.stop();				
 		var calculatingResultsView = new CalculatingResultsView(method(:onFinishActivity));
@@ -51,6 +53,8 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 		}
 		else {
 			me.mHeartbeatIntervalsSensor.stop();
+			me.mHeartbeatIntervalsSensor = null;
+			
 			showSummaryView(summaryModel);
 		}
     }
