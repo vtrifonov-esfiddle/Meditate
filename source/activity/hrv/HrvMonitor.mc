@@ -3,14 +3,13 @@ using Toybox.Math;
 using Toybox.Application as App;
 
 class HrvMonitor {
-	function initialize(activitySession, restingHeartRate) {
+	function initialize(activitySession) {
 		me.mHrvTracking = GlobalSettings.loadHrvTracking();
 		if (me.mHrvTracking == HrvTracking.OnDetailed) {
 			me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);			
 			me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);
 			me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
 			me.mHrFromHeartbeatDataField = HrvMonitor.createHrFromHeartbeatDataField(activitySession);
-			me.mRestingHrDataField = HrvMonitor.createRestingHrDataField(activitySession);
 		}
 		if (me.mHrvTracking != HrvTracking.Off) {			
 			me.mHrvDataField = HrvMonitor.createHrvDataField(activitySession);
@@ -28,7 +27,6 @@ class HrvMonitor {
 		me.mHrvPnn50 = new HrvPnnx(50);
 		me.mHrvPnn20 = new HrvPnnx(20);
 		me.mHrvConsecutive = new HrvConsecutive();
-		me.mRestingHr = restingHeartRate;
 	}
 	
 	private var mHrvTracking;
@@ -45,7 +43,6 @@ class HrvMonitor {
 	private var mHrvConsecutive;
 	private var mHrvPnn50;
 	private var mHrvPnn20;
-	private var mRestingHr;	
 		
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
@@ -57,7 +54,6 @@ class HrvMonitor {
 	private var mHrvPnn50DataField;
 	private var mHrvPnn20DataField;
 	private var mHrFromHeartbeatDataField;
-	private var mRestingHrDataField;
 			
 	private static const HrvFieldId = 6;
 	private static const HrvRmssdFieldId = 7;	
@@ -69,7 +65,6 @@ class HrvMonitor {
 	private static const HrvRmssd30SecFieldId = 13;
 	private static const HrvRmssd1MinFieldId = 14;
 	private static const HrFromHeartbeatField = 16;
-	private static const RestingHr = 17;
 				
 	private static function createHrvSdrrFirst5MinDataField(activitySession) {
 		return activitySession.createField(
@@ -142,16 +137,7 @@ class HrvMonitor {
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"bpm"}
         );
 	}
-	
-	private static function createRestingHrDataField(activitySession) {
-		return activitySession.createField(
-            "hrv_rHr",
-            HrvMonitor.RestingHr,
-            FitContributor.DATA_TYPE_UINT16,
-            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"bpm"}
-        );
-	}
-	
+		
 	private static function createHrvPnn50DataField(activitySession) {
 		return activitySession.createField(
             "hrv_pnn50",
@@ -222,9 +208,6 @@ class HrvMonitor {
 			return null;
 		}
 		
-		if (me.mHrvTracking == HrvTracking.OnDetailed) {
-			me.mRestingHrDataField.setData(me.mRestingHr.toNumber());
-		}
 		var hrvSummary = new HrvSummary();
 		hrvSummary.rmssd = me.mHrvRmssd.calculate();
 		if (hrvSummary.rmssd != null) {

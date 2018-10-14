@@ -14,7 +14,6 @@ class MediteActivity {
 	private var mStressMonitor;
 	private var mHrvTracking;
 	private var mStressTracking;
-	private var mRestingHeartRate;
 	private const SUB_SPORT_YOGA = 43;
 		
 	function initialize(meditateModel, heartbeatIntervalsSensor) {
@@ -23,7 +22,6 @@ class MediteActivity {
 		me.mHrvTracking = GlobalSettings.loadHrvTracking();
 		me.mStressTracking = GlobalSettings.loadStressTracking();
 		me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
-		me.mRestingHeartRate = UserProfile.getProfile().restingHeartRate;
 	}
 	
 	static function enableHrSensor() {		
@@ -68,8 +66,8 @@ class MediteActivity {
                 });
         }           
 		me.createMinHrDataField();	
-		me.mHrvMonitor = new HrvMonitor(me.mSession, me.mRestingHeartRate);
-		me.mStressMonitor = new StressMonitor(me.mSession, me.mRestingHeartRate);
+		me.mHrvMonitor = new HrvMonitor(me.mSession);
+		me.mStressMonitor = new StressMonitor(me.mSession);
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		

@@ -118,9 +118,7 @@
 	
 	<string id="hrPeaksWindow10Field">HR Peaks 10 Sec Window(bmp)</string>
 	<string id="hrFromHeartbeatField">HR from heartbeat(bpm)</string>
-	
-	<string id="restingHrField">Resting HR</string>
-	
+		
 	<string id="maxMinHrvWindowField">Max-Min HRV 10 Sec Window(ms)</string>
 	<string id="stressMedianField">Stress Median</string>
 	

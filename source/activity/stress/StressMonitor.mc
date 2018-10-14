@@ -3,7 +3,7 @@ using Toybox.Math;
 using Toybox.Application as App;
 
 class StressMonitor {
-	function initialize(activitySession, restingHeartRate) {	
+	function initialize(activitySession) {	
 		me.mStressTracking = GlobalSettings.loadStressTracking();
 		if (me.mStressTracking == StressTracking.OnDetailed) {		
 			me.mMaxMinHrvWindowDataField = StressMonitor.createMaxMinHrvWindowDataField(activitySession);
@@ -16,7 +16,7 @@ class StressMonitor {
 			me.mHighStressDataField = StressMonitor.createHighStressDataField(activitySession);
 		}		
 		
-		me.mHrPeaksWindow10 = new HrPeaksWindow(10, restingHeartRate);
+		me.mHrPeaksWindow10 = new HrPeaksWindow(10);
 		me.mMaxMinHrvWindow10 = new MaxMinHrvWindow(10);
 		me.mMaxMinHrvWindowStats = new MaxMinHrvWindowStats();				
 	}
