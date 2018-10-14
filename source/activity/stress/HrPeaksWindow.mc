@@ -5,13 +5,11 @@ class HrPeaksWindow {
 		me.mSamples = new [samplesCount];
 		me.mStoreIndex = 0;
 		me.mStoredSamplesCount = 0;
-		me.mRunningMinHr = null;
 	}
 	
 	private var mSamples;
 	private var mStoredSamplesCount;
 	private var mStoreIndex;
-	private var mRunningMinHr;
 	
 	function addOneSecBeatToBeatIntervals(beatToBeatIntervals) {
 		me.mSamples[me.mStoreIndex] = beatToBeatIntervals;
@@ -30,10 +28,6 @@ class HrPeaksWindow {
 					var beatToBeatSample = me.mSamples[i][s];
 					var bpmSample =  Math.round(60000 / beatToBeatSample.toFloat()).toNumber();
 					
-					if (me.mRunningMinHr == null || bpmSample < me.mRunningMinHr) {
-						me.mRunningMinHr = bpmSample;
-					}					
-					
 					if (maxHr == null || bpmSample > maxHr) {
 						maxHr = bpmSample;
 					}
@@ -44,6 +38,13 @@ class HrPeaksWindow {
 		if (maxHr == null) {
 			return null;
 		}
-		return maxHr - me.mRunningMinHr;
+		var averageHr = Activity.getActivityInfo().averageHeartRate;
+		var result = maxHr - averageHr;
+		if (result > 0) {
+			return result;
+		}
+		else {
+			return 0;
+		}
 	}
 }
