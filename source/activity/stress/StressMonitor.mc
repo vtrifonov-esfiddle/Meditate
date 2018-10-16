@@ -8,6 +8,7 @@ class StressMonitor {
 		if (me.mStressTracking == StressTracking.OnDetailed) {		
 			me.mMaxMinHrvWindowDataField = StressMonitor.createMaxMinHrvWindowDataField(activitySession);
 			me.mHrPeaksWindow10DataField = StressMonitor.createHrPeaksWindow10DataField(activitySession);
+			me.mHrPeaksAverageDataField = StressMonitor.createHrPeaksAverageDataField(activitySession);
 		}
 		if (me.mStressTracking != StressTracking.Off) {
 			me.mStressMedianDataField = createStressMedianDataField(activitySession);
@@ -33,6 +34,7 @@ class StressMonitor {
 	private var mNoStressDataField;
 	private var mLowStressDataField;
 	private var mHighStressDataField;
+	private var mHrPeaksAverageDataField;
 	
 	private static const MaxMinHrvWindowDataFieldId = 5;		
 	private static const StressMedianDataFieldId = 1;
@@ -40,6 +42,7 @@ class StressMonitor {
 	private static const LowStressDataFieldId = 3;
 	private static const HighStressDataFieldId = 4;
 	private static const HrPeaksWindow10DataFieldId = 15;
+	private static const HrPeaksAverageDataFieldId = 17;
 	
 	private static function createStressMedianDataField(activitySession) {
 		return activitySession.createField(
@@ -47,6 +50,15 @@ class StressMonitor {
             StressMedianDataFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"ms x10"}
+        );
+	}
+	
+	private static function createHrPeaksAverageDataField(activitySession) {
+		return activitySession.createField(
+            "stress_hrpa",
+            HrPeaksAverageDataFieldId,
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_SESSION, :units=>"%"}
         );
 	}
 	
@@ -114,7 +126,7 @@ class StressMonitor {
 	}
 	
 	private function calculateHrPeaksWindow10() {
-		var result = me.mHrPeaksWindow10.calculate();
+		var result = me.mHrPeaksWindow10.calculateCurrentPeak();
 		if (result != null) {
 			if (me.mHrPeaksWindow10DataField != null) {
 				me.mHrPeaksWindow10DataField.setData(result);
@@ -134,6 +146,10 @@ class StressMonitor {
 			me.mNoStressDataField.setData(stressStats.noStress);
 			me.mLowStressDataField.setData(stressStats.lowStress);
 			me.mHighStressDataField.setData(stressStats.highStress);
+		}
+		if (me.mStressTracking == StressTracking.OnDetailed) {
+			var hrPeaksAverage = me.mHrPeaksWindow10.calculateHrPeaksAverage();
+			me.mHrPeaksAverageDataField.setData(hrPeaksAverage);
 		}
 		return stressStats;
 	}	

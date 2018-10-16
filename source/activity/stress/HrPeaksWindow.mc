@@ -5,11 +5,17 @@ class HrPeaksWindow {
 		me.mSamples = new [samplesCount];
 		me.mStoreIndex = 0;
 		me.mStoredSamplesCount = 0;
+		
+		me.mAverageHrPeak = 0.0;
+		me.mHrPeaksCount = 0;
 	}
 	
 	private var mSamples;
 	private var mStoredSamplesCount;
 	private var mStoreIndex;
+	
+	private var mAverageHrPeak;
+	private var mHrPeaksCount;
 	
 	function addOneSecBeatToBeatIntervals(beatToBeatIntervals) {
 		me.mSamples[me.mStoreIndex] = beatToBeatIntervals;
@@ -17,7 +23,28 @@ class HrPeaksWindow {
 		me.mStoredSamplesCount++;
 	}
 	
-	function calculate() {
+	function calculateCurrentPeak() {
+		var hrPeak = me.calculateHrPeak();
+		if (hrPeak != null) {
+			me.addHrPeak(hrPeak);
+		}
+		return hrPeak;
+	}
+	
+	function calculateHrPeaksAverage() {
+		if (me.mHrPeaksCount == 0) {
+			return 0.0;
+		}
+		
+		return me.mAverageHrPeak / me.mHrPeaksCount.toFloat();
+	}
+	
+	private function addHrPeak(hrPeak) {
+		me.mAverageHrPeak += hrPeak;
+		me.mHrPeaksCount++;
+	}
+	
+	private function calculateHrPeak() {
 		if (me.mStoredSamplesCount < me.mSamples.size()) {
 			return null;
 		}
