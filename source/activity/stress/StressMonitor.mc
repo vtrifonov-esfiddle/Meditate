@@ -90,8 +90,8 @@ class StressMonitor {
 		return activitySession.createField(
             "stress_hrp",
             HrPeaksWindow10DataFieldId,
-            FitContributor.DATA_TYPE_UINT16,
-            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"bpm"}
+            FitContributor.DATA_TYPE_FLOAT,
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"%"}
         );
 	}
 	

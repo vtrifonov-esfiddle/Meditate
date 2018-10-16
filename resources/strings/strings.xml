@@ -115,7 +115,7 @@
 	
 	<string id="hrvRrIntervalsField">HRV beat-to-beat interval(ms)</string>
 	
-	<string id="hrPeaksWindow10Field">HR Peaks 10 Sec Window(bmp)</string>
+	<string id="hrPeaksWindow10Field">HR Peaks 10 Sec Window(%)</string>
 	<string id="hrFromHeartbeatField">HR from heartbeat(bpm)</string>
 		
 	<string id="maxMinHrvWindowField">Max-Min HRV 10 Sec Window(ms)</string>

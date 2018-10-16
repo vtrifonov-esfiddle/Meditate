@@ -39,12 +39,12 @@ class HrPeaksWindow {
 			return null;
 		}
 		var averageHr = Activity.getActivityInfo().averageHeartRate;
-		var result = maxHr - averageHr;
-		if (result > 0) {
-			return result;
+		var hrPeak = maxHr - averageHr;
+		if (hrPeak > 0) {
+			return (hrPeak / averageHr.toFloat()) * 100.0;
 		}
 		else {
-			return 0;
+			return 0.0;
 		}
 	}
 }
