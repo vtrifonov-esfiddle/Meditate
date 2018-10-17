@@ -147,10 +147,14 @@ class StressMonitor {
 			me.mLowStressDataField.setData(stressStats.lowStress);
 			me.mHighStressDataField.setData(stressStats.highStress);
 		}
-		if (me.mStressTracking == StressTracking.OnDetailed) {
-			var hrPeaksAverage = me.mHrPeaksWindow10.calculateHrPeaksAverage();
-			me.mHrPeaksAverageDataField.setData(hrPeaksAverage);
-		}
+
 		return stressStats;
 	}	
+	
+	public function calculateStressHrPeaks(minHr) {
+		if (me.mStressTracking == StressTracking.OnDetailed) {
+			var hrPeaksAverage = me.mHrPeaksWindow10.calculateHrPeaksAverage(minHr);
+			me.mHrPeaksAverageDataField.setData(hrPeaksAverage);
+		}
+	}
 }

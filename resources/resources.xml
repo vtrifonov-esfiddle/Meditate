@@ -26,6 +26,6 @@
 		<fitField id="13" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="13" precision="2" dataLabel="@Strings.hrvRmssd30SecField" unitLabel="@Strings.hrvFieldUnits" chartTitle="@Strings.hrvRmssd30SecField" fillColor="993366"  />
 		<fitField id="15" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="15" precision="2" dataLabel="@Strings.hrPeaksWindow10Field" unitLabel="@Strings.stressUnits" chartTitle="@Strings.hrPeaksWindow10Field" fillColor="6666FF"  />
 		<fitField id="16" displayInChart="true" displayInActivityLaps="false" displayInActivitySummary="false" sortOrder="16" precision="0" dataLabel="@Strings.hrFromHeartbeatField" unitLabel="@Strings.hrUnits" chartTitle="@Strings.hrFromHeartbeatField" fillColor="FF0000"  />
-		<fitField id="17" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="17" precision="2" dataLabel="@Strings.hrPeaksAverageField" unitLabel="@Strings.stressUnits" />
+		<fitField id="17" displayInChart="false" displayInActivityLaps="true" displayInActivitySummary="true" sortOrder="17" precision="2" dataLabel="@Strings.hrPeaksAverageField" unitLabel="@Strings.hrUnits" />
 	</fitContributions>
 </resources>

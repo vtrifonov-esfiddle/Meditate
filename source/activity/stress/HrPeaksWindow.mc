@@ -31,12 +31,20 @@ class HrPeaksWindow {
 		return hrPeak;
 	}
 	
-	function calculateHrPeaksAverage() {
-		if (me.mHrPeaksCount == 0) {
+	function calculateHrPeaksAverage(minHr) {
+		if (me.mHrPeaksCount == 0 || minHr == null || minHr == 0) {
+			return 0.0;
+		}
+		var averageHrPeaksDiff = me.mAverageHrPeak / me.mHrPeaksCount.toFloat() - minHr;
+		if (averageHrPeaksDiff < 0.0) {
 			return 0.0;
 		}
 		
-		return me.mAverageHrPeak / me.mHrPeaksCount.toFloat();
+		var averageHrPeaks = (averageHrPeaksDiff * 100.0) / minHr.toFloat();
+		if (averageHrPeaks > 100.0) {
+			return 100.0;
+		}
+		return averageHrPeaks;
 	}
 	
 	private function addHrPeak(hrPeak) {
@@ -65,13 +73,6 @@ class HrPeaksWindow {
 		if (maxHr == null) {
 			return null;
 		}
-		var averageHr = Activity.getActivityInfo().averageHeartRate;
-		var hrPeak = maxHr - averageHr;
-		if (hrPeak > 0) {
-			return (hrPeak / averageHr.toFloat()) * 100.0;
-		}
-		else {
-			return 0.0;
-		}
+		return maxHr;
 	}
 }
