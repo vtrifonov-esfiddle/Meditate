@@ -103,7 +103,7 @@ class StressMonitor {
             "stress_hrp",
             HrPeaksWindow10DataFieldId,
             FitContributor.DATA_TYPE_FLOAT,
-            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"%"}
+            {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"bpm"}
         );
 	}
 	
