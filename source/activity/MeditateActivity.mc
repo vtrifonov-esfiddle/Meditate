@@ -122,7 +122,7 @@ class MediteActivity {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
 		
-		me.mStressMonitor.calculateStressHrPeaks(me.mMeditateModel.minHr);
+		me.mStressMonitor.calculateStress(me.mMeditateModel.minHr);
 		var stressStats = me.mStressMonitor.calculateStressStats();
 		var hrvSummary = me.mHrvMonitor.calculateHrvSummary();
 		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvSummary);

@@ -151,10 +151,10 @@ class StressMonitor {
 		return stressStats;
 	}	
 	
-	public function calculateStressHrPeaks(minHr) {
+	public function calculateStress(minHr) {
 		if (me.mStressTracking == StressTracking.OnDetailed) {
-			var hrPeaksAverage = me.mHrPeaksWindow10.calculateHrPeaksAverage(minHr);
-			me.mHrPeaksAverageDataField.setData(hrPeaksAverage);
+			var averageStress = me.mHrPeaksWindow10.calculateAverageStress(minHr);
+			me.mHrPeaksAverageDataField.setData(averageStress);
 		}
 	}
 }

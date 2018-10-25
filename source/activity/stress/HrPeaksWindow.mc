@@ -31,7 +31,7 @@ class HrPeaksWindow {
 		return hrPeak;
 	}
 	
-	function calculateHrPeaksAverage(minHr) {
+	function calculateAverageStress(minHr) {
 		if (me.mHrPeaksCount == 0 || minHr == null || minHr == 0) {
 			return 0.0;
 		}
@@ -40,11 +40,11 @@ class HrPeaksWindow {
 			return 0.0;
 		}
 		
-		var averageHrPeaks = (averageHrPeaksDiff * 100.0) / minHr.toFloat();
-		if (averageHrPeaks > 100.0) {
+		var averageStress = (averageHrPeaksDiff * 100.0) / minHr.toFloat();
+		if (averageStress > 100.0) {
 			return 100.0;
 		}
-		return averageHrPeaks;
+		return averageStress;
 	}
 	
 	private function addHrPeak(hrPeak) {
