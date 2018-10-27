@@ -16,7 +16,4 @@
 	<property id="meditateActivityIconsXPos" type="number">80</property>
 	<property id="meditateActivityMeditateIconX" type="number">60</property>
 	<property id="meditateActivityMeditateIconY" type="number">40</property>
-	<property id="sessionHrvStatusLineYOffset" type="number">10</property>
-	<property id="sessionHrvStatusLineIconXPos" type="number">60</property>
-	<property id="sessionHrvStatusLineTextXPos" type="number">80</property>
 </properties>

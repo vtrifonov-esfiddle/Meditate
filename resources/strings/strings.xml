@@ -16,7 +16,6 @@
     <string id="menuSessionSettings_globalSettings">Global Settings</string>
     
     <string id="menuGlobalSettings_title">Global Settings</string>    
-    <string id="menuGlobalSettings_stressTracking">Stress Tracking</string>
     <string id="menuGlobalSettings_hrvTracking">HRV Tracking</string>
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
@@ -29,12 +28,7 @@
     <string id="activityTypeMenu_title">Activity Type</string>    
     <string id="activityTypeMenu_meditating">Meditate</string>
     <string id="activityTypeMenu_yoga">Yoga</string>
-    
-    <string id="menuStressTrackingOptions_title">Stress Tracking</string>    
-    <string id="menuStressTrackingOptions_on">On (Default)</string>
-    <string id="menuStressTrackingOptions_onDetailed">On Detailed</string>
-    <string id="menuStressTrackingOptions_off">Off</string>
-    
+        
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
     <string id="menuHrvTrackingOptions_on">On (Default)</string>
     <string id="menuHrvTrackingOptions_onDetailed">On Detailed</string>

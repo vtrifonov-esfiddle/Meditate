@@ -9,9 +9,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 
 	function initialize(summaryModel, discardDanglingActivity) {		
 		var hrvTracking = GlobalSettings.loadHrvTracking();		
-		var stressTracking = GlobalSettings.loadStressTracking();
-		me.mPagesCount = SummaryViewDelegate.getPagesCount(hrvTracking, stressTracking);
-		setPageIndexes(hrvTracking, stressTracking);
+		me.mPagesCount = SummaryViewDelegate.getPagesCount(hrvTracking);
+		setPageIndexes(hrvTracking);
 		
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = summaryModel;
@@ -21,58 +20,34 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		
 	private var mSummaryLinesYOffset;
 			
-	private static function getPagesCount(hrvTracking, stressTracking) {		
-		var pagesCount = 6;
+	private static function getPagesCount(hrvTracking) {		
+		var pagesCount = 5;
 		if (hrvTracking == HrvTracking.Off) {
-			pagesCount -= 3;
+			pagesCount -= 4;
 		}
 		else if (hrvTracking == HrvTracking.On) {
-			pagesCount -= 1;
-		}
-		if (stressTracking == StressTracking.Off) {
 			pagesCount -= 2;
-		}
-		else if (stressTracking == StressTracking.On) {
-			pagesCount--;
 		}
 		return pagesCount;
 	}
 	
-	private function setPageIndexes(hrvTracking, stressTracking) {
-		if (stressTracking == StressTracking.Off) {
-			me.mStressPageIndex = InvalidPageIndex;
-		}
-		else {
-			me.mStressPageIndex = 1;
-		}
-		
-		if (stressTracking == StressTracking.OnDetailed) {
-			me.mStressMedianPageIndex = 2;
-		}
-		else {
-			me.mStressMedianPageIndex = InvalidPageIndex;
-		}
-		
+	private function setPageIndexes(hrvTracking) {		
 		if (hrvTracking == HrvTracking.Off) {
+			me.mStressPageIndex = InvalidPageIndex;
 			me.mHrvRmssdPageIndex = InvalidPageIndex;
 			me.mHrvSdrrPageIndex = InvalidPageIndex;
 			me.mHrvPnnxPageIndex = InvalidPageIndex;
 		}
 		else {
-			if (stressTracking == StressTracking.Off) {
-				me.mHrvRmssdPageIndex = 1;
-			}
-			else if (stressTracking == StressTracking.On) {				
-				me.mHrvRmssdPageIndex = 2;
-			}
-			else {
-				me.mHrvRmssdPageIndex = 3;
-			}
-			me.mHrvPnnxPageIndex = me.mHrvRmssdPageIndex + 1;		
+			me.mStressPageIndex = 1;
+			me.mHrvRmssdPageIndex = 2;
+				
 			if (hrvTracking == HrvTracking.OnDetailed) {	
+				me.mHrvPnnxPageIndex = me.mHrvRmssdPageIndex + 1;	
 				me.mHrvSdrrPageIndex = me.mHrvRmssdPageIndex + 2;
 			}
 			else {
+				me.mHrvPnnxPageIndex = InvalidPageIndex;
 				me.mHrvSdrrPageIndex = InvalidPageIndex;
 			}
 		}
@@ -84,7 +59,6 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mHrvSdrrPageIndex;
 	private var mHrvPnnxPageIndex;
 	private var mStressPageIndex;
-	private var mStressMedianPageIndex;
 	
 	private const InvalidPageIndex = -1;
 
@@ -103,9 +77,6 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 		} 
 		else if (me.mSelectedPageIndex == me.mStressPageIndex) {
 			details = me.createDetailsPageStress();
-		}
-		else if (me.mSelectedPageIndex == me.mStressMedianPageIndex) {
-			details = me.createDetailsStressMedian();
 		}
 		else if (me.mSelectedPageIndex == mHrvRmssdPageIndex){
 			details = me.createDetailsPageHrvRmssd();
@@ -195,60 +166,26 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         	:font => IconFonts.fontMeditateIcons,
         	:symbol => Rez.Strings.meditateFontStress,
         	:color=>Graphics.COLOR_GREEN   	
-    	});           
-        details.detailLines[2].icon = noStressIcon;  
-        details.detailLines[2].value.color = Gfx.COLOR_BLACK;            
-        details.detailLines[2].value.text = Lang.format("No: $1$ %", [me.mSummaryModel.noStress]);
-        
+    	}); 
         var lowStressIcon = new Icon({       
         	:font => IconFonts.fontMeditateIcons,
         	:symbol => Rez.Strings.meditateFontStress,
         	:color=>Graphics.COLOR_YELLOW   	
-    	});      
-        details.detailLines[3].icon = lowStressIcon;
-        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[3].value.text = Lang.format("Low: $1$ %", [me.mSummaryModel.lowStress]);  
-        
-        var highStressIcon = new Icon({       
+    	}); 
+       var highStressIcon = new Icon({       
         	:font => IconFonts.fontMeditateIcons,
         	:symbol => Rez.Strings.meditateFontStress,
         	:color=>Graphics.COLOR_RED   	
-    	});        
-        details.detailLines[4].icon = highStressIcon;
-        details.detailLines[4].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[4].value.text = Lang.format("High: $1$ %", [me.mSummaryModel.highStress]);   
+    	});    
+    	      
+        details.detailLines[2].icon = lowStressIcon;  
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;            
+        details.detailLines[2].value.text = Lang.format("Stress: $1$ %", [me.mSummaryModel.stress]);
          
         var summaryStressIconsXPos = App.getApp().getProperty("summaryStressIconsXPos");
         var summaryStressValueXPos = App.getApp().getProperty("summaryStressValueXPos");
         details.setAllIconsXPos(summaryStressIconsXPos);
         details.setAllValuesXPos(summaryStressValueXPos);   
-        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
-        
-        return details;
-	}
-	
-	private function createDetailsStressMedian() {
-		var details = new DetailsModel();
-		details.color = Gfx.COLOR_BLACK;
-        details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n Stress";
-        details.titleColor = Gfx.COLOR_BLACK;
-                             
-		var pieChartIcon = new Icon({       
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faPieChart,
-        	:color=>Graphics.COLOR_BLACK  	
-    	});      
-        details.detailLines[3].icon = pieChartIcon;                
-        details.detailLines[3].value.text = "Median";   
-        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[4].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[4].value.text = Lang.format("$1$ ms x10", [me.mSummaryModel.stressMedian]);   
-         
-        var summaryStressMedianIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
-        var summaryStressMeidanValueXPos = App.getApp().getProperty("summaryHrValueXPos");
-        details.setAllIconsXPos(summaryStressMedianIconsXPos);
-        details.setAllValuesXPos(summaryStressMeidanValueXPos); 
         details.setAllLinesYOffset(me.mSummaryLinesYOffset);
         
         return details;

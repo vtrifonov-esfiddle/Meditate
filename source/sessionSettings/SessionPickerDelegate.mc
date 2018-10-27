@@ -18,17 +18,13 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		me.sessionDetailsValueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
 		me.globalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
 		me.sessionDetailsAlertsLineYOffset = App.getApp().getProperty("sessionDetailsAlertsLineYOffset");
-		me.sessionHrvStatusLineYOffset = App.getApp().getProperty("sessionHrvStatusLineYOffset");
-		me.sessionHrvStatusLineIconXPos = App.getApp().getProperty("sessionHrvStatusLineIconXPos");
-		me.sessionHrvStatusLineTextXPos = App.getApp().getProperty("sessionHrvStatusLineTextXPos");
 	}
 	
 	private function initializeHeartbeatIntervalsSensor() {
 		me.mHeartbeatIntervalsSensor = new HeartbeatIntervalsSensor();
 		var hrvTracking = GlobalSettings.loadHrvTracking();
-		var stressTracking = GlobalSettings.loadStressTracking();
 		me.mNoHrvSeconds = MinSecondsNoHrvDetected;
-		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {	
+		if (hrvTracking != HrvTracking.Off) {	
 	        me.mHeartbeatIntervalsSensor.start();
 	        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onHeartbeatIntervalsListener));
         }
@@ -36,8 +32,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	
 	function setTestModeHeartbeatIntervalsSensor() {			
 		var hrvTracking = GlobalSettings.loadHrvTracking();
-		var stressTracking = GlobalSettings.loadStressTracking();
-		if (hrvTracking != HrvTracking.Off || stressTracking != StressTracking.Off) {	
+		if (hrvTracking != HrvTracking.Off) {	
 	        me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onHeartbeatIntervalsListener));
         }
 	}
@@ -48,9 +43,6 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	private var sessionDetailsValueXPos;
 	private var globalSettingsIconsXPos;
 	private var sessionDetailsAlertsLineYOffset;
-	private var sessionHrvStatusLineYOffset;
-	private var sessionHrvStatusLineIconXPos;
-	private var sessionHrvStatusLineTextXPos;
 		
     function onMenu() {
 		return me.showSessionSettingsMenu();
@@ -161,8 +153,8 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	private function setHrvReadyStatus() {
 		var hrvStatusLine = me.mSelectedSessionDetails.detailLines[4];
 		if (me.mNoHrvSeconds >= MinSecondsNoHrvDetected) {
-			hrvStatusLine.icon.setColor(Gfx.COLOR_TRANSPARENT);
-			hrvStatusLine.value.text = "";
+			hrvStatusLine.icon.setColor(Gfx.COLOR_YELLOW);
+			hrvStatusLine.value.text = "Waiting HRV";
 		}
 		else {			
 			hrvStatusLine.icon.setColor(Icon.HeartBeatPurpleColor);
@@ -212,19 +204,16 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);
         details.detailLines[3].value = alertsToHighlightsLine.getAlertsLine(me.sessionDetailsValueXPos, me.sessionDetailsAlertsLineYOffset);
         
-        details.setAllIconsXPos(me.sessionDetailsIconsXPos);
-        details.setAllValuesXPos(me.sessionDetailsValueXPos);
-        
-        var hrvStatusLine = details.detailLines[4];			
-        hrvStatusLine.yLineOffset = sessionHrvStatusLineYOffset;
+        var hrvStatusLine = details.detailLines[4];
         hrvStatusLine.icon = new Icon({        
 		        	:font => IconFonts.fontAwesomeFreeSolid,
 		        	:symbol => Rez.Strings.faHeartbeat,
-		        	:color => Gfx.COLOR_TRANSPARENT,
-		        	:xPos => me.sessionHrvStatusLineIconXPos
+		        	:color => Gfx.COLOR_YELLOW,
 		        });
-        hrvStatusLine.value.text = "";
-       	hrvStatusLine.value.xPos = me.sessionHrvStatusLineTextXPos;
+        hrvStatusLine.value.text = "Waiting HRV";
+        
+        details.setAllIconsXPos(me.sessionDetailsIconsXPos);
+        details.setAllValuesXPos(me.sessionDetailsValueXPos);
 	}		
 	
 	function createScreenPickerView() {

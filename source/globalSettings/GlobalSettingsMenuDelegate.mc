@@ -9,11 +9,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 	private var mOnGlobalSettingsChanged;
 	
 	function onMenuItem(item) {
-		if (item == :stressTracking) {
-			var stressTrackingDelegate = new MenuOptionsDelegate(method(:onStressTrackingPicked));
-        	Ui.pushView(new Rez.Menus.stressTrackingOptionsMenu(), stressTrackingDelegate, Ui.SLIDE_LEFT);
-		}
-		else if (item ==:hrvTracking) {
+		if (item ==:hrvTracking) {
 			var hrvTrackingDelegate = new MenuOptionsDelegate(method(:onHrvTrackingPicked));
         	Ui.pushView(new Rez.Menus.hrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
 		}
@@ -63,20 +59,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		}
 		mOnGlobalSettingsChanged.invoke();
 	}
-	
-	function onStressTrackingPicked(item) {
-		if (item == :on) {
-			GlobalSettings.saveStressTracking(StressTracking.On);
-		}
-		else if (item == :onDetailed) {
-			GlobalSettings.saveStressTracking(StressTracking.OnDetailed);
-		}
-		else if (item == :off) {
-			GlobalSettings.saveStressTracking(StressTracking.Off);
-		}
-		mOnGlobalSettingsChanged.invoke();
-	}
-	
+			
 	function onHrvTrackingPicked(item) {
 		if (item == :on) {
 			GlobalSettings.saveHrvTracking(HrvTracking.On);

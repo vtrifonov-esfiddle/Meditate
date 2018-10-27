@@ -4,17 +4,19 @@ using Toybox.Application as App;
 
 class StressMonitor {
 	function initialize(activitySession) {	
-		me.mStressTracking = GlobalSettings.loadStressTracking();
-		if (me.mStressTracking == StressTracking.OnDetailed) {		
-			me.mMaxMinHrvWindowDataField = StressMonitor.createMaxMinHrvWindowDataField(activitySession);
+		me.mHrvTracking = GlobalSettings.loadHrvTracking();
+		if (me.mHrvTracking == HrvTracking.OnDetailed) {		
 			me.mHrPeaksWindow10DataField = StressMonitor.createHrPeaksWindow10DataField(activitySession);
-			me.mHrPeaksAverageDataField = StressMonitor.createHrPeaksAverageDataField(activitySession);
-		}
-		if (me.mStressTracking != StressTracking.Off) {
+			
+			//TODO - delete			
+			me.mMaxMinHrvWindowDataField = StressMonitor.createMaxMinHrvWindowDataField(activitySession);
 			me.mStressMedianDataField = createStressMedianDataField(activitySession);
 			me.mNoStressDataField = StressMonitor.createNoStressDataField(activitySession);
 			me.mLowStressDataField = StressMonitor.createLowStressDataField(activitySession);
 			me.mHighStressDataField = StressMonitor.createHighStressDataField(activitySession);
+		}
+		if (me.mHrvTracking != HrvTracking.Off) {		
+			me.mHrPeaksAverageDataField = StressMonitor.createHrPeaksAverageDataField(activitySession);
 		}		
 		
 		me.mHrPeaksWindow10 = new HrPeaksWindow(10);
@@ -22,7 +24,7 @@ class StressMonitor {
 		me.mMaxMinHrvWindowStats = new MaxMinHrvWindowStats();				
 	}
 					
-	private var mStressTracking;
+	private var mHrvTracking;
 	
 	private var mHrPeaksWindow10;	
 	private var mMaxMinHrvWindow10;
@@ -135,12 +137,12 @@ class StressMonitor {
 	}
 		
 	public function calculateStressStats() {
-		if (me.mStressTracking == StressTracking.Off) {
+		if (me.mHrvTracking == HrvTracking.Off) {
 			return null;
 		}
 		var stressStats = me.mMaxMinHrvWindowStats.calculate();		
 		if (stressStats.median != null) {
-			if (me.mStressTracking == StressTracking.OnDetailed) {
+			if (me.mHrvTracking == HrvTracking.OnDetailed) {
 				me.mStressMedianDataField.setData(stressStats.median);
 			}
 			me.mNoStressDataField.setData(stressStats.noStress);
@@ -152,9 +154,13 @@ class StressMonitor {
 	}	
 	
 	public function calculateStress(minHr) {
-		if (me.mStressTracking == StressTracking.OnDetailed) {
+		if (me.mHrvTracking == HrvTracking.OnDetailed) {
 			var averageStress = me.mHrPeaksWindow10.calculateAverageStress(minHr);
 			me.mHrPeaksAverageDataField.setData(averageStress);
+			return averageStress;
+		}
+		else {
+			return null;
 		}
 	}
 }

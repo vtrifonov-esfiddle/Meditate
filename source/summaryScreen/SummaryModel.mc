@@ -1,18 +1,14 @@
 using Toybox.System;
 
 class SummaryModel {
-	function initialize(activityInfo, minHr, stressStats, hrvSummary) {
+	function initialize(activityInfo, minHr, stress, hrvSummary) {
 		me.elapsedTime = activityInfo.elapsedTime / 1000; 
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
 		
-		if (stressStats != null) {
-			me.noStress = me.initializePercentageValue(stressStats.noStress);
-			me.lowStress = me.initializePercentageValue(stressStats.lowStress);
-			me.highStress = me.initializePercentageValue(stressStats.highStress);
-
-			me.stressMedian = me.initializeStressMedian(stressStats.median);
+		if (stress != null) {
+			me.stress = me.initializePercentageValue(stress);
 		}
 		if (hrvSummary != null) {
 			me.hrvRmssd = me.initializeHeartRateVariability(hrvSummary.rmssd);
@@ -31,16 +27,7 @@ class SummaryModel {
 			return heartRate;
 		}
 	}
-	
-	private function initializeStressMedian(median) {
-		if (median == null || median == 0) {
-			return me.InvalidHeartRate;
-		}
-		else {
-			return median.format("%2.1f");
-		}
-	}
-	
+		
 	private function initializePercentageValue(stressScore) {
 		if (stressScore == null) {
 			return me.InvalidHeartRate;
@@ -67,12 +54,8 @@ class SummaryModel {
 	var avgHr;
 	var minHr;	
 	
-	var noStress;
-	var lowStress;
-	var highStress;
-	
-	var stressMedian;
-	
+	var stress;
+		
 	var hrvRmssd;
 	var hrvFirst5Min;
 	var hrvLast5Min;

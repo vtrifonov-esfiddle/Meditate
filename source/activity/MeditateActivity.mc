@@ -13,14 +13,13 @@ class MediteActivity {
 	private var mHrvMonitor;
 	private var mStressMonitor;
 	private var mHrvTracking;
-	private var mStressTracking;
+	
 	private const SUB_SPORT_YOGA = 43;
 		
 	function initialize(meditateModel, heartbeatIntervalsSensor) {
 		me.mMeditateModel = meditateModel;
 				
 		me.mHrvTracking = GlobalSettings.loadHrvTracking();
-		me.mStressTracking = GlobalSettings.loadStressTracking();
 		me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
 	}
 	
@@ -76,11 +75,9 @@ class MediteActivity {
 		
 	function onOneSecBeatToBeatIntervals(heartBeatIntervals) {
 		if (me.mHrvTracking != HrvTracking.Off) {		
-			me.mHrvMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);	
+			me.mHrvMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
+			me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);	
 		} 
-    	if (me.mStressTracking != StressTracking.Off) {
-    		me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
-    	}
 	}		
 			
 	function refreshActivityStats() {	
@@ -122,10 +119,9 @@ class MediteActivity {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
 		
-		me.mStressMonitor.calculateStress(me.mMeditateModel.minHr);
-		var stressStats = me.mStressMonitor.calculateStressStats();
+		var stress = me.mStressMonitor.calculateStress(me.mMeditateModel.minHr);
 		var hrvSummary = me.mHrvMonitor.calculateHrvSummary();
-		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvSummary);
+		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stress, hrvSummary);
 		return summaryModel;
 	}
 			
