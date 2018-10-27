@@ -6,7 +6,7 @@ class MeditateModel {
 		me.elapsedTime = 0;
 		me.minHr = null;
 		me.currentHr = null;
-		me.hrv = null;
+		me.hrvSuccessive = null;
 	}
 	
 	private var mSession;
@@ -14,7 +14,7 @@ class MeditateModel {
 	var currentHr;
 	var minHr;
 	var elapsedTime;
-	var hrv;
+	var hrvSuccessive;
 	
 	function isHrvOn() {
 		return me.mSession.hrvTracking != HrvTracking.Off;

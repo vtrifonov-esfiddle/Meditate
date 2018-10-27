@@ -95,8 +95,8 @@ class MediteActivity {
 		if (activityInfo.currentHeartRate != null && (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate)) {
     		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
     	}
-		me.mVibeAlertsExecutor.firePendingAlerts();	    
-    	me.mMeditateModel.hrv = me.mHrvMonitor.calculateHrvConsecutive();
+		me.mVibeAlertsExecutor.firePendingAlerts();	 
+		me.mMeditateModel.hrvSuccessive = me.mHrvMonitor.calculateHrvSuccessive();
     	
 	    Ui.requestUpdate();	    
 	}	   	
@@ -121,6 +121,7 @@ class MediteActivity {
 		}
 		
 		var stress = me.mStressMonitor.calculateStress(me.mMeditateModel.minHr);
+
 		var hrvSummary = me.mHrvMonitor.calculateHrvSummary();
 		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stress, hrvSummary, me.mMeditateModel.getHrvTracking());
 		return summaryModel;

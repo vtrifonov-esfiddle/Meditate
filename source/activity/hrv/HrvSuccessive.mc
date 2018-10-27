@@ -1,4 +1,4 @@
-class HrvConsecutive {
+class HrvSuccessive {
 	function initialize() {		
 		me.mPreviousBeatToBeatInterval = null;
 		me.mCurrentBeatToBeatInterval = null;

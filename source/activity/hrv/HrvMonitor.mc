@@ -9,22 +9,24 @@ class HrvMonitor {
 			me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);			
 			me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);
 			me.mHrvSdrrLast5MinDataField = HrvMonitor.createHrvSdrrLast5MinDataField(activitySession);
-			me.mHrFromHeartbeatDataField = HrvMonitor.createHrFromHeartbeatDataField(activitySession);
-		}
-		if (me.mHrvTracking != HrvTracking.Off) {			
-			me.mHrvDataField = HrvMonitor.createHrvDataField(activitySession);
-			me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
+			me.mHrFromHeartbeatDataField = HrvMonitor.createHrFromHeartbeatDataField(activitySession);			
 			me.mHrvRmssd30SecDataField = HrvMonitor.createHrvRmssd30SecDataField(activitySession);
 			me.mHrvPnn50DataField = HrvMonitor.createHrvPnn50DataField(activitySession);
 			me.mHrvPnn20DataField = HrvMonitor.createHrvPnn20DataField(activitySession);
+			me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
+			me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);
+			
+			me.mHrvPnn50 = new HrvPnnx(50);
+			me.mHrvPnn20 = new HrvPnnx(20);			
+			me.mHrvRmssd30Sec = new HrvRmssdRolling(HrvRmssd30Sec);
 		}
-		me.mHrvSdrrFirst5Min = new HrvSdrrFirstNSec(Buffer5MinLength);
-		me.mHrvSdrrLast5Min = new HrvSdrrLastNSec(Buffer5MinLength);	
-		me.mHrvRmssd = new HrvRmssd();	
-		me.mHrvRmssd30Sec = new HrvRmssdRolling(HrvRmssd30Sec);
-		me.mHrvPnn50 = new HrvPnnx(50);
-		me.mHrvPnn20 = new HrvPnnx(20);
-		me.mHrvConsecutive = new HrvConsecutive();
+		if (me.mHrvTracking != HrvTracking.Off) {			
+			me.mHrvSuccessiveDataField = HrvMonitor.createHrvSuccessiveDataField(activitySession);
+			me.mHrvRmssdDataField = HrvMonitor.createHrvRmssdDataField(activitySession);
+						
+			me.mHrvRmssd = new HrvRmssd();	
+			me.mHrvSuccessive = new HrvSuccessive();
+		}	
 	}
 	
 	private var mHrvTracking;
@@ -36,21 +38,21 @@ class HrvMonitor {
 	private var mHrvSdrrLast5Min;	
 	private var mHrvRmssd;
 	private var mHrvRmssd30Sec;
-	private var mHrvConsecutive;
+	private var mHrvSuccessive;
 	private var mHrvPnn50;
 	private var mHrvPnn20;
 		
 	private var mHrvBeatToBeatIntervalsDataField;
 	private var mHrvSdrrFirst5MinDataField;
 	private var mHrvSdrrLast5MinDataField;	
-	private var mHrvDataField;
+	private var mHrvSuccessiveDataField;
 	private var mHrvRmssd30SecDataField;
 	private var mHrvRmssdDataField;
 	private var mHrvPnn50DataField;
 	private var mHrvPnn20DataField;
 	private var mHrFromHeartbeatDataField;
 			
-	private static const HrvFieldId = 6;
+	private static const HrvSuccessiveFieldId = 6;
 	private static const HrvRmssdFieldId = 7;	
 	private static const HrvBeatToBeatIntervalsFieldId = 8;		
 	private static const HrvSdrrFirst5MinFieldId = 9;
@@ -87,10 +89,10 @@ class HrvMonitor {
         );
 	}
 	
-	private static function createHrvDataField(activitySession) {
+	private static function createHrvSuccessiveDataField(activitySession) {
 		return activitySession.createField(
-            "hrv_c",
-            HrvMonitor.HrvFieldId,
+            "hrv_s",
+            HrvMonitor.HrvSuccessiveFieldId,
             FitContributor.DATA_TYPE_FLOAT,
             {:mesgType=>FitContributor.MESG_TYPE_RECORD, :units=>"ms"}
         );
@@ -149,10 +151,12 @@ class HrvMonitor {
 	    			me.addValidBeatToBeatInterval(beatToBeatInterval);	
 	    		}
 	    	}
-	    	var rmssd30Sec = me.mHrvRmssd30Sec.addOneSecBeatToBeatIntervals(beatToBeatIntervals); 	
-	    	if (rmssd30Sec != null) {
-	    		me.mHrvRmssd30SecDataField.setData(rmssd30Sec);
-	    	}	    	
+	    	if (me.mHrvTracking == HrvTracking.OnDetailed) {
+		    	var rmssd30Sec = me.mHrvRmssd30Sec.addOneSecBeatToBeatIntervals(beatToBeatIntervals); 	
+		    	if (rmssd30Sec != null) {
+		    		me.mHrvRmssd30SecDataField.setData(rmssd30Sec);
+		    	}	
+	    	}    	
     	}    	
 	}
 		
@@ -165,23 +169,25 @@ class HrvMonitor {
 			
 			me.mHrvSdrrFirst5Min.addBeatToBeatInterval(beatToBeatInterval);
 			me.mHrvSdrrLast5Min.addBeatToBeatInterval(beatToBeatInterval);
+			
+			me.mHrvPnn50.addBeatToBeatInterval(beatToBeatInterval);
+			me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);				
 		}
-		
-		me.mHrvConsecutive.addBeatToBeatInterval(beatToBeatInterval);								
-		me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
-		me.mHrvPnn50.addBeatToBeatInterval(beatToBeatInterval);
-		me.mHrvPnn20.addBeatToBeatInterval(beatToBeatInterval);
+		if (me.mHrvTracking != HrvTracking.Off) {
+			me.mHrvSuccessive.addBeatToBeatInterval(beatToBeatInterval);	
+			me.mHrvRmssd.addBeatToBeatInterval(beatToBeatInterval);
+		}
 	}			
 				
-	public function calculateHrvConsecutive() {
+	public function calculateHrvSuccessive() {
 		if (me.mHrvTracking == HrvTracking.Off) {
 			return null;
 		}
-		var hrv = me.mHrvConsecutive.calculate();
-		if (hrv != null) {
-			me.mHrvDataField.setData(hrv);
+		var hrvSuccessive = me.mHrvSuccessive.calculate();
+		if (hrvSuccessive != null) {
+			me.mHrvSuccessiveDataField.setData(hrvSuccessive);
 		}
-		return hrv;
+		return hrvSuccessive;
 	}
 	
 	public function calculateHrvSummary() {
@@ -194,25 +200,24 @@ class HrvMonitor {
 		if (hrvSummary.rmssd != null) {
 			me.mHrvRmssdDataField.setData(hrvSummary.rmssd);
 		}
-		hrvSummary.pnn50 = me.mHrvPnn50.calculate();
-		if (hrvSummary.pnn50 != null) {
-			me.mHrvPnn50DataField.setData(hrvSummary.pnn50);
-		}
-		hrvSummary.pnn20 = me.mHrvPnn20.calculate();
-		if (hrvSummary.pnn20 != null) {
-			me.mHrvPnn20DataField.setData(hrvSummary.pnn20);
-		}
-		hrvSummary.rmssd = me.mHrvRmssd.calculate();
-		if (hrvSummary.rmssd != null) {
-			me.mHrvRmssdDataField.setData(hrvSummary.rmssd);
-		}
-		hrvSummary.first5MinSdrr = me.mHrvSdrrFirst5Min.calculate();
-		if (hrvSummary.first5MinSdrr != null) {
-			me.mHrvSdrrFirst5MinDataField.setData(hrvSummary.first5MinSdrr);
-		}
-		hrvSummary.last5MinSdrr = me.mHrvSdrrLast5Min.calculate();
-		if (hrvSummary.last5MinSdrr != null) {
-			me.mHrvSdrrLast5MinDataField.setData(hrvSummary.last5MinSdrr);
+		
+		if (me.mHrvTracking == HrvTracking.OnDetailed) {
+			hrvSummary.pnn50 = me.mHrvPnn50.calculate();
+			if (hrvSummary.pnn50 != null) {
+				me.mHrvPnn50DataField.setData(hrvSummary.pnn50);
+			}
+			hrvSummary.pnn20 = me.mHrvPnn20.calculate();
+			if (hrvSummary.pnn20 != null) {
+				me.mHrvPnn20DataField.setData(hrvSummary.pnn20);
+			}
+			hrvSummary.first5MinSdrr = me.mHrvSdrrFirst5Min.calculate();
+			if (hrvSummary.first5MinSdrr != null) {
+				me.mHrvSdrrFirst5MinDataField.setData(hrvSummary.first5MinSdrr);
+			}
+			hrvSummary.last5MinSdrr = me.mHrvSdrrLast5Min.calculate();
+			if (hrvSummary.last5MinSdrr != null) {
+				me.mHrvSdrrLast5MinDataField.setData(hrvSummary.last5MinSdrr);
+			}
 		}
 		return hrvSummary;
 	}

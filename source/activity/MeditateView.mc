@@ -177,7 +177,7 @@ class MeditateView extends Ui.View {
      	
  	    if (me.mMeditateModel.isHrvOn() == true) {
 	        me.mHrvIcon.draw(dc);
-	        me.mHrvText.setText(me.formatHrv(me.mMeditateModel.hrv));
+	        me.mHrvText.setText(me.formatHrv(me.mMeditateModel.hrvSuccessive));
 	        me.mHrvText.draw(dc); 
         }
     }
