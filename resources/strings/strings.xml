@@ -16,7 +16,7 @@
     <string id="menuSessionSettings_globalSettings">Global Settings</string>
     
     <string id="menuGlobalSettings_title">Global Settings</string>    
-    <string id="menuGlobalSettings_hrvTracking">HRV Tracking</string>
+    <string id="menuGlobalSettings_newHrvTracking">HRV Tracking</string>
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
     <string id="menuGlobalSettings_multiSession">Multi-Session</string>
@@ -28,6 +28,11 @@
     <string id="activityTypeMenu_title">Activity Type</string>    
     <string id="activityTypeMenu_meditating">Meditate</string>
     <string id="activityTypeMenu_yoga">Yoga</string>
+      
+    <string id="menuNewHrvTrackingOptions_title">Hrv Tracking</string>    
+    <string id="menuNewHrvTrackingOptions_on">On (Default)</string>
+    <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuNewHrvTrackingOptions_off">Off</string>
         
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
     <string id="menuHrvTrackingOptions_on">On (Default)</string>
@@ -65,6 +70,7 @@
     <string id="addEditSessionMenu_vibePattern">Vibe Pattern</string>
 	<string id="addEditSessionMenu_intervalAlerts">Interval Alerts</string>
 	<string id="addEditSessionMenu_activityType">Activity Type</string>
+	<string id="addEditSessionMenu_hrvTracking">HRV Tracking</string>
 	
 	<string id="intervalAlertTransparentColorText">Transparent</string>
 	

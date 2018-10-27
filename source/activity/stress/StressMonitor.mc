@@ -3,8 +3,8 @@ using Toybox.Math;
 using Toybox.Application as App;
 
 class StressMonitor {
-	function initialize(activitySession) {	
-		me.mHrvTracking = GlobalSettings.loadHrvTracking();
+	function initialize(activitySession, hrvTracking) {	
+		me.mHrvTracking = hrvTracking;
 		if (me.mHrvTracking == HrvTracking.OnDetailed) {		
 			me.mHrPeaksWindow10DataField = StressMonitor.createHrPeaksWindow10DataField(activitySession);
 			
@@ -154,13 +154,11 @@ class StressMonitor {
 	}	
 	
 	public function calculateStress(minHr) {
-		if (me.mHrvTracking == HrvTracking.OnDetailed) {
-			var averageStress = me.mHrPeaksWindow10.calculateAverageStress(minHr);
-			me.mHrPeaksAverageDataField.setData(averageStress);
-			return averageStress;
-		}
-		else {
+		if (me.mHrvTracking == HrvTracking.Off) {
 			return null;
 		}
+		var averageStress = me.mHrPeaksWindow10.calculateAverageStress(minHr);
+		me.mHrPeaksAverageDataField.setData(averageStress);
+		return averageStress;
 	}
 }

@@ -64,10 +64,7 @@ class MeditateView extends Ui.View {
     	var hrvIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
     	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 1);
         var hrvIconYPos = hrvTextYPos + YIconOffset;
-        me.mHrvIcon = new Icon({        
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHeartbeat,
-        	:color=> Icon.HeartBeatPurpleColor,
+        me.mHrvIcon =  new HrvIcon({
         	:xPos => hrvIconXPos,
         	:yPos => hrvIconYPos
         });

@@ -33,7 +33,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
     	Ui.pushView(new Rez.Menus.globalSettingsMenu(), new GlobalSettingsMenuDelegate(method(:onGlobalSettingsChanged)), Ui.SLIDE_LEFT);  
     }
     
-    function onBack() {
+    function onBack() {    
     	Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     	return true;
     }
@@ -51,12 +51,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
         		
-		var hrvIcon = new Icon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faHeartbeat,
-	        	:color => Icon.HeartBeatPurpleColor
-	        });	
-	    details.detailLines[1].icon = hrvIcon;
+	    details.detailLines[1].icon = new HrvIcon({});
 	    var hrvTrackingSetting;
 	    var hrvTracking = GlobalSettings.loadHrvTracking();
 		if (hrvTracking == HrvTracking.On) {			

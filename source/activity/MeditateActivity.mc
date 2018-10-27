@@ -12,14 +12,11 @@ class MediteActivity {
 	private var mVibeAlertsExecutor;	
 	private var mHrvMonitor;
 	private var mStressMonitor;
-	private var mHrvTracking;
 	
 	private const SUB_SPORT_YOGA = 43;
 		
 	function initialize(meditateModel, heartbeatIntervalsSensor) {
-		me.mMeditateModel = meditateModel;
-				
-		me.mHrvTracking = GlobalSettings.loadHrvTracking();
+		me.mMeditateModel = meditateModel;				
 		me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
 	}
 	
@@ -47,7 +44,9 @@ class MediteActivity {
 	private var mHeartbeatIntervalsSensor;
 			
 	function start() {
-		me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onOneSecBeatToBeatIntervals));
+		if (me.mMeditateModel.isHrvOn()) {
+			me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onOneSecBeatToBeatIntervals));
+		}
 		if (me.mMeditateModel.getActivityType() == ActivityType.Yoga) { 
 			me.mSession = ActivityRecording.createSession(       
                 {
@@ -65,8 +64,8 @@ class MediteActivity {
                 });
         }           
 		me.createMinHrDataField();	
-		me.mHrvMonitor = new HrvMonitor(me.mSession);
-		me.mStressMonitor = new StressMonitor(me.mSession);
+		me.mHrvMonitor = new HrvMonitor(me.mSession, me.mMeditateModel.getHrvTracking());
+		me.mStressMonitor = new StressMonitor(me.mSession, me.mMeditateModel.getHrvTracking());
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
@@ -74,7 +73,7 @@ class MediteActivity {
 	}	
 		
 	function onOneSecBeatToBeatIntervals(heartBeatIntervals) {
-		if (me.mHrvTracking != HrvTracking.Off) {		
+		if (me.mMeditateModel.isHrvOn()) {		
 			me.mHrvMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
 			me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);	
 		} 
@@ -106,7 +105,9 @@ class MediteActivity {
 		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
-	    me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
+	    if (me.mMeditateModel.isHrvOn()) {
+	    	me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
+    	}
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		me.mRefreshActivityTimer = null;
@@ -121,7 +122,7 @@ class MediteActivity {
 		
 		var stress = me.mStressMonitor.calculateStress(me.mMeditateModel.minHr);
 		var hrvSummary = me.mHrvMonitor.calculateHrvSummary();
-		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stress, hrvSummary);
+		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stress, hrvSummary, me.mMeditateModel.getHrvTracking());
 		return summaryModel;
 	}
 			

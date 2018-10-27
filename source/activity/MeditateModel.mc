@@ -7,7 +7,6 @@ class MeditateModel {
 		me.minHr = null;
 		me.currentHr = null;
 		me.hrv = null;
-		me.mIsHrvOn = GlobalSettings.loadHrvTracking() != HrvTracking.Off;
 	}
 	
 	private var mSession;
@@ -17,9 +16,12 @@ class MeditateModel {
 	var elapsedTime;
 	var hrv;
 	
-	private var mIsHrvOn;
 	function isHrvOn() {
-		return me.mIsHrvOn;
+		return me.mSession.hrvTracking != HrvTracking.Off;
+	}
+	
+	function getHrvTracking() {
+		return me.mSession.hrvTracking;
 	}
 		
 	function getSessionTime() {

@@ -3,8 +3,8 @@ using Toybox.Math;
 using Toybox.Application as App;
 
 class HrvMonitor {
-	function initialize(activitySession) {
-		me.mHrvTracking = GlobalSettings.loadHrvTracking();
+	function initialize(activitySession, hrvTracking) {
+		me.mHrvTracking = hrvTracking;
 		if (me.mHrvTracking == HrvTracking.OnDetailed) {
 			me.mHrvBeatToBeatIntervalsDataField = HrvMonitor.createHrvBeatToBeatIntervalsDataField(activitySession);			
 			me.mHrvSdrrFirst5MinDataField = HrvMonitor.createHrvSdrrFirst5MinDataField(activitySession);

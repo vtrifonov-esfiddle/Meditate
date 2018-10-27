@@ -1,15 +1,14 @@
 using Toybox.System;
 
 class SummaryModel {
-	function initialize(activityInfo, minHr, stress, hrvSummary) {
+	function initialize(activityInfo, minHr, stress, hrvSummary, hrvTracking) {
 		me.elapsedTime = activityInfo.elapsedTime / 1000; 
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
 		
-		if (stress != null) {
-			me.stress = me.initializePercentageValue(stress);
-		}
+		me.stress = me.initializePercentageValue(stress);
+		
 		if (hrvSummary != null) {
 			me.hrvRmssd = me.initializeHeartRateVariability(hrvSummary.rmssd);
 			me.hrvFirst5Min = me.initializeHeartRateVariability(hrvSummary.first5MinSdrr);
@@ -17,6 +16,8 @@ class SummaryModel {
 			me.hrvPnn50 = me.initializePercentageValue(hrvSummary.pnn50);
 			me.hrvPnn20 = me.initializePercentageValue(hrvSummary.pnn20);
 		}
+		
+		me.hrvTracking = hrvTracking;
 	}
 	
 	private function initializeHeartRate(heartRate) {
@@ -61,4 +62,6 @@ class SummaryModel {
 	var hrvLast5Min;
 	var hrvPnn50;
 	var hrvPnn20;
+	
+	var hrvTracking;
 }

@@ -11,7 +11,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 	function onMenuItem(item) {
 		if (item ==:hrvTracking) {
 			var hrvTrackingDelegate = new MenuOptionsDelegate(method(:onHrvTrackingPicked));
-        	Ui.pushView(new Rez.Menus.hrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
+        	Ui.pushView(new Rez.Menus.newHrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
 		}
 		else if (item ==:newActivityType) {
 			var newActivityTypeDelegate = new MenuOptionsDelegate(method(:onNewActivityTypePicked));

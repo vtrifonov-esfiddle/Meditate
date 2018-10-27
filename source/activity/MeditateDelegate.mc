@@ -61,7 +61,6 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     
     private function showSessionPickerView(summaryModel) {		
 		me.mSessionPickerDelegate.addSummary(summaryModel);
-		me.mSessionPickerDelegate.setTestModeHeartbeatIntervalsSensor();
 		Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     }
     

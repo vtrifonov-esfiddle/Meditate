@@ -8,9 +8,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 	private var mDiscardDanglingActivity;
 
 	function initialize(summaryModel, discardDanglingActivity) {		
-		var hrvTracking = GlobalSettings.loadHrvTracking();		
-		me.mPagesCount = SummaryViewDelegate.getPagesCount(hrvTracking);
-		setPageIndexes(hrvTracking);
+		me.mPagesCount = SummaryViewDelegate.getPagesCount(summaryModel.hrvTracking);
+		setPageIndexes(summaryModel.hrvTracking);
 		
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = summaryModel;
@@ -178,9 +177,9 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         	:color=>Graphics.COLOR_RED   	
     	});    
     	      
-        details.detailLines[2].icon = lowStressIcon;  
-        details.detailLines[2].value.color = Gfx.COLOR_BLACK;            
-        details.detailLines[2].value.text = Lang.format("Stress: $1$ %", [me.mSummaryModel.stress]);
+        details.detailLines[3].icon = lowStressIcon;  
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;            
+        details.detailLines[3].value.text = Lang.format("$1$ %", [me.mSummaryModel.stress]);
          
         var summaryStressIconsXPos = App.getApp().getProperty("summaryStressIconsXPos");
         var summaryStressValueXPos = App.getApp().getProperty("summaryStressValueXPos");
@@ -197,13 +196,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV RMSSD";
         details.titleColor = Gfx.COLOR_BLACK;
-                           
-        var hrvIcon = new Icon({       
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHeartbeat,
-        	:color=> Icon.HeartBeatPurpleColor  	
-    	});            
-        details.detailLines[3].icon = hrvIcon;              
+                             
+        details.detailLines[3].icon = new HrvIcon({});              
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvRmssd]);
                  
@@ -223,11 +217,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n HRV pNNx";
         details.titleColor = Gfx.COLOR_BLACK;
                             
-        var hrvIcon = new Icon({       
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHeartbeat,
-        	:color=> Icon.HeartBeatPurpleColor  	
-    	});            
+        var hrvIcon = new HrvIcon({});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
         details.detailLines[2].value.text = "pNN20";
@@ -257,11 +247,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n HRV SDRR";
         details.titleColor = Gfx.COLOR_BLACK;
                         
-        var hrvIcon = new Icon({       
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHeartbeat,
-        	:color=> Icon.HeartBeatPurpleColor  	
-    	});            
+        var hrvIcon = new HrvIcon({});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
         details.detailLines[2].value.text = "First 5 min";

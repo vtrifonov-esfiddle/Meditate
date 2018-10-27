@@ -53,6 +53,24 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
         	var activityTypeDelegate = new MenuOptionsDelegate(method(:onActivityTypePicked));
 			Ui.pushView(new Rez.Menus.activityTypeMenu(), activityTypeDelegate, Ui.SLIDE_LEFT);
         }
+        else if (item == :hrvTracking) {
+        	var hrvTrackingDelegate = new MenuOptionsDelegate(method(:onHrvTrackingPicked));
+			Ui.pushView(new Rez.Menus.hrvTrackingMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
+        }
+    }
+    
+    function onHrvTrackingPicked(item) {
+    	var sessionModel = new SessionModel();
+    	if (item == :on) {    		
+    		sessionModel.hrvTracking = HrvTracking.On;
+    	}
+    	else if (item == :onDetailed) {    		
+    		sessionModel.hrvTracking = HrvTracking.OnDetailed;
+    	}
+    	else if (item == :off) {    		
+    		sessionModel.hrvTracking = HrvTracking.Off;
+    	}    		
+		me.mOnChangeSession.invoke(sessionModel);	
     }
     
     function onActivityTypePicked(item) {
