@@ -160,27 +160,13 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
-        
-        var noStressIcon = new Icon({       
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontStress,
-        	:color=>Graphics.COLOR_GREEN   	
-    	}); 
-        var lowStressIcon = new Icon({       
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontStress,
-        	:color=>Graphics.COLOR_YELLOW   	
-    	}); 
-       var highStressIcon = new Icon({       
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontStress,
-        	:color=>Graphics.COLOR_RED   	
-    	});    
-    	      
+ 
+    	var lowStressIcon = new StressIcon({});
+    	lowStressIcon.setLowStress();	      
         details.detailLines[3].icon = lowStressIcon;  
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;            
         details.detailLines[3].value.text = Lang.format("$1$ %", [me.mSummaryModel.stress]);
-         
+                 
         var summaryStressIconsXPos = App.getApp().getProperty("summaryStressIconsXPos");
         var summaryStressValueXPos = App.getApp().getProperty("summaryStressValueXPos");
         details.setAllIconsXPos(summaryStressIconsXPos);

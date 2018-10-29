@@ -170,8 +170,13 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 			hrvStatusLine.icon.setStatusWarning();
 			hrvStatusLine.value.text = "Waiting HRV";
 		}
-		else {			
-			hrvStatusLine.icon.setStatusOn();
+		else {		
+			if (me.mLastHrvTracking == HrvTracking.On) {	
+				hrvStatusLine.icon.setStatusOn();
+			}
+			else {
+				hrvStatusLine.icon.setStatusOnDetailed();
+			}
 			hrvStatusLine.value.text = "HRV Ready";
 		}
 		Ui.requestUpdate();
