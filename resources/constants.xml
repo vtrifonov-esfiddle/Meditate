@@ -15,5 +15,5 @@
 	<property id="summaryLinesYOffset" type="number">0</property>
 	<property id="meditateActivityIconsXPos" type="number">80</property>
 	<property id="meditateActivityMeditateIconX" type="number">60</property>
-	<property id="meditateActivityMeditateIconY" type="number">40</property>
+	<property id="meditateActivityMeditateIconY" type="number">35</property>
 </properties>
