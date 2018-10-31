@@ -1,8 +1,9 @@
 # User Guide
 
 ## Features
-- ability to save the session as a Connect IQ activity (optional)
-    - save as **Meditating** or **Yoga**
+
+- ability to save the session as a Connect IQ activity
+    - activity type **Meditating** or **Yoga**
 - ability to configure multiple meditation/yoga sessions
     - e.g. a 20 min session with 1 min recurring alerts, triggering a different alert on the 10th minute
     - each session supports interval vibration alerts
@@ -11,15 +12,18 @@
     - RMSSD - Root Mean Square of Successive Differences (beat-to-beat intervals)
     - pNN20 - % of successive beat-to-beat intervals that differ by more than 20 ms
     - pNN50 - % of successive beat-to-beat intervals that differ by more than 50 ms
-    - HRV Successive Beats - difference between current and previous beat-to-beat intervals
-    - SDRR - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
+    - beat-to-beat interval - reading coming directly from the watch sensor
+    - HRV Successive Differences - difference between current and previous beat-to-beat intervals
+    - SDRR - [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of beat-to-beat intervals 
+      - calculated of the first and last 5 min of the session
+    - HRV RMSSD 30 Sec Window - RMSSD calculated for consecutive 30 second intervals    
+    - HR from heartbeat - beat-to-beat interval converted to HR
 - stress tracking
-    - analyses in overlapping 10 Sec Windows Max-Min beat-to-beat intervals (reported as Max-Min HRV 10 Sec Window chart on Connect IQ)
-    - tracks the median of the Max-Min HRV windows as a summary field (Stress Median field on Connect IQ)
-    - calculates stress into 3 cathegories - **No**, **Low** and **High**
-        - No - % of Max-Min Windows that are <= **stress median**
-        - Low - % of Max-Min Windows that are > **stress median** and < 3x **stress median**
-        - High - % of Max-Min Windows that are >= 3x **stress median**
+    - Stress - summary of the the average stress during the session 
+    - HR Peaks 10 Sec Window
+      - internal metric for calculating stress 
+      - tracks in overlapping 10 Sec Windows Max HR for each window 
+      - HR calculated from beat-to-beat interval
 - summary stats at the end of the session
     - tracks the overall min, avg and max HR
     - Stress
@@ -55,7 +59,11 @@ The meditation session finishes once you press the stop button.
 
 1.4. If you are in single session mode (the default) at the end you see the Summary Screen (for Multi-Session mode see the next section **1.5**). Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV. Go back from this view to exit the app.
 
-  ![Summary HR](userGuideScreenshots/summaryHr.png)![Summary Stress](userGuideScreenshots/summaryStress.png) ![Summary stress median](userGuideScreenshots/summaryStressMedian.png) ![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
+![Summary HR](userGuideScreenshots/summaryHr.png)
+![Summary stress](userGuideScreenshots/summaryStress.png)
+![Summary HRV RMSSD](userGuideScreenshots/summaryHrvRmssd.png)
+![Summary HRV pNNx](userGuideScreenshots/summaryHrvPnnx.png)
+![Summary HRV SDRR](userGuideScreenshots/summaryHrvSdrr.png)
 
 1.5 If you are in multi-session mode (determined by [Global Settings](#4-global-settings) -> [Multi-Session](#44-multi-session)) then you go back to the session picker screen. From there you can start another session. Once you finished your session you can go back from the session picker screen to enter the Sessions Summary view.
 
@@ -105,39 +113,46 @@ On this screen you can see the applicable settings for the selected session
 ![Session picker yoga explained](userGuideScreenshots/sessionPickerYogaExplained.png)
 
 ### 4. Global Settings
+
 From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. You see a view with the states of the global settings.
 
 ![Global settings](userGuideScreenshots/globalSettings.png)
 
 To change the settings hold the menu button (for Vivoactive 3 hold on the screen) until you see the Global Settings menu. There you can select the setting you want to change.
 
-#### 4.1 Stress Tracking
-
-- On - tracks summary stress metrics into tree categories: No, Low and High stress
-- On Detailed - tracks additionally stress median and Max-Min HR Windows Graph
-- Off - no stress tracking
-
-#### 4.2 HRV Tracking
+#### 4.1 HRV Tracking
 
 - On 
-  - tracks the standard deviation HRV of the first and last 5 min intervals of the session
-  - produces beat-to-beat intervals graph in ConnectIQ when activity is saved
-- Off - no HRV tracking
+  - tracks default HRV metrics and Stress
+    - RMSSD
+    - Successive Differences
+    - Stress
+- On Detailed - metrics of On plus those bellow
+    - beat-to-beat interval
+    - pNN50
+    - pNN20
+    - HR from heartbeat
+    - RMSSD 30 Sec Window
+    - HR Peaks 10 Sec Window
+    - SDRR First 5 min of the session
+    - SDRR Last 5 min of the session
+- Off - HRV and Stress tracking turned off
 
-#### 4.3 Confirm Save
+#### 4.2 Confirm Save
 
 - Ask - when an activity finihes asks for confirmation whether to save the activity
 - Auto Yes - when an activity finihes auto saves it
 - Auto No - when an activity finihes auto discards it
 
-#### 4.4 Multi-Session
+#### 4.3 Multi-Session
 
 - Yes 
   - the app continues to run after finishing session
   - this allows you to record multiple sessions
 - No - the app exits after finishing session
 
-#### 4.5 New Activity Type
+#### 4.4 New Activity Type
+
 You can set the default activity type for new sessions.
 
 - Meditating

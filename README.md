@@ -3,8 +3,9 @@
 A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HRV, stress and provides vibration alerts.
 
 ## Features
-- ability to save the session as a Connect IQ activity (optional)
-    - save as **Meditating** or **Yoga**
+
+- ability to save the session as a Connect IQ activity
+    - activity type **Meditating** or **Yoga**
 - ability to configure multiple meditation/yoga sessions
     - e.g. a 20 min session with 1 min recurring alerts, triggering a different alert on the 10th minute
     - each session supports interval vibration alerts
@@ -13,24 +14,29 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
     - RMSSD - Root Mean Square of Successive Differences (beat-to-beat intervals)
     - pNN20 - % of successive beat-to-beat intervals that differ by more than 20 ms
     - pNN50 - % of successive beat-to-beat intervals that differ by more than 50 ms
-    - HRV Successive Beats - difference between current and previous beat-to-beat intervals
-    - SDRR - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
+    - beat-to-beat interval - reading coming directly from the watch sensor
+    - HRV Successive Differences - difference between current and previous beat-to-beat intervals
+    - SDRR - [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of beat-to-beat intervals
+      - calculated  of the first and last 5 min of the session
+    - HRV RMSSD 30 Sec Window - RMSSD calculated for consecutive 30 second intervals    
+    - HR from heartbeat - beat-to-beat interval converted to HR
 - stress tracking
-    - analyses in overlapping 10 Sec Windows Max-Min beat-to-beat intervals (reported as Max-Min HRV 10 Sec Window chart on Connect IQ)
-    - tracks the median of the Max-Min HRV windows as a summary field (Stress Median field on Connect IQ)
-    - calculates stress into 3 cathegories - **No**, **Low** and **High**
-        - No - % of Max-Min Windows that are <= **stress median**
-        - Low - % of Max-Min Windows that are > **stress median** and < 3x **stress median**
-        - High - % of Max-Min Windows that are >= 3x **stress median**
+    - Stress - summary of the the average stress during the session 
+    - HR Peaks 10 Sec Window
+      - internal metric for calculating stress 
+      - tracks in overlapping 10 Sec Windows Max HR for each window 
+      - HR calculated from beat-to-beat interval.
 - summary stats at the end of the session
     - tracks the overall min, avg and max HR
     - Stress
     - HRV
 
-![Session picker yoga explained](userGuideScreenshots/sessionPicker.png)
+![Session picker yoga](userGuideScreenshots/sessionPicker.png)
 ![Session in-progress explained](userGuideScreenshots/sessionInProgressExplained.png)
 ![Summary stress](userGuideScreenshots/summaryStress.png)
-![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
+![Summary HRV RMSSD](userGuideScreenshots/summaryHrvRmssd.png)
+![Summary HRV pNNx](userGuideScreenshots/summaryHrvPnnx.png)
+![Summary HRV SDRR](userGuideScreenshots/summaryHrvSdrr.png)
 
 ## Supported Devices
 - Vivoactive 3, Vivoactive 3 Music 
