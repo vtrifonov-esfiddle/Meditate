@@ -17,7 +17,7 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
     - beat-to-beat interval - reading coming directly from the watch sensor
     - HRV Successive Differences - difference between current and previous beat-to-beat intervals
     - SDRR - [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of beat-to-beat intervals
-      - calculated  of the first and last 5 min of the session
+      - calculated from the first and last 5 min of the session
     - HRV RMSSD 30 Sec Window - RMSSD calculated for consecutive 30 second intervals    
     - HR from heartbeat - beat-to-beat interval converted to HR
 - stress tracking
