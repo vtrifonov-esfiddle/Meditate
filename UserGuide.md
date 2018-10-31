@@ -122,12 +122,14 @@ To change the settings hold the menu button (for Vivoactive 3 hold on the screen
 
 #### 4.1 HRV Tracking
 
-- On 
-  - tracks default HRV metrics and Stress
+- **On** - tracks default HRV metrics and Stress
     - RMSSD
     - Successive Differences
     - Stress
-- On Detailed - metrics of On plus those bellow
+- **On Detailed** - extended HRV and Stress metrics
+    - RMSSD
+    - Successive Differences
+    - Stress
     - beat-to-beat interval
     - pNN50
     - pNN20
@@ -136,7 +138,7 @@ To change the settings hold the menu button (for Vivoactive 3 hold on the screen
     - HR Peaks 10 Sec Window
     - SDRR First 5 min of the session
     - SDRR Last 5 min of the session
-- Off - HRV and Stress tracking turned off
+- **Off** - HRV and Stress tracking turned off
 
 #### 4.2 Confirm Save
 
