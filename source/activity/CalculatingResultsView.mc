@@ -9,7 +9,7 @@ class CalculatingResultsView extends Ui.View {
 		me.mOnShow = onShow;
 	}
 	
-	private function onViewDrawn() {
+	function onViewDrawn() {
 		me.mOnShow.invoke();
 	}
 	

@@ -16,8 +16,7 @@
     <string id="menuSessionSettings_globalSettings">Global Settings</string>
     
     <string id="menuGlobalSettings_title">Global Settings</string>    
-    <string id="menuGlobalSettings_stressTracking">Stress Tracking</string>
-    <string id="menuGlobalSettings_hrvTracking">HRV Tracking</string>
+    <string id="menuGlobalSettings_newHrvTracking">HRV Tracking</string>
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
     <string id="menuGlobalSettings_multiSession">Multi-Session</string>
@@ -29,15 +28,16 @@
     <string id="activityTypeMenu_title">Activity Type</string>    
     <string id="activityTypeMenu_meditating">Meditate</string>
     <string id="activityTypeMenu_yoga">Yoga</string>
-    
-    <string id="menuStressTrackingOptions_title">Stress Tracking</string>    
-    <string id="menuStressTrackingOptions_on">On (Default)</string>
-    <string id="menuStressTrackingOptions_onDetailed">On Detailed</string>
-    <string id="menuStressTrackingOptions_off">Off</string>
-    
+      
+    <string id="menuNewHrvTrackingOptions_title">Hrv Tracking</string>    
+    <string id="menuNewHrvTrackingOptions_on">On (Default)</string>
+    <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuNewHrvTrackingOptions_off">Off</string>
+        
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
-    <string id="menuHrvTrackingOptions_on">On</string>
-    <string id="menuHrvTrackingOptions_off">Off (Default)</string>
+    <string id="menuHrvTrackingOptions_on">On (Default)</string>
+    <string id="menuHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuHrvTrackingOptions_off">Off</string>
     
     <string id="menuConfirmSaveActivityOptions_title">Confirm Save</string>    
     <string id="menuConfirmSaveActivityOptions_ask">Ask (Default)</string>
@@ -70,6 +70,7 @@
     <string id="addEditSessionMenu_vibePattern">Vibe Pattern</string>
 	<string id="addEditSessionMenu_intervalAlerts">Interval Alerts</string>
 	<string id="addEditSessionMenu_activityType">Activity Type</string>
+	<string id="addEditSessionMenu_hrvTracking">HRV Tracking</string>
 	
 	<string id="intervalAlertTransparentColorText">Transparent</string>
 	
@@ -85,9 +86,6 @@
 	<string id="vibePatternMenu_shortAscending">Short ascending</string>
 	
 	<string id="intervalVibePatternMenu_title">Vibe Pattern</string>
-	<string id="intervalVibePatternMenu_shortContinuous">Short continuous</string>
-	<string id="intervalVibePatternMenu_shortPulsating">Short pulsating</string>
-	<string id="intervalVibePatternMenu_shortAscending">Short ascending</string>
 	<string id="intervalVibePatternMenu_shorterContinuous">Shorter continuous</string>
 	<string id="intervalVibePatternMenu_shorterAscending">Shorter ascending</string>
 	<string id="intervalVibePatternMenu_blip">Blip</string>
@@ -99,34 +97,29 @@
 	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
 			
 	<string id="minHrField">Min HR</string>
-	<string id="minHrFieldUnits">bpm</string>
+	<string id="hrUnits">bpm</string>
 		
 	<string id="hrvSdrrFirst5MinFieldLabel">HRV SDRR First 5 min</string>
-	<string id="hrvSdrrFirst5MinFieldUnits">ms</string>
 	
 	<string id="hrvSdrrLast5MinFieldLabel">HRV SDRR Last 5 min</string>
-	<string id="hrvSdrrLast5MinFieldUnits">ms</string>
+	<string id="hrvFieldUnits">ms</string>
 	
-	<string id="hrvRrIntervalsFieldLabel">HRV beat-to-beat interval(ms)</string>
-	<string id="hrvRrIntervalsFieldUnits">ms</string>
-	<string id="hrvRrIntervalsFieldChartTitle">HRV beat-to-beat intervals(ms)</string>
+	<string id="hrvSuccessiveField">HRV Successive Differences(ms)</string>
+	<string id="hrvRmssdFieldLabel">HRV RMSSD</string>
+	<string id="hrvPnn20FieldLabel">HRV pNN20</string>
+	<string id="hrvPnn50FieldLabel">HRV pNN50</string>
 	
-	<string id="maxMinHrWindowLabel">Max-Min HR 10 Sec Window(bmp)</string>
-	<string id="maxMinHrWindowUnits">bmp</string>
-	<string id="maxMinHrWindowTitle">Max-Min HR 10 Sec Window(bpm)</string>
+	<string id="hrvRmssd30SecField">HRV RMSSD 30 Sec Window(ms)</string>
+		
+	<string id="percentUnits">%</string>
+	<string id="stressUnits">%</string>	
 	
-	<string id="stressMedianField">Stress Median</string>
-	<string id="stressMedianFieldUnits">bpm</string>
+	<string id="hrvRrIntervalsField">HRV beat-to-beat interval(ms)</string>
 	
-	<string id="stressNoField">No Stress</string>
-	<string id="stressNoFieldUnits">%</string>
-	
-	<string id="stressLowField">Low Stress</string>
-	<string id="stressLowFieldUnits">%</string>
-	
-	<string id="stressHighField">High Stress</string>
-	<string id="stressHighFieldUnits">%</string>
-	
+	<string id="hrPeaksWindow10Field">HR Peaks 10 Sec Window(bpm)</string>
+	<string id="stressField">Stress</string>
+	<string id="hrFromHeartbeatField">HR from heartbeat(bpm)</string>
+			
 	<string id="activityCalculatingResultsText">Finishing...</string>
 	<string id="faSaveSession"></string>
 	<string id="faRepeatSession"></string>

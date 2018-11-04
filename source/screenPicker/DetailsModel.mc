@@ -108,7 +108,63 @@ class Icon {
 	
 	function draw(dc) {
 		me.mIconDrawable.draw(dc);
+	}	
+}
+
+class HrvIcon extends Icon {
+	function initialize(icon) {
+		icon[:font] = IconFonts.fontAwesomeFreeSolid;
+		icon[:symbol] = Rez.Strings.faHeartbeat;
+		if (icon[:color] == null) {
+			icon[:color] = HeartBeatPurpleColor;
+		}
+
+		Icon.initialize(icon);
 	}
+	
+	const HeartBeatPurpleColor = 0xFF00FF;
+	
+	function setStatusDefault() {
+		me.setColor(HeartBeatPurpleColor);
+	}
+	
+	function setStatusOn() {
+		me.setColor(HeartBeatPurpleColor);
+	}
+	
+	function setStatusOnDetailed() {
+		me.setColor(Gfx.COLOR_BLUE);
+	}
+	
+	function setStatusOff() {
+		me.setColor(Gfx.COLOR_LT_GRAY);
+	}
+	
+	function setStatusWarning() {
+		me.setColor(Gfx.COLOR_YELLOW);
+	}
+} 
+
+class StressIcon extends Icon {
+	function initialize(icon) {
+		icon[:font] = IconFonts.fontMeditateIcons;
+		icon[:symbol] = Rez.Strings.meditateFontStress;
+		
+		Icon.initialize(icon);
+	}
+	
+	function setNoStress() {
+		me.setColor(Gfx.COLOR_DK_GREEN);
+	}
+	
+	function setLowStress() {
+		me.setColor(Gfx.COLOR_ORANGE);
+	}
+	
+	function setHighStress() {
+		me.setColor(Gfx.COLOR_DK_RED);
+	}
+
 }
 
 module IconFonts {

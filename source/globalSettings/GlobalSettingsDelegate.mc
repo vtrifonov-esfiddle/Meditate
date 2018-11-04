@@ -5,8 +5,9 @@ using Toybox.Graphics as Gfx;
 class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	protected var mColors;
 	private var mOnColorSelected;
+	private var mSessionPickerDelegate;
 	
-	function initialize() {
+	function initialize(sessionPickerDelegate) {
 		ScreenPickerDelegate.initialize(0, 1);	
 		
 		me.mGlobalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
@@ -14,6 +15,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 		me.mGlobalSettingsLinesYOffset = App.getApp().getProperty("globalSettingsLinesYOffset");
 		me.mGlobalSettingsTitle = Ui.loadResource(Rez.Strings.menuGlobalSettings_title);
 		me.mGlobalSettingsDetailsModel = new DetailsModel();
+		me.mSessionPickerDelegate = sessionPickerDelegate;
 		updateGlobalSettingsDetails();
 	}
 	
@@ -31,15 +33,12 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
     	Ui.pushView(new Rez.Menus.globalSettingsMenu(), new GlobalSettingsMenuDelegate(method(:onGlobalSettingsChanged)), Ui.SLIDE_LEFT);  
     }
     
-    function onBack() {
-    	var sessionStorage = new SessionStorage();	 
-    	var summaryRollupModel = new SummaryRollupModel();	   	    	
-    	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, summaryRollupModel);
-    	Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
+    function onBack() {    
+    	Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     	return true;
     }
     
-    private function onGlobalSettingsChanged() {
+    function onGlobalSettingsChanged() {
     	me.updateGlobalSettingsDetails();
     	Ui.requestUpdate();
     }
@@ -51,46 +50,25 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         details.titleColor = Gfx.COLOR_WHITE;
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
-        
-        var stressIcon = new Icon({        
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontStress
-        });
-        
-        details.detailLines[1].icon = stressIcon;    
-        var stressTrackingSetting = "";     
-		var stressTracking = GlobalSettings.loadStressTracking();
-		if (stressTracking == StressTracking.On) {
-			stressTrackingSetting = "On";	
-		}
-		if (stressTracking == StressTracking.OnDetailed) {		
-			stressTrackingSetting = "On Detailed";		
-		}  
-		if (stressTracking == StressTracking.Off) {
-			stressTrackingSetting = "Off";	
-		}		
-		details.detailLines[1].value.text = "Stress: " +  stressTrackingSetting; 
-		
-		var heartBeatPurpleColor = 0xFF00FF;
-		var hrvIcon = new Icon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faHeartbeat,
-	        	:color => heartBeatPurpleColor
-	        });	
-	    details.detailLines[2].icon = hrvIcon;
+        		
+	    details.detailLines[1].icon = new HrvIcon({});
 	    var hrvTrackingSetting;
-		if (GlobalSettings.loadHrvTracking() == HrvTracking.On) {			
+	    var hrvTracking = GlobalSettings.loadHrvTracking();
+		if (hrvTracking == HrvTracking.On) {			
 			hrvTrackingSetting = "On";
 		}          
+		else if (hrvTracking == HrvTracking.OnDetailed) {
+			hrvTrackingSetting = "On Detailed";
+		}
 		else {
 			hrvTrackingSetting = "Off";
 		}
-		details.detailLines[2].value.text = "HRV: " +  hrvTrackingSetting; 	
+		details.detailLines[1].value.text = "HRV: " +  hrvTrackingSetting; 	
 		
 		var confirmSaveSetting = "";		
         var saveActivityConfirmation = GlobalSettings.loadConfirmSaveActivity();
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoYes) {
-			details.detailLines[3].icon = new Icon({        
+			details.detailLines[2].icon = new Icon({        
 	        	:font => IconFonts.fontAwesomeFreeSolid,
 	        	:symbol => Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_GREEN
@@ -98,7 +76,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	        confirmSaveSetting = "Auto Yes";
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoNo) {
-        	details.detailLines[3].icon = new Icon({        
+        	details.detailLines[2].icon = new Icon({        
 	        	:font => IconFonts.fontAwesomeFreeSolid,
 	        	:symbol => Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_RED
@@ -106,17 +84,17 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	        confirmSaveSetting = "Auto No";
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.Ask) {
-        	details.detailLines[3].icon = new Icon({        
+        	details.detailLines[2].icon = new Icon({        
 	        	:font => IconFonts.fontAwesomeFreeSolid,
 	        	:symbol => Rez.Strings.faSaveSession
 	        });	
 	        confirmSaveSetting = "Ask";
         }
-        details.detailLines[3].value.text = "Save: " + confirmSaveSetting;
+        details.detailLines[2].value.text = "Save: " + confirmSaveSetting;
         
         var multiSessionSetting = "";
         var multiSession = GlobalSettings.loadMultiSession();
-    	details.detailLines[4].icon = new Icon({        
+    	details.detailLines[3].icon = new Icon({        
 	        	:font => IconFonts.fontAwesomeFreeSolid,
 	        	:symbol => Rez.Strings.faRepeatSession
 	        });	
@@ -126,18 +104,18 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         if (multiSession == MultiSession.No) {
 	        multiSessionSetting = "Single session";
         }
-        details.detailLines[4].value.text = multiSessionSetting;
+        details.detailLines[3].value.text = multiSessionSetting;
         
-        details.detailLines[5].icon = new Icon({        
+        details.detailLines[4].icon = new Icon({        
 	        	:font => IconFonts.fontMeditateIcons,
 	        	:symbol => Rez.Strings.meditateFontYoga
 	        });	
         var newActivityType = GlobalSettings.loadActivityType();
         if (newActivityType == ActivityType.Meditating) {
-        	details.detailLines[5].value.text = "Meditate";
+        	details.detailLines[4].value.text = "Meditate";
         }
         if (newActivityType == ActivityType.Yoga) {
-        	details.detailLines[5].value.text = "Yoga";
+        	details.detailLines[4].value.text = "Yoga";
         }
         details.setAllLinesYOffset(me.mGlobalSettingsLinesYOffset);
         details.setAllIconsXPos(me.mGlobalSettingsIconsXPos);

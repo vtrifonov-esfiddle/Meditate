@@ -9,7 +9,16 @@ class IntervalVibePatternMenuDelegate extends Ui.MenuInputDelegate {
     }
 		
     function onMenuItem(item) {
-    	if (item == :shortContinuous) {
+    	if (item == :mediumContinuous) {
+        	me.mOnVibePatternPicked.invoke(VibePattern.MediumContinuous);
+        }    
+        else if (item == :mediumPulsating) {
+        	me.mOnVibePatternPicked.invoke(VibePattern.MediumPulsating);
+        }
+        else if (item == :mediumAscending) {
+        	me.mOnVibePatternPicked.invoke(VibePattern.MediumAscending);
+        }
+    	else if (item == :shortContinuous) {
         	me.mOnVibePatternPicked.invoke(VibePattern.ShortContinuous);
         }    
         else if (item == :shortPulsating) {

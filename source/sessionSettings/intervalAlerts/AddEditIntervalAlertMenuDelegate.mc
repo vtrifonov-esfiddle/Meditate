@@ -1,5 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
+using Toybox.Timer;
 
 class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 	private var mOnIntervalAlertChanged;
@@ -36,7 +37,7 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
         }
     }
     
-    private function onConfirmedDelete() {
+    function onConfirmedDelete() {
     	Ui.popView(Ui.SLIDE_IMMEDIATE);
     	me.mOnIntervalAlertDeleted.invoke(me.mIntervalAlertIndex);
     }
@@ -46,35 +47,35 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 		notifyChangeTimer.start(method(:onNotifyIntervalAlertChanged), 500, false); 
     }
     
-    private function onNotifyIntervalAlertChanged() {    	
+    function onNotifyIntervalAlertChanged() {    	
     	me.mOnIntervalAlertChanged.invoke(me.mIntervalAlertIndex, me.mIntervalAlert);
     }    
     
-    private function onOneOffDurationPicked(digits) {
+    function onOneOffDurationPicked(digits) {
     	var durationInMins = digits[0] * 60 + digits[1] * 10 + digits[2];
     	var durationInSeconds = durationInMins * 60;
     	me.mIntervalAlert.time = durationInSeconds;
     	me.notifyIntervalAlertChanged();
     }
     
-    private function onRepeatDurationPicked(digits) {
+    function onRepeatDurationPicked(digits) {
     	var durationInSeconds = digits[0] * 600 + digits[1] * 60 + digits[2] * 10 + digits[3];
     	me.mIntervalAlert.time = durationInSeconds;
     	me.notifyIntervalAlertChanged();
     }
     
-    private function onColorPicked(color) {
+    function onColorPicked(color) {
     	me.mIntervalAlert.color = color;
     	me.notifyIntervalAlertChanged();
     }
     
-    private function onVibePatternChanged(vibePattern) {
+    function onVibePatternChanged(vibePattern) {
     	me.mIntervalAlert.vibePattern = vibePattern;
     	me.notifyIntervalAlertChanged();
     	Vibe.vibrate(vibePattern);
     }
     
-    private function onTypeChanged(type) {
+    function onTypeChanged(type) {
     	me.mIntervalAlert.type = type;
     	me.notifyIntervalAlertChanged();
     	

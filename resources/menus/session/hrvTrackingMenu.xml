@@ -1,0 +1,5 @@
+<menu id="hrvTrackingMenu" title="@Strings.menuHrvTrackingOptions_title">
+    <menu-item id="on" label="@Strings.menuHrvTrackingOptions_on" />
+    <menu-item id="onDetailed" label="@Strings.menuHrvTrackingOptions_onDetailed" />
+    <menu-item id="off" label="@Strings.menuHrvTrackingOptions_off" />
+</menu>
