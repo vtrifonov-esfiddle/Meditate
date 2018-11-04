@@ -32,9 +32,7 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
     - HRV
 
 ![Session picker demo](userGuideScreenshots/sessionPickerDemo.gif)
-![Session demo](userGuideScreenshots/sessionDemo.gif)
 ![Session demo detailed](userGuideScreenshots/sessionDetailedDemo.gif)
-![Session in-progress explained](userGuideScreenshots/sessionInProgressExplained.png)
 
 ## Supported Devices
 - Vivoactive 3, Vivoactive 3 Music 
