@@ -144,7 +144,7 @@ class MeditateView extends Ui.View {
 	function onLoadMeditateIcon() {
     	var stats = System.getSystemStats();    	
         var meditateIconX = App.getApp().getProperty("meditateActivityMeditateIconX");
-        var meditateIconY = App.getApp().getProperty("meditateActivityMeditateIconY");
+        var meditateIconY = App.getApp().getProperty("meditateActivityMeditateIconYv2");
         
 		if (stats.freeMemory > MinMeditateIconFreeMemory) {		
 	        me.mMeditateIcon = new Ui.Bitmap({
