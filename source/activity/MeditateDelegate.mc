@@ -4,26 +4,26 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	private var mMeditateModel;
 	private var mMeditateActivity;
 	private var mSummaryModels;
+	private var mSessionPickerDelegate;
+	private var mHeartbeatIntervalsSensor;
 	
-    function initialize(meditateModel, summaryModels) {
+    function initialize(meditateModel, summaryModels, heartbeatIntervalsSensor, sessionPickerDelegate) {
         BehaviorDelegate.initialize();
         me.mMeditateModel = meditateModel;
         me.mSummaryModels = summaryModels;
-        me.mMeditateActivity = new MediateActivity(me.mMeditateModel);
-        me.startActivity();
+        me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
+        me.mMeditateActivity = new MediteActivity(meditateModel, heartbeatIntervalsSensor);
+        me.mMeditateActivity.start();
+        me.mSessionPickerDelegate = sessionPickerDelegate;
     }
-		
-	private function startActivity() {
-		me.mMeditateActivity.start();
-	}
-		
+    				
 	private function stopActivity() {
 		me.mMeditateActivity.stop();				
 		var calculatingResultsView = new CalculatingResultsView(method(:onFinishActivity));
 		Ui.switchToView(calculatingResultsView, me, Ui.SLIDE_IMMEDIATE);	
 	}
     
-    private function onFinishActivity() {  
+    function onFinishActivity() {  
     	showNextView();
     	
     	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();
@@ -52,15 +52,16 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 			showSessionPickerView(summaryModel);
 		}
 		else {
+			me.mHeartbeatIntervalsSensor.stop();
+			me.mHeartbeatIntervalsSensor = null;
+			
 			showSummaryView(summaryModel);
 		}
     }
     
-    private function showSessionPickerView(summaryModel) {
-		var sessionStorage = new SessionStorage();	
-		me.mSummaryModels.addSummary(summaryModel);
-		var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, me.mSummaryModels);
-		Ui.switchToView(sessionPickerDelegate.createScreenPickerView(), sessionPickerDelegate, Ui.SLIDE_RIGHT);
+    private function showSessionPickerView(summaryModel) {		
+		me.mSessionPickerDelegate.addSummary(summaryModel);
+		Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     }
     
     function onBack() {

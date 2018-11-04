@@ -2,8 +2,11 @@ using Toybox.WatchUi as Ui;
 using Toybox.Timer;
 using Toybox.FitContributor;
 using Toybox.Timer;
+using Toybox.Math;
+using Toybox.Sensor;
+using Toybox.UserProfile;
 
-class MediateActivity {
+class MediteActivity {
 	private var mMeditateModel;
 	private var mSession;
 	private var mVibeAlertsExecutor;	
@@ -12,31 +15,15 @@ class MediateActivity {
 	
 	private const SUB_SPORT_YOGA = 43;
 		
-	function initialize(meditateModel) {
-		me.mMeditateModel = meditateModel;
-		if (meditateModel.getActivityType() == ActivityType.Yoga) { 
-			me.mSession = ActivityRecording.createSession(       
-                {
-                 :name => "Yoga",                              
-                 :sport => ActivityRecording.SPORT_TRAINING,      
-                 :subSport => SUB_SPORT_YOGA
-                });    		
-        }
-        else {
-        	me.mSession = ActivityRecording.createSession(       
-                {
-                 :name => "Meditating",                              
-                 :sport => ActivityRecording.SPORT_GENERIC,      
-                 :subSport => ActivityRecording.SUB_SPORT_GENERIC
-                });
-        }      	
-		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );		
-		me.createMinHrDataField();
-		me.mVibeAlertsExecutor = null;
-		me.mHrvMonitor = new HrvMonitor(me.mSession);
-		me.mStressMonitor = new StressMonitor(me.mSession);
+	function initialize(meditateModel, heartbeatIntervalsSensor) {
+		me.mMeditateModel = meditateModel;				
+		me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
 	}
-			
+	
+	static function enableHrSensor() {		
+		Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
+	}
+				
 	private function createMinHrDataField() {
 		me.mMinHrField = me.mSession.createField(
             "min_hr",
@@ -54,15 +41,45 @@ class MediateActivity {
 	private const RefreshActivityInterval = 1000;
 	
 	private var mRefreshActivityTimer;
-		
-	function start() {	
+	private var mHeartbeatIntervalsSensor;
+			
+	function start() {
+		if (me.mMeditateModel.isHrvOn()) {
+			me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onOneSecBeatToBeatIntervals));
+		}
+		if (me.mMeditateModel.getActivityType() == ActivityType.Yoga) { 
+			me.mSession = ActivityRecording.createSession(       
+                {
+                 :name => "Yoga",                              
+                 :sport => ActivityRecording.SPORT_TRAINING,      
+                 :subSport => SUB_SPORT_YOGA
+                });    		
+        }
+        else {
+        	me.mSession = ActivityRecording.createSession(       
+                {
+                 :name => "Meditating",                              
+                 :sport => ActivityRecording.SPORT_GENERIC,      
+                 :subSport => ActivityRecording.SUB_SPORT_GENERIC
+                });
+        }           
+		me.createMinHrDataField();	
+		me.mHrvMonitor = new HrvMonitor(me.mSession, me.mMeditateModel.getHrvTracking());
+		me.mStressMonitor = new StressMonitor(me.mSession, me.mMeditateModel.getHrvTracking());
 		me.mSession.start(); 
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);
 		me.mRefreshActivityTimer = new Timer.Timer();		
 		me.mRefreshActivityTimer.start(method(:refreshActivityStats), RefreshActivityInterval, true);	
-	}
+	}	
+		
+	function onOneSecBeatToBeatIntervals(heartBeatIntervals) {
+		if (me.mMeditateModel.isHrvOn()) {		
+			me.mHrvMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);
+			me.mStressMonitor.addOneSecBeatToBeatIntervals(heartBeatIntervals);	
+		} 
+	}		
 			
-	private function refreshActivityStats() {	
+	function refreshActivityStats() {	
 		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
@@ -73,17 +90,14 @@ class MediateActivity {
 		}
 		if (activityInfo.elapsedTime != null) {
 			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
-		} 
+		}
 		me.mMeditateModel.currentHr = activityInfo.currentHeartRate;
-		if (activityInfo.currentHeartRate != null) {
-	    	if (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate) {
-	    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
-	    	}
-	    }
-    	me.mHrvMonitor.addHrSample(activityInfo.currentHeartRate);	 
-    	me.mStressMonitor.addHrSample(activityInfo.currentHeartRate);
-		me.mVibeAlertsExecutor.firePendingAlerts();
-	    
+		if (activityInfo.currentHeartRate != null && (me.mMeditateModel.minHr == null || me.mMeditateModel.minHr > activityInfo.currentHeartRate)) {
+    		me.mMeditateModel.minHr = activityInfo.currentHeartRate;
+    	}
+		me.mVibeAlertsExecutor.firePendingAlerts();	 
+		me.mMeditateModel.hrvSuccessive = me.mHrvMonitor.calculateHrvSuccessive();
+    	
 	    Ui.requestUpdate();	    
 	}	   	
 	
@@ -91,7 +105,9 @@ class MediateActivity {
 		if (me.mSession.isRecording() == false) {
 			return;
 	    }	
-	    
+	    if (me.mMeditateModel.isHrvOn()) {
+	    	me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(null);
+    	}
 		me.mSession.stop();		
 		me.mRefreshActivityTimer.stop();
 		me.mRefreshActivityTimer = null;
@@ -104,21 +120,19 @@ class MediateActivity {
 			me.mMinHrField.setData(me.mMeditateModel.minHr);
 		}
 		
-		var stressStats = me.mStressMonitor.calculateStressStats();
-		var hrvFirst5Min = me.mHrvMonitor.calculateHrvFirst5MinSdrr();
-		var hrvLast5Min = me.mHrvMonitor.calculateHrvLast5MinSdrr();
-		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stressStats, hrvFirst5Min, hrvLast5Min);
+		var stress = me.mStressMonitor.calculateStress(me.mMeditateModel.minHr);
+
+		var hrvSummary = me.mHrvMonitor.calculateHrvSummary();
+		var summaryModel = new SummaryModel(activityInfo, me.mMeditateModel.minHr, stress, hrvSummary, me.mMeditateModel.getHrvTracking());
 		return summaryModel;
 	}
 			
 	function finish() {		
-		Sensor.setEnabledSensors( [] );
 		me.mSession.save();
 		me.mSession = null;
 	}
 		
 	function discard() {		
-		Sensor.setEnabledSensors( [] );
 		me.mSession.discard();
 		me.mSession = null;
 	}

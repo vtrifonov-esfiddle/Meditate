@@ -33,7 +33,7 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
         }
         else if (item == :globalSettings) {
         	Ui.popView(Ui.SLIDE_IMMEDIATE);
-        	var globalSettingsDelegate = new GlobalSettingsDelegate();
+        	var globalSettingsDelegate = new GlobalSettingsDelegate(me.mSessionPickerDelegate);
         	Ui.switchToView(globalSettingsDelegate.createScreenPickerView(), globalSettingsDelegate, Ui.SLIDE_LEFT);  
         }
     }
@@ -45,13 +45,13 @@ class SessionSettingsMenuDelegate extends Ui.MenuInputDelegate {
     	return addEditSessionMenu;
     }
     
-    private function onConfirmedDeleteSession() {
+    function onConfirmedDeleteSession() {
     	me.mSessionStorage.deleteSelectedSession();        	 	
     	me.mSessionPickerDelegate.setPagesCount(me.mSessionStorage.getSessionsCount());
     	me.mSessionPickerDelegate.select(me.mSessionStorage.getSelectedSessionIndex());      
     }
         
-    private function onChangeSession(changedSessionModel) {
+    function onChangeSession(changedSessionModel) {
     	var existingSession = me.mSessionStorage.loadSelectedSession();
 		existingSession.copyNonNullFieldsFromSession(changedSessionModel);
 		me.mSessionStorage.saveSelectedSession(existingSession);

@@ -1,6 +1,5 @@
 <menu id="globalSettingsMenu" title="@Strings.menuGlobalSettings_title">
-    <menu-item id="stressTracking" label="@Strings.menuGlobalSettings_stressTracking" />
-    <menu-item id="hrvTracking" label="@Strings.menuGlobalSettings_hrvTracking" />
+    <menu-item id="hrvTracking" label="@Strings.menuGlobalSettings_newHrvTracking" />
     <menu-item id="confirmSaveActivity" label="@Strings.menuGlobalSettings_confirmSaveActivity" />
     <menu-item id="multiSession" label="@Strings.menuGlobalSettings_multiSession" />
     <menu-item id="newActivityType" label="@Strings.menuGlobalSettings_newActivityType" />

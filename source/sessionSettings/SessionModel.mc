@@ -24,6 +24,14 @@ module ActivityType {
 	}
 }
 
+module HrvTracking {
+	enum {
+		Off = 0,
+		On = 1,
+		OnDetailed = 2
+	}
+}
+
 class SessionModel {
 	function initialize() {	
 	}
@@ -33,10 +41,18 @@ class SessionModel {
 		me.color = loadedSessionDictionary["color"];
 		me.vibePattern = loadedSessionDictionary["vibePattern"];
 		me.activityType = loadedSessionDictionary["activityType"];		
-		me.ensureActivityTypeExists();	
+		me.ensureActivityTypeExists();
+		me.hrvTracking = loadedSessionDictionary["hrvTracking"];
+		me.ensureHrvTrackingExists();	
 		var serializedAlerts = loadedSessionDictionary["intervalAlerts"];		
 		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.fromDictionary(serializedAlerts);
+	}
+	
+	private function ensureHrvTrackingExists() {
+		if (me.hrvTracking == null) {
+			me.hrvTracking = GlobalSettings.loadHrvTracking();
+		}	
 	}
 	
 	private function ensureActivityTypeExists() {
@@ -53,7 +69,8 @@ class SessionModel {
 			"color" => me.color,
 			"vibePattern" => me.vibePattern,
 			"intervalAlerts" => serializedAlerts,
-			"activityType" => me.activityType
+			"activityType" => me.activityType,
+			"hrvTracking" => me.hrvTracking
 		};
 	}
 		
@@ -62,6 +79,7 @@ class SessionModel {
 		me.color = Gfx.COLOR_BLUE;
 		me.vibePattern = VibePattern.LongContinuous;		
 		me.activityType = GlobalSettings.loadActivityType();
+		me.hrvTracking = GlobalSettings.loadHrvTracking();
 		me.intervalAlerts = new IntervalAlerts();
 		me.intervalAlerts.reset();
 	}
@@ -82,6 +100,9 @@ class SessionModel {
     	if (otherSession.activityType != null) {
     		me.activityType = otherSession.activityType;
     	}
+    	if (otherSession.hrvTracking != null) {
+    		me.hrvTracking = otherSession.hrvTracking;
+    	}
 	}
 		
 	var time;
@@ -89,4 +110,5 @@ class SessionModel {
 	var vibePattern;
 	var intervalAlerts;
 	var activityType;
+	var hrvTracking;
 }

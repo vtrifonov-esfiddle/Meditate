@@ -1,21 +1,23 @@
 using Toybox.System;
 
 class SummaryModel {
-	function initialize(activityInfo, minHr, stressStats, hrvFirst5Min, hrvLast5Min) {
+	function initialize(activityInfo, minHr, stress, hrvSummary, hrvTracking) {
 		me.elapsedTime = activityInfo.elapsedTime / 1000; 
 		me.maxHr = me.initializeHeartRate(activityInfo.maxHeartRate);
 		me.avgHr = me.initializeHeartRate(activityInfo.averageHeartRate);
 		me.minHr = me.initializeHeartRate(minHr);
 		
-		if (stressStats != null) {
-			me.noStress = me.initializeStressScore(stressStats.noStress);
-			me.lowStress = me.initializeStressScore(stressStats.lowStress);
-			me.highStress = me.initializeStressScore(stressStats.highStress);
-
-			me.stressMedian = me.initializeStressMedian(stressStats.median);
+		me.stress = me.initializePercentageValue(stress);
+		
+		if (hrvSummary != null) {
+			me.hrvRmssd = me.initializeHeartRateVariability(hrvSummary.rmssd);
+			me.hrvFirst5Min = me.initializeHeartRateVariability(hrvSummary.first5MinSdrr);
+			me.hrvLast5Min = me.initializeHeartRateVariability(hrvSummary.last5MinSdrr);
+			me.hrvPnn50 = me.initializePercentageValue(hrvSummary.pnn50);
+			me.hrvPnn20 = me.initializePercentageValue(hrvSummary.pnn20);
 		}
-		me.hrvFirst5Min = me.initializeHeartRateVariability(hrvFirst5Min);
-		me.hrvLast5Min = me.initializeHeartRateVariability(hrvLast5Min);
+		
+		me.hrvTracking = hrvTracking;
 	}
 	
 	private function initializeHeartRate(heartRate) {
@@ -26,17 +28,8 @@ class SummaryModel {
 			return heartRate;
 		}
 	}
-	
-	private function initializeStressMedian(median) {
-		if (median == null || median == 0) {
-			return me.InvalidHeartRate;
-		}
-		else {
-			return median.format("%2.1f");
-		}
-	}
-	
-	private function initializeStressScore(stressScore) {
+		
+	private function initializePercentageValue(stressScore) {
 		if (stressScore == null) {
 			return me.InvalidHeartRate;
 		}
@@ -53,7 +46,7 @@ class SummaryModel {
 			return hrv.format("%3.2f");
 		}
 	}
-	
+		
 	private const InvalidHeartRate = "--";
 	
 	var elapsedTime;
@@ -62,12 +55,13 @@ class SummaryModel {
 	var avgHr;
 	var minHr;	
 	
-	var noStress;
-	var lowStress;
-	var highStress;
-	
-	var stressMedian;
-	
+	var stress;
+		
+	var hrvRmssd;
 	var hrvFirst5Min;
 	var hrvLast5Min;
+	var hrvPnn50;
+	var hrvPnn20;
+	
+	var hrvTracking;
 }

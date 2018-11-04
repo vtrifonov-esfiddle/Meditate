@@ -9,13 +9,9 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 	private var mOnGlobalSettingsChanged;
 	
 	function onMenuItem(item) {
-		if (item == :stressTracking) {
-			var stressTrackingDelegate = new MenuOptionsDelegate(method(:onStressTrackingPicked));
-        	Ui.pushView(new Rez.Menus.stressTrackingOptionsMenu(), stressTrackingDelegate, Ui.SLIDE_LEFT);
-		}
-		else if (item ==:hrvTracking) {
+		if (item ==:hrvTracking) {
 			var hrvTrackingDelegate = new MenuOptionsDelegate(method(:onHrvTrackingPicked));
-        	Ui.pushView(new Rez.Menus.hrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
+        	Ui.pushView(new Rez.Menus.newHrvTrackingOptionsMenu(), hrvTrackingDelegate, Ui.SLIDE_LEFT);
 		}
 		else if (item ==:newActivityType) {
 			var newActivityTypeDelegate = new MenuOptionsDelegate(method(:onNewActivityTypePicked));
@@ -31,7 +27,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		}
 	}
 	
-	private function onConfirmSaveActivityPicked(item) {
+	function onConfirmSaveActivityPicked(item) {
 		if (item == :ask) {
 			GlobalSettings.saveConfirmSaveActivity(ConfirmSaveActivity.Ask);
 		}
@@ -44,7 +40,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	
-	private function onMultiSessionPicked(item) {
+	function onMultiSessionPicked(item) {
 		if (item == :yes) {
 			GlobalSettings.saveMultiSession(MultiSession.Yes);
 		}
@@ -54,7 +50,7 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	
-	private function onNewActivityTypePicked(item) {
+	function onNewActivityTypePicked(item) {
 		if (item == :meditating) {
 			GlobalSettings.saveActivityType(ActivityType.Meditating);
 		}
@@ -63,23 +59,13 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		}
 		mOnGlobalSettingsChanged.invoke();
 	}
-	
-	private function onStressTrackingPicked(item) {
-		if (item == :on) {
-			GlobalSettings.saveStressTracking(StressTracking.On);
-		}
-		else if (item == :onDetailed) {
-			GlobalSettings.saveStressTracking(StressTracking.OnDetailed);
-		}
-		else if (item == :off) {
-			GlobalSettings.saveStressTracking(StressTracking.Off);
-		}
-		mOnGlobalSettingsChanged.invoke();
-	}
-	
-	private function onHrvTrackingPicked(item) {
+			
+	function onHrvTrackingPicked(item) {
 		if (item == :on) {
 			GlobalSettings.saveHrvTracking(HrvTracking.On);
+		}
+		else if (item == :onDetailed) {
+			GlobalSettings.saveHrvTracking(HrvTracking.OnDetailed);
 		}
 		else if (item == :off) {
 			GlobalSettings.saveHrvTracking(HrvTracking.Off);

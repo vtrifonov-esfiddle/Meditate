@@ -4,4 +4,5 @@
     <menu-item id="vibePattern" label="@Strings.addEditSessionMenu_vibePattern"></menu-item>
     <menu-item id="intervalAlerts" label="@Strings.addEditSessionMenu_intervalAlerts"></menu-item>
     <menu-item id="activityType" label="@Strings.addEditSessionMenu_activityType"></menu-item>
+    <menu-item id="hrvTracking" label="@Strings.addEditSessionMenu_hrvTracking"></menu-item>
  </menu>

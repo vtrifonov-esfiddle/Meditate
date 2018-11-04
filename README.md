@@ -1,42 +1,47 @@
 # Meditate
 
-A Garmin Connect IQ meditation app that tracks as an activity the heart rate, stress, HRV and provides vibration alerts.
+A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HRV, stress and provides vibration alerts.
 
 ## Features
-- ability to save the session as a Connect IQ activity (optional)
-    - save as **Meditating** or **Yoga**
+
+- ability to save the session as a Connect IQ activity
+    - activity type **Meditating** or **Yoga**
 - ability to configure multiple meditation/yoga sessions
     - e.g. a 20 min session with 1 min recurring alerts, triggering a different alert on the 10th minute
     - each session supports interval vibration alerts
     - interval alerts can trigger from a few seconds up to few hours
+- [HRV](https://en.wikipedia.org/wiki/Heart_rate_variability) (Heart Rate Variability)
+    - RMSSD - Root Mean Square of Successive Differences (beat-to-beat intervals)
+    - pNN20 - % of successive beat-to-beat intervals that differ by more than 20 ms
+    - pNN50 - % of successive beat-to-beat intervals that differ by more than 50 ms
+    - beat-to-beat interval - reading coming directly from the watch sensor
+    - HRV Successive Differences - difference between current and previous beat-to-beat intervals
+    - SDRR - [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of beat-to-beat intervals
+      - calculated from the first and last 5 min of the session
+    - HRV RMSSD 30 Sec Window - RMSSD calculated for consecutive 30 second intervals    
+    - HR from heartbeat - beat-to-beat interval converted to HR
 - stress tracking
-    - analyses in overlapping 10 Sec Windows Max-Min HR (reported as Max-Min HR 10 Sec Window chart on Connect IQ)
-    - tracks the median of the Max-Min HR windows as a summary field (Stress Median field on Connect IQ)
-    - calculates stress into 3 cathegories - **No**, **Low** and **High**
-        - No - % of Max-Min Windows that are <= **stress median**
-        - Low - % of Max-Min Windows that are > **stress median** and < 3x **stress median**
-        - High - % of Max-Min Windows that are >= 3x **stress median**
+    - Stress - summary of the the average stress during the session 
+    - HR Peaks 10 Sec Window
+      - internal metric for calculating stress 
+      - tracks in overlapping 10 Sec Windows Max HR for each window 
+      - HR calculated from beat-to-beat interval.
 - summary stats at the end of the session
     - tracks the overall min, avg and max HR
     - Stress
     - HRV
-- [HRV](https://en.wikipedia.org/wiki/Heart_rate_variability) (Heart Rate Variability) - optional
-    - this approximates current HR to beat-to-beat intervals to calculate [Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the first and last 5 min of the session
-    - the Vivoactive 3 HR sensor is too unreliable to produce usable intervals data for algorithms that analyse successive beat-to-beat intervals like RMSSD (it flattens the readings)
 
-![Session picker yoga explained](userGuideScreenshots/sessionPicker.png)
-![Session in-progress explained](userGuideScreenshots/sessionInProgressExplained.png)
-![Summary stress](userGuideScreenshots/summaryStress.png)
-![Summary HRV](userGuideScreenshots/summaryHrvSdrr.png)
+![Session picker demo](userGuideScreenshots/sessionPickerDemo.gif)
+![Session demo detailed](userGuideScreenshots/sessionDetailedDemo.gif)
 
 ## Supported Devices
 - Vivoactive 3, Vivoactive 3 Music 
   - [app store link](https://apps.garmin.com/en-US/apps/bed7ed4d-07ea-4600-b477-b8911670b64a)
   - from [vivoactive3-publish](https://github.com/vtrifonov-esfiddle/Meditate/tree/vivoactive3-publish) branch
-- Round Watches that support Connect IQ >= 2.4 
+- Round Watches that support Connect IQ >= 3.0 
   - [app store link](https://apps.garmin.com/en-US/apps/1cc98099-c08b-4fc7-91e6-0f3615a3ab2c)
   - from [round-watches-publish](https://github.com/vtrifonov-esfiddle/Meditate/tree/round-watches-publish) branch
-  - Fenix 5 Family, Forerunner 645 Family, Forerunner 935, D2 Charlie, D2 Delta Family
+  - Fenix 5/5+ Family, Forerunner 645 Family, Forerunner 935, D2 Charlie, D2 Delta Family
 
 ## [User Guide](UserGuide.md)
 
