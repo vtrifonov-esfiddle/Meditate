@@ -1,0 +1,12 @@
+<resources>
+    <bitmap id="launcherIcon" filename="images/launcher_icon.png" />
+    <bitmap id="meditateIcon" x="60" y="50" filename="images/meditate.png" />
+    <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
+    <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
+    <fonts>
+   	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
+   	    <font id="fontAwesomeFreeSolid" filename="fonts/fontAwesome/fontAwesomeFreeSolid.fnt" />
+   	    <font id="fontAwesomeFreeRegular" filename="fonts/fontAwesome/fontAwesomeFreeRegular.fnt" />
+   	    <font id="fontMeditateIcons" filename="fonts/meditateIcons/meditateIcons.fnt" />
+    </fonts>
+</resources>
