@@ -218,22 +218,22 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.titleColor = session.color;
         
         var timeIcon = new Icon({        
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHourglassHalf
+        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+        	:symbol => StatusIconFonts.Rez.Strings.faHourglassHalf
         });
         details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
         var vibePatternIcon = new Icon({        
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontVibratePattern
+        	:font => StatusIconFonts.fontMeditateIcons,
+        	:symbol => StatusIconFonts.Rez.Strings.meditateFontVibratePattern
         });
         details.detailLines[2].icon = vibePatternIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
         var alertsLineIcon = new Icon({        
-        	:font => IconFonts.fontAwesomeFreeRegular,
-        	:symbol => Rez.Strings.faClock
+        	:font => StatusIconFonts.fontAwesomeFreeRegular,
+        	:symbol => StatusIconFonts.Rez.Strings.faClock
         });
         details.detailLines[3].icon = alertsLineIcon;
         var alertsToHighlightsLine = new AlertsToHighlightsLine(session);

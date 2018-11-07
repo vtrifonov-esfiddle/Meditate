@@ -113,8 +113,8 @@ class Icon {
 
 class HrvIcon extends Icon {
 	function initialize(icon) {
-		icon[:font] = IconFonts.fontAwesomeFreeSolid;
-		icon[:symbol] = Rez.Strings.faHeartbeat;
+		icon[:font] = StatusIconFonts.fontAwesomeFreeSolid;
+		icon[:symbol] = StatusIconFonts.Rez.Strings.faHeartbeat;
 		if (icon[:color] == null) {
 			icon[:color] = HeartBeatPurpleColor;
 		}
@@ -147,8 +147,8 @@ class HrvIcon extends Icon {
 
 class StressIcon extends Icon {
 	function initialize(icon) {
-		icon[:font] = IconFonts.fontMeditateIcons;
-		icon[:symbol] = Rez.Strings.meditateFontStress;
+		icon[:font] = StatusIconFonts.fontMeditateIcons;
+		icon[:symbol] = StatusIconFonts.Rez.Strings.meditateFontStress;
 		
 		Icon.initialize(icon);
 	}
@@ -167,11 +167,7 @@ class StressIcon extends Icon {
 
 }
 
-module IconFonts {
-	var fontMeditateIcons = Ui.loadResource(Rez.Fonts.fontMeditateIcons);
-	var fontAwesomeFreeSolid = Ui.loadResource(Rez.Fonts.fontAwesomeFreeSolid);
-	var fontAwesomeFreeRegular = Ui.loadResource(Rez.Fonts.fontAwesomeFreeRegular);
-}
+
 
 class DetailsLine extends DetailsLineBase {
 	function initialize(lineNumber) {

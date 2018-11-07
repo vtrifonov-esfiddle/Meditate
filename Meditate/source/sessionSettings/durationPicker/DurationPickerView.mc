@@ -51,8 +51,8 @@ class DurationPickerView extends Ui.View {
 			var xPos = 	dc.getWidth() / 2;	
 			var yPos = dc.getHeight() / 2 + dc.getFontHeight(Gfx.FONT_XTINY);
      		var tickIcon = new Icon({
-     			:font => IconFonts.fontAwesomeFreeSolid,
-     			:symbol => Rez.Strings.faCheck,
+     			:font => StatusIconFonts.fontAwesomeFreeSolid,
+     			:symbol => StatusIconFonts.Rez.Strings.faCheck,
      			:xPos => xPos,
      			:yPos => yPos,
      			:color => Gfx.COLOR_GREEN

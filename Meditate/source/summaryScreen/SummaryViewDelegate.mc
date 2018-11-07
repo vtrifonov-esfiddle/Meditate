@@ -111,8 +111,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
 
         
         var timeIcon = new Icon({       
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faHourglassEnd,
+        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+        	:symbol => StatusIconFonts.Rez.Strings.faHourglassEnd,
         	:color=>Graphics.COLOR_BLACK  	
     	});
         details.detailLines[1].icon = timeIcon;
@@ -120,8 +120,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[1].value.text = TimeFormatter.format(me.mSummaryModel.elapsedTime);
         
         var hrMinIcon = new Icon({       
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontHrMin,
+        	:font => StatusIconFonts.fontMeditateIcons,
+        	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrMin,
         	:color=>Graphics.COLOR_RED   	
     	});     
         details.detailLines[2].icon = hrMinIcon;
@@ -129,8 +129,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[2].value.text = me.formatHr(me.mSummaryModel.minHr);
                 
         var hrAvgIcon = new Icon({       
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontHrAvg,
+        	:font => StatusIconFonts.fontMeditateIcons,
+        	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrAvg,
         	:color=>Graphics.COLOR_RED   	
     	});            
         details.detailLines[3].icon = hrAvgIcon;
@@ -138,8 +138,8 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[3].value.text = me.formatHr(me.mSummaryModel.avgHr);
         
         var hrMaxIcon = new Icon({       
-        	:font => IconFonts.fontMeditateIcons,
-        	:symbol => Rez.Strings.meditateFontHrMax,
+        	:font => StatusIconFonts.fontMeditateIcons,
+        	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrMax,
         	:color=>Graphics.COLOR_RED   	
     	});              
         details.detailLines[4].icon = hrMaxIcon;    

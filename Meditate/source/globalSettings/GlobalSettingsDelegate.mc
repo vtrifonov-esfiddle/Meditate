@@ -70,24 +70,24 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         var saveActivityConfirmation = GlobalSettings.loadConfirmSaveActivity();
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoYes) {
 			details.detailLines[2].icon = new Icon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faSaveSession,
+	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_GREEN
 	        });	
 	        confirmSaveSetting = "Auto Yes";
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoNo) {
         	details.detailLines[2].icon = new Icon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faSaveSession,
+	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_RED
 	        });	
 	        confirmSaveSetting = "Auto No";
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.Ask) {
         	details.detailLines[2].icon = new Icon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faSaveSession
+	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession
 	        });	
 	        confirmSaveSetting = "Ask";
         }
@@ -96,8 +96,8 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         var multiSessionSetting = "";
         var multiSession = GlobalSettings.loadMultiSession();
     	details.detailLines[3].icon = new Icon({        
-	        	:font => IconFonts.fontAwesomeFreeSolid,
-	        	:symbol => Rez.Strings.faRepeatSession
+	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+	        	:symbol => StatusIconFonts.Rez.Strings.faRepeatSession
 	        });	
         if (multiSession == MultiSession.Yes) {
 	        multiSessionSetting = "Multi-session";
@@ -108,8 +108,8 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         details.detailLines[3].value.text = multiSessionSetting;
         
         details.detailLines[4].icon = new Icon({        
-	        	:font => IconFonts.fontMeditateIcons,
-	        	:symbol => Rez.Strings.meditateFontYoga
+	        	:font => StatusIconFonts.fontMeditateIcons,
+	        	:symbol => StatusIconFonts.Rez.Strings.meditateFontYoga
 	        });	
         var newActivityType = GlobalSettings.loadActivityType();
         if (newActivityType == ActivityType.Meditating) {

@@ -1,0 +1,23 @@
+<strings>    
+	<string id="faSaveSession"></string>
+	<string id="faRepeatSession"></string>
+	<string id="faHourglassHalf"></string>
+	<string id="faHourglassEnd"></string>
+	<string id="faClock"></string>
+	<string id="faHeartbeat"></string>
+	<string id="faPieChart"></string>
+	<string id="faHeart"></string>
+	<string id="faCheckCircle"></string>
+	<string id="faCheck"></string>
+	<string id="faSortUp"></string>
+	<string id="faSortDown"></string>
+	
+	<string id="meditateFontStress">1</string>
+	<string id="meditateFontIntervalAlertsTime">3</string>
+	<string id="meditateFontVibratePattern">2</string>
+	<string id="meditateFontSessionTime">4</string>
+	<string id="meditateFontHrMin">5</string>
+	<string id="meditateFontHrAvg">6</string>
+	<string id="meditateFontHrMax">7</string>
+	<string id="meditateFontYoga">8</string>
+</strings>

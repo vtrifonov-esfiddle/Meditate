@@ -5,14 +5,14 @@ class ScreenPickerView extends Ui.View {
 	function initialize(upDownArrowsColor) {
 		View.initialize();
 		me.mUpArrow = new Icon({        
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faSortUp,
+        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+        	:symbol => StatusIconFonts.Rez.Strings.faSortUp,
         	:color=>upDownArrowsColor,
         	:justify => Gfx.TEXT_JUSTIFY_CENTER
         });
 		me.mDownArrow = new Icon({        
-        	:font => IconFonts.fontAwesomeFreeSolid,
-        	:symbol => Rez.Strings.faSortDown,
+        	:font => StatusIconFonts.fontAwesomeFreeSolid,
+        	:symbol => StatusIconFonts.Rez.Strings.faSortDown,
         	:color=>upDownArrowsColor,
         	:justify => Gfx.TEXT_JUSTIFY_CENTER
         });
@@ -32,7 +32,7 @@ class ScreenPickerView extends Ui.View {
 		me.mUpArrow.setYPos(0);
 		me.mUpArrow.draw(dc);
 		me.mDownArrow.setXPos(centerXPos);
-		me.mDownArrow.setYPos(dc.getHeight() - dc.getFontHeight(IconFonts.fontAwesomeFreeSolid));
+		me.mDownArrow.setYPos(dc.getHeight() - dc.getFontHeight(StatusIconFonts.fontAwesomeFreeSolid));
 		me.mDownArrow.draw(dc);          
     }
 }

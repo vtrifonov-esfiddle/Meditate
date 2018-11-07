@@ -4,3 +4,6 @@
 HrvAlgorithms = [C:\Users\vlado\garmin-connect-workspace\Meditate\HrvAlgorithms\monkey.jungle]
 base.barrelPath = $(base.barrelPath);$(HrvAlgorithms)
 
+StatusIconFonts = [C:\Users\vlado\garmin-connect-workspace\Meditate\StatusIconFonts\monkey.jungle]
+base.barrelPath = $(base.barrelPath);$(StatusIconFonts)
+
