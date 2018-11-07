@@ -3,7 +3,7 @@ using Toybox.Application as App;
 using Toybox.Graphics as Gfx;
 using HrvAlgorithms.HrvTracking;
 
-class GlobalSettingsDelegate extends ScreenPickerDelegate {
+class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	protected var mColors;
 	private var mOnColorSelected;
 	private var mSessionPickerDelegate;
@@ -52,7 +52,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
         		
-	    details.detailLines[1].icon = new HrvIcon({});
+	    details.detailLines[1].icon = new ScreenPicker.HrvIcon({});
 	    var hrvTrackingSetting;
 	    var hrvTracking = GlobalSettings.loadHrvTracking();
 		if (hrvTracking == HrvTracking.On) {			
@@ -69,7 +69,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 		var confirmSaveSetting = "";		
         var saveActivityConfirmation = GlobalSettings.loadConfirmSaveActivity();
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoYes) {
-			details.detailLines[2].icon = new Icon({        
+			details.detailLines[2].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
 	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_GREEN
@@ -77,7 +77,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	        confirmSaveSetting = "Auto Yes";
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoNo) {
-        	details.detailLines[2].icon = new Icon({        
+        	details.detailLines[2].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
 	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_RED
@@ -85,7 +85,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
 	        confirmSaveSetting = "Auto No";
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.Ask) {
-        	details.detailLines[2].icon = new Icon({        
+        	details.detailLines[2].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
 	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession
 	        });	
@@ -95,7 +95,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         
         var multiSessionSetting = "";
         var multiSession = GlobalSettings.loadMultiSession();
-    	details.detailLines[3].icon = new Icon({        
+    	details.detailLines[3].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
 	        	:symbol => StatusIconFonts.Rez.Strings.faRepeatSession
 	        });	
@@ -107,7 +107,7 @@ class GlobalSettingsDelegate extends ScreenPickerDelegate {
         }
         details.detailLines[3].value.text = multiSessionSetting;
         
-        details.detailLines[4].icon = new Icon({        
+        details.detailLines[4].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontMeditateIcons,
 	        	:symbol => StatusIconFonts.Rez.Strings.meditateFontYoga
 	        });	

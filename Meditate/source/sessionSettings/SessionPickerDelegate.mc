@@ -3,7 +3,7 @@ using Toybox.Graphics as Gfx;
 using Toybox.Application as App;
 using HrvAlgorithms.HrvTracking;
 
-class SessionPickerDelegate extends ScreenPickerDelegate {
+class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mSessionStorage;
 	private var mSelectedSessionDetails;
 	private var mSummaryRollupModel;
@@ -185,7 +185,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 	}
 	
 	private function setInitialHrvStatus(hrvStatusLine, session) {
-		hrvStatusLine.icon = new HrvIcon({});
+		hrvStatusLine.icon = new ScreenPicker.HrvIcon({});
 		if (session.hrvTracking == HrvTracking.Off) {
 			hrvStatusLine.icon.setStatusOff();
 			hrvStatusLine.value.text = "HRV off";		
@@ -217,21 +217,21 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
         details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;
         
-        var timeIcon = new Icon({        
+        var timeIcon = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontAwesomeFreeSolid,
         	:symbol => StatusIconFonts.Rez.Strings.faHourglassHalf
         });
         details.detailLines[1].icon = timeIcon;
         details.detailLines[1].value.text = TimeFormatter.format(session.time);
         
-        var vibePatternIcon = new Icon({        
+        var vibePatternIcon = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontMeditateIcons,
         	:symbol => StatusIconFonts.Rez.Strings.meditateFontVibratePattern
         });
         details.detailLines[2].icon = vibePatternIcon;
         details.detailLines[2].value.text = getVibePatternText(session.vibePattern);
         
-        var alertsLineIcon = new Icon({        
+        var alertsLineIcon = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontAwesomeFreeRegular,
         	:symbol => StatusIconFonts.Rez.Strings.faClock
         });
@@ -259,7 +259,7 @@ class SessionPickerDelegate extends ScreenPickerDelegate {
 		private var mSession;
 		
 		function getAlertsLine(alertsLineXPos, alertsLineYOffset) {
-	        var alertsLine = new PercentageHighlightLine(me.mSession.intervalAlerts.count());
+	        var alertsLine = new ScreenPicker.PercentageHighlightLine(me.mSession.intervalAlerts.count());
 
 	        alertsLine.backgroundColor = me.mSession.color;	        
 	        alertsLine.startPosX = alertsLineXPos;

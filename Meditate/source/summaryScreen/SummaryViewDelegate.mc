@@ -4,7 +4,7 @@ using Toybox.Application as App;
 using Toybox.Lang;
 using HrvAlgorithms.HrvTracking;
 
-class SummaryViewDelegate extends ScreenPickerDelegate {
+class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mSummaryModel;
 	private var mDiscardDanglingActivity;
 
@@ -110,7 +110,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.titleColor = Gfx.COLOR_BLACK;
 
         
-        var timeIcon = new Icon({       
+        var timeIcon = new ScreenPicker.Icon({       
         	:font => StatusIconFonts.fontAwesomeFreeSolid,
         	:symbol => StatusIconFonts.Rez.Strings.faHourglassEnd,
         	:color=>Graphics.COLOR_BLACK  	
@@ -119,7 +119,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[1].value.color = Gfx.COLOR_BLACK;
         details.detailLines[1].value.text = TimeFormatter.format(me.mSummaryModel.elapsedTime);
         
-        var hrMinIcon = new Icon({       
+        var hrMinIcon = new ScreenPicker.Icon({       
         	:font => StatusIconFonts.fontMeditateIcons,
         	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrMin,
         	:color=>Graphics.COLOR_RED   	
@@ -128,7 +128,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;
         details.detailLines[2].value.text = me.formatHr(me.mSummaryModel.minHr);
                 
-        var hrAvgIcon = new Icon({       
+        var hrAvgIcon = new ScreenPicker.Icon({       
         	:font => StatusIconFonts.fontMeditateIcons,
         	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrAvg,
         	:color=>Graphics.COLOR_RED   	
@@ -137,7 +137,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;  
         details.detailLines[3].value.text = me.formatHr(me.mSummaryModel.avgHr);
         
-        var hrMaxIcon = new Icon({       
+        var hrMaxIcon = new ScreenPicker.Icon({       
         	:font => StatusIconFonts.fontMeditateIcons,
         	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrMax,
         	:color=>Graphics.COLOR_RED   	
@@ -162,7 +162,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
  
-    	var lowStressIcon = new StressIcon({});
+    	var lowStressIcon = new ScreenPicker.StressIcon({});
     	lowStressIcon.setLowStress();	      
         details.detailLines[3].icon = lowStressIcon;  
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;            
@@ -184,7 +184,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n HRV RMSSD";
         details.titleColor = Gfx.COLOR_BLACK;
                              
-        details.detailLines[3].icon = new HrvIcon({});              
+        details.detailLines[3].icon = new ScreenPicker.HrvIcon({});              
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvRmssd]);
                  
@@ -204,7 +204,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n HRV pNNx";
         details.titleColor = Gfx.COLOR_BLACK;
                             
-        var hrvIcon = new HrvIcon({});            
+        var hrvIcon = new ScreenPicker.HrvIcon({});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
         details.detailLines[2].value.text = "pNN20";
@@ -234,7 +234,7 @@ class SummaryViewDelegate extends ScreenPickerDelegate {
         details.title = "Summary\n HRV SDRR";
         details.titleColor = Gfx.COLOR_BLACK;
                         
-        var hrvIcon = new HrvIcon({});            
+        var hrvIcon = new ScreenPicker.HrvIcon({});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
         details.detailLines[2].value.text = "First 5 min";

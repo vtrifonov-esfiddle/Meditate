@@ -51,7 +51,7 @@ class MeditateView extends Ui.View {
       	
   	    var hrStatusX = App.getApp().getProperty("meditateActivityIconsXPos");
         var hrStatusY = getYPosOffsetFromCenter(dc, 0) + YIconOffset; 
-  	    me.mHrStatus = new Icon({        
+  	    me.mHrStatus = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontAwesomeFreeSolid,
         	:symbol => StatusIconFonts.Rez.Strings.faHeart,
         	:color=>Graphics.COLOR_RED,
@@ -64,7 +64,7 @@ class MeditateView extends Ui.View {
     	var hrvIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
     	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 1);
         var hrvIconYPos = hrvTextYPos + YIconOffset;
-        me.mHrvIcon =  new HrvIcon({
+        me.mHrvIcon =  new ScreenPicker.HrvIcon({
         	:xPos => hrvIconXPos,
         	:yPos => hrvIconYPos
         });
