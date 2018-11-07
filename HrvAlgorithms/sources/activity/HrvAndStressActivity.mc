@@ -1,14 +1,12 @@
 module HrvAlgorithms {
-	class HrvActivity extends HrActivity {
-		function initialize(fitSession, hrvTracking, isStressTracked, heartbeatIntervalsSensor) {
+	class HrvAndStressActivity extends HrActivity {
+		function initialize(fitSession, hrvTracking, heartbeatIntervalsSensor) {
 			me.mHrvTracking = hrvTracking;
-			me.mIsStressTracked = isStressTracked;
 			me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
 			HrActivity.initialize(fitSession);
 		}
 		
 		private var mHrvTracking;
-		private var mIsStressTracked;
 		private var mHeartbeatIntervalsSensor;
 		
 		private var mHrvMonitor;
@@ -21,8 +19,13 @@ module HrvAlgorithms {
 		protected function onBeforeStart(fitSession) {
 			if (me.isHrvOn()) {					
 				me.mHeartbeatIntervalsSensor.setOneSecBeatToBeatIntervalsSensorListener(method(:onOneSecBeatToBeatIntervals));
-				me.mHrvMonitor = new HrvMonitor(fitSession, me.mHrvTracking);
 				me.mStressMonitor = new StressMonitor(fitSession, me.mHrvTracking);
+				if (me.mHrvTracking == HrvTracking.OnDetailed) {
+					me.mHrvMonitor = new HrvMonitorDetailed(fitSession, true);					
+				}
+				else {
+					me.mHrvMonitor = new HrvMonitorDefault(fitSession);
+				}
 			}
 		}
 		

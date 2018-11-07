@@ -91,10 +91,10 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 			details = me.createDetailsPageHr();
 		}
 		if (me.mPagesCount > 1) {
-			return new ScreenPickerDetailsView(details);
+			return new ScreenPicker.ScreenPickerDetailsView(details);
 		}
 		else {
-			return new ScreenPickerDetailsSinglePageView(details);
+			return new ScreenPicker.ScreenPickerDetailsSinglePageView(details);
 		}
 	}	
 				
@@ -103,7 +103,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}
 	
 	private function createDetailsPageHr() {
-		var details = new DetailsModel();
+		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary HR";
@@ -156,7 +156,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}	
 		
 	private function createDetailsPageStress() {
-		var details = new DetailsModel();
+		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n Stress";
@@ -178,7 +178,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}
 	
 	private function createDetailsPageHrvRmssd() {
-		var details = new DetailsModel();
+		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV RMSSD";
@@ -198,7 +198,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}	
 	
 	private function createDetailsPageHrvPnnx() {
-		var details = new DetailsModel();
+		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV pNNx";
@@ -228,7 +228,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}	
 	
 	private function createDetailsPageHrvSdrr() {
-		var details = new DetailsModel();
+		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n HRV SDRR";

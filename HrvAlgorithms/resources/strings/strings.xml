@@ -1,10 +1,11 @@
 <strings>			
 	<string id="minHrField">Min HR</string>
 	<string id="hrUnits">bpm</string>
-		
-	<string id="hrvSdrrFirst5MinFieldLabel">HRV SDRR First 5 min</string>
 	
+	<string id="hrvSdrrFieldLabel">HRV SDRR</string>	
+	<string id="hrvSdrrFirst5MinFieldLabel">HRV SDRR First 5 min</string>	
 	<string id="hrvSdrrLast5MinFieldLabel">HRV SDRR Last 5 min</string>
+	
 	<string id="hrvFieldUnits">ms</string>
 	
 	<string id="hrvSuccessiveField">HRV Successive Differences(ms)</string>

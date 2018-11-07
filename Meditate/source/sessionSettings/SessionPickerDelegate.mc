@@ -12,7 +12,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 		ScreenPickerDelegate.initialize(sessionStorage.getSelectedSessionIndex(), sessionStorage.getSessionsCount());	
 		me.mSessionStorage = sessionStorage;
 		me.mSummaryRollupModel = new SummaryRollupModel();
-		me.mSelectedSessionDetails = new DetailsModel();	
+		me.mSelectedSessionDetails = new ScreenPicker.DetailsModel();	
 		me.mLastHrvTracking = null;		
 		me.initializeHeartbeatIntervalsSensor(heartbeatIntervalsSensor);
         
@@ -248,7 +248,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 	
 	function createScreenPickerView() {
 		me.setSelectedSessionDetails();
-		return new ScreenPickerDetailsView(me.mSelectedSessionDetails);
+		return new ScreenPicker.ScreenPickerDetailsView(me.mSelectedSessionDetails);
 	}
 	
 	class AlertsToHighlightsLine {

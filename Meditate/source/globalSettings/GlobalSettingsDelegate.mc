@@ -15,7 +15,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 		me.mGlobalSettingsValueXPos = App.getApp().getProperty("globalSettingsValueXPos");
 		me.mGlobalSettingsLinesYOffset = App.getApp().getProperty("globalSettingsLinesYOffset");
 		me.mGlobalSettingsTitle = Ui.loadResource(Rez.Strings.menuGlobalSettings_title);
-		me.mGlobalSettingsDetailsModel = new DetailsModel();
+		me.mGlobalSettingsDetailsModel = new ScreenPicker.DetailsModel();
 		me.mSessionPickerDelegate = sessionPickerDelegate;
 		updateGlobalSettingsDetails();
 	}
@@ -27,7 +27,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mGlobalSettingsLinesYOffset;
 	
 	function createScreenPickerView() {
-		return new ScreenPickerDetailsSinglePageView(me.mGlobalSettingsDetailsModel);
+		return new ScreenPicker.ScreenPickerDetailsSinglePageView(me.mGlobalSettingsDetailsModel);
 	}
 	
 	function onMenu() {        
