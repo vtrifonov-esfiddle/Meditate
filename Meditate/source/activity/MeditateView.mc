@@ -105,12 +105,6 @@ class MeditateView extends Ui.View {
         if (me.mMeditateModel.isHrvOn() == true) {
 	        renderHrvStatusLayout(dc);
         }
-        delayedShowMeditateIcon();
-    }
-    
-    private function delayedShowMeditateIcon() {
-    	var mMeditateIconLoaderTimer = new Timer.Timer();
-        mMeditateIconLoaderTimer.start(method(:onLoadMeditateIcon), 500, false);
     }
     
     // Called when this View is brought to the foreground. Restore
@@ -136,22 +130,6 @@ class MeditateView extends Ui.View {
 		}
 		else {
 			return hrv.format("%3.0f");
-		}
-	}
-	
-    private static const MinMeditateIconFreeMemory = 21000;
-    
-	function onLoadMeditateIcon() {
-    	var stats = System.getSystemStats();    	
-        var meditateIconX = App.getApp().getProperty("meditateActivityMeditateIconX");
-        var meditateIconY = App.getApp().getProperty("meditateActivityMeditateIconYv2");
-        
-		if (stats.freeMemory > MinMeditateIconFreeMemory) {		
-	        me.mMeditateIcon = new Ui.Bitmap({
-	        	:rezId => Rez.Drawables.meditateIcon,
-	        	:locX => meditateIconX,
-	        	:locY => meditateIconY
-        	});
 		}
 	}
 	

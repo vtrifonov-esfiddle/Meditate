@@ -6,7 +6,5 @@
 	<property id="sessionDetailsIconsXPos" type="number">30</property>
 	<property id="sessionDetailsValueXPos" type="number">55</property>
 	<property id="meditateActivityIconsXPos" type="number">70</property>
-	<property id="meditateActivityMeditateIconX" type="number">50</property>
-	<property id="meditateActivityMeditateIconYv2" type="number">30</property>
 	<property id="summaryLinesYOffset" type="number">-7</property>	
 </properties>
