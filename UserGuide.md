@@ -62,7 +62,7 @@ The meditation session finishes once you press the stop button.
 
 1.3. Once you stop the session you have the option to save it.
 
-1.3.1 You can configure to auto save or auto discard the session via [Global Settings](#4-global-settings) -> [Confirm Save](#43-confirm-save)
+1.3.1 You can configure to auto save or auto discard the session via [Global Settings](#4-global-settings) -> [Confirm Save](#42-confirm-save)
 
 ![Confirm save session](userGuideScreenshots/confirmSaveSession.png)
 
@@ -70,7 +70,7 @@ The meditation session finishes once you press the stop button.
 
 ![Session Summary Detailed Demo](userGuideScreenshots/sessionSummaryDetailedDemo.gif)
 
-1.5 If you are in multi-session mode (determined by [Global Settings](#4-global-settings) -> [Multi-Session](#44-multi-session)) then you go back to the session picker screen. From there you can start another session. Once you finish your session you can go back from the session picker screen to enter the Sessions Summary view.
+1.5 If you are in multi-session mode (determined by [Global Settings](#4-global-settings) -> [Multi-Session](#43-multi-session)) then you go back to the session picker screen. From there you can start another session. Once you finish your session you can go back from the session picker screen to enter the Sessions Summary view.
 
 ![Summary Rollup](userGuideScreenshots/summaryRollup.png)
 

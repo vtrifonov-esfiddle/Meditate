@@ -1,0 +1,100 @@
+<strings>
+    <string id="AppName">Meditate-beta</string>
+
+    <string id="ConfirmSaveHeader">Save Session?</string>
+    
+    <string id="confirmDeleteSessionHeader">Delete Session?</string>
+    
+    <string id="confirmDeleteAllIntervalAlertsHeader">Delete All Alerts?</string>
+    
+    <string id="SummaryTitle">Summary</string>
+                  
+    <string id="menuSessionSettings_Title">Session Settings</string>
+    <string id="menuSessionSettings_addNew">Add New</string>
+    <string id="menuSessionSettings_edit">Edit</string>
+    <string id="menuSessionSettings_delete">Delete</string>
+    <string id="menuSessionSettings_globalSettings">Global Settings</string>
+    
+    <string id="menuGlobalSettings_title">Global Settings</string>    
+    <string id="menuGlobalSettings_newHrvTracking">HRV Tracking</string>
+    <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
+    <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
+    <string id="menuGlobalSettings_multiSession">Multi-Session</string>
+    
+    <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
+    <string id="menuNewActivityTypeOptions_meditating">Meditate</string>
+    <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
+    
+    <string id="activityTypeMenu_title">Activity Type</string>    
+    <string id="activityTypeMenu_meditating">Meditate</string>
+    <string id="activityTypeMenu_yoga">Yoga</string>
+      
+    <string id="menuNewHrvTrackingOptions_title">Hrv Tracking</string>    
+    <string id="menuNewHrvTrackingOptions_on">On (Default)</string>
+    <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuNewHrvTrackingOptions_off">Off</string>
+        
+    <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
+    <string id="menuHrvTrackingOptions_on">On (Default)</string>
+    <string id="menuHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuHrvTrackingOptions_off">Off</string>
+    
+    <string id="menuConfirmSaveActivityOptions_title">Confirm Save</string>    
+    <string id="menuConfirmSaveActivityOptions_ask">Ask (Default)</string>
+    <string id="menuConfirmSaveActivityOptions_autoYes">Auto Yes</string>
+    <string id="menuConfirmSaveActivityOptions_autoNo">Auto No</string>
+    
+    <string id="menuMultiSessionOptions_title">Multi-Session</string>    
+    <string id="menuMultiSessionOptions_yes">Yes</string>
+    <string id="menuMultiSessionOptions_no">No (Default)</string>
+    
+    <string id="menuIntervalAlertSettings_Title">Interval Alerts</string>
+    <string id="menuIntervalAlertSettings_addNew">Add New</string>
+    <string id="menuIntervalAlertSettings_edit">Edit</string>
+    <string id="menuIntervalAlertSettings_deleteAll">Delete All</string>
+    
+    <string id="summaryRollupMenu_title">Sessions Summary</string>
+    <string id="summaryRollupMenuOption_exit">Exit</string>
+    
+    <string id="confirmDeleteIntervalAlertHeader">Delete Alert?</string>
+    
+    <string id="addEditIntervalAlertMenu_title">Alert</string>    
+    <string id="addEditIntervalAlertMenu_time">Time</string>
+    <string id="addEditIntervalAlertMenu_color">Color</string>
+    <string id="addEditIntervalAlertMenu_vibePattern">Vibe</string>
+    <string id="addEditIntervalAlertMenu_delete">Delete</string>
+    
+    <string id="addEditSessionMenu_title">Session</string>
+    <string id="addEditSessionMenu_time">Time</string>
+    <string id="addEditSessionMenu_color">Color</string>
+    <string id="addEditSessionMenu_vibePattern">Vibe Pattern</string>
+	<string id="addEditSessionMenu_intervalAlerts">Interval Alerts</string>
+	<string id="addEditSessionMenu_activityType">Activity Type</string>
+	<string id="addEditSessionMenu_hrvTracking">HRV Tracking</string>
+	
+	<string id="intervalAlertTransparentColorText">Transparent</string>
+	
+	<string id="vibePatternMenu_title">Vibe Pattern</string>
+	<string id="vibePatternMenu_longPulsating">Long pulsating</string>
+	<string id="vibePatternMenu_longContinuous">Long continuous</string>
+	<string id="vibePatternMenu_longAscending">Long ascending</string>
+	<string id="vibePatternMenu_mediumPulsating">Medium pulsating</string>
+	<string id="vibePatternMenu_mediumContinuous">Medium continuous</string>
+	<string id="vibePatternMenu_mediumAscending">Medium ascending</string>
+	<string id="vibePatternMenu_shortPulsating">Short pulsating</string>
+	<string id="vibePatternMenu_shortContinuous">Short continuous</string>
+	<string id="vibePatternMenu_shortAscending">Short ascending</string>
+	
+	<string id="intervalVibePatternMenu_title">Vibe Pattern</string>
+	<string id="intervalVibePatternMenu_shorterContinuous">Shorter continuous</string>
+	<string id="intervalVibePatternMenu_shorterAscending">Shorter ascending</string>
+	<string id="intervalVibePatternMenu_blip">Blip</string>
+		
+	<string id="intervalTypeMenu_title">Interval Alert Type</string>
+	<string id="intervalTypeMenu_oneOff">One-off H:MM</string>
+	<string id="intervalTypeMenu_repeat">Every MM:SS</string>		
+	
+	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
+			
+	<string id="activityCalculatingResultsText">Finishing...</string>
+</strings>
