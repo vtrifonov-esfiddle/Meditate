@@ -1,0 +1,8 @@
+<resources>
+    <bitmap id="launcherIcon" filename="images/launcher_icon.png" />
+    <drawable-list id="whiteBackground" background="Gfx.COLOR_WHITE" />
+    <drawable-list id="blackBackground" background="Gfx.COLOR_BLACK" />
+    <fonts>
+   	    <font id="fontDigits" filename="fonts/roboto/roboto46Bold.fnt" />
+    </fonts>
+</resources>

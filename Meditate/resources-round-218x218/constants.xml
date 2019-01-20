@@ -1,0 +1,10 @@
+<properties>
+	<property id="progressBarWidth" type="number">150</property>
+	<property id="globalSettingsIconsXPos" type="number">56</property>
+	<property id="globalSettingsValueXPos" type="number">76</property>
+	<property id="globalSettingsLinesYOffset" type="number">-10</property>
+	<property id="sessionDetailsIconsXPos" type="number">30</property>
+	<property id="sessionDetailsValueXPos" type="number">55</property>
+	<property id="meditateActivityIconsXPos" type="number">70</property>
+	<property id="summaryLinesYOffset" type="number">-7</property>	
+</properties>

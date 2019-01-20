@@ -1,0 +1,7 @@
+<resources>    
+    <fonts>
+   	    <font id="fontAwesomeFreeSolid" filename="fonts/fontAwesome/fontAwesomeFreeSolid.fnt" />
+   	    <font id="fontAwesomeFreeRegular" filename="fonts/fontAwesome/fontAwesomeFreeRegular.fnt" />
+   	    <font id="fontMeditateIcons" filename="fonts/meditateIcons/meditateIcons.fnt" />
+    </fonts>
+</resources>
