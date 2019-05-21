@@ -19,8 +19,7 @@ class MeditateApp extends App.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {      
-    	var sessionStorage = new SessionStorage();	    	
-    	HrvAlgorithms.HrActivity.enableHrSensor(); 	        	
+    	var sessionStorage = new SessionStorage();	          	
     	var heartbeatIntervalsSensor = new HrvAlgorithms.HeartbeatIntervalsSensor();	
     	var sessionPickerDelegate = new SessionPickerDelegate(sessionStorage, heartbeatIntervalsSensor);
     	

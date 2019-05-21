@@ -81,14 +81,16 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 			return true;
     	}
     	else {    	
-			me.mHeartbeatIntervalsSensor.stop();  
+			me.mHeartbeatIntervalsSensor.stop();  			
+    		me.mHeartbeatIntervalsSensor.disableHrSensor(); 
     		return false;
     	}
     }
     
     function onSummaryRollupMenuOption(option) {
     	if (option == RollupExitOption) {   
-    		me.mHeartbeatIntervalsSensor.stop(); 		
+    		me.mHeartbeatIntervalsSensor.stop();
+    		me.mHeartbeatIntervalsSensor.disableHrSensor(); 		
     		System.exit();
     	}
     	else {
