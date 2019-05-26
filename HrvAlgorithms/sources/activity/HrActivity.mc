@@ -17,11 +17,7 @@ module HrvAlgorithms {
 		private var mFitSession;		
 		private const RefreshActivityInterval = 1000;	
 		private var mRefreshActivityTimer;
-		
-		static function enableHrSensor() {		
-			Sensor.setEnabledSensors( [Sensor.SENSOR_HEARTRATE] );
-		}
-				
+			
 		protected function onBeforeStart(fitSession) {
 		}
 		
