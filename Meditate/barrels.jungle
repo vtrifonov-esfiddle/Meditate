@@ -1,12 +1,12 @@
 # Do not hand edit this file. To make changes right click
 # on the project and select "Configure Monkey Barrels".
 
-StatusIconFonts = [C:\Users\vlado\garmin-connect-workspace\Meditate\StatusIconFonts\monkey.jungle]
+StatusIconFonts = [..\StatusIconFonts\monkey.jungle]
 base.barrelPath = $(base.barrelPath);$(StatusIconFonts)
 
-HrvAlgorithms = [C:\Users\vlado\garmin-connect-workspace\Meditate\HrvAlgorithms\monkey.jungle]
+HrvAlgorithms = [..\HrvAlgorithms\monkey.jungle]
 base.barrelPath = $(base.barrelPath);$(HrvAlgorithms)
 
-ScreenPicker = [C:\Users\vlado\garmin-connect-workspace\Meditate\ScreenPicker\monkey.jungle]
+ScreenPicker = [..\ScreenPicker\monkey.jungle]
 base.barrelPath = $(base.barrelPath);$(ScreenPicker)
 
