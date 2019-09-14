@@ -12,7 +12,7 @@
             <iq:language>eng</iq:language>
         </iq:languages>
         <iq:barrels>
-            <iq:depends name="HrvAlgorithms" version="1.0.0"/>
+            <iq:depends name="HrvAlgorithms" version="1.1.0"/>
             <iq:depends name="ScreenPicker" version="1.0.0"/>
             <iq:depends name="StatusIconFonts" version="1.0.0"/>
         </iq:barrels>
