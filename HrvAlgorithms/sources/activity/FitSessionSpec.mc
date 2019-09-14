@@ -12,11 +12,11 @@ module HrvAlgorithms {
                 };
 		}
 		
-		static function createGeneric(sessionName) {
+		static function createCardio(sessionName) {
 			return {
                  :name => sessionName,                              
-                 :sport => ActivityRecording.SPORT_GENERIC,      
-                 :subSport => ActivityRecording.SUB_SPORT_GENERIC
+                 :sport => ActivityRecording.SPORT_FITNESS_EQUIPMENT,      
+                 :subSport => ActivityRecording.SUB_SPORT_CARDIO_TRAINING
                 };
 		}
 	}
