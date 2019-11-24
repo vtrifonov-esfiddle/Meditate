@@ -18,27 +18,31 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     				
 	private function stopActivity() {
 		me.mMeditateActivity.stop();				
-		var calculatingResultsView = new CalculatingResultsView(method(:onFinishActivity));
+		var calculatingResultsView = new DelayedFinishingView(method(:onFinishActivity));
 		Ui.switchToView(calculatingResultsView, me, Ui.SLIDE_IMMEDIATE);	
 	}
-    
+	    
     function onFinishActivity() {  
-    	showNextView();
-    	
+		showNextView();
+		    	
     	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();
     	if (confirmSaveActivity == ConfirmSaveActivity.AutoYes) { 
-    		me.mMeditateActivity.finish();    		
+			//Made sure reading/writing session settings for the next session in multi-session mode happens before saving the FIT file.
+			//If both happen at the same time FIT file gets corrupted
+			var saveActivityView = new DelayedFinishingView(me.method(:onAutoSaveActivity));
+			Ui.pushView(saveActivityView, me, Ui.SLIDE_IMMEDIATE);    		
         }
         else if (confirmSaveActivity == ConfirmSaveActivity.AutoNo) {
-        	me.mMeditateActivity.discard(); 
+        	me.mMeditateActivity.discard(); 			
         }   
         else { 	
-	    	var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
+			var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
 	    	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
 	        Ui.pushView(confirmSaveDialog, new YesNoDelegate(me.mMeditateActivity.method(:finish), me.mMeditateActivity.method(:discard)), Ui.SLIDE_IMMEDIATE);
         }
     }   
-       
+    
+    //this reads/writes session settings and needs to happen before saving session to avoid FIT file corruption          
     private function showSummaryView(summaryModel) { 
     	var summaryViewDelegate = new SummaryViewDelegate(summaryModel, me.mMeditateActivity.method(:discardDanglingActivity));
     	Ui.switchToView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT);  
@@ -57,6 +61,11 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 			showSummaryView(summaryModel);
 		}
     }
+
+	function onAutoSaveActivity() {
+		me.mMeditateActivity.method(:finish);
+		Ui.popView(Ui.SLIDE_IMMEDIATE);
+	}
     
     private function showSessionPickerView(summaryModel) {		
 		me.mSessionPickerDelegate.addSummary(summaryModel);

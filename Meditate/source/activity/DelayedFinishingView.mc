@@ -1,9 +1,9 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Timer;
 
-class CalculatingResultsView extends Ui.View {
+class DelayedFinishingView extends Ui.View {
 	private var mOnShow;
-	
+
 	function initialize(onShow) {
 		View.initialize();
 		me.mOnShow = onShow;
@@ -14,7 +14,7 @@ class CalculatingResultsView extends Ui.View {
 	}
 	
 	function onLayout(dc) {    
-        setLayout(Rez.Layouts.calculatingResults(dc));
+        setLayout(Rez.Layouts.delayedFinishing(dc));
     }     
 	
 	function onShow() {	
