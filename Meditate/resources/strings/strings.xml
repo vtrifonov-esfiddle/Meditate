@@ -96,5 +96,5 @@
 	
 	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
 			
-	<string id="activityCalculatingResultsText">Finishing...</string>
+	<string id="activityDelayedFinishingText">Finishing...</string>
 </strings>
