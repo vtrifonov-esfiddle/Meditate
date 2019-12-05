@@ -6,6 +6,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	private var mSummaryModels;
 	private var mSessionPickerDelegate;
 	private var mHeartbeatIntervalsSensor;
+	private var mSummaryModel;
 	
     function initialize(meditateModel, summaryModels, heartbeatIntervalsSensor, sessionPickerDelegate) {
         BehaviorDelegate.initialize();
@@ -14,6 +15,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
         me.mHeartbeatIntervalsSensor = heartbeatIntervalsSensor;
         me.mMeditateActivity = new MediteActivity(meditateModel, heartbeatIntervalsSensor);
         me.mSessionPickerDelegate = sessionPickerDelegate;
+        me.mSummaryModel = null;
     }
     				
 	private function stopActivity() {
@@ -23,22 +25,24 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	}
 	    
     function onFinishActivity() {  
-		showNextView();
+    	me.mSummaryModel = me.mMeditateActivity.calculateSummaryFields();
 		    	
     	var confirmSaveActivity = GlobalSettings.loadConfirmSaveActivity();
     	if (confirmSaveActivity == ConfirmSaveActivity.AutoYes) { 
 			//Made sure reading/writing session settings for the next session in multi-session mode happens before saving the FIT file.
-			//If both happen at the same time FIT file gets corrupted
-			var saveActivityView = new DelayedFinishingView(me.method(:onAutoSaveActivity));
-			Ui.pushView(saveActivityView, me, Ui.SLIDE_IMMEDIATE);    		
+			//If both happen at the same time FIT file gets corrupted			
+			me.mMeditateActivity.finish();
+			var saveActivityView = new DelayedFinishingView(me.method(:onShowNextView));
+			Ui.switchToView(saveActivityView, me, Ui.SLIDE_IMMEDIATE);    		
         }
         else if (confirmSaveActivity == ConfirmSaveActivity.AutoNo) {
-        	me.mMeditateActivity.discard(); 			
+        	me.mMeditateActivity.discard(); 
+        	var nextView = new DelayedFinishingView(method(:onShowNextView));
+			Ui.switchToView(nextView, me, Ui.SLIDE_IMMEDIATE);	
         }   
         else { 	
-			var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
-	    	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
-	        Ui.pushView(confirmSaveDialog, new YesNoDelegate(me.mMeditateActivity.method(:finish), me.mMeditateActivity.method(:discard)), Ui.SLIDE_IMMEDIATE);
+        	var nextView = new DelayedFinishingView(method(:onShowNextViewConfirmDialog));
+			Ui.switchToView(nextView, me, Ui.SLIDE_IMMEDIATE);
         }
     }   
     
@@ -48,24 +52,26 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     	Ui.switchToView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT);  
     }
     
-    private function showNextView() {    
-    	var summaryModel = me.mMeditateActivity.calculateSummaryFields();
+    function onShowNextViewConfirmDialog() {      
+    	onShowNextView();
+     	
+    	var confirmSaveHeader = Ui.loadResource(Rez.Strings.ConfirmSaveHeader);
+    	var confirmSaveDialog = new Ui.Confirmation(confirmSaveHeader);
+        Ui.pushView(confirmSaveDialog, new YesNoDelegate(me.mMeditateActivity.method(:finish), me.mMeditateActivity.method(:discard)), Ui.SLIDE_IMMEDIATE);
+    }
+    
+    function onShowNextView() {    
     	var continueAfterFinishingSession = GlobalSettings.loadMultiSession();
 		if (continueAfterFinishingSession == MultiSession.Yes) {
-			showSessionPickerView(summaryModel);
+			showSessionPickerView(me.mSummaryModel);
 		}
 		else {
 			me.mHeartbeatIntervalsSensor.stop();
 			me.mHeartbeatIntervalsSensor = null;
 			
-			showSummaryView(summaryModel);
+			showSummaryView(me.mSummaryModel);
 		}
     }
-
-	function onAutoSaveActivity() {
-		me.mMeditateActivity.method(:finish);
-		Ui.popView(Ui.SLIDE_IMMEDIATE);
-	}
     
     private function showSessionPickerView(summaryModel) {		
 		me.mSessionPickerDelegate.addSummary(summaryModel);
