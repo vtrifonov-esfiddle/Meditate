@@ -27,7 +27,7 @@ module ScreenPicker {
 	        	dc.setColor(me.mDetailsModel.color, Gfx.COLOR_TRANSPARENT); 
 				var line = me.mDetailsModel.detailLines[lineNumber];	
 				if (line.icon != null) {
-					me.displayFontIcon(dc, line.icon, line.getYPos());
+					me.displayFontIcon(dc, line.icon, line.getIconYPos());
 				}
 				if (line.value instanceof TextValue) {
 					me.displayText(dc, line.value, line.getYPos());  

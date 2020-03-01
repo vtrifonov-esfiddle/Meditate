@@ -6,6 +6,7 @@
 	<property id="sessionDetailsIconsXPos" type="number">30</property>
 	<property id="sessionDetailsValueXPos" type="number">54</property>
 	<property id="sessionDetailsAlertsLineYOffset" type="number">6</property>
+	<property id="sessionDetailsYOffset" type="number">0</property>
 	<property id="summaryHrIconsXPos" type="number">60</property>
 	<property id="summaryHrValueXPos" type="number">80</property>
 	<property id="summaryStressIconsXPos" type="number">50</property>
@@ -14,4 +15,10 @@
 	<property id="summaryHrvValueXPos" type="number">70</property>
 	<property id="summaryLinesYOffset" type="number">0</property>
 	<property id="meditateActivityIconsXPos" type="number">80</property>
+	<property id="meditateActivityIconsYOffset" type="number">5</property>
+	<property id="meditateActivityXHrvTextOffset" type="number">20</property>
+	<property id="detailsModelLineHeight" type="number">32</property>
+	<property id="detailsModelIconHeight" type="number">32</property>
+	<property id="hmmTimePickerOutputXOffset" type="number">85</property>
+	<property id="mmssTimePickerOutputXOffset" type="number">75</property>
 </properties>
