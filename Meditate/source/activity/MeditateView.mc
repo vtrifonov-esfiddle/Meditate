@@ -16,7 +16,7 @@ class MeditateView extends Ui.View {
         me.mIntervalAlertsRenderer = null;
         me.mElapsedTime = null; 
         me.mHrStatusText = null;
-        me.mMeditateIcon = null;     
+        me.mMeditateIcon = null;           
     }
     
     private var mElapsedTime;
@@ -50,7 +50,8 @@ class MeditateView extends Ui.View {
       	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosText, xPosText, Gfx.TEXT_JUSTIFY_CENTER); 
       	
   	    var hrStatusX = App.getApp().getProperty("meditateActivityIconsXPos");
-        var hrStatusY = getYPosOffsetFromCenter(dc, 0) + YIconOffset; 
+		var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");  
+        var hrStatusY = getYPosOffsetFromCenter(dc, 0) + iconsYOffset; 
   	    me.mHrStatus = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontAwesomeFreeSolid,
         	:symbol => StatusIconFonts.Rez.Strings.faHeart,
@@ -63,22 +64,22 @@ class MeditateView extends Ui.View {
     private function renderHrvStatusLayout(dc) {
     	var hrvIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
     	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 1);
-        var hrvIconYPos = hrvTextYPos + YIconOffset;
+        var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");
+        var hrvIconYPos = hrvTextYPos + iconsYOffset;
         me.mHrvIcon =  new ScreenPicker.HrvIcon({
         	:xPos => hrvIconXPos,
         	:yPos => hrvIconYPos
         });
-        var hrvTextXPos = hrvIconXPos + XHrvTextOffset;
+        
+        var xHrvTextOffset = App.getApp().getProperty("meditateActivityXHrvTextOffset");
+        var hrvTextXPos = hrvIconXPos + xHrvTextOffset;
         me.mHrvText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvTextXPos, hrvTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
     }
     
     private function getYPosOffsetFromCenter(dc, lineOffset) {
     	return dc.getHeight() / 2 + lineOffset * dc.getFontHeight(TextFont);
     }
-    
-    private const XHrvTextOffset = 20;
-    private const YIconOffset = 5;
-    
+        
     function renderLayoutElapsedTime(dc) { 	
     	var xPosCenter = dc.getWidth() / 2;
     	var yPosCenter = getYPosOffsetFromCenter(dc, -1);

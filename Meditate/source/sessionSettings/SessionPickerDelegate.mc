@@ -21,6 +21,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 		me.sessionDetailsValueXPos = App.getApp().getProperty("sessionDetailsValueXPos");
 		me.globalSettingsIconsXPos = App.getApp().getProperty("globalSettingsIconsXPos");
 		me.sessionDetailsAlertsLineYOffset = App.getApp().getProperty("sessionDetailsAlertsLineYOffset");
+		me.sessionDetailsYOffset = App.getApp().getProperty("sessionDetailsYOffset");
 		
 		me.setSelectedSessionDetails();
 	}
@@ -59,6 +60,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var sessionDetailsValueXPos;
 	private var globalSettingsIconsXPos;
 	private var sessionDetailsAlertsLineYOffset;
+	private var sessionDetailsYOffset;
 		
     function onMenu() {
 		return me.showSessionSettingsMenu();
@@ -246,6 +248,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
         
         details.setAllIconsXPos(me.sessionDetailsIconsXPos);
         details.setAllValuesXPos(me.sessionDetailsValueXPos);
+		details.setAllLinesYOffset(me.sessionDetailsYOffset);
 	}		
 	
 	function createScreenPickerView() {
