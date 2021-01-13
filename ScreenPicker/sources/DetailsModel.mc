@@ -1,5 +1,6 @@
 using Toybox.Graphics as Gfx;
 using Toybox.WatchUi as Ui;
+using Toybox.Application as App;
 
 module ScreenPicker {
 	class PercentageHighlightLine {
@@ -127,6 +128,8 @@ module ScreenPicker {
 		function initialize(lineNumber) {	
 			me.mLineNumber = lineNumber;
 			me.yLineOffset = 0;
+			me.lineHeight = App.getApp().getProperty("detailsModelLineHeight");
+			me.iconHeight = App.getApp().getProperty("detailsModelIconHeight");
 		}
 	
 		var yLineOffset;
@@ -134,10 +137,15 @@ module ScreenPicker {
 		private var mLineNumber;
 			
 		function getYPos() {
-			return InitialPosY + me.mLineNumber * LineOffsetY + me.yLineOffset;
+			return InitialPosY + me.mLineNumber * me.lineHeight + me.yLineOffset;
 		}
 		
-		private const LineOffsetY = 32;
+		function getIconYPos() {
+			return InitialPosY + me.mLineNumber * me.iconHeight + me.yLineOffset;
+		}
+				
+		private var lineHeight;
+		private var iconHeight;
 		private const InitialPosY = 30;
 	}
 	
@@ -166,7 +174,7 @@ module ScreenPicker {
 				}
 			}
 		}
-		
+				
 		function setAllValuesXPos(xPos) {
 			for (var i = 1; i <= LinesCount; i++) {
 				if (me.detailLines[i] instanceof DetailsLine && me.detailLines[i].value instanceof TextValue) {
@@ -174,7 +182,7 @@ module ScreenPicker {
 				}
 			}
 		}
-		
+				
 		function setAllLinesYOffset(yOffset) {
 			for (var i = 1; i <= LinesCount; i++) {
 				if (me.detailLines[i]) {

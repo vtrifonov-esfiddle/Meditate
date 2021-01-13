@@ -1,0 +1,4 @@
+<properties>
+	<property id="detailsModelLineHeight" type="number">32</property>
+	<property id="detailsModelIconHeight" type="number">32</property>
+</properties>

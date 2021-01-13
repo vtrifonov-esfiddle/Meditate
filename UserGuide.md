@@ -66,7 +66,7 @@ The meditation session finishes once you press the stop button.
 
 ![Confirm save session](userGuideScreenshots/confirmSaveSession.png)
 
-1.4. If you are in single session mode (the default) at the end you see the Summary Screen (for Multi-Session mode see the next section **1.5**). Swipe up/down (Vivoactive 3) or press page up/down buttons to see the summary stats of HR, Stress and HRV. Go back from this view to exit the app.
+1.4. If you are in single session mode (the default) at the end you see the Summary Screen (for Multi-Session mode see the next section **1.5**). Swipe up/down (Vivoactive 3/4/Venu) or press page up/down buttons to see the summary stats of HR, Stress and HRV. Go back from this view to exit the app.
 
 ![Session Summary Detailed Demo](userGuideScreenshots/sessionSummaryDetailedDemo.gif)
 
@@ -78,13 +78,15 @@ The meditation session finishes once you press the stop button.
 
 ### 2. Configuring a session
 
-2.1 From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu.
+2.1 From the session picker screen hold the menu button until you see the Session settings menu.
+  - for Vivoactive 3 hold on the screen 
+  - for Vivoactive 4/Venu hold the back button
 
 ![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings menu](userGuideScreenshots/sessionSettingsMenu.png)
 
 2.2 In Add New/Edit you can configure:
 - Time - total duration of the session in H:MM
-- Color - the color of the session used in graphical controls; select by using page up/down behaviour on the watch (Vivoactive 3 - swipe up/down)
+- Color - the color of the session used in graphical controls; select by using page up/down behaviour on the watch (Vivoactive 3/4/Venu - swipe up/down)
 - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
 - Interval Alerts - ability to configure multiple intermediate alerts
     - once you are on a specific interval alert you see in the menu title the Alert ID (e.g. Alert 1) relative to the current session interval alerts
@@ -121,7 +123,7 @@ The meditation session finishes once you press the stop button.
 
 ### 3. Picking a session
 
-From the session picker screen press page up/down buttons (for Vivoactive 3 - swipe up/down).
+From the session picker screen press page up/down buttons (for Vivoactive 3/4/Venu - swipe up/down).
 On this screen you can see the applicable settings for the selected session
 - activity type - in the title
   - Meditate
@@ -147,11 +149,9 @@ On this screen you can see the applicable settings for the selected session
 
 ### 4. Global Settings
 
-From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen) until you see the Session settings menu. Select the Global Settings Menu. You see a view with the states of the global settings.
+From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen/Vivoactive 4 and Venu - hold the back button) until you see the Session settings menu. Select the Global Settings Menu. You see a view with the states of the global settings.
 
 ![Global settings](userGuideScreenshots/globalSettings.png)
-
-To change the settings hold the menu button (for Vivoactive 3 hold on the screen) until you see the Global Settings menu. There you can select the setting you want to change.
 
 #### 4.1 HRV Tracking
 

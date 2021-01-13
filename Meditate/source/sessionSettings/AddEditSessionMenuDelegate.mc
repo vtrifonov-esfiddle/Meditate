@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using HrvAlgorithms.HrvTracking;
+using Toybox.Application as App;
 
 class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
     private var mOnChangeSession;
@@ -14,7 +15,8 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
 	
 	private function createHmmTimeLayoutBuilder() {
 		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_TINY);
-		digitsLayout.setOutputXOffset(85);
+		var outputXOffset = App.getApp().getProperty("hmmTimePickerOutputXOffset");
+		digitsLayout.setOutputXOffset(outputXOffset);
 		digitsLayout.addInitialHint("Pick H:MM");
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
 		digitsLayout.addSeparator("h");
