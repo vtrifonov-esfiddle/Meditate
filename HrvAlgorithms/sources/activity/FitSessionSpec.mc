@@ -13,7 +13,7 @@ module HrvAlgorithms {
                 };
 		}
 		
-		static function createCardio(sessionName) {
+		static function createBreathworks(sessionName) {
 			return {
                  :name => sessionName,                              
                  :sport => ActivityRecording.SPORT_TRAINING,      
