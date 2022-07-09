@@ -4,6 +4,7 @@
     <iq:barrel id="63a2b8b89927448da9d22f3b8b23a0d6" minSdkVersion="3.0.0" module="ScreenPicker" version="1.0.0">
         <iq:products>
             <iq:product id="d2air"/>
+            <iq:product id="epix2"/>
             <iq:product id="fenix5"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fenix5s"/>

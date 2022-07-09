@@ -4,6 +4,7 @@
     <iq:barrel id="7a73f9b8804a4d64881f6be386721fdf" minSdkVersion="3.0.0" module="StatusIconFonts" version="1.0.0">
         <iq:products>
             <iq:product id="d2air"/>
+            <iq:product id="epix2"/>
             <iq:product id="fenix5"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fenix5s"/>

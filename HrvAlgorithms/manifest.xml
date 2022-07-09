@@ -4,6 +4,7 @@
     <iq:barrel id="b05b0323f1bd44508698457aa8fa12d2" minSdkVersion="3.0.0" module="HrvAlgorithms" version="1.1.0">
         <iq:products>
             <iq:product id="d2air"/>
+            <iq:product id="epix2"/>
             <iq:product id="fenix5"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fenix5s"/>
