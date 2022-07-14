@@ -1,0 +1,22 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "monkeyc",
+            "request": "launch",
+            "name": "Run App",
+            "stopAtLaunch": false,
+            "device": "${command:GetTargetDevice}"
+        },
+        {
+            "type": "monkeyc",
+            "request": "launch",
+            "name": "Run Tests",
+            "runTests": true,
+            "device": "${command:GetTargetDevice}"
+        }
+    ]
+}
