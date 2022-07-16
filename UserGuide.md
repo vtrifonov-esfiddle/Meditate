@@ -149,7 +149,7 @@ On this screen you can see the applicable settings for the selected session
 
 ### 4. Global Settings
 
-From the session picker screen hold the menu button (for Vivoactive 3 hold on the screen/Vivoactive 4 and Venu - hold the back button) until you see the Session settings menu. Select the Global Settings Menu. You see a view with the states of the global settings.
+From the session picker screen hold the menu button (for Vivoactive 3/ Venu 2 hold on the screen/Vivoactive 4 and Venu - hold the back button) until you see the Session settings menu. Select the Global Settings Menu. You see a view with the states of the global settings.
 
 ![Global settings](userGuideScreenshots/globalSettings.png)
 

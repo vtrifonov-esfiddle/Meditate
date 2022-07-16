@@ -31,9 +31,18 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}
 	
 	function onMenu() {        
-    	Ui.pushView(new Rez.Menus.globalSettingsMenu(), new GlobalSettingsMenuDelegate(method(:onGlobalSettingsChanged)), Ui.SLIDE_LEFT);  
+    	return me.showGlobalSettingsMenu();
     }
     
+	function onHold(param) {
+		return me.showGlobalSettingsMenu();
+	}
+
+	function showGlobalSettingsMenu()
+	{
+		Ui.pushView(new Rez.Menus.globalSettingsMenu(), new GlobalSettingsMenuDelegate(method(:onGlobalSettingsChanged)), Ui.SLIDE_LEFT);  
+	}
+
     function onBack() {    
     	Ui.switchToView(me.mSessionPickerDelegate.createScreenPickerView(), me.mSessionPickerDelegate, Ui.SLIDE_RIGHT);
     	return true;
