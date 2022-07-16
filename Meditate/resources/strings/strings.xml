@@ -9,7 +9,7 @@
     
     <string id="SummaryTitle">Summary</string>
                   
-    <string id="menuSessionSettings_Title">Session Settings</string>
+    <string id="menuSessionSettings_Title">Settings</string>
     <string id="menuSessionSettings_addNew">Add New</string>
     <string id="menuSessionSettings_edit">Edit</string>
     <string id="menuSessionSettings_delete">Delete</string>

@@ -123,7 +123,7 @@ class MeditateView extends Ui.View {
 		}
 	}
 		
-	private const InvalidHeartRate = "--";
+	private const InvalidHeartRate = "  --";
 	
 	private function formatHrv(hrv) {
 		if (hrv == null) {

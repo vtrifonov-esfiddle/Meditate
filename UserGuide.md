@@ -79,7 +79,7 @@ The meditation session finishes once you press the stop button.
 ### 2. Configuring a session
 
 2.1 From the session picker screen hold the menu button until you see the Session settings menu.
-  - for Vivoactive 3 hold on the screen 
+  - for Vivoactive 3 / Venu 2 series hold on the screen 
   - for Vivoactive 4/Venu hold the back button
 
 ![Session Picker](userGuideScreenshots/sessionPicker.png) ![Session settings menu](userGuideScreenshots/sessionSettingsMenu.png)

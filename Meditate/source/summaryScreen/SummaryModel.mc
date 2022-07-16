@@ -48,7 +48,7 @@ class SummaryModel {
 		}
 	}
 		
-	private const InvalidHeartRate = "--";
+	private const InvalidHeartRate = "   --";
 	
 	var elapsedTime;
 	

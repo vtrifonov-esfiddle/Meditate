@@ -3,10 +3,17 @@
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
     <iq:barrel id="7a73f9b8804a4d64881f6be386721fdf" minSdkVersion="3.0.0" module="StatusIconFonts" version="1.0.0">
         <iq:products>
+            <iq:product id="approachs62"/>
             <iq:product id="d2air"/>
+            <iq:product id="d2airx10"/>
+            <iq:product id="d2delta"/>
+            <iq:product id="d2deltapx"/>
+            <iq:product id="d2deltas"/>
+            <iq:product id="d2mach1"/>
             <iq:product id="descentmk1"/>
             <iq:product id="descentmk2"/>
             <iq:product id="descentmk2s"/>
+            <iq:product id="enduro"/>
             <iq:product id="epix2"/>
             <iq:product id="fenix5"/>
             <iq:product id="fenix5plus"/>
@@ -39,6 +46,7 @@
             <iq:product id="fr955"/>
             <iq:product id="legacyherocaptainmarvel"/>
             <iq:product id="legacyherofirstavenger"/>
+            <iq:product id="legacysagadarthvader"/>
             <iq:product id="legacysagarey"/>
             <iq:product id="marqadventurer"/>
             <iq:product id="marqathlete"/>

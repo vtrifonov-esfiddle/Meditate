@@ -5,7 +5,7 @@ using Toybox.Application as App;
 
 module ScreenPicker {
 	class DetailsViewRenderer {
-		private const TitlePosY = 20;
+		private const TitlePosY = 25;
 		
 		private var mDetailsModel;
 		
