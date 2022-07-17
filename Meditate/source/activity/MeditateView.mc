@@ -101,7 +101,7 @@ class MeditateView extends Ui.View {
 	        me.mIntervalAlertsRenderer = new IntervalAlertsRenderer(me.mMeditateModel.getSessionTime(), me.mMeditateModel.getOneOffIntervalAlerts(), 
 	        	me.mMeditateModel.getRepeatIntervalAlerts(), intervalAlertsArcRadius, intervalAlertsArcWidth);    
     	}
-    	  
+
         renderHrStatusLayout(dc);
         if (me.mMeditateModel.isHrvOn() == true) {
 	        renderHrvStatusLayout(dc);
@@ -140,7 +140,15 @@ class MeditateView extends Ui.View {
         if (me.mMeditateIcon != null) {
         	mMeditateIcon.draw(dc);
         }
-		me.mElapsedTime.setText(TimeFormatter.format(me.mMeditateModel.elapsedTime));		
+		
+		var timeText = TimeFormatter.format(me.mMeditateModel.elapsedTime);
+
+		// Check if activity is paused, render the [Paused] text
+		if (!me.mMeditateModel.isTimerRunning)  {
+			timeText = Ui.loadResource(Rez.Strings.meditateActivityPaused);
+		}
+
+		me.mElapsedTime.setText(timeText);		
 		me.mElapsedTime.draw(dc);
                     
         var alarmTime = me.mMeditateModel.getSessionTime();
@@ -160,7 +168,7 @@ class MeditateView extends Ui.View {
 	        me.mHrvText.draw(dc); 
         }
     }
-    
+	
 
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from

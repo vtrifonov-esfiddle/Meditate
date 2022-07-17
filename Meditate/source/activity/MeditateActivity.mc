@@ -23,13 +23,14 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 	}
 								
 	protected function onBeforeStart(fitSession) {
+		mMeditateModel.isTimerRunning = true;
 		HrvAlgorithms.HrvAndStressActivity.onBeforeStart(fitSession);
 		me.mVibeAlertsExecutor = new VibeAlertsExecutor(me.mMeditateModel);	
 	}	
 				
 	protected function onRefreshHrvActivityStats(activityInfo, minHr, hrvSuccessive) {	
 		if (activityInfo.elapsedTime != null) {
-			me.mMeditateModel.elapsedTime = activityInfo.elapsedTime / 1000;
+			me.mMeditateModel.elapsedTime = activityInfo.timerTime / 1000;
 		}
 		me.mMeditateModel.currentHr = activityInfo.currentHeartRate;
 		me.mMeditateModel.minHr = minHr;

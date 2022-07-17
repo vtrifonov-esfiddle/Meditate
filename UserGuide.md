@@ -28,6 +28,7 @@
     - tracks the overall min, avg and max HR
     - Stress
     - HRV
+- paused/resume session using the back button
 
 
 ![Session picker demo](userGuideScreenshots/sessionPickerDemo.gif)
@@ -57,6 +58,7 @@
   - **to get good HRV readings you need to minimise wrist movement**
 
 The meditation session finishes once you press the stop button.
+The meditation session can be paused/resumed using the back button.
 
 ![Session in progress](userGuideScreenshots/sessionInProgressExplained.png)
 

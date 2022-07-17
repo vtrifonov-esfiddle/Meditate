@@ -33,7 +33,34 @@ module HrvAlgorithms {
 		
 		protected function onBeforeStop() {
 		}
-					
+
+		// Pause/Resume session, returns true is session is now running
+		function pauseResume() {
+			// Check if session is running	
+			if (me.mFitSession.isRecording()) {
+
+				// Stop the timer and refresh the screen 
+				// to show the pause text
+				me.mFitSession.stop();		
+				me.mRefreshActivityTimer.stop();
+				me.mRefreshActivityTimer = null;
+				refreshActivityStats();
+				return false;
+
+		    } else {
+
+				// Restart the timer for the session
+				me.mFitSession.start();		
+				me.mRefreshActivityTimer = new Timer.Timer();		
+				me.mRefreshActivityTimer.start(method(:refreshActivityStats), RefreshActivityInterval, true);
+				return true;
+			}
+		}
+
+		function isTimerRunning() {	
+			return me.mFitSession.isRecording();
+		}
+
 		private function createMinHrDataField() {
 			me.mMinHrField = me.mFitSession.createField(
 	            "min_hr",
@@ -50,9 +77,9 @@ module HrvAlgorithms {
 		private var mMinHr;
 				
 		function refreshActivityStats() {
-			if (me.mFitSession.isRecording() == false) {
-				return;
-		    }	
+			//if (me.mFitSession.isRecording() == false) {
+			//	return;
+		    //}	
 		    
 			var activityInfo = Activity.getActivityInfo();
 			if (activityInfo == null) {
@@ -78,7 +105,8 @@ module HrvAlgorithms {
 			summary.maxHr = activityInfo.maxHeartRate;
 			summary.averageHr = activityInfo.averageHeartRate;
 			summary.minHr = me.mMinHr;
-			summary.elapsedTimeSeconds = activityInfo.elapsedTime / 1000;
+			summary.elapsedTimeSeconds = activityInfo.timerTime / 1000;
+
 			return summary;
 		}
 								

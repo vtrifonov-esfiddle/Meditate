@@ -79,7 +79,9 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     }
     
     function onBack() {
-    	//making sure the app doesn't exit during an activity until the user stops it
+
+    	// back button to pause/resume the activity
+		me.mMeditateModel.isTimerRunning = me.mMeditateActivity.pauseResume();
     	return true;
     }
         

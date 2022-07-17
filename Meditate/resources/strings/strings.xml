@@ -97,4 +97,7 @@
 	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
 			
 	<string id="activityDelayedFinishingText">Finishing...</string>
+
+    <string id="meditateActivityPaused">[Paused]</string>
+    
 </strings>
