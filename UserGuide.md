@@ -28,7 +28,7 @@
     - tracks the overall min, avg and max HR
     - Stress
     - HRV
-- paused/resume session using the back button
+- pause/resume session using the back button
 
 
 ![Session picker demo](userGuideScreenshots/sessionPickerDemo.gif)
