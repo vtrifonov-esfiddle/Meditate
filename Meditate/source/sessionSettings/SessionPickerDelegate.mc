@@ -131,6 +131,12 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 	  	return false;
     }
 	
+	function onTap(clickEvent)
+	{
+		me.startActivity();
+		return true;
+	}
+	
 	private function setSelectedSessionDetails() {
 		me.mSessionStorage.selectSession(me.mSelectedPageIndex);
 		var session = me.mSessionStorage.loadSelectedSession();			
