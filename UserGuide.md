@@ -20,6 +20,7 @@
     - HR from heartbeat - beat-to-beat interval converted to HR
 - stress tracking
     - Stress - summary of the the average stress during the session 
+    - Average stress for the beginning and end of the session (calculated automatically by the watch for session of 5min or more)
     - HR Peaks 10 Sec Window
       - internal metric for calculating stress 
       - tracks in overlapping 10 Sec Windows Max HR for each window 
