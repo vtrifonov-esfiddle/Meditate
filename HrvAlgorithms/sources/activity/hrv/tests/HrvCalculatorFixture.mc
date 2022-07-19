@@ -37,7 +37,7 @@ module HrvAlgorithms {
 		}
 		
 		function isResultExpected(actual, expected) {		
-			System.println("Hrv Calculator result: actual: " + actual + "; expected: " + expected);
+			//System.println("Hrv Calculator result: actual: " + actual + "; expected: " + expected);
 			var actualRound = Math.floor(actual * 100.0);
 			var expectedRound = Math.floor(expected * 100.0);
 			return actualRound == expectedRound;		

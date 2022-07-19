@@ -1,3 +1,4 @@
+using Toybox.Time.Gregorian as Calendar;
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.Application as App;
@@ -161,12 +162,36 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_WHITE;
         details.title = "Summary\n Stress";
         details.titleColor = Gfx.COLOR_BLACK;
- 
+
+		//DEBUG logging
+		//var now = Time.now();
+		//var time = Calendar.info(now, Time.FORMAT_SHORT);
+		//System.println(time.hour.format("%d")+":"+time.min.format("%02d")+":"+time.sec.format("%02d"));
+
+		//System.println("stressStart:" + me.mSummaryModel.stressStart);
+		//System.println("stressEnd:" + me.mSummaryModel.stressEnd);
+		//System.println("--------------------------------------");
+
+ 		if (me.mSummaryModel.stressStart!=null && me.mSummaryModel.stressEnd!=null) {
+
+				var lowStressIcon = new ScreenPicker.StressIcon({});
+    			lowStressIcon.setLowStress();	      
+        		details.detailLines[3].icon = lowStressIcon;  
+				details.detailLines[3].value.color = Gfx.COLOR_BLACK;            
+				details.detailLines[3].value.text = Lang.format("Stress Start: $1$", [me.mSummaryModel.stressStart.format("%d")]);
+
+				lowStressIcon = new ScreenPicker.StressIcon({});
+    			lowStressIcon.setLowStress();	      
+        		details.detailLines[4].icon = lowStressIcon;  
+				details.detailLines[4].value.color = Gfx.COLOR_BLACK;            
+				details.detailLines[4].value.text = Lang.format("Stress End: $1$", [me.mSummaryModel.stressEnd.format("%d")]);
+		}
+
     	var lowStressIcon = new ScreenPicker.StressIcon({});
     	lowStressIcon.setLowStress();	      
-        details.detailLines[3].icon = lowStressIcon;  
-        details.detailLines[3].value.color = Gfx.COLOR_BLACK;            
-        details.detailLines[3].value.text = Lang.format("$1$ %", [me.mSummaryModel.stress]);
+        details.detailLines[2].icon = lowStressIcon;  
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;            
+        details.detailLines[2].value.text = Lang.format("$1$ %", [me.mSummaryModel.stress]);
                  
         var summaryStressIconsXPos = App.getApp().getProperty("summaryStressIconsXPos");
         var summaryStressValueXPos = App.getApp().getProperty("summaryStressValueXPos");
