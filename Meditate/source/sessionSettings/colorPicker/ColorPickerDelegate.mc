@@ -23,5 +23,16 @@ class ColorPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 		me.mOnColorSelected.invoke(me.getSelectedColor());
 		Ui.popView(Ui.SLIDE_RIGHT);
 		return true;
+	}
+
+	function onSwipe(swipeEvent) {
+		
+		// FIx back with left-to-right touch
+		if (swipeEvent.getDirection() == WatchUi.SWIPE_RIGHT) {
+			Ui.popView(Ui.SLIDE_RIGHT);
+			return true;
+		}
+
+		return false;
 	}	
 }

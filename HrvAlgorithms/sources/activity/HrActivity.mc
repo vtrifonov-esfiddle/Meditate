@@ -25,6 +25,7 @@ module HrvAlgorithms {
 			if (me.mFitSession.isRecording() == false) {
 				return;
 		    }
+
 		    me.onBeforeStop();
 			me.mFitSession.stop();		
 			me.mRefreshActivityTimer.stop();
@@ -77,10 +78,7 @@ module HrvAlgorithms {
 		private var mMinHr;
 				
 		function refreshActivityStats() {
-			//if (me.mFitSession.isRecording() == false) {
-			//	return;
-		    //}	
-		    
+			
 			var activityInfo = Activity.getActivityInfo();
 			if (activityInfo == null) {
 				return;

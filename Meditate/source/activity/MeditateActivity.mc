@@ -12,14 +12,37 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 		
 	function initialize(meditateModel, heartbeatIntervalsSensor) {
 		var fitSessionSpec;
+		var sessionTime = meditateModel.getSessionTime();
 		if (meditateModel.getActivityType() == ActivityType.Yoga) {
-			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createYoga();
+			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createYoga(createSessionName(sessionTime, "Yoga"));
 		}
 		else {
-			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createCardio("Meditating");
+			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createCardio(createSessionName(sessionTime, "Meditating"));
 		}
 		me.mMeditateModel = meditateModel;	
 		HrvAlgorithms.HrvAndStressActivity.initialize(fitSessionSpec, meditateModel.getHrvTracking(), heartbeatIntervalsSensor);			
+	}
+
+	protected function createSessionName(sessionTime, activityName) {
+
+		// Calculate session minutes and hours
+		var sessionTimeMinutes = Math.round(sessionTime / 60);
+		var sessionTimeHours = Math.round(sessionTimeMinutes / 60);
+		var sessionName;
+
+		// Create the Connect activity name showing the number of hours/minutes for the meditate session
+		if (sessionTimeHours == 0) {
+			sessionName = Lang.format("$1$ $2$min 🙏", [activityName, sessionTimeMinutes]);
+		} else {
+			sessionTimeMinutes = sessionTimeMinutes % 60;
+			if (sessionTimeMinutes == 0){
+				sessionName = Lang.format("$1$ $2$h 🙏", [activityName, sessionTimeHours]);
+			} else {
+				sessionName = Lang.format("$1$ $2$h $3$min 🙏", [activityName, sessionTimeHours, sessionTimeMinutes]);
+			}
+		}
+
+		return sessionName;
 	}
 								
 	protected function onBeforeStart(fitSession) {

@@ -42,6 +42,7 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
     }
     
     function onBack() {
+
     	if (me.mModel.isInitialHintPos()) {
     		return false;
     	}
@@ -49,4 +50,15 @@ class DurationPickerDelegate extends Ui.BehaviorDelegate {
 		Ui.requestUpdate();
     	return true;
     }
+
+	function onSwipe(swipeEvent) {
+		
+		// FIx back with left-to-right touch
+		if (swipeEvent.getDirection() == WatchUi.SWIPE_RIGHT) {
+			Ui.popView(Ui.SLIDE_RIGHT);
+			return true;
+		}
+
+		return false;
+	}
 }
