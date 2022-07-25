@@ -32,7 +32,15 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		return pagesCount;
 	}
 	
-	private function setPageIndexes(hrvTracking) {		
+	private function setPageIndexes(hrvTracking) {	
+
+
+		if (HrvAlgorithms.RrActivity.isSupported()) {
+			me.mRespirationPageIndex = 2;
+		} else {
+			me.mRespirationPageIndex = InvalidPageIndex;
+		}
+		
 		if (hrvTracking == HrvTracking.Off) {
 			me.mStressPageIndex = InvalidPageIndex;
 			me.mHrvRmssdPageIndex = InvalidPageIndex;
@@ -41,7 +49,11 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		}
 		else {
 			me.mStressPageIndex = 1;
-			me.mHrvRmssdPageIndex = 2;
+			if (HrvAlgorithms.RrActivity.isSupported()) {
+				me.mHrvRmssdPageIndex = 3;
+			} else {
+				me.mHrvRmssdPageIndex = 2;
+			}
 				
 			if (hrvTracking == HrvTracking.OnDetailed) {	
 				me.mHrvPnnxPageIndex = me.mHrvRmssdPageIndex + 1;	
@@ -60,6 +72,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mHrvSdrrPageIndex;
 	private var mHrvPnnxPageIndex;
 	private var mStressPageIndex;
+	private var mRespirationPageIndex;
 	
 	private const InvalidPageIndex = -1;
 
@@ -78,6 +91,9 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		} 
 		else if (me.mSelectedPageIndex == me.mStressPageIndex) {
 			details = me.createDetailsPageStress();
+		}
+		else if (me.mSelectedPageIndex == me.mRespirationPageIndex) {
+			details = me.createDetailsPageRespiration();
 		}
 		else if (me.mSelectedPageIndex == mHrvRmssdPageIndex){
 			details = me.createDetailsPageHrvRmssd();
@@ -202,6 +218,37 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
         return details;
 	}
 	
+	private function createDetailsPageRespiration() {
+		var details = new ScreenPicker.DetailsModel();
+		details.color = Gfx.COLOR_BLACK;
+        details.backgroundColor = Gfx.COLOR_WHITE;
+        details.title = "Summary\n Respiration";
+        details.titleColor = Gfx.COLOR_BLACK;
+
+        
+        var respirationIcon = new ScreenPicker.BreathIcon({});
+        details.detailLines[2].icon = respirationIcon;
+        details.detailLines[2].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[2].value.text = "Min " + me.mSummaryModel.minRr.toString();
+
+		details.detailLines[3].icon = respirationIcon;
+        details.detailLines[3].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[3].value.text = "Avg " + me.mSummaryModel.avgRr.toString();
+
+		details.detailLines[4].icon = respirationIcon;
+        details.detailLines[4].value.color = Gfx.COLOR_BLACK;
+        details.detailLines[4].value.text = "Max " + me.mSummaryModel.maxRr.toString();
+        
+		
+        var hrIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
+        var hrValueXPos = App.getApp().getProperty("summaryHrValueXPos");                
+        details.setAllIconsXPos(hrIconsXPos);
+        details.setAllValuesXPos(hrValueXPos);   
+        details.setAllLinesYOffset(me.mSummaryLinesYOffset + 10);
+        
+        return details;
+	}	
+
 	private function createDetailsPageHrvRmssd() {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;

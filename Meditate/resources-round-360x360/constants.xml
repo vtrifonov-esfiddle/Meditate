@@ -10,6 +10,7 @@
 	<property id="meditateActivityIconsXPos" type="number">130</property>
 	<property id="meditateActivityIconsYOffset" type="number">12</property>
 	<property id="meditateActivityXHrvTextOffset" type="number">22</property>
+	<property id="meditateActivityXBreathTextOffset" type="number">32</property>
 	<property id="summaryHrIconsXPos" type="number">80</property>
 	<property id="summaryHrValueXPos" type="number">110</property>
 	<property id="summaryStressIconsXPos" type="number">80</property>

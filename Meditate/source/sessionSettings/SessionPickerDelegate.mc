@@ -224,7 +224,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_BLACK;
         var activityTypeText;
         if (session.activityType == ActivityType.Yoga) {
-        	activityTypeText = "Yoga";
+        	activityTypeText = "Meditate";		// Due to bug in Connect IQ API for breath activity to get respiration rate, we will use Yoga as default meditate activity
         }
         else {
         	activityTypeText = "Meditate";

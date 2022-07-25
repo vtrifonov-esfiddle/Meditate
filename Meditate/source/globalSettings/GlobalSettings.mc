@@ -7,7 +7,7 @@ class GlobalSettings {
 	static function loadHrvTracking() {
 		var hrvTracking = App.Storage.getValue(HrvTrackingKey);
 		if (hrvTracking == null) {
-			hrvTracking = HrvTracking.On;
+			hrvTracking = HrvTracking.OnDetailed;
 		}
 		return hrvTracking;
 	}
@@ -21,7 +21,7 @@ class GlobalSettings {
 	static function loadActivityType() {
 		var activityType = App.Storage.getValue(ActivityTypeKey);
 		if (activityType == null) {
-			return ActivityType.Meditating;
+			return ActivityType.Yoga;
 		}
 		else {
 			return activityType;

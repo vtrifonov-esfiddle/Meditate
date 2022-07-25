@@ -14,7 +14,7 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 		var fitSessionSpec;
 		var sessionTime = meditateModel.getSessionTime();
 		if (meditateModel.getActivityType() == ActivityType.Yoga) {
-			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createYoga(createSessionName(sessionTime, "Yoga"));
+			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createYoga(createSessionName(sessionTime, "Meditating")); // Due to bug in Connect IQ API for breath activity to get respiration rate, we will use Yoga as default meditate activity
 		}
 		else {
 			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createCardio(createSessionName(sessionTime, "Meditating"));
@@ -70,7 +70,7 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 		
 	function calculateSummaryFields() {	
 		var activitySummary = HrvAlgorithms.HrvAndStressActivity.calculateSummaryFields();	
-		var summaryModel = new SummaryModel(activitySummary, me.mMeditateModel.getHrvTracking());
+		var summaryModel = new SummaryModel(activitySummary, me.mMeditateModel.getRespirationActivity(), me.mMeditateModel.getHrvTracking());
 		return summaryModel;
 	}
 }

@@ -17,6 +17,7 @@
 	<property id="meditateActivityIconsXPos" type="number">80</property>
 	<property id="meditateActivityIconsYOffset" type="number">5</property>
 	<property id="meditateActivityXHrvTextOffset" type="number">20</property>
+	<property id="meditateActivityXBreathTextOffset" type="number">28</property>
 	<property id="detailsModelLineHeight" type="number">32</property>
 	<property id="detailsModelIconHeight" type="number">32</property>
 	<property id="hmmTimePickerOutputXOffset" type="number">85</property>

@@ -8,15 +8,19 @@ class MeditateModel {
 		me.minHr = null;
 		me.currentHr = null;
 		me.hrvSuccessive = null;
+		me.respirationRate = null;
 		me.isTimerRunning = false;
+		me.rrActivity = new HrvAlgorithms.RrActivity();
 	}
 	
 	private var mSession;
+	private var rrActivity;
 
 	var currentHr;
 	var minHr;
 	var elapsedTime;
 	var hrvSuccessive;
+	var respirationRate;
 	var isTimerRunning;
 
 	function isHrvOn() {
@@ -64,5 +68,13 @@ class MeditateModel {
 	
 	function getActivityType() {
 		return me.mSession.activityType;
+	}
+
+	function getRespirationRate() {
+		return rrActivity.getRespirationRate();
+	}
+
+	function getRespirationActivity() {
+		return rrActivity;
 	}
 }

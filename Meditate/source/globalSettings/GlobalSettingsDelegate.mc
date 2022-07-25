@@ -122,7 +122,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	        });	
         var newActivityType = GlobalSettings.loadActivityType();
         if (newActivityType == ActivityType.Meditating) {
-        	details.detailLines[4].value.text = "Meditate";
+        	details.detailLines[4].value.text = "Breathing";
         }
         if (newActivityType == ActivityType.Yoga) {
         	details.detailLines[4].value.text = "Yoga";

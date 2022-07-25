@@ -24,6 +24,8 @@ class MeditateView extends Ui.View {
 	private var mHrStatus;
 	private var mHrvIcon;
 	private var mHrvText;	
+	private var mBreathIcon;
+	private var mBreathText;	
     private var mMeditateIcon;
         
     private function createMeditateText(color, font, xPos, yPos, justification) {
@@ -46,12 +48,12 @@ class MeditateView extends Ui.View {
     
     private function renderHrStatusLayout(dc) {
     	var xPosText = dc.getWidth() / 2;
-    	var yPosText = getYPosOffsetFromCenter(dc, 0);
-      	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosText, xPosText, Gfx.TEXT_JUSTIFY_CENTER); 
+    	var yPosText = getYPosOffsetFromCenter(dc, -1);
+      	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosText, yPosText, Gfx.TEXT_JUSTIFY_CENTER); 
       	
   	    var hrStatusX = App.getApp().getProperty("meditateActivityIconsXPos");
 		var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");  
-        var hrStatusY = getYPosOffsetFromCenter(dc, 0) + iconsYOffset; 
+        var hrStatusY = getYPosOffsetFromCenter(dc, -1) + iconsYOffset; 
   	    me.mHrStatus = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontAwesomeFreeSolid,
         	:symbol => StatusIconFonts.Rez.Strings.faHeart,
@@ -63,7 +65,7 @@ class MeditateView extends Ui.View {
     
     private function renderHrvStatusLayout(dc) {
     	var hrvIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
-    	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 1);
+    	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 0);
         var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");
         var hrvIconYPos = hrvTextYPos + iconsYOffset;
         me.mHrvIcon =  new ScreenPicker.HrvIcon({
@@ -75,6 +77,21 @@ class MeditateView extends Ui.View {
         var hrvTextXPos = hrvIconXPos + xHrvTextOffset;
         me.mHrvText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvTextXPos, hrvTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
     }
+
+	  private function renderBreathStatusLayout(dc) {
+    	var breathIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
+    	var breathTextYPos =  getYPosOffsetFromCenter(dc, 1);
+        var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");
+        var breathIconYPos = breathTextYPos + iconsYOffset;
+        me.mBreathIcon =  new ScreenPicker.BreathIcon({
+        	:xPos => breathIconXPos,
+        	:yPos => breathIconYPos
+        });
+        
+        var xbreathTextOffset = App.getApp().getProperty("meditateActivityXBreathTextOffset");
+        var breathTextXPos = breathIconXPos + xbreathTextOffset;
+        me.mBreathText = createMeditateText(Gfx.COLOR_WHITE, TextFont, breathTextXPos, breathTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
+    }
     
     private function getYPosOffsetFromCenter(dc, lineOffset) {
     	return dc.getHeight() / 2 + lineOffset * dc.getFontHeight(TextFont);
@@ -82,7 +99,7 @@ class MeditateView extends Ui.View {
         
     function renderLayoutElapsedTime(dc) { 	
     	var xPosCenter = dc.getWidth() / 2;
-    	var yPosCenter = getYPosOffsetFromCenter(dc, -1);
+    	var yPosCenter = getYPosOffsetFromCenter(dc, -2);
     	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter, Gfx.TEXT_JUSTIFY_CENTER);
     }
                 
@@ -106,6 +123,7 @@ class MeditateView extends Ui.View {
         if (me.mMeditateModel.isHrvOn() == true) {
 	        renderHrvStatusLayout(dc);
         }
+		renderBreathStatusLayout(dc);
     }
     
     // Called when this View is brought to the foreground. Restore
@@ -115,7 +133,7 @@ class MeditateView extends Ui.View {
     }
 	
 	private function formatHr(hr) {
-		if (hr == null) {
+		if (hr == null || hr == 0) {
 			return "--";
 		}
 		else {
@@ -172,9 +190,17 @@ class MeditateView extends Ui.View {
 	        me.mHrvText.setText(me.formatHrv(hrvSuccessive));
 	        me.mHrvText.draw(dc); 
         }
+
+		var respirationRate = me.mMeditateModel.getRespirationRate();
+
+		if(respirationRate!=-1) {
+			
+			me.mBreathIcon.draw(dc);
+			me.mBreathText.setText(me.formatHr(respirationRate));
+			me.mBreathText.draw(dc); 
+		}
     }
 	
-
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
     // memory.

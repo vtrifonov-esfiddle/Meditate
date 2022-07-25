@@ -4,12 +4,19 @@ using HrvAlgorithms.HrvTracking;
 using Toybox.ActivityMonitor;
 
 class SummaryModel {
-	function initialize(activitySummary, hrvTracking) {
+	function initialize(activitySummary, rrActivity, hrvTracking) {
 		me.elapsedTime = activitySummary.hrSummary.elapsedTimeSeconds; 
 		me.maxHr = me.initializeHeartRate(activitySummary.hrSummary.maxHr);
 		me.avgHr = me.initializeHeartRate(activitySummary.hrSummary.averageHr);
 		me.minHr = me.initializeHeartRate(activitySummary.hrSummary.minHr);
 		
+		var rrSummary = rrActivity.getSummary();
+		if (rrSummary!=null) {
+			me.maxRr = me.initializeHeartRate(rrSummary.maxRr);
+			me.avgRr = me.initializeHeartRate(rrSummary.averageRr);
+			me.minRr = me.initializeHeartRate(rrSummary.minRr);
+		}
+
 		me.stress = me.initializePercentageValue(activitySummary.stress);
 		
 		initializeStressHistory(me.elapsedTime);
@@ -113,6 +120,10 @@ class SummaryModel {
 	var avgHr;
 	var minHr;	
 	
+	var maxRr;
+	var avgRr;
+	var minRr;	
+
 	var stress;
 	var stressStart;
 	var stressEnd;

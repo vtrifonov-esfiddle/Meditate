@@ -22,16 +22,16 @@
     <string id="menuGlobalSettings_multiSession">Multi-Session</string>
     
     <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
-    <string id="menuNewActivityTypeOptions_meditating">Meditate</string>
     <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
-    
+    <string id="menuNewActivityTypeOptions_meditating">Breathing</string>
+        
     <string id="activityTypeMenu_title">Activity Type</string>    
-    <string id="activityTypeMenu_meditating">Meditate</string>
     <string id="activityTypeMenu_yoga">Yoga</string>
+    <string id="activityTypeMenu_meditating">Breathing</string>
       
     <string id="menuNewHrvTrackingOptions_title">Hrv Tracking</string>    
-    <string id="menuNewHrvTrackingOptions_on">On (Default)</string>
-    <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuNewHrvTrackingOptions_on">On</string>
+    <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed (Default)</string>
     <string id="menuNewHrvTrackingOptions_off">Off</string>
         
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
