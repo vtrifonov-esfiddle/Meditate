@@ -71,7 +71,16 @@ class MeditateModel {
 	}
 
 	function getRespirationRate() {
-		return rrActivity.getRespirationRate();
+
+ 		if (rrActivity.isSupported()) {
+			if (isTimerRunning) {
+				return rrActivity.getRespirationRate();
+			} else {
+				return " --";
+			}
+		} else {
+			return -1;
+		}
 	}
 
 	function getRespirationActivity() {

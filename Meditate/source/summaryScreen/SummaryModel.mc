@@ -15,6 +15,10 @@ class SummaryModel {
 			me.maxRr = me.initializeHeartRate(rrSummary.maxRr);
 			me.avgRr = me.initializeHeartRate(rrSummary.averageRr);
 			me.minRr = me.initializeHeartRate(rrSummary.minRr);
+
+			if (me.minRr == 9999999) {
+				me.minRr = me.initializeHeartRate(0);
+			}
 		}
 
 		me.stress = me.initializePercentageValue(activitySummary.stress);
