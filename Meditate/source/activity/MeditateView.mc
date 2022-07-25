@@ -16,7 +16,14 @@ class MeditateView extends Ui.View {
         me.mIntervalAlertsRenderer = null;
         me.mElapsedTime = null; 
         me.mHrStatusText = null;
-        me.mMeditateIcon = null;           
+        me.mMeditateIcon = null;
+
+		// If we have respiration rate and HRV on , we should push all text and icons one line above
+		if (mMeditateModel.respirationRateSupported() && me.mMeditateModel.isHrvOn()) {
+			mRespirationRateYPosOffset = -1;
+		} else {
+			mRespirationRateYPosOffset = 0;
+		}
     }
     
     private var mElapsedTime;
@@ -27,7 +34,8 @@ class MeditateView extends Ui.View {
 	private var mBreathIcon;
 	private var mBreathText;	
     private var mMeditateIcon;
-        
+    private var mRespirationRateYPosOffset;
+
     private function createMeditateText(color, font, xPos, yPos, justification) {
     	return new Ui.Text({
         	:text => "",
@@ -48,12 +56,12 @@ class MeditateView extends Ui.View {
     
     private function renderHrStatusLayout(dc) {
     	var xPosText = dc.getWidth() / 2;
-    	var yPosText = getYPosOffsetFromCenter(dc, -1);
+    	var yPosText = getYPosOffsetFromCenter(dc, 0 + mRespirationRateYPosOffset);
       	me.mHrStatusText = createMeditateText(Gfx.COLOR_WHITE, TextFont, xPosText, yPosText, Gfx.TEXT_JUSTIFY_CENTER); 
       	
   	    var hrStatusX = App.getApp().getProperty("meditateActivityIconsXPos");
 		var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");  
-        var hrStatusY = getYPosOffsetFromCenter(dc, -1) + iconsYOffset; 
+        var hrStatusY = getYPosOffsetFromCenter(dc, 0 + mRespirationRateYPosOffset) + iconsYOffset; 
   	    me.mHrStatus = new ScreenPicker.Icon({        
         	:font => StatusIconFonts.fontAwesomeFreeSolid,
         	:symbol => StatusIconFonts.Rez.Strings.faHeart,
@@ -65,7 +73,7 @@ class MeditateView extends Ui.View {
     
     private function renderHrvStatusLayout(dc) {
     	var hrvIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
-    	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 0);
+    	var hrvTextYPos =  getYPosOffsetFromCenter(dc, 1 + mRespirationRateYPosOffset);
         var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");
         var hrvIconYPos = hrvTextYPos + iconsYOffset;
         me.mHrvIcon =  new ScreenPicker.HrvIcon({
@@ -78,9 +86,16 @@ class MeditateView extends Ui.View {
         me.mHrvText = createMeditateText(Gfx.COLOR_WHITE, TextFont, hrvTextXPos, hrvTextYPos, Gfx.TEXT_JUSTIFY_LEFT); 
     }
 
-	  private function renderBreathStatusLayout(dc) {
+	private function renderBreathStatusLayout(dc) {
+
+		// Put HR and Respiration rate together when HRV is off
+		var indexRespirationRateHrvOff = 0;
+		if (!me.mMeditateModel.isHrvOn()) {
+			indexRespirationRateHrvOff = -1;
+		}
+
     	var breathIconXPos = App.getApp().getProperty("meditateActivityIconsXPos");
-    	var breathTextYPos =  getYPosOffsetFromCenter(dc, 1);
+    	var breathTextYPos =  getYPosOffsetFromCenter(dc, 2 + mRespirationRateYPosOffset + indexRespirationRateHrvOff);
         var iconsYOffset = App.getApp().getProperty("meditateActivityIconsYOffset");
         var breathIconYPos = breathTextYPos + iconsYOffset;
         me.mBreathIcon =  new ScreenPicker.BreathIcon({
@@ -99,7 +114,7 @@ class MeditateView extends Ui.View {
         
     function renderLayoutElapsedTime(dc) { 	
     	var xPosCenter = dc.getWidth() / 2;
-    	var yPosCenter = getYPosOffsetFromCenter(dc, -2);
+    	var yPosCenter = getYPosOffsetFromCenter(dc, -1 + mRespirationRateYPosOffset);
     	me.mElapsedTime = createMeditateText(me.mMeditateModel.getColor(), TextFont, xPosCenter, yPosCenter, Gfx.TEXT_JUSTIFY_CENTER);
     }
                 

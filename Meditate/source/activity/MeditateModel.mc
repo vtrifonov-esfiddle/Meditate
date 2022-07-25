@@ -70,6 +70,10 @@ class MeditateModel {
 		return me.mSession.activityType;
 	}
 
+	function respirationRateSupported() {
+		return rrActivity.isSupported();
+	}
+
 	function getRespirationRate() {
 
  		if (rrActivity.isSupported()) {

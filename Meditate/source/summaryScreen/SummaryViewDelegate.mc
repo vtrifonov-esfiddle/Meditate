@@ -22,7 +22,9 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mSummaryLinesYOffset;
 			
 	private static function getPagesCount(hrvTracking) {		
-		var pagesCount = 7;
+		
+		var pagesCount = 6;
+
 		if (hrvTracking == HrvTracking.Off) {
 			pagesCount -= 4;
 		}
@@ -38,9 +40,6 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	}
 	
 	private function setPageIndexes(hrvTracking) {	
-
-
-		
 		
 		if (hrvTracking == HrvTracking.Off) {
 			me.mStressPageIndex = InvalidPageIndex;
