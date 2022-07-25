@@ -25,9 +25,12 @@
       - internal metric for calculating stress 
       - tracks in overlapping 10 Sec Windows Max HR for each window 
       - HR calculated from beat-to-beat interval
+- respiration rate
+    - Breathes per minute real time in watches that supports it (only works fine for Yoga activity due to bug in Connect IQ API for Breathing activity)
 - summary stats at the end of the session
     - tracks the overall min, avg and max HR
     - Stress
+    - respiration rate min, avg and max
     - HRV
 - pause/resume session using the back button
 
@@ -57,6 +60,8 @@
   - difference between the current and previous beat-to-beat intervals measured in milliseconds
   - shows only when HRV tracking is on
   - **to get good HRV readings you need to minimise wrist movement**
+- current respiration rate calculated by the watch
+  - **to get good respiration readings you need to minimise wrist movement**
 
 The meditation session finishes once you press the stop button.
 The meditation session can be paused/resumed using the back button.
@@ -103,7 +108,7 @@ The meditation session can be paused/resumed using the back button.
           3. last repetative alert
     - Color - the color of the current interval alert used in the graphical controls. Select different colors for each alert to differentiate them during meditation. Select transparent color if you don't want to see visual marks for the alert during meditation
     - Vibe Pattern - shorter or longer patterns ranging from pulsating or continuous
-- Activity Type - ability to save the session as **Meditating** or **Yoga**. You can configure default activity type for new sessions from the Global Settings ([see section 4](#4-global-settings)).
+- Activity Type - ability to save the session as **Breathing** or **Yoga**. You can configure default activity type for new sessions from the Global Settings ([see section 4](#4-global-settings)).
 - HRV Tracking - determines if HRV and stress are tracked
   - ON (Default) - tracks stress and the following HRV metrics
     - RMSSD
@@ -130,7 +135,6 @@ From the session picker screen press page up/down buttons (for Vivoactive 3/4/Ve
 On this screen you can see the applicable settings for the selected session
 - activity type - in the title
   - Meditate
-  - Yoga
 - time - total duration of the session
 - vibe pattern
 - interval alert triggers - the graph in the middle of the screen represents the relative alert triger time compared to the total session time
@@ -195,5 +199,6 @@ This setting provides the default **HRV Tracking** for new sessions.
 
 You can set the default activity type for new sessions.
 
-- Meditating
 - Yoga
+- Breathing
+
