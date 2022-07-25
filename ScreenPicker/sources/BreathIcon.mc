@@ -9,6 +9,6 @@ module ScreenPicker {
 			Icon.initialize(icon);
 		}
 
-		const BreathIconLightBlueColor = 0x2020FF;
+		const BreathIconLightBlueColor = 0x6060FF;
 	}
 }

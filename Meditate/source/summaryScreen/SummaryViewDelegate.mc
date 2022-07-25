@@ -9,9 +9,9 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mSummaryModel;
 	private var mDiscardDanglingActivity;
 
-	function initialize(summaryModel, discardDanglingActivity) {		
-		me.mPagesCount = SummaryViewDelegate.getPagesCount(summaryModel.hrvTracking);
-		setPageIndexes(summaryModel.hrvTracking);
+	function initialize(summaryModel, isRespirationRateOn, discardDanglingActivity) {		
+		me.mPagesCount = SummaryViewDelegate.getPagesCount(summaryModel.hrvTracking, isRespirationRateOn);
+		setPageIndexes(summaryModel.hrvTracking, isRespirationRateOn);
 		
         ScreenPickerDelegate.initialize(0, me.mPagesCount);
         me.mSummaryModel = summaryModel;
@@ -21,7 +21,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		
 	private var mSummaryLinesYOffset;
 			
-	private static function getPagesCount(hrvTracking) {		
+	private static function getPagesCount(hrvTracking, isRespirationRateOn) {		
 		
 		var pagesCount = 6;
 
@@ -32,14 +32,14 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 			pagesCount -= 2;
 		}
 
-		if (!HrvAlgorithms.RrActivity.isSupported()) {
+		if (!isRespirationRateOn) {
 			pagesCount -= 1;
 		}
 
 		return pagesCount;
 	}
 	
-	private function setPageIndexes(hrvTracking) {	
+	private function setPageIndexes(hrvTracking, isRespirationRateOn) {	
 		
 		if (hrvTracking == HrvTracking.Off) {
 			me.mStressPageIndex = InvalidPageIndex;
@@ -47,7 +47,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 			me.mHrvSdrrPageIndex = InvalidPageIndex;
 			me.mHrvPnnxPageIndex = InvalidPageIndex;
 
-			if (HrvAlgorithms.RrActivity.isSupported()) {
+			if (isRespirationRateOn) {
 				me.mRespirationPageIndex = 1;
 			} else {
 				me.mRespirationPageIndex = InvalidPageIndex;
@@ -56,7 +56,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		}
 		else {
 			me.mStressPageIndex = 1;
-			if (HrvAlgorithms.RrActivity.isSupported()) {
+			if (isRespirationRateOn) {
 				me.mRespirationPageIndex = 2;
 				me.mHrvRmssdPageIndex = 3;
 			} else {

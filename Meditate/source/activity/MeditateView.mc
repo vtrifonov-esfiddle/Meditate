@@ -18,8 +18,8 @@ class MeditateView extends Ui.View {
         me.mHrStatusText = null;
         me.mMeditateIcon = null;
 
-		// If we have respiration rate and HRV on , we should push all text and icons one line above
-		if (mMeditateModel.respirationRateSupported() && me.mMeditateModel.isHrvOn()) {
+		// If we have respiration rate and HRV on , we should push all text and icons one line below
+		if (mMeditateModel.isRespirationRateOn() && me.mMeditateModel.isHrvOn()) {
 			mRespirationRateYPosOffset = -1;
 		} else {
 			mRespirationRateYPosOffset = 0;
@@ -138,7 +138,10 @@ class MeditateView extends Ui.View {
         if (me.mMeditateModel.isHrvOn() == true) {
 	        renderHrvStatusLayout(dc);
         }
-		renderBreathStatusLayout(dc);
+
+		if (me.mMeditateModel.isRespirationRateOn()) {
+			renderBreathStatusLayout(dc);
+		}
     }
     
     // Called when this View is brought to the foreground. Restore
@@ -206,10 +209,8 @@ class MeditateView extends Ui.View {
 	        me.mHrvText.draw(dc); 
         }
 
-		var respirationRate = me.mMeditateModel.getRespirationRate();
-
-		if(respirationRate!=-1) {
-			
+		if (me.mMeditateModel.isRespirationRateOn()) {
+			var respirationRate = me.mMeditateModel.getRespirationRate();
 			me.mBreathIcon.draw(dc);
 			me.mBreathText.setText(me.formatHr(respirationRate));
 			me.mBreathText.draw(dc); 

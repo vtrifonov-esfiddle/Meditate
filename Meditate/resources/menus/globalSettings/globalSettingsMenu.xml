@@ -3,4 +3,5 @@
     <menu-item id="confirmSaveActivity" label="@Strings.menuGlobalSettings_confirmSaveActivity" />
     <menu-item id="multiSession" label="@Strings.menuGlobalSettings_multiSession" />
     <menu-item id="newActivityType" label="@Strings.menuGlobalSettings_newActivityType" />
+    <menu-item id="respirationRate" label="@Strings.menuGlobalSettings_respirationRate" />
 </menu>

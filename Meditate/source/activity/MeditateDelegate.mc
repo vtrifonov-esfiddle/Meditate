@@ -48,7 +48,7 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     
     //this reads/writes session settings and needs to happen before saving session to avoid FIT file corruption          
     private function showSummaryView(summaryModel) { 
-    	var summaryViewDelegate = new SummaryViewDelegate(summaryModel, me.mMeditateActivity.method(:discardDanglingActivity));
+    	var summaryViewDelegate = new SummaryViewDelegate(summaryModel, mMeditateModel.isRespirationRateOn(), me.mMeditateActivity.method(:discardDanglingActivity));
     	Ui.switchToView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT);  
     }
     

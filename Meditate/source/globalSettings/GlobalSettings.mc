@@ -63,6 +63,22 @@ class GlobalSettings {
 	static function saveMultiSession(multiSession) {
 		App.Storage.setValue(MultiSessionKey, multiSession);
 	}
+
+	private static const RespirationRateKey = "globalSettings_respirationRate";
+	
+	static function loadRespirationRate() {
+		var respirationRate = App.Storage.getValue(RespirationRateKey);
+		if (respirationRate == null) {
+			return RespirationRate.On;
+		}
+		else {
+			return respirationRate;
+		}
+	}
+	
+	static function saveRespirationRate(respirationRate) {
+		App.Storage.setValue(RespirationRateKey, respirationRate);
+	}
 }
 
 module ConfirmSaveActivity {
@@ -77,5 +93,12 @@ module MultiSession {
 	enum {
 		No = 0,
 		Yes = 1
+	}
+}
+
+module RespirationRate {
+	enum {
+		Off = 0,
+		On = 1
 	}
 }

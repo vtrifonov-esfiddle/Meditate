@@ -1,0 +1,4 @@
+<menu id="respirationRateOptionsMenu" title="@Strings.menuRespirationRateOptions_title">
+    <menu-item id="on" label="@Strings.menuRespirationRateOptions_on" />
+    <menu-item id="off" label="@Strings.menuRespirationRateOptions_off" />
+</menu>

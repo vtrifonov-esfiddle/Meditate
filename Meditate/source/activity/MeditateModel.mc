@@ -70,20 +70,34 @@ class MeditateModel {
 		return me.mSession.activityType;
 	}
 
-	function respirationRateSupported() {
-		return rrActivity.isSupported();
+	function isRespirationRateOn() {
+		return isRespirationRateOnStatic(me.rrActivity);
+	}
+
+	function isRespirationRateOnStatic(rrActivity) {
+
+		// Check if watch supports respiration rate
+		if (rrActivity.isSupported()) {
+
+			// Check if global option is enabled
+			var respirationRateSetting = GlobalSettings.loadRespirationRate();
+			if (respirationRateSetting == RespirationRate.On) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} else {
+			return false;
+		}
 	}
 
 	function getRespirationRate() {
 
- 		if (rrActivity.isSupported()) {
-			if (isTimerRunning) {
-				return rrActivity.getRespirationRate();
-			} else {
-				return " --";
-			}
+		if (isTimerRunning) {
+			return rrActivity.getRespirationRate();
 		} else {
-			return -1;
+			return " --";
 		}
 	}
 

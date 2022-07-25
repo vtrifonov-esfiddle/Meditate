@@ -1,33 +1,34 @@
 using Toybox.Timer;
-using Toybox.FitContributor;
-using Toybox.ActivityRecording;
-using Toybox.ActivityMonitor;
 using Toybox.Sensor;
+using Toybox.FitContributor;
+using Toybox.ActivityMonitor;
+using Toybox.ActivityRecording;
 
 module HrvAlgorithms {
 	class RrActivity {
 		
 		function initialize() {
-			if(isSupported()) {
-				me.supported = true;
+
+			// Check if device supports respiration rate
+			if (isRespirationRateSupported()) {
+				me.respirationRateSupported = true;
 				me.rrSummary = new RrSummary();
 				me.rrSummary.maxRr = 0;
 				me.rrSummary.minRr = 9999999;
-				me.totalSamples = 0;
-				me.totalRespirationRates = 0;
+				me.totalRespirationSamples = 0;
+				me.totalRespirationRateSum = 0;
 			} else {
-				me.supported = false;
+				me.respirationRateSupported = false;
 			}
 		}
 
-		private var supported;
-		private var totalSamples;
-		private var totalRespirationRates;
+		private var respirationRateSupported;
+		private var totalRespirationSamples;
+		private var totalRespirationRateSum;
 		private var rrSummary;
 	
-		function isSupported() {
-
-			// Check if device supports respiration rate
+		// Method to be used without class instance
+		function isRespirationRateSupported(){
 			if (ActivityMonitor.getInfo() has :respirationRate) {
 				return true;
 			} else {
@@ -35,10 +36,15 @@ module HrvAlgorithms {
 			}
 		}
 
+		// Check if device supports respiration rate
+		function isSupported() {
+			return respirationRateSupported;
+		}
+
 		function getRespirationRate() {
 
 			// If device supports respiration rate
-			if (me.supported) {
+			if (me.respirationRateSupported) {
 				
 				// Retrieves respiration rate
 				var respirationRate = ActivityMonitor.getInfo().respirationRate;
@@ -61,10 +67,10 @@ module HrvAlgorithms {
 			// Average respiration rate
 			// Max respiration rate
 			
-			totalSamples++;
-			totalRespirationRates+=respirationRate;
+			totalRespirationSamples++;
+			totalRespirationRateSum+=respirationRate;
 
-			rrSummary.averageRr = Math.round(totalRespirationRates / totalSamples);
+			rrSummary.averageRr = Math.round(totalRespirationRateSum / totalRespirationSamples);
 
 			if (respirationRate < rrSummary.minRr) {
 				rrSummary.minRr = respirationRate;

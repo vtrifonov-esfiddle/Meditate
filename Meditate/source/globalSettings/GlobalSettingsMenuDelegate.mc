@@ -26,6 +26,17 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 			var multiSessionDelegate = new MenuOptionsDelegate(method(:onMultiSessionPicked));
 			Ui.pushView(new Rez.Menus.multiSessionOptionsMenu(), multiSessionDelegate, Ui.SLIDE_LEFT);
 		}
+		else if (item ==:respirationRate) {
+
+			// Respiration rate settings if supported
+			if (HrvAlgorithms.RrActivity.isRespirationRateSupported()) {
+				var respirationRateDelegate = new MenuOptionsDelegate(method(:onRespirationRatePicked));
+				Ui.pushView(new Rez.Menus.respirationRateOptionsMenu(), respirationRateDelegate, Ui.SLIDE_LEFT);
+			} else {
+				var respirationRateDelegate = new MenuOptionsDelegate(method(:onRespirationRateDisabledPicked));
+				Ui.pushView(new Rez.Menus.respirationRateOptionsDisabledMenu(), respirationRateDelegate, Ui.SLIDE_LEFT);
+			}
+		}
 	}
 	
 	function onConfirmSaveActivityPicked(item) {
@@ -48,6 +59,20 @@ class GlobalSettingsMenuDelegate extends Ui.MenuInputDelegate {
 		else if (item == :no) {
 			GlobalSettings.saveMultiSession(MultiSession.No);
 		}
+		mOnGlobalSettingsChanged.invoke();
+	}
+
+	function onRespirationRatePicked(item) {
+		if (item == :on) {
+			GlobalSettings.saveRespirationRate(RespirationRate.On);
+		}
+		else if (item == :off) {
+			GlobalSettings.saveRespirationRate(RespirationRate.Off);
+		}
+		mOnGlobalSettingsChanged.invoke();
+	}
+
+	function onRespirationRateDisabledPicked(item) {
 		mOnGlobalSettingsChanged.invoke();
 	}
 	

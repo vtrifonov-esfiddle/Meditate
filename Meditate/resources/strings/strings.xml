@@ -20,6 +20,7 @@
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
     <string id="menuGlobalSettings_multiSession">Multi-Session</string>
+    <string id="menuGlobalSettings_respirationRate">Respiration Rate</string>
     
     <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
     <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
@@ -48,6 +49,10 @@
     <string id="menuMultiSessionOptions_yes">Yes</string>
     <string id="menuMultiSessionOptions_no">No (Default)</string>
     
+    <string id="menuRespirationRateOptions_title">Respiration Rate</string>    
+    <string id="menuRespirationRateOptions_on">On (Default)</string>
+    <string id="menuRespirationRateOptions_off">Off</string>
+
     <string id="menuIntervalAlertSettings_Title">Interval Alerts</string>
     <string id="menuIntervalAlertSettings_addNew">Add New</string>
     <string id="menuIntervalAlertSettings_edit">Edit</string>

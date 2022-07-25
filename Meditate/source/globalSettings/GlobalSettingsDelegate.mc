@@ -61,6 +61,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
         details.color = Gfx.COLOR_WHITE;
         details.backgroundColor = Gfx.COLOR_BLACK;
         		
+		// HRV settings
 	    details.detailLines[1].icon = new ScreenPicker.HrvIcon({});
 	    var hrvTrackingSetting;
 	    var hrvTracking = GlobalSettings.loadHrvTracking();
@@ -75,6 +76,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 		}
 		details.detailLines[1].value.text = "HRV: " +  hrvTrackingSetting; 	
 		
+		// Confirm save activity settings
 		var confirmSaveSetting = "";		
         var saveActivityConfirmation = GlobalSettings.loadConfirmSaveActivity();
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoYes) {
@@ -102,6 +104,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
         }
         details.detailLines[2].value.text = "Save: " + confirmSaveSetting;
         
+		// Multi-session settings
         var multiSessionSetting = "";
         var multiSession = GlobalSettings.loadMultiSession();
     	details.detailLines[3].icon = new ScreenPicker.Icon({        
@@ -116,6 +119,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
         }
         details.detailLines[3].value.text = multiSessionSetting;
         
+		// Activity type settings
         details.detailLines[4].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontMeditateIcons,
 	        	:symbol => StatusIconFonts.Rez.Strings.meditateFontYoga
@@ -127,6 +131,22 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
         if (newActivityType == ActivityType.Yoga) {
         	details.detailLines[4].value.text = "Yoga";
         }
+
+		// Show Respiration rate settings if supported
+		if (HrvAlgorithms.RrActivity.isRespirationRateSupported()) {
+			
+			var respirationRateSetting = "";
+			var respirationRate = GlobalSettings.loadRespirationRate();
+			details.detailLines[5].icon = new ScreenPicker.BreathIcon({});
+			if (respirationRate == RespirationRate.On) {
+				respirationRateSetting = "On";
+			}
+			if (respirationRate == RespirationRate.Off) {
+				respirationRateSetting = "Off";
+			}
+			details.detailLines[5].value.text = "Respiration: " + respirationRateSetting;
+		}
+
         details.setAllLinesYOffset(me.mGlobalSettingsLinesYOffset);
         details.setAllIconsXPos(me.mGlobalSettingsIconsXPos);
         details.setAllValuesXPos(me.mGlobalSettingsValueXPos);  
