@@ -30,13 +30,13 @@
     <string id="activityTypeMenu_meditating">Breathing</string>
       
     <string id="menuNewHrvTrackingOptions_title">Hrv Tracking</string>    
-    <string id="menuNewHrvTrackingOptions_on">On</string>
     <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed (Default)</string>
+    <string id="menuNewHrvTrackingOptions_on">On</string>
     <string id="menuNewHrvTrackingOptions_off">Off</string>
         
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
-    <string id="menuHrvTrackingOptions_on">On (Default)</string>
-    <string id="menuHrvTrackingOptions_onDetailed">On Detailed</string>
+    <string id="menuHrvTrackingOptions_onDetailed">On Detailed (Default)</string>
+    <string id="menuHrvTrackingOptions_on">On</string>
     <string id="menuHrvTrackingOptions_off">Off</string>
     
     <string id="menuConfirmSaveActivityOptions_title">Confirm Save</string>    

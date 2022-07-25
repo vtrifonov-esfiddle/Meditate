@@ -1,6 +1,7 @@
 using Toybox.Timer;
 using Toybox.FitContributor;
 using Toybox.ActivityRecording;
+using Toybox.ActivityMonitor;
 using Toybox.Sensor;
 
 module HrvAlgorithms {

@@ -22,36 +22,46 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private var mSummaryLinesYOffset;
 			
 	private static function getPagesCount(hrvTracking) {		
-		var pagesCount = 5;
+		var pagesCount = 7;
 		if (hrvTracking == HrvTracking.Off) {
 			pagesCount -= 4;
 		}
 		else if (hrvTracking == HrvTracking.On) {
 			pagesCount -= 2;
 		}
+
+		if (!HrvAlgorithms.RrActivity.isSupported()) {
+			pagesCount -= 1;
+		}
+
 		return pagesCount;
 	}
 	
 	private function setPageIndexes(hrvTracking) {	
 
 
-		if (HrvAlgorithms.RrActivity.isSupported()) {
-			me.mRespirationPageIndex = 2;
-		} else {
-			me.mRespirationPageIndex = InvalidPageIndex;
-		}
+		
 		
 		if (hrvTracking == HrvTracking.Off) {
 			me.mStressPageIndex = InvalidPageIndex;
 			me.mHrvRmssdPageIndex = InvalidPageIndex;
 			me.mHrvSdrrPageIndex = InvalidPageIndex;
 			me.mHrvPnnxPageIndex = InvalidPageIndex;
+
+			if (HrvAlgorithms.RrActivity.isSupported()) {
+				me.mRespirationPageIndex = 1;
+			} else {
+				me.mRespirationPageIndex = InvalidPageIndex;
+			}
+
 		}
 		else {
 			me.mStressPageIndex = 1;
 			if (HrvAlgorithms.RrActivity.isSupported()) {
+				me.mRespirationPageIndex = 2;
 				me.mHrvRmssdPageIndex = 3;
 			} else {
+				me.mRespirationPageIndex = InvalidPageIndex;
 				me.mHrvRmssdPageIndex = 2;
 			}
 				
