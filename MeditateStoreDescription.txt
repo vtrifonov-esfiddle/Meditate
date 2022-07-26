@@ -1,14 +1,16 @@
-Totally free application developed by vtrifonov and compiled/enhanced for newers Garmin watch models by dliedke.
+Totally free application developed by vtrifonov and compiled/enhanced for newer Garmin watch models by dliedke.
 
 A meditation/yoga app that tracks as an activity the heart rate, stress, respiration rate, heart rate variability (HRV) and provides vibration alerts.
 
 Touch and hold the screen (Touch devices) or hold the left middle button (Button only devices) to edit the meditation sessions, properties and global settings.
 
+Touch screen or click Start button to start meditation session. Use lap/back button to pause/resume. Use start button to end the meditation session.
+
 Set Activity Name as "Location & Device Activity Name" in Garmin Connect Settings (https://connect.garmin.com/modern/settings) for activity name generated to be saved correctly.
 
-Use "Yoga" type activity to correctly capture Respiration rate metrics.
+Use "Yoga" type activity to correctly capture Respiration rate metrics due to bug in Breath work activity.
 
-Avoid moving your wrist to better capture HRV and Respiration rate metrics. 
+Avoid moving your wrist to better capture HRV and Respiration rate metrics. 
 
 User Guide (explains HRV metrics details and how to use application):
 
