@@ -102,7 +102,7 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_SYSTEM_TINY);
 		var outputXOffset = App.getApp().getProperty("mmssTimePickerOutputXOffset");
 		digitsLayout.setOutputXOffset(outputXOffset);
-		digitsLayout.addInitialHint("Pick MM:SS");
+		digitsLayout.addInitialHint(Ui.loadResource(Rez.Strings.pickMMSS));
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
 		digitsLayout.addSeparator("m");
@@ -116,7 +116,7 @@ class AddEditIntervalAlertMenuDelegate extends Ui.MenuInputDelegate {
 		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_SYSTEM_TINY);
 		var outputXOffset = App.getApp().getProperty("hmmTimePickerOutputXOffset");
 		digitsLayout.setOutputXOffset(outputXOffset);
-		digitsLayout.addInitialHint("Pick H:MM");
+		digitsLayout.addInitialHint(Ui.loadResource(Rez.Strings.pickHMM));
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
 		digitsLayout.addSeparator("h");
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});

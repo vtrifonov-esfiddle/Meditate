@@ -26,10 +26,10 @@ class IntervalAlertsMenuDelegate extends Ui.MenuInputDelegate {
 				var intervalAlert = me.mIntervalAlerts.get(i);			
 				var type;
 				if (intervalAlert.type == IntervalAlertType.OneOff) {
-					type = "One-off";
+					type = Ui.loadResource(Rez.Strings.intervalTypeMenu_oneOff);
 				}
 				else {
-					type = "Repeat";
+					type = Ui.loadResource(Rez.Strings.intervalTypeMenu_repeat);
 				}
 				editIntervalAlertsMenu.addItem(Lang.format("$1$ $2$", [type, TimeFormatter.format(intervalAlert.time)]), i);
 			}

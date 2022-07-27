@@ -146,23 +146,23 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 	private static function getVibePatternText(vibePattern) {
 		switch (vibePattern) {
 			case VibePattern.LongPulsating:
-				return "Long Pulsating";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_longPulsating);
 			case VibePattern.LongAscending:
-				return "Long Ascending";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_longAscending);
 			case VibePattern.LongContinuous:
-				return "Long Continuous";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_longContinuous);
 			case VibePattern.MediumAscending:
-				return "Medium Ascending";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_mediumAscending);
 			case VibePattern.MediumContinuous:
-				return "Medium Continuous";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_mediumContinuous);
 			case VibePattern.MediumPulsating:
-				return "Medium Pulsating";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_mediumPulsating);
 			case VibePattern.ShortAscending:
-				return "Short Ascending";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_shortAscending);
 			case VibePattern.ShortContinuous:
-				return "Short Continuous";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_shortContinuous);
 			case VibePattern.ShortPulsating:
-				return "Short Pulsating";
+				return Ui.loadResource(Rez.Strings.vibePatternMenu_shortPulsating);
 		}
 	}
 	
@@ -185,7 +185,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var hrvStatusLine = me.mSelectedSessionDetails.detailLines[4];
 		if (me.mNoHrvSeconds >= MinSecondsNoHrvDetected) {
 			hrvStatusLine.icon.setStatusWarning();
-			hrvStatusLine.value.text = "Waiting HRV";
+			hrvStatusLine.value.text = Ui.loadResource(Rez.Strings.waitingHRV);
 		}
 		else {		
 			if (me.mLastHrvTracking == HrvTracking.On) {	
@@ -194,7 +194,7 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 			else {
 				hrvStatusLine.icon.setStatusOnDetailed();
 			}
-			hrvStatusLine.value.text = "HRV Ready";
+			hrvStatusLine.value.text = Ui.loadResource(Rez.Strings.HRVready);
 		}
 		Ui.requestUpdate();
 	}
@@ -203,11 +203,11 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
 		hrvStatusLine.icon = new ScreenPicker.HrvIcon({});
 		if (session.hrvTracking == HrvTracking.Off) {
 			hrvStatusLine.icon.setStatusOff();
-			hrvStatusLine.value.text = "HRV off";		
+			hrvStatusLine.value.text = Ui.loadResource(Rez.Strings.HRVoff);		
 		}
 		else {
 			hrvStatusLine.icon.setStatusWarning();
-			hrvStatusLine.value.text = "Waiting HRV";
+			hrvStatusLine.value.text = Ui.loadResource(Rez.Strings.waitingHRV);
 		}
 	}
 	
@@ -224,10 +224,10 @@ class SessionPickerDelegate extends ScreenPicker.ScreenPickerDelegate {
         details.backgroundColor = Gfx.COLOR_BLACK;
         var activityTypeText;
         if (session.activityType == ActivityType.Yoga) {
-        	activityTypeText = "Meditate";		// Due to bug in Connect IQ API for breath activity to get respiration rate, we will use Yoga as default meditate activity
+        	activityTypeText = Ui.loadResource(Rez.Strings.meditateYogaActivityName);		// Due to bug in Connect IQ API for breath activity to get respiration rate, we will use Yoga as default meditate activity
         }
         else {
-        	activityTypeText = "Meditate";
+        	activityTypeText = Ui.loadResource(Rez.Strings.meditateBreathActivityName);
         }
         details.title = activityTypeText + " " + (me.mSelectedPageIndex + 1);
         details.titleColor = session.color;

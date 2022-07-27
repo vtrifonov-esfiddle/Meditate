@@ -74,6 +74,8 @@
         </iq:permissions>
         <iq:languages>
             <iq:language>eng</iq:language>
+            <iq:language>rus</iq:language>
+            <iq:language>por</iq:language>
         </iq:languages>
         <iq:barrels>
             <iq:depends name="HrvAlgorithms" version="1.1.0"/>

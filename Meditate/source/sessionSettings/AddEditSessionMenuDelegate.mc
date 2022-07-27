@@ -17,7 +17,7 @@ class AddEditSessionMenuDelegate extends Ui.MenuInputDelegate {
 		var digitsLayout = new DigitsLayoutBuilder(Gfx.FONT_TINY);
 		var outputXOffset = App.getApp().getProperty("hmmTimePickerOutputXOffset");
 		digitsLayout.setOutputXOffset(outputXOffset);
-		digitsLayout.addInitialHint("Pick H:MM");
+		digitsLayout.addInitialHint(Ui.loadResource(Rez.Strings.pickHMM));
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>9});
 		digitsLayout.addSeparator("h");
 		digitsLayout.addDigit({:minValue=>0, :maxValue=>5});

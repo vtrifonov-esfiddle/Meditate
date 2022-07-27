@@ -132,7 +132,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary HR";
+        details.title = Ui.loadResource(Rez.Strings.SummaryHR);
         details.titleColor = Gfx.COLOR_BLACK;
 
         
@@ -185,17 +185,8 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n Stress";
+        details.title = Ui.loadResource(Rez.Strings.SummaryStress);
         details.titleColor = Gfx.COLOR_BLACK;
-
-		//DEBUG logging
-		//var now = Time.now();
-		//var time = Calendar.info(now, Time.FORMAT_SHORT);
-		//System.println(time.hour.format("%d")+":"+time.min.format("%02d")+":"+time.sec.format("%02d"));
-
-		//System.println("stressStart:" + me.mSummaryModel.stressStart);
-		//System.println("stressEnd:" + me.mSummaryModel.stressEnd);
-		//System.println("--------------------------------------");
 
  		if (me.mSummaryModel.stressStart!=null && me.mSummaryModel.stressEnd!=null) {
 
@@ -203,13 +194,13 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
     			lowStressIcon.setLowStress();	      
         		details.detailLines[3].icon = lowStressIcon;  
 				details.detailLines[3].value.color = Gfx.COLOR_BLACK;            
-				details.detailLines[3].value.text = Lang.format("Stress Start: $1$", [me.mSummaryModel.stressStart.format("%d")]);
+				details.detailLines[3].value.text = Lang.format(Ui.loadResource(Rez.Strings.SummaryStressStart), [me.mSummaryModel.stressStart.format("%d")]);
 
 				lowStressIcon = new ScreenPicker.StressIcon({});
     			lowStressIcon.setLowStress();	      
         		details.detailLines[4].icon = lowStressIcon;  
 				details.detailLines[4].value.color = Gfx.COLOR_BLACK;            
-				details.detailLines[4].value.text = Lang.format("Stress End: $1$", [me.mSummaryModel.stressEnd.format("%d")]);
+				details.detailLines[4].value.text = Lang.format(Ui.loadResource(Rez.Strings.SummaryStressEnd), [me.mSummaryModel.stressEnd.format("%d")]);
 		}
 
     	var lowStressIcon = new ScreenPicker.StressIcon({});
@@ -231,24 +222,23 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n Respiration";
+        details.title = Ui.loadResource(Rez.Strings.SummaryRespiration);
         details.titleColor = Gfx.COLOR_BLACK;
 
         
         var respirationIcon = new ScreenPicker.BreathIcon({});
         details.detailLines[2].icon = respirationIcon;
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[2].value.text = "Min " + me.mSummaryModel.minRr.toString();
+        details.detailLines[2].value.text = Ui.loadResource(Rez.Strings.SummaryRespirationMin) + me.mSummaryModel.minRr.toString();
 
 		details.detailLines[3].icon = respirationIcon;
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[3].value.text = "Avg " + me.mSummaryModel.avgRr.toString();
+        details.detailLines[3].value.text = Ui.loadResource(Rez.Strings.SummaryRespirationAvg) + me.mSummaryModel.avgRr.toString();
 
 		details.detailLines[4].icon = respirationIcon;
         details.detailLines[4].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[4].value.text = "Max " + me.mSummaryModel.maxRr.toString();
-        
-		
+        details.detailLines[4].value.text = Ui.loadResource(Rez.Strings.SummaryRespirationMax) + me.mSummaryModel.maxRr.toString();
+        		
         var hrIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
         var hrValueXPos = App.getApp().getProperty("summaryHrValueXPos");                
         details.setAllIconsXPos(hrIconsXPos);
@@ -262,7 +252,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n HRV RMSSD";
+        details.title = Ui.loadResource(Rez.Strings.SummaryHRVRMSSD);
         details.titleColor = Gfx.COLOR_BLACK;
                              
         details.detailLines[3].icon = new ScreenPicker.HrvIcon({});              
@@ -282,7 +272,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n HRV pNNx";
+        details.title = Ui.loadResource(Rez.Strings.SummaryHRVpNNx);
         details.titleColor = Gfx.COLOR_BLACK;
                             
         var hrvIcon = new ScreenPicker.HrvIcon({});            
@@ -312,20 +302,20 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;
         details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = "Summary\n HRV SDRR";
+        details.title = Ui.loadResource(Rez.Strings.SummaryHRVSDRR);
         details.titleColor = Gfx.COLOR_BLACK;
                         
         var hrvIcon = new ScreenPicker.HrvIcon({});            
         details.detailLines[2].icon = hrvIcon;      
         details.detailLines[2].value.color = Gfx.COLOR_BLACK;        
-        details.detailLines[2].value.text = "First 5 min";
+        details.detailLines[2].value.text = Ui.loadResource(Rez.Strings.SummaryHRVRMSSDFirst5min);
         
         details.detailLines[3].value.color = Gfx.COLOR_BLACK;
         details.detailLines[3].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvFirst5Min]);
         
     	details.detailLines[4].icon = hrvIcon;
     	details.detailLines[4].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[4].value.text = "Last 5 min";
+        details.detailLines[4].value.text = Ui.loadResource(Rez.Strings.SummaryHRVRMSSDLast5min);
         details.detailLines[5].value.color = Gfx.COLOR_BLACK;
         details.detailLines[5].value.text = Lang.format("$1$ ms", [me.mSummaryModel.hrvLast5Min]);  
          

@@ -1,4 +1,5 @@
-using Toybox.Test;
+// Commented out to reduce PRG size
+/*using Toybox.Test;
 
 module HrvAlgorithms {
 	class HrvSdrrLastNSecTests {
@@ -71,4 +72,4 @@ module HrvAlgorithms {
 			return calculatorFixture.isResultExpected(result, ExpectedHrvSdrr.Expected5NormalIntervals1Outlier);	
 		}
 	}
-}
+}*/

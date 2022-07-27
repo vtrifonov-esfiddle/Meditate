@@ -1,14 +1,24 @@
 <strings>
     <string id="AppName">Meditate</string>
-
     <string id="ConfirmSaveHeader">Save Session?</string>
-    
     <string id="confirmDeleteSessionHeader">Delete Session?</string>
-    
     <string id="confirmDeleteAllIntervalAlertsHeader">Delete All Alerts?</string>
     
     <string id="SummaryTitle">Summary</string>
-                  
+    <string id="SummaryHR">Summary HR</string>
+    <string id="SummaryStress">Summary\n Stress</string>
+    <string id="SummaryStressStart">Stress Start: $1$</string>
+    <string id="SummaryStressEnd">Stress End: $1$</string>
+    <string id="SummaryRespiration">Summary\n Respiration</string>
+    <string id="SummaryRespirationMin">Min: </string>
+    <string id="SummaryRespirationAvg">Avg: </string>
+    <string id="SummaryRespirationMax">Max: </string>
+    <string id="SummaryHRVRMSSD">Summary\n HRV RMSSD</string>
+    <string id="SummaryHRVpNNx">Summary\n HRV pNNx</string>
+    <string id="SummaryHRVSDRR">Summary\n HRV SDRR</string>
+    <string id="SummaryHRVRMSSDFirst5min">First 5 min</string>
+    <string id="SummaryHRVRMSSDLast5min">Last 5 min</string>
+                      
     <string id="menuSessionSettings_Title">Settings</string>
     <string id="menuSessionSettings_addNew">Add New</string>
     <string id="menuSessionSettings_edit">Edit</string>
@@ -20,7 +30,10 @@
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
     <string id="menuGlobalSettings_multiSession">Multi-Session</string>
+    <string id="menuGlobalSettings_singleSession">Single session</string>
     <string id="menuGlobalSettings_respirationRate">Respiration Rate</string>
+    <string id="menuGlobalSettings_respiration">Respiration: </string>
+    <string id="menuGlobalSettings_save">Save: </string>
     
     <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
     <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
@@ -34,6 +47,7 @@
     <string id="menuNewHrvTrackingOptions_onDetailed">On Detailed (Default)</string>
     <string id="menuNewHrvTrackingOptions_on">On</string>
     <string id="menuNewHrvTrackingOptions_off">Off</string>
+    <string id="menuNewHrvTrackingOptions_onDetailedSimple">On Detailed</string>
         
     <string id="menuHrvTrackingOptions_title">Hrv Tracking</string>    
     <string id="menuHrvTrackingOptions_onDetailed">On Detailed (Default)</string>
@@ -44,6 +58,7 @@
     <string id="menuConfirmSaveActivityOptions_ask">Ask (Default)</string>
     <string id="menuConfirmSaveActivityOptions_autoYes">Auto Yes</string>
     <string id="menuConfirmSaveActivityOptions_autoNo">Auto No</string>
+    <string id="menuConfirmSaveActivityOptions_askSimple">Ask</string>
     
     <string id="menuMultiSessionOptions_title">Multi-Session</string>    
     <string id="menuMultiSessionOptions_yes">Yes</string>
@@ -100,9 +115,15 @@
 	<string id="intervalTypeMenu_repeat">Every MM:SS</string>		
 	
 	<string id="editIntervalAlertsMenu_title">Edit Interval Alerts</string>		
-			
 	<string id="activityDelayedFinishingText">Finishing...</string>
-
     <string id="meditateActivityPaused">[Paused]</string>
-    
+
+    <string id="meditateYogaActivityName">Meditating</string>
+    <string id="meditateBreathActivityName">Meditating</string>
+    <string id="pickMMSS">Pick MM:SS</string>
+    <string id="pickHMM">Pick H:MM</string>
+    <string id="waitingHRV">Waiting HRV</string>
+    <string id="HRVready">HRV Ready</string>
+    <string id="HRVoff">HRV off</string>
+
 </strings>

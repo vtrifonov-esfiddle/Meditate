@@ -1,4 +1,5 @@
-using Toybox.Math;
+// Commented out to reduce PRG size
+/*using Toybox.Math;
 
 module HrvAlgorithms {
 	class HrvCalculatorFixture{
@@ -51,3 +52,4 @@ module HrvAlgorithms {
 		const Expected5NormalIntervals1Outlier = 139.41;
 	}
 }
+*/

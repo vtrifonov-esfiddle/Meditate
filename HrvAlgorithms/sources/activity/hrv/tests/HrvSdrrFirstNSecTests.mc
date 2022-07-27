@@ -1,3 +1,5 @@
+// Commented out to reduce PRG size
+/*
 using Toybox.Test;
 
 module HrvAlgorithms {
@@ -71,4 +73,4 @@ module HrvAlgorithms {
 			return calculatorFixture.isResultExpected(result, ExpectedHrvSdrr.Expected6NormalIntervals1Outlier);	
 		}
 	}
-}
+}*/

@@ -66,13 +66,13 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	    var hrvTrackingSetting;
 	    var hrvTracking = GlobalSettings.loadHrvTracking();
 		if (hrvTracking == HrvTracking.On) {			
-			hrvTrackingSetting = "On";
+			hrvTrackingSetting = Ui.loadResource(Rez.Strings.menuNewHrvTrackingOptions_on);
 		}          
 		else if (hrvTracking == HrvTracking.OnDetailed) {
-			hrvTrackingSetting = "On Detailed";
+			hrvTrackingSetting = Ui.loadResource(Rez.Strings.menuNewHrvTrackingOptions_onDetailedSimple);
 		}
 		else {
-			hrvTrackingSetting = "Off";
+			hrvTrackingSetting = Ui.loadResource(Rez.Strings.menuNewHrvTrackingOptions_off);
 		}
 		details.detailLines[1].value.text = "HRV: " +  hrvTrackingSetting; 	
 		
@@ -85,7 +85,7 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_GREEN
 	        });	
-	        confirmSaveSetting = "Auto Yes";
+	        confirmSaveSetting = Ui.loadResource(Rez.Strings.menuConfirmSaveActivityOptions_autoYes);
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.AutoNo) {
         	details.detailLines[2].icon = new ScreenPicker.Icon({        
@@ -93,16 +93,16 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession,
 	        	:color => Gfx.COLOR_RED
 	        });	
-	        confirmSaveSetting = "Auto No";
+	        confirmSaveSetting = Ui.loadResource(Rez.Strings.menuConfirmSaveActivityOptions_autoNo);
         }
         if (saveActivityConfirmation == ConfirmSaveActivity.Ask) {
         	details.detailLines[2].icon = new ScreenPicker.Icon({        
 	        	:font => StatusIconFonts.fontAwesomeFreeSolid,
 	        	:symbol => StatusIconFonts.Rez.Strings.faSaveSession
 	        });	
-	        confirmSaveSetting = "Ask";
+	        confirmSaveSetting = Ui.loadResource(Rez.Strings.menuConfirmSaveActivityOptions_askSimple);
         }
-        details.detailLines[2].value.text = "Save: " + confirmSaveSetting;
+        details.detailLines[2].value.text = Ui.loadResource(Rez.Strings.menuGlobalSettings_save) + confirmSaveSetting;
         
 		// Multi-session settings
         var multiSessionSetting = "";
@@ -112,10 +112,10 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	        	:symbol => StatusIconFonts.Rez.Strings.faRepeatSession
 	        });	
         if (multiSession == MultiSession.Yes) {
-	        multiSessionSetting = "Multi-session";
+	        multiSessionSetting = Ui.loadResource(Rez.Strings.menuGlobalSettings_multiSession);
         }
         if (multiSession == MultiSession.No) {
-	        multiSessionSetting = "Single session";
+	        multiSessionSetting = Ui.loadResource(Rez.Strings.menuGlobalSettings_singleSession);
         }
         details.detailLines[3].value.text = multiSessionSetting;
         
@@ -126,10 +126,10 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 	        });	
         var newActivityType = GlobalSettings.loadActivityType();
         if (newActivityType == ActivityType.Meditating) {
-        	details.detailLines[4].value.text = "Breathing";
+        	details.detailLines[4].value.text = Ui.loadResource(Rez.Strings.menuNewActivityTypeOptions_meditating);
         }
         if (newActivityType == ActivityType.Yoga) {
-        	details.detailLines[4].value.text = "Yoga";
+        	details.detailLines[4].value.text = Ui.loadResource(Rez.Strings.menuNewActivityTypeOptions_yoga);
         }
 
 		// Show Respiration rate settings if supported
@@ -139,12 +139,12 @@ class GlobalSettingsDelegate extends ScreenPicker.ScreenPickerDelegate {
 			var respirationRate = GlobalSettings.loadRespirationRate();
 			details.detailLines[5].icon = new ScreenPicker.BreathIcon({});
 			if (respirationRate == RespirationRate.On) {
-				respirationRateSetting = "On";
+				respirationRateSetting = Ui.loadResource(Rez.Strings.menuNewHrvTrackingOptions_on);
 			}
 			if (respirationRate == RespirationRate.Off) {
-				respirationRateSetting = "Off";
+				respirationRateSetting = Ui.loadResource(Rez.Strings.menuNewHrvTrackingOptions_off);
 			}
-			details.detailLines[5].value.text = "Respiration: " + respirationRateSetting;
+			details.detailLines[5].value.text = Ui.loadResource(Rez.Strings.menuGlobalSettings_respiration) + respirationRateSetting;
 		}
 
         details.setAllLinesYOffset(me.mGlobalSettingsLinesYOffset);
