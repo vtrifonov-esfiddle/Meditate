@@ -2,6 +2,7 @@ using Toybox.Time;
 using Toybox.System;
 using HrvAlgorithms.HrvTracking;
 using Toybox.ActivityMonitor;
+using Toybox.Time.Gregorian;
 
 class SummaryModel {
 	function initialize(activitySummary, rrActivity, hrvTracking) {
@@ -40,9 +41,13 @@ class SummaryModel {
 
 		stressEnd = null;
 		stressStart = null;
+		var momentStartMediatation = null;
+
+		//DEBUG
+		//elapsedTimeSeconds = 600;
 
 		// Get stress history iterator object
-		var stressIterator = getStressHistoryIterator(elapsedTimeSeconds);
+		var stressIterator = getStressHistoryIterator();
 		if (stressIterator!=null) {
 		
 			// Loop through all data
@@ -50,7 +55,23 @@ class SummaryModel {
 
 			// Get the stress data for the end of the session
 			if (sample != null) {
+				
+				// Calculate the moment of the start of meditation session
+				momentStartMediatation = Time.now().subtract(new Time.Duration(elapsedTimeSeconds));
+
+				//var momentStartStressDate = Gregorian.info(momentStartMediatation, Time.FORMAT_MEDIUM);
+				//System.println("momentStartStress:" + momentStartStressDate.hour + ":" + momentStartStressDate.min + ":" + momentStartStressDate.sec);
+
+				//var sampleDate = Gregorian.info(sample.when, Time.FORMAT_MEDIUM);
+				//System.println("sample date:" + sampleDate.hour + ":" + sampleDate.min + ":" + sampleDate.sec);
+
+				if (momentStartMediatation.greaterThan(sample.when))
+				{
+					//System.println("No stress history data found for the meditation timeframe, exiting.");
+					return;
+				}
 				me.stressEnd = sample.data;
+				//System.println("stressEnd.data:" + sample.data);
 			}
 
 			// Go until the end of the iterator
@@ -60,29 +81,27 @@ class SummaryModel {
 
 				// Get the stress score for the start of the session
 				if (sample!=null) {
-					me.stressStart = sample.data;
+
+					// If the stress sample is within the meditation timeframe use it for the stress start metric
+					if (sample.when.greaterThan(momentStartMediatation)) {
+						me.stressStart = sample.data;
+
+						//var sampleDate = Gregorian.info(sample.when, Time.FORMAT_MEDIUM);
+						//System.println("sample.date:" + sampleDate.hour + ":" + sampleDate.min + ":" + sampleDate.sec);
+						//System.println("sample.data:" + sample.data);
+					}
 				}
 			}
 		}
 	}
 
-	function getStressHistoryIterator(elapsedTimeSeconds) {
-
-		// We need at least 5min duration in order to call getStressHistory
-		// otherwise it will fail with invalid value for duration
-		if (elapsedTimeSeconds < (60 * 5)) {
-			return null;
-		}
+	function getStressHistoryIterator() {
 
 		// Check device for SensorHistory compatibility
 		if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getStressHistory)) {
 
-			// Convert seconds into Duration
-			var duration = new Time.Duration(elapsedTimeSeconds);
-
-			// Retrieve the stress history for the meditation session period
-			var stressHistory = Toybox.SensorHistory.getStressHistory({:period => duration,:order => SensorHistory.ORDER_NEWEST_FIRST});
-
+			// Retrieve the stress history (sending period sometimes fail in some watches)
+			var stressHistory = Toybox.SensorHistory.getStressHistory(null);
 			return stressHistory;
 		}
 
