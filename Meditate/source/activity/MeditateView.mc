@@ -193,7 +193,17 @@ class MeditateView extends Ui.View {
 		me.mElapsedTime.draw(dc);
                     
         var alarmTime = me.mMeditateModel.getSessionTime();
-		me.mMainDuationRenderer.drawOverallElapsedTime(dc, me.mMeditateModel.elapsedTime, alarmTime);
+		var elapsedTime = me.mMeditateModel.elapsedTime;
+
+		// Enable backlight in the first 8 seconds then turn off to save battery
+		if (elapsedTime <= 8) {
+			Attention.backlight(true);
+		}
+		if (elapsedTime == 9) {
+			Attention.backlight(false);
+		}
+
+		me.mMainDuationRenderer.drawOverallElapsedTime(dc, elapsedTime, alarmTime);
 		if (me.mIntervalAlertsRenderer != null) {
 			me.mIntervalAlertsRenderer.drawRepeatIntervalAlerts(dc);
 			me.mIntervalAlertsRenderer.drawOneOffIntervalAlerts(dc);
