@@ -13,9 +13,9 @@
     <string id="SummaryRespirationMin">Min: </string>
     <string id="SummaryRespirationAvg">Med: </string>
     <string id="SummaryRespirationMax">Max: </string>
-    <string id="SummaryHRVRMSSD">Sumário\n HRV RMSSD</string>
-    <string id="SummaryHRVpNNx">Sumário\n HRV pNNx</string>
-    <string id="SummaryHRVSDRR">Sumário\n HRV SDRR</string>
+    <string id="SummaryHRVRMSSD">Sumário\n VFC RMSSD</string>
+    <string id="SummaryHRVpNNx">Sumário\n VFC pNNx</string>
+    <string id="SummaryHRVSDRR">Sumário\n VFC SDRR</string>
     <string id="SummaryHRVRMSSDFirst5min">Primeiros 5 min</string>
     <string id="SummaryHRVRMSSDLast5min">Últimos 5 min</string>
                       
@@ -26,7 +26,7 @@
     <string id="menuSessionSettings_globalSettings">Conf.Globais</string>
     
     <string id="menuGlobalSettings_title">Globais</string>    
-    <string id="menuGlobalSettings_newHrvTracking">Monit. HRV</string>
+    <string id="menuGlobalSettings_newHrvTracking">Monit. VFC</string>
     <string id="menuGlobalSettings_newActivityType">Atividade</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirmar Salvar</string>
     <string id="menuGlobalSettings_multiSession">Multi-Sessão</string>
@@ -43,13 +43,13 @@
     <string id="activityTypeMenu_yoga">Yoga</string>
     <string id="activityTypeMenu_meditating">Respiração</string>
       
-    <string id="menuNewHrvTrackingOptions_title">Monit. Hrv</string>    
+    <string id="menuNewHrvTrackingOptions_title">Monit. VFC</string>    
     <string id="menuNewHrvTrackingOptions_onDetailed">Detalhado (Padrão)</string>
     <string id="menuNewHrvTrackingOptions_on">Lig.</string>
     <string id="menuNewHrvTrackingOptions_off">Desl.</string>
     <string id="menuNewHrvTrackingOptions_onDetailedSimple">Detalhado</string>
         
-    <string id="menuHrvTrackingOptions_title">Monit. Hrv</string>    
+    <string id="menuHrvTrackingOptions_title">Monit. VFC</string>    
     <string id="menuHrvTrackingOptions_onDetailed">Detalhado (Padrão)</string>
     <string id="menuHrvTrackingOptions_on">Lig.</string>
     <string id="menuHrvTrackingOptions_off">Deslig.</string>
@@ -90,7 +90,7 @@
     <string id="addEditSessionMenu_vibePattern">Vibração</string>
 	<string id="addEditSessionMenu_intervalAlerts">Intervalo Alerta</string>
 	<string id="addEditSessionMenu_activityType">Tipo Atividade</string>
-	<string id="addEditSessionMenu_hrvTracking">Monit. HRV</string>
+	<string id="addEditSessionMenu_hrvTracking">Monit. VFC</string>
 	
 	<string id="intervalAlertTransparentColorText">Transparente</string>
 	
@@ -122,8 +122,8 @@
     <string id="meditateBreathActivityName">Meditação</string>
     <string id="pickMMSS">Escolha MM:SS</string>
     <string id="pickHMM">Escolha H:MM</string>
-    <string id="waitingHRV">Aguardando HRV</string>
-    <string id="HRVready">HRV Pronto</string>
-    <string id="HRVoff">HRV Deslig.</string>
+    <string id="waitingHRV">Aguardando VFC</string>
+    <string id="HRVready">VFC Pronto</string>
+    <string id="HRVoff">VFC Deslig.</string>
 
 </strings>
