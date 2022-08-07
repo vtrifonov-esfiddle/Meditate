@@ -22,4 +22,8 @@
 	<property id="detailsModelIconHeight" type="number">32</property>
 	<property id="hmmTimePickerOutputXOffset" type="number">85</property>
 	<property id="mmssTimePickerOutputXOffset" type="number">75</property>
+	<property id="heartRateChartWidth" type="number">120</property>
+	<property id="heartRateChartLineExtra" type="number">15</property>
+	<property id="heartRateChartXPosrelocation" type="number">0</property>
+	<property id="heartRateChartXPosLabelrelocation" type="number">-10</property>
 </properties>

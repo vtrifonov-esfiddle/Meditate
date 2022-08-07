@@ -10,7 +10,8 @@ class SummaryModel {
 		me.maxHr = me.initializeHeartRate(activitySummary.hrSummary.maxHr);
 		me.avgHr = me.initializeHeartRate(activitySummary.hrSummary.averageHr);
 		me.minHr = me.initializeHeartRate(activitySummary.hrSummary.minHr);
-		
+		me.hrHistory = activitySummary.hrSummary.hrHistory;
+
 		var rrSummary = rrActivity.getSummary();
 		if (rrSummary!=null) {
 			me.maxRr = me.initializeHeartRate(rrSummary.maxRr);
@@ -158,4 +159,5 @@ class SummaryModel {
 	var hrvPnn20;
 	
 	var hrvTracking;
+	var hrHistory;
 }

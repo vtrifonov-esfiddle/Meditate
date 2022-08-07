@@ -6,5 +6,9 @@
 	<property id="sessionDetailsIconsXPos" type="number">40</property>
 	<property id="sessionDetailsValueXPos" type="number">65</property>
 	<property id="meditateActivityIconsXPos" type="number">90</property>
-	<property id="summaryLinesYOffset" type="number">15</property>	
+	<property id="summaryLinesYOffset" type="number">15</property>
+	<property id="heartRateChartWidth" type="number">180</property>
+	<property id="heartRateChartLineExtra" type="number">22</property>
+	<property id="heartRateChartXPosrelocation" type="number">10</property>
+	<property id="heartRateChartXPosLabelrelocation" type="number">-10</property>
 </properties>

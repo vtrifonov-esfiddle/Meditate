@@ -48,8 +48,11 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
     
     //this reads/writes session settings and needs to happen before saving session to avoid FIT file corruption          
     private function showSummaryView(summaryModel) { 
-    	var summaryViewDelegate = new SummaryViewDelegate(summaryModel, mMeditateModel.isRespirationRateOn(), me.mMeditateActivity.method(:discardDanglingActivity));
-    	Ui.switchToView(summaryViewDelegate.createScreenPickerView(), summaryViewDelegate, Ui.SLIDE_LEFT);  
+		var summaryViewDelegate = new SummaryViewDelegate(summaryModel, mMeditateModel.isRespirationRateOn(), me.mMeditateActivity.method(:discardDanglingActivity));
+		var view = summaryViewDelegate.createScreenPickerView();
+		if (view!=null) {
+			Ui.switchToView(view, summaryViewDelegate, Ui.SLIDE_LEFT);  
+		}
     }
     
     function onShowNextViewConfirmDialog() {      
@@ -94,23 +97,4 @@ class MeditateDelegate extends Ui.BehaviorDelegate {
 	  	}
 	  	return false;
     }
-
-	var backlightOn = false;
-
-	function onTap(clickEvent) {
-		try {
-			
-			// Touch screen to disable/enable backlight during activity
-			// This will still respect the backligh timeout configured in the device
-			backlightOn = !backlightOn;
-			Attention.backlight(backlightOn);
-
-		} catch(ex) { 
-			
-			// Just in case we get a BacklightOnTooLongException for OLED display devices,
-			// disable backlight
-			backlightOn = false;
-			Attention.backlight(backlightOn);
-		}
-	}
 }

@@ -95,8 +95,9 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 	
 	function createScreenPickerView() {
 		var details;
+
 		if (me.mSelectedPageIndex == 0) {
-			details = me.createDetailsPageHr();
+			return new HeartRateGraphView(me.mSummaryModel);
 		} 
 		else if (me.mSelectedPageIndex == me.mStressPageIndex) {
 			details = me.createDetailsPageStress();
@@ -114,7 +115,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 			details = me.createDetailsPageHrvSdrr();
 		} 
 		else {
-			details = me.createDetailsPageHr();
+			return new HeartRateGraphView(me.mSummaryModel);
 		}
 		if (me.mPagesCount > 1) {
 			return new ScreenPicker.ScreenPickerDetailsView(details);
@@ -123,64 +124,7 @@ class SummaryViewDelegate extends ScreenPicker.ScreenPickerDelegate {
 			return new ScreenPicker.ScreenPickerDetailsSinglePageView(details);
 		}
 	}	
-				
-	private function formatHr(hr) {
-		return hr + " bpm";
-	}
-	
-	private function createDetailsPageHr() {
-		var details = new ScreenPicker.DetailsModel();
-		details.color = Gfx.COLOR_BLACK;
-        details.backgroundColor = Gfx.COLOR_WHITE;
-        details.title = Ui.loadResource(Rez.Strings.SummaryHR);
-        details.titleColor = Gfx.COLOR_BLACK;
-
-        
-        var timeIcon = new ScreenPicker.Icon({       
-        	:font => StatusIconFonts.fontAwesomeFreeSolid,
-        	:symbol => StatusIconFonts.Rez.Strings.faHourglassEnd,
-        	:color=>Graphics.COLOR_BLACK  	
-    	});
-        details.detailLines[1].icon = timeIcon;
-        details.detailLines[1].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[1].value.text = TimeFormatter.format(me.mSummaryModel.elapsedTime);
-        
-        var hrMinIcon = new ScreenPicker.Icon({       
-        	:font => StatusIconFonts.fontMeditateIcons,
-        	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrMin,
-        	:color=>Graphics.COLOR_RED   	
-    	});     
-        details.detailLines[2].icon = hrMinIcon;
-        details.detailLines[2].value.color = Gfx.COLOR_BLACK;
-        details.detailLines[2].value.text = me.formatHr(me.mSummaryModel.minHr);
-                
-        var hrAvgIcon = new ScreenPicker.Icon({       
-        	:font => StatusIconFonts.fontMeditateIcons,
-        	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrAvg,
-        	:color=>Graphics.COLOR_RED   	
-    	});            
-        details.detailLines[3].icon = hrAvgIcon;
-        details.detailLines[3].value.color = Gfx.COLOR_BLACK;  
-        details.detailLines[3].value.text = me.formatHr(me.mSummaryModel.avgHr);
-        
-        var hrMaxIcon = new ScreenPicker.Icon({       
-        	:font => StatusIconFonts.fontMeditateIcons,
-        	:symbol => StatusIconFonts.Rez.Strings.meditateFontHrMax,
-        	:color=>Graphics.COLOR_RED   	
-    	});              
-        details.detailLines[4].icon = hrMaxIcon;    
-        details.detailLines[4].value.color = Gfx.COLOR_BLACK; 
-        details.detailLines[4].value.text = me.formatHr(me.mSummaryModel.maxHr);
-		
-        var hrIconsXPos = App.getApp().getProperty("summaryHrIconsXPos");
-        var hrValueXPos = App.getApp().getProperty("summaryHrValueXPos");                
-        details.setAllIconsXPos(hrIconsXPos);
-        details.setAllValuesXPos(hrValueXPos);   
-        details.setAllLinesYOffset(me.mSummaryLinesYOffset);
-        
-        return details;
-	}	
-		
+			
 	private function createDetailsPageStress() {
 		var details = new ScreenPicker.DetailsModel();
 		details.color = Gfx.COLOR_BLACK;

@@ -4,5 +4,6 @@ module HrvAlgorithms {
 		var averageHr;
 		var minHr;
 		var elapsedTimeSeconds;
+		var hrHistory;
 	}
 }
