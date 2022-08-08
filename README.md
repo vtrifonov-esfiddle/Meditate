@@ -1,12 +1,12 @@
 # Meditate
 
-A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HRV, stress and provides vibration alerts.
+A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HRV, stress, respiration rate provides vibration alerts and heart rate chart.
 
 ## Features
 
 - ability to save the session as a Connect IQ activity
-    - activity type **Meditating** or **Yoga**
-- ability to configure multiple meditation/yoga sessions
+    - activity type  **Yoga** or **Breathwork**
+- ability to configure multiple breathwork/yoga sessions
     - e.g. a 20 min session with 1 min recurring alerts, triggering a different alert on the 10th minute
     - each session supports interval vibration alerts
     - interval alerts can trigger from a few seconds up to few hours
@@ -22,12 +22,14 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
     - HR from heartbeat - beat-to-beat interval converted to HR
 - stress tracking
     - Stress - summary of the the average stress during the session 
+    - Average stress for the beginning and end of the session (calculated automatically by the watch for session of 5min or more) 
     - HR Peaks 10 Sec Window
       - internal metric for calculating stress 
       - tracks in overlapping 10 Sec Windows Max HR for each window 
       - HR calculated from beat-to-beat interval.
 - summary stats at the end of the session
-    - tracks the overall min, avg and max HR
+    - tracks the overall min, avg and max HR and show heart rate chart for the session
+    - Respiration rate if devices supports it
     - Stress
     - HRV
 
@@ -40,7 +42,7 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
   - from [vivoactive3-publish](https://github.com/vtrifonov-esfiddle/Meditate/tree/vivoactive3-publish) branch
 - Round Watches that support Connect IQ >= 3.0 
   - [app store link](https://apps.garmin.com/en-US/apps/abd89b58-aaf9-4550-892b-9670cb5e6fd1#0)
-  - from [round-watches-publish](https://github.com/dliedke/Meditate/tree/round-watches-publish/) branch
+  - from [round-watches-publish](https://github.com/dliedke/Meditate/tree/round-watches-publish) branch
   - Most round watches other than Vivoactive 3 are supported
 
 ## [User Guide](UserGuide.md)
@@ -48,5 +50,3 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
 ## Dependencies
 - Font for duration picker [Google Roboto](https://fonts.google.com/specimen/Roboto) ([Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0))
 - Status Icons - [Font Awesome free](https://fontawesome.com/license) (SIL OFL 1.1 License) 
-
-
