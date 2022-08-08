@@ -5,7 +5,7 @@
     <string id="confirmDeleteAllIntervalAlertsHeader">Deletar todos alertas?</string>
     
     <string id="SummaryTitle">Sumário</string>
-    <string id="SummaryHR">Sumário HR</string>
+    <string id="SummaryHR">Sumário FC</string>
     <string id="SummaryStress">Sumário\n Stress</string>
     <string id="SummaryStressStart">Stress no Início: $1$</string>
     <string id="SummaryStressEnd">Stress no Fim: $1$</string>

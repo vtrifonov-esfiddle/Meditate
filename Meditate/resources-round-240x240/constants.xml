@@ -8,7 +8,6 @@
 	<property id="meditateActivityIconsXPos" type="number">90</property>
 	<property id="summaryLinesYOffset" type="number">10</property>	
 	<property id="heartRateChartWidth" type="number">160</property>
-	<property id="heartRateChartLineExtra" type="number">-5</property>
 	<property id="heartRateChartXPosrelocation" type="number">0</property>
 	<property id="heartRateChartXPosLabelrelocation" type="number">-10</property>
 </properties>

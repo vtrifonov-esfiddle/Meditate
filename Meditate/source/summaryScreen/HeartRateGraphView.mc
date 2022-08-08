@@ -117,8 +117,18 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 		
 		// Try adapting the chart for the graph width
 		var skipSize = 1;
+		var skipSizeFloatPart = 0;
+
+		// If chart would be larger than expected graph width
 		if (heartRateHistory.size() > graph_width) {
-			skipSize = Math.round(heartRateHistory.size().toFloat() / graph_width.toFloat()).toNumber();
+
+			// Calculate with maximum precision the skip
+			skipSizeFloatPart = heartRateHistory.size().toFloat() / graph_width.toFloat();
+			skipSizeFloatPart = skipSizeFloatPart - Math.floor(skipSizeFloatPart);
+			skipSizeFloatPart = skipSizeFloatPart * 10000000;
+
+			// Calculate the basic skip for the for loop
+			skipSize = Math.floor(heartRateHistory.size().toFloat() / graph_width.toFloat()).toNumber();
 		} 
 		
 		// Draw HR chart
@@ -137,6 +147,13 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 							position_y);
 			}
 
+			// Skip to fit the chart in the screen
+			if (skipSizeFloatPart > 0) {
+				if ((xStep * 1000000) % (skipSizeFloatPart).toNumber() > 1000000) {
+					i++;			
+				}
+			}
+
 			xStep++;
 		}
 
@@ -151,7 +168,7 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 			// Draw lines over chart
 			dc.drawLine(position_x + 3, 
 						position_y - (lineSpacing * i), 
-						position_x + graph_width + App.getApp().getProperty("heartRateChartLineExtra"), 
+						position_x + graph_width, 
 						position_y - (lineSpacing * i));
 
 			if (i!=0) {
