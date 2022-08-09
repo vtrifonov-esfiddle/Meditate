@@ -33,8 +33,8 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 		centerY = dc.getHeight()/2;
 
 		// Calculate position of the chart
-		position_x = centerX - (centerX / 1.5) - App.getApp().getProperty("heartRateChartXPosrelocation");
-		position_y = centerY + (centerY / 2);
+		position_x = centerX - (centerX / 1.5) - App.getApp().getProperty("heartRateChartXPos");
+		position_y = centerY + (centerY / 2) - App.getApp().getProperty("heartRateChartYPos");
 	
 		graph_height = dc.getHeight() / 3;
 		graph_width =  App.getApp().getProperty("heartRateChartWidth");
@@ -174,7 +174,7 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 			if (i!=0) {
 
 				// Draw labels for the lines except last one
-				dc.drawText(position_x + App.getApp().getProperty("heartRateChartXPosLabelrelocation"), 
+				dc.drawText(position_x + App.getApp().getProperty("heartRateChartXPosLabel"), 
 							position_y - (lineSpacing * i), 
 							Gfx.FONT_SYSTEM_XTINY, 
 							Math.round(HistoryMin + (minMaxDiff / 4) * i).toNumber(), 

@@ -9,6 +9,6 @@
 	<property id="summaryLinesYOffset" type="number">10</property>	
 	<property id="heartRateChartWidth" type="number">180</property>
 	<property id="heartRateChartLineExtra" type="number">20</property>
-	<property id="heartRateChartXPosrelocation" type="number">11</property>
-	<property id="heartRateChartXPosLabelrelocation" type="number">-10</property>
+	<property id="heartRateChartXPos" type="number">0</property>
+	<property id="heartRateChartXPosLabel" type="number">-10</property>
 </properties>

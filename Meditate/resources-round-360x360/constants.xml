@@ -24,6 +24,7 @@
 	<property id="mmssTimePickerOutputXOffset" type="number">130</property>	
 	<property id="heartRateChartWidth" type="number">320</property>
 	<property id="heartRateChartLineExtra" type="number">-15</property>
-	<property id="heartRateChartXPosrelocation" type="number">22</property>
-	<property id="heartRateChartXPosLabelrelocation" type="number">-10</property>
+	<property id="heartRateChartYPos" type="number">22</property>
+	<property id="heartRateChartXPos" type="number">28</property>
+	<property id="heartRateChartXPosLabel" type="number">-10</property>
 </properties>

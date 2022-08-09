@@ -7,8 +7,9 @@
 	<property id="sessionDetailsValueXPos" type="number">55</property>
 	<property id="meditateActivityIconsXPos" type="number">70</property>
 	<property id="summaryLinesYOffset" type="number">-7</property>	
-	<property id="heartRateChartWidth" type="number">120</property>
-	<property id="heartRateChartLineExtra" type="number">15</property>
-	<property id="heartRateChartXPosrelocation" type="number">0</property>
-	<property id="heartRateChartXPosLabelrelocation" type="number">-10</property>
+	<property id="heartRateChartWidth" type="number">180</property>
+	<property id="heartRateChartLineExtra" type="number">0</property>
+	<property id="heartRateChartYPos" type="number">10</property>
+	<property id="heartRateChartXPos" type="number">10</property>
+	<property id="heartRateChartXPosLabel" type="number">-8</property>
 </properties>
