@@ -152,7 +152,7 @@ module ScreenPicker {
 	class DetailsModel{
 		function initialize() {
 			me.title = "";
-			me.titleFont = Gfx.FONT_SYSTEM_MEDIUM;
+			me.titleFont = App.getApp().getProperty("largeFont");
 			me.color = null;
 			me.titleColor = null;
 			me.backgroundColor = null;

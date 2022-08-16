@@ -56,12 +56,12 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 		// Draw title text
 		dc.drawText(centerX, 
 					25, 
-					Gfx.FONT_SYSTEM_MEDIUM, 
+					App.getApp().getProperty("largeFont"), 
 					Ui.loadResource(Rez.Strings.SummaryHR), 
 					Graphics.TEXT_JUSTIFY_CENTER);
 
 		// Draw MIN HR text
-		dc.drawText(centerX - centerX / 2 + 20, 
+		dc.drawText(centerX - centerX / 2 + 10, 
 					centerY - centerY / 2 + 10, 
 					Gfx.FONT_SYSTEM_TINY, 
 					Ui.loadResource(Rez.Strings.SummaryRespirationMin) + me.summaryModel.minHr.toString(), 
@@ -75,7 +75,7 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 					Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
 		// Draw MAX HR text
-		dc.drawText(centerX + centerX / 2 - 20, 
+		dc.drawText(centerX + centerX / 2 - 10, 
 					centerY - centerY / 2 + 10, 
 					Gfx.FONT_SYSTEM_TINY, 
 					Ui.loadResource(Rez.Strings.SummaryRespirationMax) + me.summaryModel.maxHr.toString(), 
@@ -181,5 +181,6 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 							Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 			}
 		}
+		
     }
 }

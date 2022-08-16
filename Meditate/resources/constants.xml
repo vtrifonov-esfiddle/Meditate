@@ -14,7 +14,7 @@
 	<property id="summaryHrvIconsXPos" type="number">50</property>
 	<property id="summaryHrvValueXPos" type="number">70</property>
 	<property id="summaryLinesYOffset" type="number">0</property>
-	<property id="meditateActivityIconsXPos" type="number">80</property>
+	<property id="meditateActivityIconsXPos" type="number">70</property>
 	<property id="meditateActivityIconsYOffset" type="number">5</property>
 	<property id="meditateActivityXHrvTextOffset" type="number">20</property>
 	<property id="meditateActivityXBreathTextOffset" type="number">28</property>
@@ -27,4 +27,5 @@
 	<property id="heartRateChartYPos" type="number">10</property>
 	<property id="heartRateChartXPos" type="number">10</property>
 	<property id="heartRateChartXPosLabel" type="number">-11</property>
+	<property id="largeFont" type="number">3</property> <!--Gfx.FONT_MEDIUM-->
 </properties>

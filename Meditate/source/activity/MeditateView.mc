@@ -47,7 +47,7 @@ class MeditateView extends Ui.View {
     	});
     }
     
-    private static const TextFont = Gfx.FONT_MEDIUM;
+    private static const TextFont = App.getApp().getProperty("largeFont");
     
     private function renderBackground(dc) {				        
         dc.setColor(Gfx.COLOR_TRANSPARENT, Gfx.COLOR_BLACK);        

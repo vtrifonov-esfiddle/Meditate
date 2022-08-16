@@ -10,9 +10,9 @@
     <string id="SummaryStressStart">Stress Start: $1$</string>
     <string id="SummaryStressEnd">Stress End: $1$</string>
     <string id="SummaryRespiration">Summary\n Respiration</string>
-    <string id="SummaryRespirationMin">Min: </string>
-    <string id="SummaryRespirationAvg">Avg: </string>
-    <string id="SummaryRespirationMax">Max: </string>
+    <string id="SummaryRespirationMin">Min:</string>
+    <string id="SummaryRespirationAvg">Avg:</string>
+    <string id="SummaryRespirationMax">Max:</string>
     <string id="SummaryHRVRMSSD">Summary\n HRV RMSSD</string>
     <string id="SummaryHRVpNNx">Summary\n HRV pNNx</string>
     <string id="SummaryHRVSDRR">Summary\n HRV SDRR</string>
@@ -25,7 +25,7 @@
     <string id="menuSessionSettings_delete">Delete</string>
     <string id="menuSessionSettings_globalSettings">Global Settings</string>
     
-    <string id="menuGlobalSettings_title">Global Settings</string>    
+    <string id="menuGlobalSettings_title">Settings</string>    
     <string id="menuGlobalSettings_newHrvTracking">HRV Tracking</string>
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
@@ -35,7 +35,7 @@
     <string id="menuGlobalSettings_respiration">Respiration: </string>
     <string id="menuGlobalSettings_save">Save: </string>
     
-    <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
+    <string id="menuNewActivityTypeOptions_title">Activity</string>    
     <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
     <string id="menuNewActivityTypeOptions_meditating">Breathing</string>
         

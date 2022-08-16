@@ -1,12 +1,12 @@
 <properties>
-	<property id="progressBarWidth" type="number">150</property>
+	<property id="progressBarWidth" type="number">130</property>
 	<property id="globalSettingsIconsXPos" type="number">26</property>
 	<property id="globalSettingsValueXPos" type="number">46</property>
 	<property id="globalSettingsLinesYOffset" type="number">-10</property>
 	<property id="sessionDetailsIconsXPos" type="number">30</property>
 	<property id="sessionDetailsValueXPos" type="number">55</property>
-	<property id="meditateActivityIconsXPos" type="number">60</property>
-	<property id="summaryLinesYOffset" type="number">-7</property>	
+	<property id="meditateActivityIconsXPos" type="number">70</property>
+	<property id="summaryLinesYOffset" type="number">-13</property>	
 	<property id="heartRateChartWidth" type="number">180</property>
 	<property id="heartRateChartLineExtra" type="number">0</property>
 	<property id="heartRateChartYPos" type="number">10</property>

@@ -3,7 +3,7 @@
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
     <iq:barrel id="7a73f9b8804a4d64881f6be386721fdf" minSdkVersion="3.0.0" module="StatusIconFonts" version="1.0.0">
         <iq:products>
-           <iq:product id="approachs62"/>
+            <iq:product id="approachs62"/>
             <iq:product id="d2air"/>
             <iq:product id="d2airx10"/>
             <iq:product id="d2delta"/>
@@ -13,24 +13,35 @@
             <iq:product id="descentmk1"/>
             <iq:product id="descentmk2"/>
             <iq:product id="descentmk2s"/>
+            <iq:product id="enduro"/>
             <iq:product id="epix2"/>
+            <iq:product id="fenix5"/>
             <iq:product id="fenix5plus"/>
+            <iq:product id="fenix5s"/>
             <iq:product id="fenix5splus"/>
             <iq:product id="fenix5x"/>
             <iq:product id="fenix5xplus"/>
+            <iq:product id="fenix6"/>
             <iq:product id="fenix6pro"/>
+            <iq:product id="fenix6prosystem5preview"/>
+            <iq:product id="fenix6s"/>
             <iq:product id="fenix6spro"/>
             <iq:product id="fenix6xpro"/>
             <iq:product id="fenix7"/>
             <iq:product id="fenix7s"/>
             <iq:product id="fenix7x"/>
+            <iq:product id="fenixchronos"/>
+            <iq:product id="fr245"/>
             <iq:product id="fr245m"/>
             <iq:product id="fr255"/>
             <iq:product id="fr255m"/>
             <iq:product id="fr255s"/>
             <iq:product id="fr255sm"/>
+            <iq:product id="fr55"/>
+            <iq:product id="fr645"/>
             <iq:product id="fr645m"/>
             <iq:product id="fr745"/>
+            <iq:product id="fr935"/>
             <iq:product id="fr945"/>
             <iq:product id="fr945lte"/>
             <iq:product id="fr955"/>
@@ -51,6 +62,7 @@
             <iq:product id="venu2plus"/>
             <iq:product id="venu2s"/>
             <iq:product id="venud"/>
+            <iq:product id="venusq"/>
             <iq:product id="venusqm"/>
             <iq:product id="vivoactive3"/>
             <iq:product id="vivoactive3d"/>

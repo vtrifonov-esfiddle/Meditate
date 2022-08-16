@@ -25,7 +25,7 @@
     <string id="menuSessionSettings_delete">Delete</string>
     <string id="menuSessionSettings_globalSettings">Global Settings</string>
     
-    <string id="menuGlobalSettings_title">Global Settings</string>    
+    <string id="menuGlobalSettings_title">Settings</string>    
     <string id="menuGlobalSettings_newHrvTracking">HRV Tracking</string>
     <string id="menuGlobalSettings_newActivityType">New Activity Type</string>
     <string id="menuGlobalSettings_confirmSaveActivity">Confirm Save</string>
@@ -35,7 +35,7 @@
     <string id="menuGlobalSettings_respiration">Respiration: </string>
     <string id="menuGlobalSettings_save">Save: </string>
     
-    <string id="menuNewActivityTypeOptions_title">New Activity Type</string>    
+    <string id="menuNewActivityTypeOptions_title">Activity</string>    
     <string id="menuNewActivityTypeOptions_yoga">Yoga</string>
     <string id="menuNewActivityTypeOptions_meditating">Breathing</string>
         
