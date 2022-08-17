@@ -69,7 +69,7 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 
 		// Draw AVG HR text
 		dc.drawText(centerX, 
-					centerY + centerY / 2 + 20, 
+					centerY + centerY / 2 + 3, 
 					Gfx.FONT_SYSTEM_TINY, 
 					Ui.loadResource(Rez.Strings.SummaryRespirationAvg) + me.summaryModel.avgHr.toString(), 
 					Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
@@ -79,6 +79,13 @@ class HeartRateGraphView extends ScreenPicker.ScreenPickerView  {
 					centerY - centerY / 2 + 10, 
 					Gfx.FONT_SYSTEM_TINY, 
 					Ui.loadResource(Rez.Strings.SummaryRespirationMax) + me.summaryModel.maxHr.toString(), 
+					Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+
+		// Draw Time text
+		dc.drawText(centerX, 
+					centerY + centerY / 1.5 + 13, 
+					Gfx.FONT_SYSTEM_TINY, 
+					TimeFormatter.format(me.summaryModel.elapsedTime), 
 					Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
 		// Retrieve saved HR history for this activity
