@@ -121,6 +121,7 @@
     <string id="meditateYogaActivityName">Meditating</string>
     <string id="meditateBreathActivityName">Meditating</string>
     <string id="activityName">Activity Name (use [time] to be replaced by session time and also keep name short):</string>
+    <string id="mediateActivityName">Meditating [time] 🙏</string>
     <string id="pickMMSS">Pick MM:SS</string>
     <string id="pickHMM">Pick H:MM</string>
     <string id="waitingHRV">Waiting HRV</string>

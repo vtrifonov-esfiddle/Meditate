@@ -17,9 +17,10 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 		// Retrieve activity name property from Garmin Express/Connect IQ 
 		var activityNameProperty = Application.Properties.getValue("activityName");
 
-		// If it is empty, use default name
+		// If it is empty, use default name and save the property
 		if (activityNameProperty == null || activityNameProperty.length() == 0) {
-			activityNameProperty = Ui.loadResource(Rez.Strings.meditateYogaActivityName);
+			activityNameProperty = Ui.loadResource(Rez.Strings.mediateActivityName);
+			Application.Properties.setValue("activityName", activityNameProperty);
 		}
 
 		if (meditateModel.getActivityType() == ActivityType.Yoga) {

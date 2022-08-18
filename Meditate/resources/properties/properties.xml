@@ -1,5 +1,5 @@
 <resources>
     <properties>
-        <property id="activityName" type="string">Meditating [time] 🙏</property>
+        <property id="activityName" type="string"></property>
     </properties>
 </resources>
