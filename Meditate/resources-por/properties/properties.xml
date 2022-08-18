@@ -1,0 +1,5 @@
+<resources>
+    <properties>
+        <property id="activityName" type="string">Meditação [time] 🙏</property>
+    </properties>
+</resources>

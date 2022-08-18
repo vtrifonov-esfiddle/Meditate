@@ -120,6 +120,7 @@
 
     <string id="meditateYogaActivityName">Meditação</string>
     <string id="meditateBreathActivityName">Meditação</string>
+    <string id="activityName">Nome da atividade (use [time] para substituir pelo tempo da sessão e mantenha pequeno o nome):</string>
     <string id="pickMMSS">Escolha MM:SS</string>
     <string id="pickHMM">Escolha H:MM</string>
     <string id="waitingHRV">Aguardando VFC</string>

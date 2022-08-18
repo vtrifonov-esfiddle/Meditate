@@ -13,11 +13,20 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 	function initialize(meditateModel, heartbeatIntervalsSensor) {
 		var fitSessionSpec;
 		var sessionTime = meditateModel.getSessionTime();
+
+		// Retrieve activity name property from Garmin Express/Connect IQ 
+		var activityNameProperty = Application.Properties.getValue("activityName");
+
+		// If it is empty, use default name
+		if (activityNameProperty == null || activityNameProperty.length() == 0) {
+			activityNameProperty = Ui.loadResource(Rez.Strings.meditateYogaActivityName);
+		}
+
 		if (meditateModel.getActivityType() == ActivityType.Yoga) {
-			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createYoga(createSessionName(sessionTime, Ui.loadResource(Rez.Strings.meditateYogaActivityName))); // Due to bug in Connect IQ API for breath activity to get respiration rate, we will use Yoga as default meditate activity
+			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createYoga(createSessionName(sessionTime, activityNameProperty)); // Due to bug in Connect IQ API for breath activity to get respiration rate, we will use Yoga as default meditate activity
 		}
 		else {
-			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createCardio(createSessionName(sessionTime, Ui.loadResource(Rez.Strings.meditateBreathActivityName)));
+			fitSessionSpec = HrvAlgorithms.FitSessionSpec.createCardio(createSessionName(sessionTime, activityNameProperty));
 		}
 		me.mMeditateModel = meditateModel;	
 		HrvAlgorithms.HrvAndStressActivity.initialize(fitSessionSpec, meditateModel.getHrvTracking(), heartbeatIntervalsSensor);			
@@ -28,21 +37,46 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 		// Calculate session minutes and hours
 		var sessionTimeMinutes = Math.round(sessionTime / 60);
 		var sessionTimeHours = Math.round(sessionTimeMinutes / 60);
-		var sessionName;
+		var sessionTimeString;
 
 		// Create the Connect activity name showing the number of hours/minutes for the meditate session
 		if (sessionTimeHours == 0) {
-			sessionName = Lang.format("$1$ $2$min 🙏", [activityName, sessionTimeMinutes]);
+			sessionTimeString = Lang.format("$1$min", [sessionTimeMinutes]);
 		} else {
 			sessionTimeMinutes = sessionTimeMinutes % 60;
 			if (sessionTimeMinutes == 0){
-				sessionName = Lang.format("$1$ $2$h 🙏", [activityName, sessionTimeHours]);
+				sessionTimeString = Lang.format("$1$h 🙏", [sessionTimeHours]);
 			} else {
-				sessionName = Lang.format("$1$ $2$h $3$min 🙏", [activityName, sessionTimeHours, sessionTimeMinutes]);
+				sessionTimeString = Lang.format("$1$h $2$min 🙏", [sessionTimeHours, sessionTimeMinutes]);
 			}
 		}
 
-		return sessionName;
+		// Replace "[time]" string with the activity time
+		var finalActivityName = stringReplace(activityName,"[time]", sessionTimeString);
+
+		// If the generated name is too big, use only default name
+		if (finalActivityName.length() > 23) {
+			finalActivityName = Ui.loadResource(Rez.Strings.meditateYogaActivityName);
+		}
+
+		return finalActivityName;
+	}
+
+	function stringReplace(str, oldString, newString)
+	{
+		var result = str;
+
+		while (true) {
+			var index = result.find(oldString);
+			if (index != null) {
+				var index2 = index+oldString.length();
+				result = result.substring(0, index) + newString + result.substring(index2, result.length());
+			} else {
+				return result;
+			}
+		}
+
+		return null;
 	}
 								
 	protected function onBeforeStart(fitSession) {

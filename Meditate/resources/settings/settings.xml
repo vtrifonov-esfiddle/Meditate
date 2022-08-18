@@ -1,0 +1,7 @@
+<resources>
+    <settings>
+        <setting propertyKey="@Properties.activityName" title="@Strings.activityName">
+            <settingConfig type="alphaNumeric" />
+        </setting>
+    </settings>
+</resources>
