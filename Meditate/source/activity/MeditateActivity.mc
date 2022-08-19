@@ -56,7 +56,7 @@ class MediteActivity extends HrvAlgorithms.HrvAndStressActivity {
 		var finalActivityName = stringReplace(activityName,"[time]", sessionTimeString);
 
 		// If the generated name is too big, use only default name
-		if (finalActivityName.length() > 23) {
+		if (finalActivityName.length() > 21) {
 			finalActivityName = Ui.loadResource(Rez.Strings.meditateYogaActivityName);
 		}
 
