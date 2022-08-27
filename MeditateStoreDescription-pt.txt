@@ -1,0 +1,26 @@
+Aplicativo totalmente gratuito desenvolvido por vtrifonov e compilado/aprimorado para modelos de relógios Garmin mais recentes por dliedke.
+(se entrar em contato comigo usando o link nesta tela, agradeceria se você fornecesse seu e-mail para que eu possa responder e ajudar).
+
+Um aplicativo de meditação/Yoga que rastreia atividade com frequência cardíaca, estresse, frequência respiratória, variabilidade da frequência cardíaca (VFC), fornece alertas de vibração e gráfico da frequência cardíaca.
+
+Caso você possua algum dos modelos de relógio abaixo e queira uma sessão de meditação de mais de 20 minutos, use o aplicativo original da vtrifonov em https://apps.garmin.com/en-US/apps/1cc98099-c08b-4fc7-91e6-0f3615a3ab2c devido a restrições de memória:
+
+Enduro, Fenix ​​5, Fenix ​​5S, Fenix ​​6/6 Solar, Fenix ​​6S / 6S Solar, Fenix ​​Chronos, Forerunner 245 (sem música), Forerunner 55, Forerunner 645 (sem música), Forerunner 935, Venu Sq (sem música)
+
+Toque e segure a tela (dispositivos com touch screen) ou segure o botão do meio esquerdo (dispositivos apenas com botões) para editar as sessões de meditação, propriedades e configurações globais.
+
+Toque na tela ou clique no botão Iniciar para iniciar a sessão de meditação. Use o botão de lap/voltar para pausar/retomar. Use o botão Iniciar para encerrar a sessão de meditação.
+
+Defina o nome da atividade como "Local e nome da atividade do dispositivo" nas configurações do Garmin Connect (https://connect.garmin.com/modern/settings) para que o nome da atividade gerada seja salvo corretamente.
+
+Defina o nome da atividade personalizada usando Garmin Connect ou Garmin Express, consulte o guia https://support.garmin.com/pt-BR/?faq=SPo0TFvhQO04O36Y5TYRh5 para obter ajuda.
+
+Use a atividade do tipo "Yoga" para capturar corretamente as métricas da taxa de respiração devido a um bug na atividade de respiração.
+
+Evite mover o pulso para capturar melhor as métricas de VFC e taxa de respiração.
+
+Guia do usuário (em inglês) (explica os detalhes das métricas de VFC/HRV e como usar o aplicativo):
+
+https://github.com/dliedke/Meditate/blob/round-watches-publish/UserGuide.md
+
+Selecionado como o melhor aplicativo pelo wareable.com: https://www.wareable.com/garmin/garmin-connect-iq-guide-best-apps-122
