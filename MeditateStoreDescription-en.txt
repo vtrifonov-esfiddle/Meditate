@@ -1,9 +1,6 @@
-Totally free application developed by vtrifonov and compiled/enhanced for newer Garmin watch models by dliedke. (if contacting me using the link this screen, I would appreciate if you provide your email so I can reply back and help).
+Totally free application developed by vtrifonov and compiled/enhanced for newer Garmin watch models by dliedke.
+
 A meditation/yoga app that tracks as an activity the heart rate, stress, respiration rate, heart rate variability (HRV), provides vibration alerts and heart rate chart.
-
-In case you own any of the watch models below and would like a meditation session of over 20min, please use original app from vtrifonov at https://apps.garmin.com/en-US/apps/1cc98099-c08b-4fc7-91e6-0f3615a3ab2c due to memory restrictions:
-
-Enduro, Fenix 5, Fenix 5S, Fenix 6 / 6 Solar, Fenix 6S / 6S Solar, Fenix Chronos, Forerunner 245 (not music), Forerunner 55, Forerunner 645 (not music), Forerunner 935, Venu Sq (not music)
 
 Touch and hold the screen (Touch devices) or hold the left middle button (Button only devices) to edit the meditation sessions, properties and global settings.
 
