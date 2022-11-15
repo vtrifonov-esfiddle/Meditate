@@ -47,6 +47,10 @@ A Garmin Connect IQ meditation app that tracks as an activity the heart rate, HR
 
 ## [User Guide](UserGuide.md)
 
+## Compilation
+
+- Codebase compatible with Connect IQ SDK v4.1.5 or lower
+
 ## Dependencies
 - Font for duration picker [Google Roboto](https://fonts.google.com/specimen/Roboto) ([Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0))
 - Status Icons - [Font Awesome free](https://fontawesome.com/license) (SIL OFL 1.1 License) 
